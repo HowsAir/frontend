@@ -1,0 +1,32 @@
+name: CI Pipeline
+
+# Ejecuta el workflow en push o pull request a la rama main
+on:
+  pull_request:
+    branches:
+      - master
+
+# Definimos el conjunto de jobs a ejecutar
+jobs:
+  # Job para el frontend
+  frontend-tests:
+    name: Run frontend tests
+    runs-on: ubuntu-latest
+
+    # Definimos los pasos para ejecutar los tests del frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "16"
+
+      - name: Install frontend dependencies
+        run: |
+          npm install
+
+      - name: Run frontend tests
+        run: |
+          npm test
