@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
 import * as apiClient from "../api/apiClient";
-import { RegisterFormData } from "../types/mainTypes";
+import { RegisterFormData, ToastMessageType } from "../types/mainTypes";
 import { useState } from "react";
+import { redirectToCheckout } from "../api/stripe";
+import { useAppContext } from "../contexts/AppContext";
 
 const Register = () => {
+  const priceAmount = 87; // Price in cents
+
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const { showToast } = useAppContext();
   const [step, setStep] = useState(1); // Estado para manejar los pasos del formulario
   const {
     register,
@@ -16,24 +19,30 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  const mutation = useMutation(apiClient.register, {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries("validateToken");
-      alert("Cuenta creada con éxito");
-      navigate("/");
-    },
-    onError: (error: Error) => {
-      alert(error.message);
-    },
-  });
+  // Mutation for the createCheckoutSession API call
+  // This mutation will create a new checkout session and redirect the user to the Stripe checkout page
+  const mutation = useMutation(
+    apiClient.createCheckoutSession,
+    {
+      onSuccess: async (sessionId) => {
+        queryClient.invalidateQueries("validateToken");
 
-  // Manejo del envío del formulario
-  const onSubmit = handleSubmit((data) => {
+        localStorage.setItem("userData", JSON.stringify(watch()));
+
+        await redirectToCheckout(sessionId);
+      },
+      onError: (error: Error) => {
+        showToast({ message: error.message, type: ToastMessageType.ERROR });
+      },
+    }
+  );
+
+  // Handle form submission
+  const onSubmit = handleSubmit(async () => {
     if (step === 1) {
-      // Aquí podrías hacer algo con los datos del paso 1 si es necesario
-      setStep(2); // Avanza al siguiente paso
+      setStep(2); // Move to the next step
     } else {
-      mutation.mutate(data); // Realiza la mutación con los datos del paso 2
+      await mutation.mutate(priceAmount);
     }
   });
 
@@ -46,7 +55,7 @@ const Register = () => {
           Conoce la calidad del aire a tu alrededor en un santiamén!
         </p>
         <footer className="text-sm mt-auto">
-        &copy; 2024 HowsAir. Todos los derechos reservados.
+          &copy; 2024 HowsAir. Todos los derechos reservados.
         </footer>
       </div>
 
@@ -67,7 +76,9 @@ const Register = () => {
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="Nombre"
-                  {...register("name", { required: "Este campo es obligatorio" })}
+                  {...register("name", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.name && (
                   <span className="text-red-500 text-sm">
@@ -92,7 +103,9 @@ const Register = () => {
                   className="w-full border rounded-lg p-3"
                   placeholder="Email"
                   type="email"
-                  {...register("email", { required: "Este campo es obligatorio" })}
+                  {...register("email", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.email && (
                   <span className="text-red-500 text-sm">
@@ -108,8 +121,7 @@ const Register = () => {
                     required: "Este campo es obligatorio",
                     minLength: {
                       value: 6,
-                      message:
-                        "La contraseña debe tener al menos 6 caracteres",
+                      message: "La contraseña debe tener al menos 6 caracteres",
                     },
                   })}
                 />
@@ -140,7 +152,9 @@ const Register = () => {
                 <input
                   type="checkbox"
                   className="h-5 w-5 text-primary rounded border-gray-300"
-                  {...register("terms", { required: "Debes aceptar los términos" })}
+                  {...register("terms", {
+                    required: "Debes aceptar los términos",
+                  })}
                 />
                 <label className="ml-2 text-sm text-gray-700">
                   Acepto los{" "}
@@ -164,14 +178,18 @@ const Register = () => {
             </>
           ) : (
             <>
-              <h2 className="text-3xl font-bold mb-6">Información de dirección</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                Información de dirección
+              </h2>
 
               <div className="space-y-4">
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="Teléfono"
                   type="tel"
-                  {...register("phone", { required: "Este campo es obligatorio" })}
+                  {...register("phone", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.phone && (
                   <span className="text-red-500 text-sm">
@@ -182,7 +200,9 @@ const Register = () => {
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="País"
-                  {...register("country", { required: "Este campo es obligatorio" })}
+                  {...register("country", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.country && (
                   <span className="text-red-500 text-sm">
@@ -193,7 +213,9 @@ const Register = () => {
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="Código Postal"
-                  {...register("postalCode", { required: "Este campo es obligatorio" })}
+                  {...register("postalCode", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.postalCode && (
                   <span className="text-red-500 text-sm">
@@ -204,7 +226,9 @@ const Register = () => {
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="Ciudad"
-                  {...register("city", { required: "Este campo es obligatorio" })}
+                  {...register("city", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.city && (
                   <span className="text-red-500 text-sm">
@@ -215,7 +239,9 @@ const Register = () => {
                 <input
                   className="w-full border rounded-lg p-3"
                   placeholder="Dirección"
-                  {...register("address", { required: "Este campo es obligatorio" })}
+                  {...register("address", {
+                    required: "Este campo es obligatorio",
+                  })}
                 />
                 {errors.address && (
                   <span className="text-red-500 text-sm">
@@ -228,7 +254,7 @@ const Register = () => {
                 type="submit"
                 className="w-full bg-primary text-white py-3 mt-6 rounded-lg font-semibold hover:bg-blue-500"
               >
-                Completar registro
+                Ir al pago
               </button>
             </>
           )}

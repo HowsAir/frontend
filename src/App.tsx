@@ -8,6 +8,8 @@ import {
 import Layout from "./layouts/Layout";
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
             </Layout>
           }
         />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-cancel" element={<PaymentCancel />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
