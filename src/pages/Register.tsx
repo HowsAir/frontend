@@ -7,7 +7,7 @@ import { redirectToCheckout } from "../api/stripe";
 import { useAppContext } from "../contexts/AppContext";
 
 const Register = () => {
-  const priceAmount = 87; // Price in cents
+  const priceAmount = 85; // Price in cents
 
   const queryClient = useQueryClient();
   const { showToast } = useAppContext();
