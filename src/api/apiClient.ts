@@ -4,19 +4,18 @@
  * @author Juan Diaz
  */
 
-import { MeasurementData } from "./data";
-import { RegisterFormData } from "../types/mainTypes";
+import { MeasurementData } from './data';
+import { RegisterFormData } from '../types/mainTypes';
 
-const NODE_ENV = import.meta.env.VITE_NODE_ENV || "development";
-const API_BASE_URL = NODE_ENV === "development" ? "http://localhost:3000" : "";
+const NODE_ENV = import.meta.env.VITE_NODE_ENV || 'development';
+const API_BASE_URL = NODE_ENV === 'development' ? 'http://localhost:3000' : '';
 
 export const API_ERRORS = {
-  GET_MEASUREMENTS: "Error al obtener las mediciones",
-  REGISTER_USER: "Error al registrar al usuario",
-  CREATE_CHECKOUT_SESSION: "Error al crear la sesión de pago",
-  // Additional error messages for other functions can be added here
+    GET_MEASUREMENTS: 'Error al obtener las mediciones',
+    REGISTER_USER: 'Error al registrar al usuario',
+    CREATE_CHECKOUT_SESSION: 'Error al crear la sesión de pago',
+    // Additional error messages for other functions can be added here
 } as const;
-
 
 /**
  * @brief Fetches all stored measurements from the API
@@ -32,25 +31,25 @@ export const API_ERRORS = {
  * @returns A promise resolved with an array of MeasurementData objects
  */
 export const getMeasurements = async (): Promise<MeasurementData[]> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/measurements`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/measurements`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Error fetching measurements");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching measurements');
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.GET_MEASUREMENTS);
     }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error(API_ERRORS.GET_MEASUREMENTS);
-  }
 };
 
 /**
@@ -67,24 +66,24 @@ export const getMeasurements = async (): Promise<MeasurementData[]> => {
  * @returns A promise that resolves when the registration is successful
  */
 export const register = async (data: RegisterFormData): Promise<void> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/users`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Error registering user");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error registering user');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.REGISTER_USER);
     }
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error(API_ERRORS.REGISTER_USER);
-  }
 };
 
 /**
@@ -100,29 +99,29 @@ export const register = async (data: RegisterFormData): Promise<void> => {
  * @throws Error - If the checkout session creation fails or the response is invalid
  */
 export const createCheckoutSession = async (
-  amount: number 
+    amount: number
 ): Promise<string> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/checkout`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount }),
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/checkout`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amount }),
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Error creating checkout session");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error creating checkout session');
+        }
+
+        const { id }: { id: string } = await response.json();
+        return id; // Return the id for the Stripe checkout session
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.CREATE_CHECKOUT_SESSION);
     }
-
-    const { id }: { id: string } = await response.json();
-    return id; // Return the id for the Stripe checkout session
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error(API_ERRORS.CREATE_CHECKOUT_SESSION);
-  }
 };
 
 /**
@@ -138,25 +137,25 @@ export const createCheckoutSession = async (
  * @returns A promise that resolves when the token is successfully validated
  */
 export const validateToken = async (): Promise<void> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate`, {
-      method: "GET",
-      credentials: "include", // Cookie-based authentication
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate`, {
+            method: 'GET',
+            credentials: 'include', // Cookie-based authentication
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Token invalid");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Token invalid');
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Error validating token');
     }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error("Error validating token");
-  }
 };
 
 /**
@@ -172,22 +171,21 @@ export const validateToken = async (): Promise<void> => {
  * @returns A promise that resolves when the user is successfully logged out
  */
 export const logout = async (): Promise<void> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
-      method: "POST",
-      credentials: "include", // Cookie-based authentication
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
+            method: 'POST',
+            credentials: 'include', // Cookie-based authentication
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Error during Logout");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error during Logout');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Error loggin out');
     }
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error("Error loggin out");
-  }
 };
-

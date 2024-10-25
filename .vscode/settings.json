@@ -1,0 +1,20 @@
+{
+  // Default (format when you paste)
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // Default (format when you save)
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  // Associations for TypeScript and React files
+  "files.associations": {
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact" // Add .tsx file association for React
+  },
+  // Specific formatter for TypeScript and TypeScript React (.tsx) files
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // For React (.tsx)
+  }
+}
