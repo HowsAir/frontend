@@ -5,7 +5,7 @@
  */
 
 import { MeasurementData } from './data';
-import { RegisterFormData } from '../types/mainTypes';
+import { LogInFormData, RegisterFormData } from '../types/mainTypes';
 
 const NODE_ENV = import.meta.env.VITE_NODE_ENV || 'development';
 const API_BASE_URL = NODE_ENV === 'development' ? 'http://localhost:3000' : '';
@@ -14,6 +14,7 @@ export const API_ERRORS = {
     GET_MEASUREMENTS: 'Error al obtener las mediciones',
     REGISTER_USER: 'Error al registrar al usuario',
     CREATE_CHECKOUT_SESSION: 'Error al crear la sesión de pago',
+    LOGIN_USER: 'Error al iniciar sesión',
     // Additional error messages for other functions can be added here
 } as const;
 
@@ -84,6 +85,27 @@ export const register = async (data: RegisterFormData): Promise<void> => {
         console.error('Error:', error);
         throw new Error(API_ERRORS.REGISTER_USER);
     }
+};
+
+export const login = async (data: LogInFormData): Promise<void> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const { message }: { message: string } = await response.json();
+      throw new Error(message || "Error logging in");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    throw new Error(API_ERRORS.LOGIN_USER);
+  }
 };
 
 /**
