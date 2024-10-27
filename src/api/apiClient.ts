@@ -87,6 +87,20 @@ export const register = async (data: RegisterFormData): Promise<void> => {
     }
 };
 
+/**
+ * @brief Logs in a user with email and password
+ * @author Mario Luis
+ *
+ * LogInFormData: data -> login -> Promise<void>
+ *
+ * This function makes a POST request to the API to register a new user.
+ * It expects the user's registration details such as name, email, and password.
+ *
+ * @throws Error - If the registration fails or the response is invalid
+ * @param {RegisterData} data - The registration details for the user
+ * @returns A promise that resolves when the registration is successful
+ */
+
 export const login = async (data: LogInFormData): Promise<void> => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
