@@ -46,7 +46,7 @@ describe("obtenerMediciones", () => {
     const result = await apiClient.getMeasurements();
 
     expect(fetch).toHaveBeenCalledWith(
-      expect.stringContaining("/api/v1/mediciones"),
+      expect.stringContaining("/api/v1/measurements"),
       expect.any(Object)
     );
     expect(result).toEqual(mockMediciones);
