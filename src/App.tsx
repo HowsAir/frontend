@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import PaymentSuccess from './pages/PaymentSuccess';
 import PaymentCancel from './pages/PaymentCancel';
+import TermsAndPrivacy from './pages/TermsAndPrivacy';
 
 const App = () => {
     return (
@@ -37,7 +38,15 @@ const App = () => {
                 />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route 
+                    path="/terms-and-privacy" 
+                    element={
+                        <Layout>
+                            <TermsAndPrivacy />
+                        </Layout>
+                    } 
+                />
+                <Route path="*" element={<Navigate to="/" />} />                
             </Routes>
         </BrowserRouter>
     );

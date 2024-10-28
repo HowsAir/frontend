@@ -6,6 +6,7 @@ import { LogInFormData, ToastMessageType } from '../types/mainTypes';
 
 
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const queryClient = useQueryClient();
@@ -87,6 +88,21 @@ const onSubmit = handleSubmit((data: LogInFormData) => {
                     <button className="w-full bg-primary text-white py-3 mt-6 rounded-lg font-semibold hover:bg-blue-500" type="submit" disabled={isLoading}>
                         {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                     </button>
+
+                    {/* Enlace a Términos y Condiciones */}
+                    <p className="text-sm mt-4">
+                        Al continuar, aceptas nuestros{' '}
+                        <Link to="/terms-and-privacy" className="text-primary font-semibold underline">
+                            Términos y Condiciones de Privacidad
+                        </Link>.
+                    </p>
+
+                    {/* Enlace a Olvidé mi contraseña */}
+                    <p className="text-sm mt-2">
+                        <Link to="/forgot-password" className="text-primary font-semibold underline">
+                            ¿Has olvidado tu contraseña?
+                        </Link>
+                    </p>
                 </form>
             </div>
 

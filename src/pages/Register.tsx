@@ -5,6 +5,7 @@ import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
 import { useState } from 'react';
 import { redirectToCheckout } from '../api/stripe';
 import { useAppContext } from '../contexts/AppContext';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const priceAmount = 85; // Price in euros
@@ -66,12 +67,9 @@ const Register = () => {
                             </h2>
                             <p className="text-sm mb-6">
                                 ¿Ya has comprado tu Breeze?{' '}
-                                <a
-                                    href="#"
-                                    className="text-primary font-semibold"
-                                >
+                                <Link to="/login" className="text-primary font-semibold">
                                     Inicia sesión aquí
-                                </a>
+                                </Link>
                             </p>
 
                             <div className="space-y-4">
@@ -159,14 +157,11 @@ const Register = () => {
                                         required: 'Debes aceptar los términos',
                                     })}
                                 />
-                                <label className="ml-2 text-sm text-gray-700">
+                               <label className="ml-2 text-sm text-gray-700">
                                     Acepto los{' '}
-                                    <a
-                                        href="#"
-                                        className="text-primary font-semibold"
-                                    >
+                                    <Link to="/terms-and-privacy" className="text-primary font-semibold">
                                         términos, condiciones y privacidad
-                                    </a>
+                                    </Link>
                                 </label>
                             </div>
                             {errors.terms && (
