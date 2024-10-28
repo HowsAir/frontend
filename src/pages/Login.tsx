@@ -6,10 +6,11 @@ import { LogInFormData, ToastMessageType } from '../types/mainTypes';
 
 
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
     const { showToast } = useAppContext();
 
     const { register, handleSubmit, formState: { errors } } = useForm<LogInFormData>();
@@ -19,6 +20,7 @@ const Login: React.FC = () => {
         onSuccess: () => {
             showToast({ message: 'Has iniciado la sesión correctamente', type: ToastMessageType.SUCCESS });
             queryClient.invalidateQueries('user');
+            navigate('/');
         },
         onError: (error: any) => {
             showToast({ message: error.message, type: ToastMessageType.ERROR });
@@ -49,63 +51,78 @@ const onSubmit = handleSubmit((data: LogInFormData) => {
 
             {/* Sección derecha */}
             <div className="w-1/2 flex flex-col justify-center items-center p-10">
-                <form className='w-full max-w-md' onSubmit={onSubmit}>
-                    <h2 className="text-3xl font-bold mb-6">
-                        Inicia sesión
-                    </h2>
+                <form className="w-full max-w-md" onSubmit={onSubmit}>
+                    <h2 className="text-3xl font-bold mb-6">Inicia sesión</h2>
                     <p className="text-sm mb-6">
                         ¿Aún no has comprado tu Breeze?{' '}
-                        <a
-                            href="#"
-                            className="text-primary font-semibold"
-                        >
+                        <Link to="/register" className="text-primary font-semibold">
                             Cómpralo aquí
-                        </a>
+                        </Link>
                     </p>
                     <div className="space-y-4">
                         {/* Input email */}
                         <input
-                            className='w-full border rounded-lg p-3'
-                            placeholder='Email'
+                            className="w-full border rounded-lg p-3"
+                            placeholder="Email"
                             type="email"
                             {...register('email', {
-                                required: 'Este campo es obligatorio'
+                                required: 'Este campo es obligatorio',
                             })}
                         />
-                        {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+                        {errors.email && (
+                            <span className="text-red-500 text-sm">
+                                {errors.email.message}
+                            </span>
+                        )}
 
                         {/* Input contrasenya  */}
                         <input
-                            className='w-full border rounded-lg p-3'
+                            className="w-full border rounded-lg p-3"
                             placeholder="Contraseña"
                             type="password"
-                            {...register('password', { required: 'Este campo es obligatorio' })}
+                            {...register('password', {
+                                required: 'Este campo es obligatorio',
+                            })}
                         />
-                        {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+                        {errors.password && (
+                            <span className="text-red-500 text-sm">
+                                {errors.password.message}
+                            </span>
+                        )}
                     </div>
 
                     {/* Boton submit */}
-                    <button className="w-full bg-primary text-white py-3 mt-6 rounded-lg font-semibold hover:bg-blue-500" type="submit" disabled={isLoading}>
+                    <button
+                        className="w-full bg-primary text-white py-3 mt-6 rounded-lg font-semibold hover:bg-blue-500"
+                        type="submit"
+                        disabled={isLoading}
+                    >
                         {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                     </button>
 
                     {/* Enlace a Términos y Condiciones */}
                     <p className="text-sm mt-4">
                         Al continuar, aceptas nuestros{' '}
-                        <Link to="/terms-and-privacy" className="text-primary font-semibold underline">
+                        <Link
+                            to="/terms-and-privacy"
+                            className="text-primary font-semibold underline"
+                        >
                             Términos y Condiciones de Privacidad
-                        </Link>.
+                        </Link>
+                        .
                     </p>
 
                     {/* Enlace a Olvidé mi contraseña */}
                     <p className="text-sm mt-2">
-                        <Link to="/forgot-password" className="text-primary font-semibold underline">
+                        <Link
+                            to="/forgot-password"
+                            className="text-primary font-semibold underline"
+                        >
                             ¿Has olvidado tu contraseña?
                         </Link>
                     </p>
                 </form>
             </div>
-
         </div>
     );
 };
