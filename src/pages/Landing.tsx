@@ -50,13 +50,14 @@ const Landing = () => {
                     {mediciones.length > 0 ? (
                         mediciones.map((medicion) => (
                             <Medicion
-                                key={medicion._id}
-                                _id={medicion._id}
-                                fecha={medicion.fecha}
-                                ppm={medicion.ppm}
-                                temperatura={medicion.temperatura}
-                                latitud={medicion.latitud}
-                                longitud={medicion.longitud}
+                                key={medicion.id}
+                                id={medicion.id}
+                                timestamp={medicion.timestamp}
+                                o3Value={medicion.o3Value}
+                                no2Value={medicion.no2Value}
+                                coValue={medicion.coValue}
+                                latitude={medicion.latitude}
+                                longitude={medicion.longitude}
                             />
                         ))
                     ) : (

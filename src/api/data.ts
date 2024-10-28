@@ -1,8 +1,9 @@
 export interface MeasurementData {
-    _id: string;
-    fecha: Date;
-    ppm: number;
-    temperatura: number;
-    latitud: number;
-    longitud: number;
+    id: string;
+    timestamp: Date;
+    o3Value: number;
+    no2Value: number;
+    coValue: number;
+    latitude: number;
+    longitude: number;
 }
