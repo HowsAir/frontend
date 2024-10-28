@@ -4,7 +4,7 @@ name: CI Pipeline
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 # Definimos el conjunto de jobs a ejecutar
 jobs:
