@@ -100,20 +100,8 @@ const onSubmit = handleSubmit((data: LogInFormData) => {
                         {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                     </button>
 
-                    {/* Enlace a Términos y Condiciones */}
-                    <p className="text-sm mt-4">
-                        Al continuar, aceptas nuestros{' '}
-                        <Link
-                            to="/terms-and-privacy"
-                            className="text-primary font-semibold underline"
-                        >
-                            Términos y Condiciones de Privacidad
-                        </Link>
-                        .
-                    </p>
-
                     {/* Enlace a Olvidé mi contraseña */}
-                    <p className="text-sm mt-2">
+                    <p className="text-sm mt-6">
                         <Link
                             to="/forgot-password"
                             className="text-primary font-semibold underline"

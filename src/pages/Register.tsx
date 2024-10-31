@@ -159,7 +159,11 @@ const Register = () => {
                                 />
                                <label className="ml-2 text-sm text-gray-700">
                                     Acepto los{' '}
-                                    <Link to="/terms-and-privacy" className="text-primary font-semibold">
+                                    <Link 
+                                    to="/terms-and-privacy" 
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-primary font-semibold">
                                         términos, condiciones y privacidad
                                     </Link>
                                 </label>
