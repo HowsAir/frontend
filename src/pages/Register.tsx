@@ -5,7 +5,12 @@ import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
 import { useState } from 'react';
 import { redirectToCheckout } from '../api/stripe';
 import { useAppContext } from '../contexts/AppContext';
+import { passwordValidation } from '../utils/passwordValidation';
 import { Link } from 'react-router-dom';
+
+interface FormInputs {
+    password: string;
+}
 
 const Register = () => {
     const priceAmount = 85; // Price in euros
@@ -119,11 +124,12 @@ const Register = () => {
                                     type="password"
                                     {...register('password', {
                                         required: 'Este campo es obligatorio',
-                                        minLength: {
-                                            value: 6,
-                                            message:
-                                                'La contraseña debe tener al menos 6 caracteres',
-                                        },
+                                        validate: {
+                                            passwordCheck: (value) => {
+                                                const validationResult = passwordValidation(value);
+                                                return validationResult === true ? true : validationResult;
+                                            }
+                                        }
                                     })}
                                 />
                                 {errors.password && (
@@ -137,6 +143,7 @@ const Register = () => {
                                     placeholder="Verifica Contraseña"
                                     type="password"
                                     {...register('confirmPassword', {
+                                        required: 'Este campo es obligatorio',
                                         validate: (val: string) =>
                                             val === watch('password') ||
                                             'Las contraseñas no coinciden',
