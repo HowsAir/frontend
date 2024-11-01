@@ -8,7 +8,7 @@ const Header = () => {
             <div className="flex flex-row items-center gap-10">
                 <a href="#">Breeze</a>
                 <a href="#">Mapas</a>
-                <a href="/login" className="h-fit px-4 py-3 rounded-lg text-primary bg-transparent border-gray border-2">Iniciar sesión</a>
+                <a href="/login" className="font-medium h-fit px-4 py-3 rounded-lg text-primary bg-transparent border-gray border-2">Iniciar sesión</a>
             </div>
         </header>
     );
