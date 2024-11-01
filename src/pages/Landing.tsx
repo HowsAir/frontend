@@ -36,7 +36,7 @@ const Landing = () => {
                 </p>
             </section>
 
-            <section className="flex flex-row gap-16 container py-20 mx-auto">
+            <section className="max-w-[85dvw] flex flex-row gap-16 py-20 mx-auto">
                 <img
                     className="w-[400px] h-fit my-auto"
                     alt="Vaper Breeze"
