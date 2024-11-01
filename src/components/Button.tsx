@@ -1,16 +1,18 @@
 import React, { ReactNode } from 'react';
 
 interface ButtonProps {
-    color: string;
+    color?: 'primary' | 'secondary';
     children: ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, color }) => {
-    const txtColor = color == 'primary' ? 'offwhite' : 'primary';
-    const bgColor = color == 'primary' ? 'primary' : 'offwhite';
+const Button: React.FC<ButtonProps> = ({ children, color = 'primary' }) => {
+    const txtColor = color === 'primary' ? 'offwhite' : 'primary';
+    const bgColor = color === 'primary' ? 'primary' : 'offwhite';
 
     return (
-        <a className={`h-fit px-12 py-3 rounded-lg text-${txtColor} bg-${bgColor}`}>{ children }</a>
+        <a className={`h-fit px-12 py-3 rounded-lg text-${txtColor} bg-${bgColor}`}>
+            {children}
+        </a>
     );
 }
 
