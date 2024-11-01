@@ -1,73 +1,22 @@
-import { useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
-import Medicion from '../components/Medicion';
-import { MeasurementData } from '../api/data';
-
 const Landing = () => {
-    const [mediciones, setMediciones] = useState<MeasurementData[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchMediciones = async () => {
-            try {
-                const data = await apiClient.getMeasurements();
-                setMediciones(data);
-            } catch (error) {
-                //Gestionar error
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        // Ejecutar la función inmediatamente al montar el componente
-        fetchMediciones();
-
-        // Configurar la actualización cada 10 segundos (10000 ms)
-        const interval = setInterval(() => {
-            fetchMediciones();
-        }, 10000);
-
-        // Limpiar el intervalo cuando el componente se desmonte
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <main className="container mx-auto py-10">
-            <div className="container mx-auto flex-1 mb-8">
-                <h1 className="text-center font-semibold text-4xl">
-                    Controla la calidad del aire a tu alrededor
-                </h1>
-            </div>
-            <h2 className="text-xl font-normal mb-4 text-left">
-                Últimas mediciones:
-            </h2>
+        <section 
+            className="relative h-screen w-screen bg-cover"
+            style={{ backgroundImage: "url('../../public/landingBg.png')" }}>
+            <div 
+                className="absolute inset-0 bg-[rgba(143,143,143,0.28)]" 
+                style={{ 
+                    background: 'radial-gradient(circle 600px at 50% 70%, rgba(143, 143, 143, 0.28) 0%, rgba(0, 73, 147, 0.65) 100%)'
+                }} 
+            />
+            <div className="container relative pt-60 mx-auto flex flex-col items-center">
+                <h1>¿Es seguro el aire a tu alrededor?</h1>
+                <p className="hero-p">HowsAir te ayuda a monitorear la calidad del aire en tu entorno.</p>
 
-            {loading ? (
-                <p className="text-center">Cargando mediciones...</p>
-            ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {mediciones.length > 0 ? (
-                        mediciones.map((medicion) => (
-                            <Medicion
-                                key={medicion.id}
-                                id={medicion.id}
-                                timestamp={medicion.timestamp}
-                                o3Value={medicion.o3Value}
-                                no2Value={medicion.no2Value}
-                                coValue={medicion.coValue}
-                                latitude={medicion.latitude}
-                                longitude={medicion.longitude}
-                            />
-                        ))
-                    ) : (
-                        <p className="text-center col-span-full">
-                            No hay mediciones disponibles
-                        </p>
-                    )}
-                </div>
-            )}
-        </main>
+                <a className="btn-primary mt-24">Ver mapas</a>
+                <button className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">V</button>
+            </div>
+        </section>
     );
 };
 
