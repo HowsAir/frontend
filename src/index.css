@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 @layer components {
-  .btn-primary {
-    @apply h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
-  }
+    .btn-primary {
+        @apply h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
+    }
 
-  .btn-secondary {
-    @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
-  }
+    .btn-secondary {
+        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+    }
 
-  .hero-p {
-    @apply text-center w-fit text-offwhite text-2xl font-medium;
-  }
+    .hero-p {
+        @apply text-offwhite text-center w-fit font-medium;
+    }
 }
 
 @layer base {
@@ -21,10 +21,14 @@
         @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight;
     }
     h2 {
-        @apply text-3xl font-semibold mb-3;
+        @apply text-5xl font-medium mb-12;
     }
     h3 {
         @apply text-2xl font-medium mb-2;
+    }
+
+    p {
+        @apply text-offblack text-2xl font-normal;
     }
     /* Add more as needed */
 }
