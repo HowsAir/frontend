@@ -15,7 +15,7 @@ const App = () => {
                 <Route
                     path="/"
                     element={
-                        <Layout>
+                        <Layout noPadding>
                             <Landing />
                         </Layout>
                     }
