@@ -1,9 +1,16 @@
+import Logo from "./Logo";
+import Button from "./Button";
+
 const Header = () => {
     return (
-        <header className="bg-white p-8 border-b-2 border-slate-100">
-            <h1 className="text-4xl font-semibold text-left text-black">
-                HowsAir
-            </h1>
+        <header className="fixed top-0 bg-white h-20 w-screen px-20 flex flex-row justify-between items-center drop-shadow-header">
+            <Logo color="blue"/>
+
+            <div className="flex flex-row items-center gap-10">
+                <a href="#">Breeze</a>
+                <a href="#">Mapas</a>
+                <a href="/login" className="h-fit px-4 py-3 rounded-lg text-primary bg-transparent border-gray border-2">Iniciar sesión</a>
+            </div>
         </header>
     );
 };
