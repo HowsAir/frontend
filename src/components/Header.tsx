@@ -1,5 +1,4 @@
 import {Logo} from "./Logo";
-import {Button} from "./Button";
 
 const Header = () => {
     return (
@@ -11,7 +10,6 @@ const Header = () => {
                 <a href="#">Mapas</a>
                 <a href="/login" className="h-fit px-4 py-3 rounded-lg text-primary bg-transparent border-gray border-2">Iniciar sesión</a>
             </div>
-            <Button>hola</Button>
         </header>
     );
 };
