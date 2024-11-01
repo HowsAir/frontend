@@ -13,7 +13,7 @@ export function CloudSvg ({ color }: CloudSvgProps) {
             xmlnsXlink="http://www.w3.org/1999/xlink"
             x="0px"
             y="0px"
-            viewBox="-20 0 520 500"
+            viewBox="-20 0 530 500"
             style={{ background: 'new 0 0 500 500' }}
             xmlSpace="preserve"
         >
