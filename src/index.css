@@ -21,7 +21,7 @@
         @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight;
     }
     h2 {
-        @apply text-5xl font-medium mb-12;
+        @apply text-5xl font-medium mb-10;
     }
     h3 {
         @apply text-2xl font-medium mb-2;

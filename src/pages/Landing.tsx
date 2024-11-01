@@ -2,7 +2,7 @@ const Landing = () => {
     return (
         <>
             <section
-                className="relative h-screen w-screen bg-cover"
+                className="relative h-screen w-full bg-cover overflow-hidden"
                 style={{ backgroundImage: "url('../../public/landingBg.png')" }}
             >
                 <div
@@ -13,7 +13,7 @@ const Landing = () => {
                     }}
                 />
 
-                <div className="container relative pt-60 mx-auto flex flex-col items-center">
+                <div className="container mx-auto relative pt-60 flex flex-col items-center">
                     <h1>¿Es seguro el aire a tu alrededor?</h1>
                     <p className="hero-p">
                         HowsAir te ayuda a monitorear la calidad del aire en tu
@@ -34,6 +34,34 @@ const Landing = () => {
                     gracias a la participación de nuestros fieles portadores de
                     Breeze.
                 </p>
+            </section>
+
+            <section className="flex flex-row gap-16 container py-20 mx-auto">
+                <img
+                    className="w-[400px] h-fit my-auto"
+                    alt="Vaper Breeze"
+                    src="/breezePic.png"
+                />
+                <div className="w-[50%] h-auto">
+                    <p className="text-[40px] font-regular text-offblack mb-6">
+                        Breeze
+                    </p>
+                    <h2>Obtén el poder de la monitorización</h2>
+                    <p className="h-fit mb-16">
+                        Dispositivo portátil que monitorea la calidad del aire a
+                        tu alrededor. Equipado con sensores para detectar ozono,
+                        CO2 y otros contaminantes, te proporciona información en
+                        tiempo real a través de tu móvil, ayudándote a cuidar tu
+                        salud y el ambiente que respiras.
+                    </p>
+
+                    <div className="flex flex-row gap-5 items-center">
+                        <a className="btn-primary">Saber más</a>
+                        <p className="text-primary font-semibold">
+                            ¡Unidades gratis limitadas!
+                        </p>
+                    </div>
+                </div>
             </section>
         </>
     );
