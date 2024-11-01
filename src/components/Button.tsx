@@ -5,7 +5,7 @@ interface ButtonProps {
     children: ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, color = 'primary' }) => {
+export const Button: React.FC<ButtonProps> = ({ children, color = 'primary' }: ButtonProps) => {
     const txtColor = color === 'primary' ? 'offwhite' : 'primary';
     const bgColor = color === 'primary' ? 'primary' : 'offwhite';
 
@@ -15,5 +15,3 @@ const Button: React.FC<ButtonProps> = ({ children, color = 'primary' }) => {
         </a>
     );
 }
-
-export default Button;

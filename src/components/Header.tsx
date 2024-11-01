@@ -1,5 +1,5 @@
-import Logo from "./Logo";
-import Button from "./Button";
+import {Logo} from "./Logo";
+import {Button} from "./Button";
 
 const Header = () => {
     return (

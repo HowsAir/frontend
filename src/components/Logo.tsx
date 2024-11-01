@@ -5,7 +5,7 @@ interface LogoProps {
 }
 
 export function Logo({color}: LogoProps) {
-    const colorName = color === 'blue' ? 'primary' : 'offwhite';
+    const colorName = color === 'primary' ? 'primary' : 'offwhite';
 
     return (
         <a href="/" className='flex flex-row items-center gap-1'>
@@ -14,5 +14,3 @@ export function Logo({color}: LogoProps) {
         </a>
     );
 }
-
-export default Logo;
