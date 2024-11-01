@@ -47,7 +47,7 @@ const Landing = () => {
                         Breeze
                     </p>
                     <h2>Obtén el poder de la monitorización</h2>
-                    <p className="h-fit mb-16">
+                    <p className="mb-16">
                         Dispositivo portátil que monitorea la calidad del aire a
                         tu alrededor. Equipado con sensores para detectar ozono,
                         CO2 y otros contaminantes, te proporciona información en
@@ -62,6 +62,25 @@ const Landing = () => {
                         </p>
                     </div>
                 </div>
+            </section>
+
+            <section className="px-24 flex flex-row bg-primary h-fit py-20">
+                <div>
+                    <h2 className="text-offwhite">Mapas de contaminación</h2>
+                    <p className="text-offwhite w-[80%] mb-24">
+                        En HowsAir, ofrecemos mapas interactivos que te permiten
+                        visualizar en tiempo real la calidad del aire que te
+                        rodea. Puedes seleccionar contaminantes como O3, CO y
+                        NO2 para ver como te afectan en tu día a día, sea donde
+                        sea.
+                    </p>
+                    <a className="btn-inverted">Ver mapas</a>
+                </div>
+                <img
+                    className="rounded-[50px]"
+                    alt="Mapa de ejemplo"
+                    src="/mapExample.png"
+                ></img>
             </section>
         </>
     );

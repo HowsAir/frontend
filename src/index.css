@@ -7,6 +7,10 @@
         @apply h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
     }
 
+    .btn-inverted {
+        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+    }
+
     .btn-secondary {
         @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
     }
@@ -28,7 +32,7 @@
     }
 
     p {
-        @apply text-offblack text-2xl font-normal;
+        @apply text-offblack text-2xl font-normal h-fit;
     }
     /* Add more as needed */
 }
