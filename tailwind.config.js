@@ -13,7 +13,7 @@ export default {
         gray: "#E3E3E3"
       },
       dropShadow: {
-        'header': '0 4px 4px rgba(16, 116, 231, 0.15)',
+        'header': '0 4px 4px rgba(16, 116, 231, 0.1)',
       },
     },
   },
