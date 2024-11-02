@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import PaymentSuccess from './pages/PaymentSuccess';
 import PaymentCancel from './pages/PaymentCancel';
 import TermsAndPrivacy from './pages/TermsAndPrivacy';
+import Product from './pages/Product';
+import Maps from './pages/Maps';
 
 const App = () => {
     return (
@@ -28,7 +30,7 @@ const App = () => {
                         </Layout>
                     }
                 />
-                <Route 
+                <Route
                     path="/login"
                     element={
                         <Layout>
@@ -38,15 +40,31 @@ const App = () => {
                 />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
-                <Route 
-                    path="/terms-and-privacy" 
+                <Route
+                    path="/terms-and-privacy"
                     element={
                         <Layout>
                             <TermsAndPrivacy />
                         </Layout>
-                    } 
+                    }
                 />
-                <Route path="*" element={<Navigate to="/" />} />                
+                <Route
+                    path="/breeze"
+                    element={
+                        <Layout>
+                            <Product />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/maps"
+                    element={
+                        <Layout>
+                            <Maps />
+                        </Layout>
+                    }
+                />
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </BrowserRouter>
     );
