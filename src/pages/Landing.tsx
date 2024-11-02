@@ -1,3 +1,5 @@
+import { ValueCard } from "../components/ValueCard";
+
 const Landing = () => {
     return (
         <>
@@ -81,6 +83,24 @@ const Landing = () => {
                     alt="Mapa de ejemplo"
                     src="/mapExample.png"
                 ></img>
+            </section>
+
+            <section className="py-20 px-20">
+                <h2 className="text-center mb-16">Nuestro valores</h2>
+                <div className="flex flex-row gap-20 items-stretch">
+                    <ValueCard title="Compromiso ambiental">
+                        Creemos en la importancia de reducir la contaminación y
+                        cuidar el planeta para las generaciones futuras.
+                    </ValueCard>
+                    <ValueCard title="Transparencia">
+                        Proporcionamos datos precisos y accesibles sin filtros,
+                        para que nuestros usuarios vean la realidad del planeta.
+                    </ValueCard>
+                    <ValueCard title="Colaboración">
+                        Valoramos el trabajo conjunto entre nuestra comunidad,
+                        clientes y expertos para recopilar datos.
+                    </ValueCard>
+                </div>
             </section>
         </>
     );
