@@ -17,7 +17,8 @@ export default {
       },
       backgroundImage: {
         'hero': "url('../../public/landingBg.png')",
-        'form': "url('../../public/formBg.png')"
+        'form': "url('../../public/formBg.png')",
+        'footer': "url('../../public/footerBg.png')"
       }
     },
   },
