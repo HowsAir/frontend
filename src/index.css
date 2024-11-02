@@ -4,19 +4,23 @@
 
 @layer components {
     .btn-primary {
-        @apply h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
+        @apply w-fit h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
     }
 
     .btn-inverted {
-        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+        @apply w-fit h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
     }
 
     .btn-secondary {
-        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+        @apply w-fit h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
     }
 
     .hero-p {
         @apply text-offwhite text-center w-fit font-medium;
+    }
+
+    .form-input { 
+        @apply w-full h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8;
     }
 }
 
@@ -25,10 +29,10 @@
         @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight w-fit;
     }
     h2 {
-        @apply text-5xl font-medium mb-10 w-fit;
+        @apply text-offblack text-5xl font-medium mb-10 w-fit;
     }
     h3 {
-        @apply text-2xl font-medium mb-2 w-fit;
+        @apply text-offblack text-2xl font-normal mb-2 w-fit;
     }
 
     p {

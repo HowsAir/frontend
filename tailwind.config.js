@@ -15,6 +15,10 @@ export default {
       dropShadow: {
         'header': '0 4px 4px rgba(16, 116, 231, 0.1)',
       },
+      backgroundImage: {
+        'hero': "url('../../public/landingBg.png')",
+        'form': "url('../../public/formBg.png')"
+      }
     },
   },
   plugins: [],
