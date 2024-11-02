@@ -58,17 +58,13 @@ const Login: React.FC = () => {
                     Copyright 2024 HowsAir. Todos los derechos reservados.
                 </span>
             </div>
-            <form
-                onSubmit={onSubmit}
-                className="lg:w-[35dvw] sm:w-[60dvw] flex flex-col bg-white sm:rounded-lg lg:rounded-none lg:rounded-br-lg 
-            lg:rounded-tr-lg border-gray border-[1px] py-12 px-16"
-            >
-                <h2 className="mb-3">Bienvenido</h2>
+            <form onSubmit={onSubmit} className="form">
+                <h2>Bienvenido</h2>
 
-                <label className="text-neutral-600">
+                <label className='form-label'>
                     ¿Aún no has comprado tu Breeze?
                     <br />
-                    <Link to="#" className="text-neutral-400 underline">
+                    <Link to="#">
                         Cómpralo aquí
                     </Link>
                 </label>
@@ -105,9 +101,9 @@ const Login: React.FC = () => {
                     Olvidé mi contraseña
                 </Link>
                 <button
+                    className='btn-submit'
                     type="submit"
                     disabled={isLoading}
-                    className="btn-primary font-normal py-2 mt-12 sm:mx-0 lg:mx-auto"
                 >
                     {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
                 </button>

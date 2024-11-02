@@ -15,6 +15,10 @@
         @apply w-fit h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
     }
 
+    .btn-submit {
+        @apply btn-primary font-normal py-2 mt-12 sm:mx-0 lg:mx-auto;
+    }
+
     .hero-p {
         @apply text-offwhite text-center w-fit font-medium;
     }
@@ -22,6 +26,26 @@
     .form-input { 
         @apply w-full h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8;
     }
+
+    .form,
+    .form {
+        @apply lg:w-[35dvw] sm:w-[60dvw] flex flex-col bg-white sm:rounded-lg lg:rounded-none lg:rounded-br-lg 
+            lg:rounded-tr-lg border-gray border-[1px] py-12 px-16;
+    }
+
+    .form h2 {
+        @apply mb-3;
+    }
+
+    .form-label {
+        @apply text-neutral-600;
+    }
+
+    .form-label * {
+        @apply text-neutral-400 underline;
+    }
+
+
 }
 
 @layer base {
