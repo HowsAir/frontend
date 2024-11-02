@@ -21,12 +21,12 @@ const Landing = () => {
                     </p>
 
                     <Link to="/maps" className="btn-primary mt-24">Ver mapas</Link>
-                    <a className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">
+                    <a href='#target' className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">
                         V
                     </a>
                 </div>
             </section>
-
+            <div id="target" className='relative -top-20'></div>
             <section className="py-20 mx-auto max-w-[600px] flex flex-col items-center">
                 <h2>¿Qué hacemos en HowsAir?</h2>
                 <p className="text-center">
