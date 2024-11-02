@@ -29,20 +29,22 @@ describe("API Client Tests", () => {
     it("debería obtener mediciones correctamente", async () => {
       const mockMediciones: MeasurementData[] = [
         {
-          _id: "1",
-          fecha: new Date(),
-          ppm: 400,
-          temperatura: 25,
-          latitud: 100.8,
-          longitud: 45.1,
+          id: "1",
+          timestamp: new Date(),
+          o3Value: 400,
+          no2Value: 25,
+          coValue: 0.5,
+          latitude: 100.8,
+          longitude: 45.1,
         },
         {
-          _id: "2",
-          fecha: new Date(),
-          ppm: 410,
-          temperatura: 26,
-          latitud: 10.5,
-          longitud: 10.7,
+          id: "2",
+          timestamp: new Date(),
+          o3Value: 410,
+          no2Value: 26,
+          coValue: 0.5,
+          latitude: 10.5,
+          longitude: 10.7,
         },
       ];
 
