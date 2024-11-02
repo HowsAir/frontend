@@ -45,7 +45,9 @@
         @apply text-neutral-400 underline;
     }
 
-
+    .footer-link {
+        @apply text-offwhite text-2xl mb-5;
+    }
 }
 
 @layer base {
@@ -62,7 +64,7 @@
     p {
         @apply text-offblack text-2xl font-normal h-fit;
     }
-    /* Add more as needed */
+
 }
 
 .loader {
