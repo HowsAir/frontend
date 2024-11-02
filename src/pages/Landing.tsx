@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ValueCard } from '../components/ValueCard';
 
 const Landing = () => {
@@ -19,10 +20,10 @@ const Landing = () => {
                         entorno.
                     </p>
 
-                    <a className="btn-primary mt-24">Ver mapas</a>
-                    <button className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">
+                    <Link to="/maps" className="btn-primary mt-24">Ver mapas</Link>
+                    <a className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">
                         V
-                    </button>
+                    </a>
                 </div>
             </section>
 
@@ -55,7 +56,7 @@ const Landing = () => {
                     </p>
 
                     <div className="flex lg:flex-row sm:flex-col gap-5 lg:items-center sm:items-start">
-                        <a className="btn-primary">Saber más</a>
+                        <Link to="/breeze" className="btn-primary">Saber más</Link>
                         <p className="text-primary font-semibold">
                             ¡Unidades gratis limitadas!
                         </p>
@@ -75,24 +76,24 @@ const Landing = () => {
                         NO2 para ver como te afectan en tu día a día, sea donde
                         sea.
                     </p>
-                    <a
-                        href="#"
-                        className="btn-inverted lg:inline-block sm:hidden"
+                    <Link
+                        to="/maps"
+                        className="relative z-10 btn-inverted lg:inline-block sm:hidden"
                     >
                         Ver mapas
-                    </a>
+                    </Link>
                 </div>
                 <img
                     className="rounded-[50px] w-auto h-auto sm:w-screen lg:max-w-[40%] object-cover"
                     alt="Mapa de ejemplo"
                     src="/mapExample.png"
                 ></img>
-                <a
-                    href="#"
+                <Link
+                    to="/maps"
                     className="btn-inverted lg:hidden sm:inline-block mx-auto mt-10"
                 >
                     Ver mapas
-                </a>
+                </Link>
             </section>
 
             <section className="py-20 px-20">
