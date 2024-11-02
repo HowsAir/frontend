@@ -1,11 +1,13 @@
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { useScrollToTop } from '../hooks/ScrollToTop';
 
 interface Props {
     children: React.ReactNode; //Any type of data
     noPadding?: boolean;
 }
 const Layout = ({ children, noPadding }: Props) => {
+    useScrollToTop();
     return (
         <div className="flex flex-col bg-offwhite">
             <Header />
