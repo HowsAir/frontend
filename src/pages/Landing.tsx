@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ValueCard } from '../components/ValueCard';
+import ArrowDown from '../components/icons/ArrowDown';
 
 const Landing = () => {
+    const Icon = ArrowDown;
+    
     return (
         <>
             <section className="relative h-screen w-full bg-cover overflow-hidden bg-hero">
@@ -13,20 +16,25 @@ const Landing = () => {
                     }}
                 />
 
-                <div className="container mx-auto relative pt-60 flex flex-col items-center">
+                <div className="container h-full mx-auto relative pt-60 flex flex-col items-center">
                     <h1>¿Es seguro el aire a tu alrededor?</h1>
                     <p className="hero-p">
                         HowsAir te ayuda a monitorear la calidad del aire en tu
                         entorno.
                     </p>
 
-                    <Link to="/maps" className="btn-primary mt-24">Ver mapas</Link>
-                    <a href='#target' className="rounded-full w-14 h-14 mt-16 p-2 text-primary text-4xl bg-white bg-opacity-60">
-                        V
+                    <Link to="/maps" className="btn-primary mt-24">
+                        Ver mapas
+                    </Link>
+                    <a
+                        href="#target"
+                        className="rounded-full w-14 h-14 mt-auto mb-12 p-2 text-primary text-4xl bg-white bg-opacity-60"
+                    >
+                        <Icon></Icon>
                     </a>
                 </div>
             </section>
-            <div id="target" className='relative -top-20'></div>
+            <div id="target" className="relative -top-20"></div>
             <section className="py-20 mx-auto max-w-[600px] flex flex-col items-center">
                 <h2>¿Qué hacemos en HowsAir?</h2>
                 <p className="text-center">
@@ -56,7 +64,9 @@ const Landing = () => {
                     </p>
 
                     <div className="flex lg:flex-row sm:flex-col gap-5 lg:items-center sm:items-start">
-                        <Link to="/breeze" className="btn-primary">Saber más</Link>
+                        <Link to="/breeze" className="btn-primary">
+                            Saber más
+                        </Link>
                         <p className="text-primary font-semibold">
                             ¡Unidades gratis limitadas!
                         </p>
