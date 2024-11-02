@@ -2,7 +2,7 @@ const TermsAndPrivacy = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-4">Términos y Condiciones y Política de Privacidad</h1>
+        <h2>Términos y Condiciones y Política de Privacidad</h2>
         <p className="text-gray-600 mb-2">Fecha de actualización: Octubre 2024</p>
 
         <div className="text-gray-700 space-y-4">
