@@ -102,6 +102,30 @@ const Landing = () => {
                     </ValueCard>
                 </div>
             </section>
+
+            <section className="px-24 flex flex-row h-fit py-20">
+                <div className="w-2/3 mr-40">
+                    <h2>Nuestra misión</h2>
+                    <p>
+                        En HowsAir, nuestra misión es proporcionar a las
+                        personas información precisa y sin filtros sobre la
+                        calidad del aire que respiran. Buscamos que cualquier
+                        persona pueda monitorear los contaminantes presentes en
+                        su entorno. Creemos que el acceso a datos veraces es
+                        clave para tomar decisiones informadas que promuevan un
+                        estilo de vida más saludable. No alteramos ni filtramos
+                        la información, estamos comprometidos con la
+                        transparencia y el empoderamiento de nuestra comunidad
+                        para que cada usuario conozca la verdad sobre el aire
+                        que lo rodea.
+                    </p>
+                </div>
+                <img
+                    alt="Mujer feliz con telefono en mano"
+                    src="/missionWoman.jpg"
+                    className="rounded-[50px] w-[400px] object-cover transform scale-x-[-1]"
+                ></img>
+            </section>
         </>
     );
 };
