@@ -2,8 +2,8 @@ import {Logo} from "./Logo";
 
 const Header = () => {
     return (
-        <header className="fixed top-0 bg-white h-20 w-screen px-20 flex flex-row justify-between items-center drop-shadow-header">
-            <Logo color="blue"/>
+        <header className="fixed z-50 top-0 bg-white h-20 w-screen px-20 flex flex-row justify-between items-center drop-shadow-header">
+            <Logo color="primary"/>
 
             <div className="flex flex-row items-center gap-10">
                 <a href="#">Breeze</a>

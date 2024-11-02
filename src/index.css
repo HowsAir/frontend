@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .btn-primary {
+        @apply h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
+    }
+
+    .btn-inverted {
+        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+    }
+
+    .btn-secondary {
+        @apply h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+    }
+
+    .hero-p {
+        @apply text-offwhite text-center w-fit font-medium;
+    }
+}
+
+@layer base {
+    h1 {
+        @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight w-fit;
+    }
+    h2 {
+        @apply text-5xl font-medium mb-10 w-fit;
+    }
+    h3 {
+        @apply text-2xl font-medium mb-2 w-fit;
+    }
+
+    p {
+        @apply text-offblack text-2xl font-normal h-fit;
+    }
+    /* Add more as needed */
+}
+
 .loader {
     border: 4px solid #f3f3f3; /* Light grey */
     border-top: 4px solid #1074e7; /* Blue */
