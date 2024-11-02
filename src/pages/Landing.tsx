@@ -3,10 +3,7 @@ import { ValueCard } from '../components/ValueCard';
 const Landing = () => {
     return (
         <>
-            <section
-                className="relative h-screen w-full bg-cover overflow-hidden"
-                style={{ backgroundImage: "url('../../public/landingBg.png')" }}
-            >
+            <section className="relative h-screen w-full bg-cover overflow-hidden bg-hero">
                 <div
                     className="absolute inset-0 bg-[rgba(143,143,143,0.28)]"
                     style={{
