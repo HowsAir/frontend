@@ -22,13 +22,13 @@
 
 @layer base {
     h1 {
-        @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight;
+        @apply text-center w-[600px] text-offwhite text-[64px] font-semibold leading-tight w-fit;
     }
     h2 {
-        @apply text-5xl font-medium mb-10;
+        @apply text-5xl font-medium mb-10 w-fit;
     }
     h3 {
-        @apply text-2xl font-medium mb-2;
+        @apply text-2xl font-medium mb-2 w-fit;
     }
 
     p {

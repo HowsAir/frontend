@@ -18,7 +18,7 @@ export function ValueCard({ children, title }: ValueCardProps) {
     const IconComponent = iconMapping[title];
 
     return (
-        <div className="bg-white w-[365px] p-6 rounded-2xl">
+        <div className="bg-white lg:w-[365px] sm:w-3/4 p-6 rounded-2xl">
             <IconComponent className="w-12 h-12 mb-4 text-primary"></IconComponent>
             <p className="font-medium">{title}</p>
             <span className="text-offblack text-xl font-light">{children}</span>

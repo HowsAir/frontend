@@ -1,4 +1,4 @@
-import { ValueCard } from "../components/ValueCard";
+import { ValueCard } from '../components/ValueCard';
 
 const Landing = () => {
     return (
@@ -38,18 +38,18 @@ const Landing = () => {
                 </p>
             </section>
 
-            <section className="max-w-[85dvw] flex flex-row gap-16 py-20 mx-auto">
+            <section className="w-fit flex flex-row lg:gap-16 sm:gap-0 py-20 justify-center">
                 <img
-                    className="w-[400px] h-fit my-auto"
+                    className="lg:w-[400px] sm:w-72 h-fit my-auto lg:static sm:absolute left-4"
                     alt="Vaper Breeze"
                     src="/breezePic.png"
                 />
-                <div className="w-[50%] h-auto">
+                <div className="w-[50%] h-auto lg:ml-0 sm:ml-64">
                     <p className="text-[40px] font-regular text-offblack mb-6">
                         Breeze
                     </p>
                     <h2>Obtén el poder de la monitorización</h2>
-                    <p className="mb-16">
+                    <p className="mb-16 lg:inline-block sm: hidden">
                         Dispositivo portátil que monitorea la calidad del aire a
                         tu alrededor. Equipado con sensores para detectar ozono,
                         CO2 y otros contaminantes, te proporciona información en
@@ -57,7 +57,7 @@ const Landing = () => {
                         salud y el ambiente que respiras.
                     </p>
 
-                    <div className="flex flex-row gap-5 items-center">
+                    <div className="flex lg:flex-row sm:flex-col gap-5 lg:items-center sm:items-start">
                         <a className="btn-primary">Saber más</a>
                         <p className="text-primary font-semibold">
                             ¡Unidades gratis limitadas!
@@ -66,28 +66,41 @@ const Landing = () => {
                 </div>
             </section>
 
-            <section className="px-24 flex flex-row bg-primary h-fit py-20">
-                <div>
-                    <h2 className="text-offwhite">Mapas de contaminación</h2>
-                    <p className="text-offwhite w-[80%] mb-24">
+            <section className="px-24 flex lg:flex-row sm:flex-col bg-primary h-fit py-20">
+                <div className="lg:w-[60%] sm:w-full lg:pr-36 ">
+                    <h2 className="text-offwhite lg:mx-0 sm:mx-auto">
+                        Mapas de contaminación
+                    </h2>
+                    <p className="text-offwhite lg:mb-24 sm:mb-12 lg:text-start sm:text-justify">
                         En HowsAir, ofrecemos mapas interactivos que te permiten
                         visualizar en tiempo real la calidad del aire que te
                         rodea. Puedes seleccionar contaminantes como O3, CO y
                         NO2 para ver como te afectan en tu día a día, sea donde
                         sea.
                     </p>
-                    <a className="btn-inverted">Ver mapas</a>
+                    <a
+                        href="#"
+                        className="btn-inverted lg:inline-block sm:hidden"
+                    >
+                        Ver mapas
+                    </a>
                 </div>
                 <img
-                    className="rounded-[50px]"
+                    className="rounded-[50px] w-auto h-auto sm:w-screen lg:max-w-[40%] object-cover"
                     alt="Mapa de ejemplo"
                     src="/mapExample.png"
                 ></img>
+                <a
+                    href="#"
+                    className="btn-inverted lg:hidden sm:inline-block mx-auto mt-10"
+                >
+                    Ver mapas
+                </a>
             </section>
 
             <section className="py-20 px-20">
-                <h2 className="text-center mb-16">Nuestro valores</h2>
-                <div className="flex flex-row gap-20 items-stretch">
+                <h2 className="mx-auto mb-16">Nuestro valores</h2>
+                <div className="flex lg:flex-row sm:flex-col gap-20 items-stretch lg:justify-center sm:items-center">
                     <ValueCard title="Compromiso ambiental">
                         Creemos en la importancia de reducir la contaminación y
                         cuidar el planeta para las generaciones futuras.
@@ -103,10 +116,10 @@ const Landing = () => {
                 </div>
             </section>
 
-            <section className="px-24 flex flex-row h-fit py-20">
-                <div className="w-2/3 mr-40">
-                    <h2>Nuestra misión</h2>
-                    <p>
+            <section className="px-24 flex lg:flex-row sm:flex-col h-fit py-20 sm:items-center">
+                <div className="lg:w-2/3 md:w-4/5 sm:w-full lg:mr-40 sm:mr-0">
+                    <h2 className="lg:mx-0 sm:mx-auto">Nuestra misión</h2>
+                    <p className="lg:text-start sm:text-justify">
                         En HowsAir, nuestra misión es proporcionar a las
                         personas información precisa y sin filtros sobre la
                         calidad del aire que respiran. Buscamos que cualquier
@@ -123,7 +136,7 @@ const Landing = () => {
                 <img
                     alt="Mujer feliz con telefono en mano"
                     src="/missionWoman.jpg"
-                    className="rounded-[50px] w-[400px] object-cover transform scale-x-[-1]"
+                    className="md:inline-block sm:hidden rounded-[50px] lg:w-1/3 md:w-4/5 md:mt-12 object-cover transform scale-x-[-1]"
                 ></img>
             </section>
         </>
