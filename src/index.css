@@ -12,7 +12,7 @@
     }
 
     .btn-secondary {
-        @apply w-fit h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+        @apply w-fit h-fit px-12 py-3 rounded-lg border-primary border-2 text-primary bg-offwhite font-semibold text-[20px];
     }
 
     .btn-submit {
@@ -52,6 +52,14 @@
     .toast {
         @apply fixed top-32 right-9 z-50 rounded-md text-white px-6 py-4;
     }
+
+    .product-detail {
+        @apply font-light text-xl text-offblack;
+    }
+
+    .product-detail span {
+        @apply text-primary font-normal;
+    }	
 }
 
 @layer base {
