@@ -27,7 +27,6 @@
         @apply w-full h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8;
     }
 
-    .form,
     .form {
         @apply lg:w-[35dvw] sm:w-[60dvw] flex flex-col bg-white sm:rounded-lg lg:rounded-none lg:rounded-br-lg 
             lg:rounded-tr-lg border-gray border-[1px] py-12 px-16;
