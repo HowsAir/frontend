@@ -48,6 +48,10 @@
     .footer-link {
         @apply text-offwhite text-2xl mb-5;
     }
+
+    .toast {
+        @apply fixed top-32 right-9 z-50 rounded-md text-white px-6 py-4;
+    }
 }
 
 @layer base {
