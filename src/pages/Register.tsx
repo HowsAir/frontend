@@ -10,6 +10,7 @@ import FormContainer from '../components/FormContainer';
 import { Input } from '../components/Input';
 import CustomCheckbox from '../components/CustomCheckbox';
 import { ProductCard } from '../components/ProductCard';
+import { passwordValidation } from '../utils/passwordValidation';
 
 const Register = () => {
     const queryClient = useQueryClient();
@@ -39,10 +40,15 @@ const Register = () => {
         }
     });
 
+    function passwordCheck(value: string): string | boolean {
+        throw new Error('Function not implemented.');
+    }
+
     return (
-        <FormContainer step={step} price={priceAmount}>
-            <FormProvider {...methods}>
+        <FormProvider {...methods}>
+            <FormContainer step={step} price={priceAmount}>
                 <form
+                    noValidate
                     onSubmit={onSubmit}
                     className={`form ${step === 1 ? 'form-right' : 'form-left'}`}
                 >
@@ -56,19 +62,51 @@ const Register = () => {
                                 <Link to="/login">Inicia sesión</Link>
                             </label>
 
-                            <Input name="name" type="text">
+                            <Input
+                                name="name"
+                                type="text"
+                                validate={(value) =>
+                                    /^[A-Za-z\s-]+$/.test(value) ||
+                                    'Solo se permiten letras y espacios'
+                                }
+                            >
                                 Nombre
                             </Input>
 
-                            <Input name="surnames" type="text">
+                            <Input
+                                name="surnames"
+                                type="text"
+                                validate={(value) =>
+                                    /^[A-Za-z\s-]+$/.test(value) ||
+                                    'Solo se permiten letras y espacios'
+                                }
+                            >
                                 Apellidos
                             </Input>
 
-                            <Input name="email" type="email">
+                            <Input
+                                name="email"
+                                type="email"
+                                validate={(value) =>
+                                    /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+                                        value
+                                    ) || 'Introduce un email válido'
+                                }
+                            >
                                 Email
                             </Input>
 
-                            <Input name="password" type="password">
+                            <Input
+                                name="password"
+                                type="password"
+                                validate={(value) => {
+                                    const validationResult =
+                                        passwordValidation(value);
+                                    return validationResult === true
+                                        ? true
+                                        : validationResult;
+                                }}
+                            >
                                 Contraseña
                             </Input>
 
@@ -100,11 +138,13 @@ const Register = () => {
                             >
                                 Dirección
                             </Input>
-                            <input
+                            <Input
+                                name="buildingDetails"
                                 type="text"
-                                className="form-input w-full"
-                                placeholder="Edificio, portal, etc."
-                            ></input>
+                                customClass="w-full"
+                            >
+                                Edificio, portal, etc.
+                            </Input>
                             <div className="flex inline-flex justify-between">
                                 <Input
                                     name="country"
@@ -142,8 +182,8 @@ const Register = () => {
                         </>
                     )}
                 </form>
-            </FormProvider>
-        </FormContainer>
+            </FormContainer>
+        </FormProvider>
 
         //                     <>
         //                         <h2 className="text-3xl font-bold mb-6">

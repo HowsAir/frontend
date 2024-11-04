@@ -6,7 +6,8 @@ interface InputProps {
     type: string;
     children: ReactNode;
     confirmPassword?: boolean;
-    customClass?: string
+    customClass?: string;
+    validate?: (value: string) => boolean | string; // Additional custom validation
 }
 
 export function Input({
@@ -14,7 +15,8 @@ export function Input({
     type,
     children,
     confirmPassword,
-    customClass = ''
+    customClass = '',
+    validate,
 }: InputProps) {
     const {
         register,
@@ -34,18 +36,26 @@ export function Input({
             val === watch('password') || 'Las contraseñas no coinciden';
     }
 
+    if (validate) {
+        validationRules.validate = validate;
+    }
+
     return (
         <div className="flex flex-col relative">
+            <label htmlFor={name} className="sr-only">
+                {String(children)}
+            </label>{' '}
+            {/* Hidden label for accessibility */}
             <input
                 className={`form-input ${customClass}`}
-                type={type} // Input type
-                placeholder={String(children)} // Use the children as the placeholder
-                {...register(name, validationRules)} // Register with the input name and validation rules
+                type={type}
+                id={name} // Use id for the label
+                placeholder={String(children)} // Use children as placeholder
+                {...register(name, validationRules)} // Register with input name and validation rules
             />
-            {errors[name] && ( // Access the error using the name
+            {errors[name] && (
                 <span className="absolute top-[72px] text-red-500 text-sm">
-                    {(errors[name]?.message as string) ||
-                        'Este campo es obligatorio'}
+                    {typeof errors[name]?.message === 'string' ? errors[name]?.message : 'Este campo es obligatorio'}
                 </span>
             )}
         </div>
