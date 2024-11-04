@@ -2,37 +2,15 @@ import React, { useState } from 'react';
 
 interface FormContainerProps {
     children: React.ReactNode;
-    onSubmitSuccess?: () => void;
+    step: number;
 }
 
-const FormContainer: React.FC<FormContainerProps> = ({
-    children,
-    onSubmitSuccess,
-}) => {
-    const [isSubmitted, setIsSubmitted] = useState(false);
-
-    const handleSuccess = () => {
-        setIsSubmitted(true);
-        onSubmitSuccess && onSubmitSuccess(); // Trigger the callback if provided
-    };
-
+const FormContainer: React.FC<FormContainerProps> = ({ children, step }) => {
     return (
         <div className="form-container">
-            {isSubmitted ? (
+            {step === 1 ? (
                 <>
-                    {children}
-                    <div className="form-cart">
-                        <div>
-                            <h1>HowsAir</h1>
-                            <h3 className="text-offwhite w-72">
-                                REGISTERED CORRECTLY!!
-                            </h3>
-                        </div>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="form-left-div">
+                    <div className="form-card">
                         <div>
                             <h1>HowsAir</h1>
                             <h3 className="text-offwhite w-72">
@@ -46,6 +24,16 @@ const FormContainer: React.FC<FormContainerProps> = ({
                         </span>
                     </div>
                     {children}
+                </>
+            ) : (
+                <>
+                    {children}
+                    <div className="form-cart">
+                            <p className='text-[30px] font-medium text-offwhite'>Tu cesta</p>
+                            <h3 className="text-offwhite w-72">
+                                REGISTERED CORRECTLY!!
+                            </h3>
+                    </div>
                 </>
             )}
         </div>
