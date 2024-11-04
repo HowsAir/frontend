@@ -11,7 +11,7 @@ const CustomCheckbox: React.FC = () => {
     const isChecked = !!watch('terms');
 
     return (
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col mt-4 relative">
             <div className="flex items-center">
                 <input
                     type="checkbox"
@@ -27,11 +27,13 @@ const CustomCheckbox: React.FC = () => {
                 >
                     <div
                         className={`h-5 w-5 border-2 rounded mr-2 flex items-center justify-center ${
-                            isChecked ? 'border-blue-600' : 'border-gray-300'
+                            isChecked
+                                ? 'border-primary'
+                                : 'border-gray bg-offwhite'
                         }`}
                     >
                         {isChecked && (
-                            <div className="h-4 w-4 bg-blue-600 rounded" />
+                            <div className="h-3 w-3 bg-primary rounded" />
                         )}
                     </div>
                     Acepto los&nbsp;
@@ -39,15 +41,16 @@ const CustomCheckbox: React.FC = () => {
                         to="/terms-and-privacy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 underline font-semibold"
+                        className="text-primary underline font-semibold"
                     >
                         términos, condiciones y privacidad
                     </Link>
                 </label>
             </div>
             {errors.terms && (
-                <span className="text-red-500 text-sm mt-1">
-                    {typeof errors.terms?.message === 'string' && errors.terms.message}
+                <span className="absolute top-[20px] text-red-500 text-sm mt-1">
+                    {typeof errors.terms?.message === 'string' &&
+                        errors.terms.message}
                 </span>
             )}
         </div>

@@ -6,6 +6,7 @@ interface InputProps {
     type: string;
     children: ReactNode;
     confirmPassword?: boolean;
+    customClass?: string
 }
 
 export function Input({
@@ -13,6 +14,7 @@ export function Input({
     type,
     children,
     confirmPassword,
+    customClass = ''
 }: InputProps) {
     const {
         register,
@@ -33,15 +35,15 @@ export function Input({
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className="flex flex-col relative">
             <input
-                className='form-input'
+                className={`form-input ${customClass}`}
                 type={type} // Input type
                 placeholder={String(children)} // Use the children as the placeholder
                 {...register(name, validationRules)} // Register with the input name and validation rules
             />
             {errors[name] && ( // Access the error using the name
-                <span className="text-red-500 text-sm">
+                <span className="absolute top-[72px] text-red-500 text-sm">
                     {(errors[name]?.message as string) ||
                         'Este campo es obligatorio'}
                 </span>
