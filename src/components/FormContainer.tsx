@@ -17,22 +17,22 @@ const FormContainer: React.FC<FormContainerProps> = ({
     };
 
     return (
-        <div className="w-fit h-fit min-h-[70dvh] flex flex-row mx-auto">
+        <div className="form-container">
             {isSubmitted ? (
-                <div className="w-[35dvw] bg-form bg-cover sm:hidden lg:flex flex-col justify-between rounded-bl-lg rounded-tl-lg p-8">
-                    <div>
-                        <h1>HowsAir</h1>
-                        <h3 className="text-offwhite w-72">
-                            REGISTERED CORRECTLY!!
-                        </h3>
+                <>
+                    {children}
+                    <div className="form-cart">
+                        <div>
+                            <h1>HowsAir</h1>
+                            <h3 className="text-offwhite w-72">
+                                REGISTERED CORRECTLY!!
+                            </h3>
+                        </div>
                     </div>
-                    <span className="text-sm text-offwhite">
-                        Todos los derechos reservados.
-                    </span>
-                </div>
+                </>
             ) : (
                 <>
-                    <div className="w-[35dvw] bg-form bg-cover sm:hidden lg:flex flex-col justify-between rounded-bl-lg rounded-tl-lg p-8">
+                    <div className="form-left-div">
                         <div>
                             <h1>HowsAir</h1>
                             <h3 className="text-offwhite w-72">
