@@ -60,12 +60,12 @@ const Login: React.FC = () => {
                     <label className="form-label">
                         ¿Aún no has comprado tu Breeze?
                         <br />
-                        <Link to="#">Cómpralo aquí</Link>
+                        <Link to="/breeze">Cómpralo aquí</Link>
                     </label>
 
-                    <Input type="email">Email</Input>
+                    <Input name="email" type="email">Email</Input>
 
-                    <Input type="password">Contraseña</Input>
+                    <Input name="password" type="password">Contraseña</Input>
 
                     <Link
                         to="#"
