@@ -7,7 +7,8 @@ interface InputProps {
     children: ReactNode;
     confirmPassword?: boolean;
     customClass?: string;
-    validate?: (value: string) => boolean | string; // Additional custom validation
+    validate?: (value: string) => boolean | string;
+    notRequired?: boolean;
 }
 
 export function Input({
@@ -17,6 +18,7 @@ export function Input({
     confirmPassword,
     customClass = '',
     validate,
+    notRequired = false
 }: InputProps) {
     const {
         register,
@@ -25,11 +27,11 @@ export function Input({
     } = useFormContext();
 
     const validationRules: {
-        required: string;
+        required?: string;
         validate?: (val: string) => string | boolean;
-    } = {
-        required: 'Este campo es obligatorio',
-    };
+    } = {};
+
+    if(!notRequired) validationRules.required = 'Este campo es obligatorio';
 
     if (confirmPassword) {
         validationRules.validate = (val: string) =>
