@@ -39,11 +39,7 @@ const Register = () => {
             await mutation.mutate(priceAmount);
         }
     });
-
-    function passwordCheck(value: string): string | boolean {
-        throw new Error('Function not implemented.');
-    }
-
+    
     return (
         <FormProvider {...methods}>
             <form noValidate onSubmit={onSubmit}>
@@ -185,91 +181,6 @@ const Register = () => {
                 </FormContainer>
             </form>
         </FormProvider>
-
-        //                     <>
-        //                         <h2 className="text-3xl font-bold mb-6">
-        //                             Información de dirección
-        //                         </h2>
-
-        //                         <div className="space-y-4">
-        //                             <input
-        //                                 className="w-full border rounded-lg p-3"
-        //                                 placeholder="Teléfono"
-        //                                 type="tel"
-        //                                 {...register('phone', {
-        //                                     required: 'Este campo es obligatorio',
-        //                                 })}
-        //                             />
-        //                             {errors.phone && (
-        //                                 <span className="text-red-500 text-sm">
-        //                                     {errors.phone.message}
-        //                                 </span>
-        //                             )}
-
-        //                             <input
-        //                                 className="w-full border rounded-lg p-3"
-        //                                 placeholder="País"
-        //                                 {...register('country', {
-        //                                     required: 'Este campo es obligatorio',
-        //                                 })}
-        //                             />
-        //                             {errors.country && (
-        //                                 <span className="text-red-500 text-sm">
-        //                                     {errors.country.message}
-        //                                 </span>
-        //                             )}
-
-        //                             <input
-        //                                 className="w-full border rounded-lg p-3"
-        //                                 placeholder="Código Postal"
-        //                                 {...register('postalCode', {
-        //                                     required: 'Este campo es obligatorio',
-        //                                 })}
-        //                             />
-        //                             {errors.postalCode && (
-        //                                 <span className="text-red-500 text-sm">
-        //                                     {errors.postalCode.message}
-        //                                 </span>
-        //                             )}
-
-        //                             <input
-        //                                 className="w-full border rounded-lg p-3"
-        //                                 placeholder="Ciudad"
-        //                                 {...register('city', {
-        //                                     required: 'Este campo es obligatorio',
-        //                                 })}
-        //                             />
-        //                             {errors.city && (
-        //                                 <span className="text-red-500 text-sm">
-        //                                     {errors.city.message}
-        //                                 </span>
-        //                             )}
-
-        //                             <input
-        //                                 className="w-full border rounded-lg p-3"
-        //                                 placeholder="Dirección"
-        //                                 {...register('address', {
-        //                                     required: 'Este campo es obligatorio',
-        //                                 })}
-        //                             />
-        //                             {errors.address && (
-        //                                 <span className="text-red-500 text-sm">
-        //                                     {errors.address.message}
-        //                                 </span>
-        //                             )}
-        //                         </div>
-
-        //                         <button
-        //                             type="submit"
-        //                             className="w-full bg-primary text-white py-3 mt-6 rounded-lg font-semibold hover:bg-blue-500"
-        //                         >
-        //                             Ir al pago
-        //                         </button>
-        //                     </>
-        //                 )}
-        //             </form>
-        //         </div>
-        //     </div>
     );
 };
 
