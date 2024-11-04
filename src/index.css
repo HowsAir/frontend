@@ -49,7 +49,7 @@
     }
 
     .form-cart {
-        @apply w-[40dvw] bg-form bg-cover rounded-br-lg rounded-tr-lg;
+        @apply w-[40dvw] bg-form bg-cover rounded-br-lg rounded-tr-lg  px-24 py-14;
     }
 
     .form h2 {

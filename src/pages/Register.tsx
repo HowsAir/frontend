@@ -5,11 +5,11 @@ import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
 import { useState } from 'react';
 import { redirectToCheckout } from '../api/stripe';
 import { useAppContext } from '../contexts/AppContext';
-import { passwordValidation } from '../utils/passwordValidation';
 import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import { Input } from '../components/Input';
 import CustomCheckbox from '../components/CustomCheckbox';
+import { ProductCard } from '../components/ProductCard';
 
 const Register = () => {
     const queryClient = useQueryClient();
@@ -18,7 +18,7 @@ const Register = () => {
 
     const [step, setStep] = useState(1);
     const { watch } = methods;
-    const priceAmount = 85;
+    const priceAmount = 99;
 
     const mutation = useMutation(apiClient.createCheckoutSession, {
         onSuccess: async (sessionId) => {
@@ -40,7 +40,7 @@ const Register = () => {
     });
 
     return (
-        <FormContainer step={step}>
+        <FormContainer step={step} price={priceAmount}>
             <FormProvider {...methods}>
                 <form
                     onSubmit={onSubmit}
@@ -138,7 +138,7 @@ const Register = () => {
                                 </Input>
                             </div>
 
-                            <div></div>
+                            <ProductCard price={priceAmount} />
                         </>
                     )}
                 </form>
