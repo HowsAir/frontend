@@ -27,9 +27,29 @@
         @apply w-10/12 h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8;
     }
 
-    .form {
-        @apply lg:w-[40dvw] sm:w-[60dvw] flex flex-col bg-white sm:rounded-lg lg:rounded-none lg:rounded-br-lg 
-            lg:rounded-tr-lg border-gray border-[1px] py-12 px-16;
+    .form-right,
+    .form-left {
+        @apply lg:w-[40dvw] sm:w-[60dvw] flex flex-col bg-white border-gray border-[1px] py-12 px-16;
+    }
+
+    .form-left {
+        @apply rounded-bl-lg rounded-tl-lg;
+    }
+
+    .form-right {
+        @apply rounded-br-lg rounded-tr-lg;
+    }
+
+    .form-container {
+        @apply w-fit h-fit min-h-[80dvh] flex flex-row mx-auto;
+    }
+
+    .form-card {
+        @apply w-[40dvw] bg-form bg-cover sm:hidden lg:flex flex-col justify-between rounded-bl-lg rounded-tl-lg p-8;
+    }
+
+    .form-cart {
+        @apply w-[40dvw] bg-form bg-cover rounded-br-lg rounded-tr-lg  px-24 py-14;
     }
 
     .form h2 {
@@ -62,18 +82,6 @@
 
     .img-btn {
         @apply bg-white w-full h-full;
-    }
-
-    .form-container {
-        @apply w-fit h-fit min-h-[80dvh] flex flex-row mx-auto;
-    }
-
-    .form-left-div {
-        @apply w-[40dvw] bg-form bg-cover sm:hidden lg:flex flex-col justify-between rounded-bl-lg rounded-tl-lg p-8;
-    }
-
-    .form-cart {
-        @apply bg-primary;
     }
 }
 
