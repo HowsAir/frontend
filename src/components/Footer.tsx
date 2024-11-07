@@ -8,14 +8,14 @@ const Footer = () => {
             <div className="relative z-10 h-fit flex flex-row justify-between px-40 pt-40">
                 <div className="flex flex-col pt-12">
                     <Link
-                        className="footer-link"
+                        className="text-offwhite text-2xl mb-5"
                         to={'/terms-and-privacy'}
                         target="_blank"
                     >
                         Términos y condiciones
                     </Link>
                     <Link
-                        className="footer-link"
+                        className="text-offwhite text-2xl mb-5"
                         to={'/terms-and-privacy'}
                         target="_blank"
                     >
@@ -29,10 +29,10 @@ const Footer = () => {
                     </label>
                 </div>
                 <div className="flex flex-col pt-12">
-                    <Link className="footer-link" to={'/contact'}>
+                    <Link className="text-offwhite text-2xl mb-5" to={'/contact'}>
                         Contáctanos
                     </Link>
-                    <Link className="footer-link" to={'/user-manual'}>
+                    <Link className="text-offwhite text-2xl mb-5" to={'/user-manual'}>
                         Manual de usuario
                     </Link>
                 </div>

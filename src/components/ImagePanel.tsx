@@ -7,11 +7,11 @@ export function ImagePanel() {
                 alt=""
             />
             <div className="col-span-5 row-span-1 grid grid-cols-5 grid-rows-1 gap-2">
-                <button className="img-btn"></button>
-                <button className="img-btn"></button>
-                <button className="img-btn"></button>
-                <button className="img-btn"></button>
-                <button className="img-btn"></button>
+                <button className="bg-white w-full h-full"></button>
+                <button className="bg-white w-full h-full"></button>
+                <button className="bg-white w-full h-full"></button>
+                <button className="bg-white w-full h-full"></button>
+                <button className="bg-white w-full h-full"></button>
             </div>
         </div>
     );

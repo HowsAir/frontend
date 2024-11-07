@@ -14,14 +14,14 @@ const Product = () => {
                 </h2>
                 <label className="text-primary text-[40px] mb-4">85€</label>
                 <ul className="list-disc list-inside marker:text-primary space-y-3">
-                    <li className="product-detail">
-                        <span>Tamaño perfecto</span> de llavero 10x5x5 cm
+                    <li className="font-light text-xl text-offblack">
+                        <span className='text-primary font-normal'>Tamaño perfecto</span> de llavero 10x5x5 cm
                     </li>
-                    <li className="product-detail">
-                        <span>Batería duradera</span> hasta 3 dias de autonomía
+                    <li className="font-light text-xl text-offblack">
+                        <span className='text-primary font-normal'>Batería duradera</span> hasta 3 dias de autonomía
                     </li>
-                    <li className="product-detail">
-                        <span>HowsAir App</span>, con mediciones en tiempo real,
+                    <li className="font-light text-xl text-offblack">
+                        <span className='text-primary font-normal'>HowsAir App</span>, con mediciones en tiempo real,
                         recompensas, y más
                     </li>
                 </ul>

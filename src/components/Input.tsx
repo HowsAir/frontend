@@ -49,7 +49,7 @@ export function Input({
             </label>{' '}
             {/* Hidden label for accessibility */}
             <input
-                className={`form-input ${customClass}`}
+                className={`w-10/12 h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8 ${customClass}`}
                 type={type}
                 id={name} // Use id for the label
                 placeholder={String(children)} // Use children as placeholder
@@ -57,7 +57,9 @@ export function Input({
             />
             {errors[name] && (
                 <span className="absolute top-[72px] text-red-500 text-sm">
-                    {typeof errors[name]?.message === 'string' ? errors[name]?.message : 'Este campo es obligatorio'}
+                    {typeof errors[name]?.message === 'string'
+                        ? errors[name]?.message
+                        : 'Este campo es obligatorio'}
                 </span>
             )}
         </div>

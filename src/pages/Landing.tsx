@@ -18,7 +18,7 @@ const Landing = () => {
 
                 <div className="container h-full mx-auto relative pt-60 flex flex-col items-center">
                     <h1>¿Es seguro el aire a tu alrededor?</h1>
-                    <p className="hero-p">
+                    <p className="text-offwhite text-center w-fit font-medium">
                         HowsAir te ayuda a monitorear la calidad del aire en tu
                         entorno.
                     </p>
