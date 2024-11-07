@@ -36,7 +36,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ price }) => {
             <div className="flex mt-4">
                 <img
                     alt="Breeze"
-                    src="/breezePic.png"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731012929/media/tje5wbwnff3ql4xxbvwi.png"
                     className="w-28 p-2 border-gray border rounded-lg"
                 />
                 <div className="ml-4">
