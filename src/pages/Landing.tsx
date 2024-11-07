@@ -4,7 +4,7 @@ import ArrowDown from '../components/icons/ArrowDown';
 
 const Landing = () => {
     const Icon = ArrowDown;
-    
+
     return (
         <>
             <section className="relative h-screen w-full bg-cover overflow-hidden bg-hero">
@@ -48,7 +48,7 @@ const Landing = () => {
                 <img
                     className="lg:w-[400px] sm:w-72 h-fit my-auto lg:static sm:absolute left-4"
                     alt="Vaper Breeze"
-                    src="/breezePic.png"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/t6rerhjiyrci4fv7fiqu.jpg"
                 />
                 <div className="w-[50%] h-auto lg:ml-0 sm:ml-64">
                     <p className="text-[40px] font-regular text-offblack mb-6">
@@ -96,7 +96,7 @@ const Landing = () => {
                 <img
                     className="rounded-[50px] w-auto h-auto sm:w-screen lg:max-w-[40%] object-cover"
                     alt="Mapa de ejemplo"
-                    src="/mapExample.png"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/uxvxh7ivr6x6hsou4ts7.jpg"
                 ></img>
                 <Link
                     to="/maps"
@@ -143,7 +143,7 @@ const Landing = () => {
                 </div>
                 <img
                     alt="Mujer feliz con telefono en mano"
-                    src="/missionWoman.jpg"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731011479/media/uvnweh4j8kdua2xz3sa6.jpg"
                     className="md:inline-block sm:hidden rounded-[50px] lg:w-1/3 md:w-4/5 md:mt-12 object-cover transform scale-x-[-1]"
                 ></img>
             </section>
