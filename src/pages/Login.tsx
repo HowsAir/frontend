@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Input } from '../components/Input';
-import FormContainer from '../components/FormContainer';
+import FormContainer from '../components/layouts/FormContainer';
 
 const Login: React.FC = () => {
     const { showToast } = useAppContext();
@@ -17,7 +17,11 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const methods = useForm<LogInFormData>();
-    const { register, handleSubmit, formState: { errors } } = methods;
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = methods;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +45,6 @@ const Login: React.FC = () => {
         },
     });
 
-
     const onSubmit = handleSubmit((data: LogInFormData) => {
         setIsLoading(true);
         mutation.mutate(data, {
@@ -63,9 +66,13 @@ const Login: React.FC = () => {
                         <Link to="/breeze">Cómpralo aquí</Link>
                     </label>
 
-                    <Input name="email" type="email">Email</Input>
+                    <Input name="email" type="email">
+                        Email
+                    </Input>
 
-                    <Input name="password" type="password">Contraseña</Input>
+                    <Input name="password" type="password">
+                        Contraseña
+                    </Input>
 
                     <Link
                         to="#"

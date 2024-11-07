@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as apiClient from '../api/apiClient';
-import Medicion from '../components/Medicion';
+import Medicion from '../components/widgets/MeasureCard';
 import { MeasurementData } from '../api/data';
 
 const Measurements = () => {

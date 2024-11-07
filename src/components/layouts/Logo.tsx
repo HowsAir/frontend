@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CloudSvg } from "./CloudSvg";
+import { CloudSvg } from "./icons/CloudSvg";
 
 interface LogoProps {
     color: 'primary' | 'offwhite';

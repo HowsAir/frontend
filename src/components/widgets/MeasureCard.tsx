@@ -1,7 +1,7 @@
 import React from 'react';
-import { MeasurementData } from '../api/data';
+import { MeasurementData } from '../../api/data';
 
-const Medicion: React.FC<MeasurementData> = ({
+const MeasureCard: React.FC<MeasurementData> = ({
     timestamp,
     o3Value,
     no2Value,
@@ -33,4 +33,4 @@ const Medicion: React.FC<MeasurementData> = ({
     );
 };
 
-export default Medicion;
+export default MeasureCard;

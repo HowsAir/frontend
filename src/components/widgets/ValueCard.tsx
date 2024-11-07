@@ -1,6 +1,6 @@
-import CompromisoAmbiental from './icons/EnvCommitment';
-import Transparencia from './icons/Transparency';
-import Colaboracion from './icons/Collaboration';
+import CompromisoAmbiental from '../icons/EnvCommitment';
+import Transparencia from '../icons/Transparency';
+import Colaboracion from '../icons/Collaboration';
 
 interface ValueCardProps {
     children: React.ReactNode;
@@ -9,10 +9,9 @@ interface ValueCardProps {
 
 const iconMapping: Record<string, React.ElementType> = {
     'Compromiso ambiental': CompromisoAmbiental,
-    'Transparencia': Transparencia,
-    'Colaboración': Colaboracion,
+    Transparencia: Transparencia,
+    Colaboración: Colaboracion,
 };
-
 
 export function ValueCard({ children, title }: ValueCardProps) {
     const IconComponent = iconMapping[title];

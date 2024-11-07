@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ImagePanel } from '../components/ImagePanel';
+import { ImagePanel } from '../components/layouts/ImagePanel';
 
 const Product = () => {
     return (
@@ -15,14 +15,22 @@ const Product = () => {
                 <label className="text-primary text-[40px] mb-4">85€</label>
                 <ul className="list-disc list-inside marker:text-primary space-y-3">
                     <li className="font-light text-xl text-offblack">
-                        <span className='text-primary font-normal'>Tamaño perfecto</span> de llavero 10x5x5 cm
+                        <span className="text-primary font-normal">
+                            Tamaño perfecto
+                        </span>{' '}
+                        de llavero 10x5x5 cm
                     </li>
                     <li className="font-light text-xl text-offblack">
-                        <span className='text-primary font-normal'>Batería duradera</span> hasta 3 dias de autonomía
+                        <span className="text-primary font-normal">
+                            Batería duradera
+                        </span>{' '}
+                        hasta 3 dias de autonomía
                     </li>
                     <li className="font-light text-xl text-offblack">
-                        <span className='text-primary font-normal'>HowsAir App</span>, con mediciones en tiempo real,
-                        recompensas, y más
+                        <span className="text-primary font-normal">
+                            HowsAir App
+                        </span>
+                        , con mediciones en tiempo real, recompensas, y más
                     </li>
                 </ul>
 

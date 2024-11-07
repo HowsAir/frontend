@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ValueCard } from '../components/ValueCard';
+import { ValueCard } from '../components/widgets/ValueCard';
 import ArrowDown from '../components/icons/ArrowDown';
 
 const Landing = () => {
@@ -48,7 +48,7 @@ const Landing = () => {
                 <img
                     className="lg:w-[400px] sm:w-72 h-fit my-auto lg:static sm:absolute left-4"
                     alt="Vaper Breeze"
-                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/t6rerhjiyrci4fv7fiqu.jpg"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731012929/media/tje5wbwnff3ql4xxbvwi.png "
                 />
                 <div className="w-[50%] h-auto lg:ml-0 sm:ml-64">
                     <p className="text-[40px] font-regular text-offblack mb-6">

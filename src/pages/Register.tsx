@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { redirectToCheckout } from '../api/stripe';
 import { useAppContext } from '../contexts/AppContext';
 import { Link } from 'react-router-dom';
-import FormContainer from '../components/FormContainer';
-import { Input } from '../components/Input';
-import CustomCheckbox from '../components/CustomCheckbox';
-import { ProductCard } from '../components/ProductCard';
+import FormContainer from '../components/layouts/FormContainer';
+import { Input } from '../components/common/Input';
+import CustomCheckbox from '../components/common/CustomCheckbox';
+import { ProductCard } from '../components/widgets/ProductCard';
 import { passwordValidation } from '../utils/passwordValidation';
 
 const Register = () => {
@@ -39,7 +39,7 @@ const Register = () => {
             await mutation.mutate(priceAmount);
         }
     });
-    
+
     return (
         <FormProvider {...methods}>
             <form noValidate onSubmit={onSubmit}>
