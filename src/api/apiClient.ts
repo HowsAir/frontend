@@ -78,11 +78,20 @@ export const register = async (data: RegisterFormData): Promise<void> => {
         });
 
         if (!response.ok) {
-            const { message }: { message: string } = await response.json();
-            throw new Error(message || 'Error registering user');
+            // Attempt to parse the error response
+            let errorDetails;
+            try {
+                errorDetails = await response.json();  // Parse JSON response
+                console.error('Full error response:', errorDetails);  // Log full error object
+            } catch (parsingError) {
+                // If response is not JSON (e.g., HTML error page), log raw response text
+                const text = await response.text();
+                console.error('Error parsing response as JSON. Response text:', text);
+                throw new Error('Unexpected error format from server');
+            }
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Registration request failed:', error);
         throw new Error(API_ERRORS.REGISTER_USER);
     }
 };

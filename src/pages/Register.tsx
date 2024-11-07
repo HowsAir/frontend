@@ -159,7 +159,7 @@ const Register = () => {
                                 </div>
                                 <div className="flex inline-flex justify-between">
                                     <Input
-                                        name="postalCode"
+                                        name="zipCode"
                                         type="number"
                                         customClass="w-full"
                                     >
