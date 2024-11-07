@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ToastProps } from '../types/mainTypes';
+import { ToastProps } from '../../types/mainTypes';
 
 const Toast = ({ message, type, onClose }: ToastProps) => {
     useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ToastMessage, AppContext } from '../types/mainTypes';
-import Toast from '../components/Toast';
+import Toast from '../components/common/Toast';
 import { useQuery } from 'react-query';
 import * as apiClient from '../api/apiClient.ts';
 
