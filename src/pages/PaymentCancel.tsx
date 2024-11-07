@@ -14,10 +14,10 @@ const PaymentCancel = () => {
     }, [navigate]);
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
+        <div className="bg-gray-100 flex h-screen w-screen items-center justify-center">
             <div className="text-center">
-                <h1 className="text-2xl font-bold mb-4">Pago Cancelado</h1>
-                <p className="text-lg mb-4">
+                <h1 className="mb-4 text-2xl font-bold">Pago Cancelado</h1>
+                <p className="mb-4 text-lg">
                     Parece que tu pago ha sido rechazo. Por favor, inténtalo de
                     nuevo.
                 </p>

@@ -5,24 +5,24 @@
 @layer components {
     /*--- BUTTON CLASSES ---*/
     .btn-primary {
-        @apply w-fit h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
+        @apply h-fit w-fit rounded-lg bg-primary px-12 py-3 text-[20px] font-semibold text-offwhite;
     }
 
     .btn-inverted {
-        @apply w-fit h-fit px-12 py-3 rounded-lg text-primary bg-offwhite font-semibold text-[20px];
+        @apply h-fit w-fit rounded-lg bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary;
     }
 
     .btn-secondary {
-        @apply w-fit h-fit px-12 py-3 rounded-lg border-primary border-2 text-primary bg-offwhite font-semibold text-[20px];
+        @apply h-fit w-fit rounded-lg border-2 border-primary bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary;
     }
 
     .btn-submit {
-        @apply btn-primary font-normal py-2 mt-12 sm:mx-0 lg:mx-auto;
+        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
     }
 
     /*--- FORM CLASSES ---*/
     .form {
-        @apply lg:w-[40dvw] sm:w-[60dvw] flex flex-col bg-white border-gray border-[1px] py-12 px-16;
+        @apply flex flex-col border-[1px] border-gray bg-white px-16 py-12 sm:w-[60dvw] lg:w-[40dvw];
     }
 
     .form h2 {
@@ -40,17 +40,17 @@
 
 @layer base {
     h1 {
-        @apply text-center text-offwhite text-[64px] font-semibold leading-tight w-fit;
+        @apply w-fit text-center text-[64px] font-semibold leading-tight text-offwhite;
     }
     h2 {
-        @apply text-offblack text-5xl font-medium mb-10 w-fit;
+        @apply mb-10 w-fit text-5xl font-medium text-offblack;
     }
     h3 {
-        @apply text-offblack text-2xl font-normal mb-2 w-fit;
+        @apply mb-2 w-fit text-2xl font-normal text-offblack;
     }
 
     p {
-        @apply text-offblack text-2xl font-normal h-fit;
+        @apply h-fit text-2xl font-normal text-offblack;
     }
 }
 

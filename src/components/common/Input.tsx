@@ -18,7 +18,7 @@ export function Input({
     confirmPassword,
     customClass = '',
     validate,
-    notRequired = false
+    notRequired = false,
 }: InputProps) {
     const {
         register,
@@ -31,7 +31,7 @@ export function Input({
         validate?: (val: string) => string | boolean;
     } = {};
 
-    if(!notRequired) validationRules.required = 'Este campo es obligatorio';
+    if (!notRequired) validationRules.required = 'Este campo es obligatorio';
 
     if (confirmPassword) {
         validationRules.validate = (val: string) =>
@@ -43,20 +43,20 @@ export function Input({
     }
 
     return (
-        <div className="flex flex-col relative">
+        <div className="relative flex flex-col">
             <label htmlFor={name} className="sr-only">
                 {String(children)}
             </label>{' '}
             {/* Hidden label for accessibility */}
             <input
-                className={`w-10/12 h-10 rounded-lg p-2 border-[1px] bg-offwhite border-gray placeholder-neutral-300 accent-primary caret-primary mt-8 ${customClass}`}
+                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary accent-primary ${customClass}`}
                 type={type}
                 id={name} // Use id for the label
                 placeholder={String(children)} // Use children as placeholder
                 {...register(name, validationRules)} // Register with input name and validation rules
             />
             {errors[name] && (
-                <span className="absolute top-[72px] text-red-500 text-sm">
+                <span className="absolute top-[72px] text-sm text-red-500">
                     {typeof errors[name]?.message === 'string'
                         ? errors[name]?.message
                         : 'Este campo es obligatorio'}

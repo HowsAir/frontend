@@ -10,7 +10,7 @@ const MeasureCard: React.FC<MeasurementData> = ({
     longitude,
 }) => {
     return (
-        <div className="p-4 rounded-lg shadow-sm bg-gray-50">
+        <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
             <p>
                 <strong>Fecha:</strong> {new Date(timestamp).toLocaleString()}
             </p>

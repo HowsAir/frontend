@@ -86,18 +86,18 @@ const PaymentSuccess = () => {
     }, [errorMessage, navigate]);
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
+        <div className="bg-gray-100 flex h-screen w-screen items-center justify-center">
             <div className="text-center">
                 {errorMessage ? (
-                    <div className="text-red-600 text-lg mb-4">
+                    <div className="mb-4 text-lg text-red-600">
                         {errorMessage}
                     </div>
                 ) : (
                     <>
-                        <div className="text-2xl mb-4">
+                        <div className="mb-4 text-2xl">
                             Estamos procesando tu pago
                         </div>
-                        <div className="loader border-t-4 border-blue-500 rounded-full w-16 h-16 mb-4 animate-spin mx-auto"></div>
+                        <div className="loader mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-t-4 border-blue-500"></div>
                     </>
                 )}
             </div>

@@ -12,15 +12,12 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
         };
     }, [onClose]);
 
-    const styles =
-        type === 'SUCCESS'
-            ? 'bg-primary'
-            : 'bg-red-500';
+    const styles = type === 'SUCCESS' ? 'bg-primary' : 'bg-red-500';
     return (
         <div
-            className={`fixed top-32 right-9 z-50 rounded-md text-white px-6 py-4 ${styles}`}
+            className={`fixed right-9 top-32 z-50 rounded-md px-6 py-4 text-white ${styles}`}
         >
-            <div className="flex justify-center items-center">
+            <div className="flex items-center justify-center">
                 <span className="text-sm font-semibold">{message}</span>
             </div>
         </div>

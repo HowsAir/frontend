@@ -3,19 +3,19 @@ import { Logo } from './Logo';
 
 const Footer = () => {
     return (
-        <footer className="relative bg-footer bg-cover h-[450px]">
+        <footer className="relative h-[450px] bg-footer bg-cover">
             <div className="absolute inset-0 bg-gradient-to-b from-offwhite from-10% to-transparent to-50%"></div>
-            <div className="relative z-10 h-fit flex flex-row justify-between px-40 pt-40">
+            <div className="relative z-10 flex h-fit flex-row justify-between px-40 pt-40">
                 <div className="flex flex-col pt-12">
                     <Link
-                        className="text-offwhite text-2xl mb-5"
+                        className="mb-5 text-2xl text-offwhite"
                         to={'/terms-and-privacy'}
                         target="_blank"
                     >
                         Términos y condiciones
                     </Link>
                     <Link
-                        className="text-offwhite text-2xl mb-5"
+                        className="mb-5 text-2xl text-offwhite"
                         to={'/terms-and-privacy'}
                         target="_blank"
                     >
@@ -24,15 +24,21 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col items-center">
                     <Logo color="offwhite"></Logo>
-                    <label className="text-offwhite font-extralight mt-2">
+                    <label className="mt-2 font-extralight text-offwhite">
                         © 2024 HowsAir Todos los derechos reservados
                     </label>
                 </div>
                 <div className="flex flex-col pt-12">
-                    <Link className="text-offwhite text-2xl mb-5" to={'/contact'}>
+                    <Link
+                        className="mb-5 text-2xl text-offwhite"
+                        to={'/contact'}
+                    >
                         Contáctanos
                     </Link>
-                    <Link className="text-offwhite text-2xl mb-5" to={'/user-manual'}>
+                    <Link
+                        className="mb-5 text-2xl text-offwhite"
+                        to={'/user-manual'}
+                    >
                         Manual de usuario
                     </Link>
                 </div>

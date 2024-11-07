@@ -29,15 +29,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ price }) => {
     const year = futureDate.getFullYear();
 
     return (
-        <div className="mt-8 h-fit px-6 py-4 border border-gray rounded-lg">
+        <div className="mt-8 h-fit rounded-lg border border-gray px-6 py-4">
             <p className="text-lg font-semibold">
                 Llega el {day} de {month} de {year}
             </p>
-            <div className="flex mt-4">
+            <div className="mt-4 flex">
                 <img
                     alt="Breeze"
                     src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731012929/media/tje5wbwnff3ql4xxbvwi.png"
-                    className="w-28 p-2 border-gray border rounded-lg"
+                    className="w-28 rounded-lg border border-gray p-2"
                 />
                 <div className="ml-4">
                     <p className="text-lg font-light">Breeze</p>

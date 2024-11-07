@@ -7,7 +7,7 @@ const Landing = () => {
 
     return (
         <>
-            <section className="relative h-screen w-full bg-cover overflow-hidden bg-hero">
+            <section className="relative h-screen w-full overflow-hidden bg-hero bg-cover">
                 <div
                     className="absolute inset-0 bg-[rgba(143,143,143,0.28)]"
                     style={{
@@ -16,9 +16,9 @@ const Landing = () => {
                     }}
                 />
 
-                <div className="container h-full mx-auto relative pt-60 flex flex-col items-center">
+                <div className="container relative mx-auto flex h-full flex-col items-center pt-60">
                     <h1>¿Es seguro el aire a tu alrededor?</h1>
-                    <p className="text-offwhite text-center w-fit font-medium">
+                    <p className="w-fit text-center font-medium text-offwhite">
                         HowsAir te ayuda a monitorear la calidad del aire en tu
                         entorno.
                     </p>
@@ -28,14 +28,14 @@ const Landing = () => {
                     </Link>
                     <a
                         href="#target"
-                        className="rounded-full w-14 h-14 mt-auto mb-12 p-2 text-primary text-4xl bg-white bg-opacity-60"
+                        className="mb-12 mt-auto h-14 w-14 rounded-full bg-white bg-opacity-60 p-2 text-4xl text-primary"
                     >
                         <Icon></Icon>
                     </a>
                 </div>
             </section>
             <div id="target" className="relative -top-20"></div>
-            <section className="py-20 mx-auto max-w-[600px] flex flex-col items-center">
+            <section className="mx-auto flex max-w-[600px] flex-col items-center py-20">
                 <h2>¿Qué hacemos en HowsAir?</h2>
                 <p className="text-center">
                     Desarrollamos mapas de calidad del aire para los ciudadanos
@@ -44,18 +44,18 @@ const Landing = () => {
                 </p>
             </section>
 
-            <section className="w-fit flex flex-row lg:gap-16 sm:gap-0 py-20 justify-center">
+            <section className="flex w-fit flex-row justify-center py-20 sm:gap-0 lg:gap-16">
                 <img
-                    className="lg:w-[400px] sm:w-72 h-fit my-auto lg:static sm:absolute left-4"
+                    className="left-4 my-auto h-fit sm:absolute sm:w-72 lg:static lg:w-[400px]"
                     alt="Vaper Breeze"
                     src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731012929/media/tje5wbwnff3ql4xxbvwi.png "
                 />
-                <div className="w-[50%] h-auto lg:ml-0 sm:ml-64">
-                    <p className="text-[40px] font-regular text-offblack mb-6">
+                <div className="h-auto w-[50%] sm:ml-64 lg:ml-0">
+                    <p className="font-regular mb-6 text-[40px] text-offblack">
                         Breeze
                     </p>
                     <h2>Obtén el poder de la monitorización</h2>
-                    <p className="mb-16 lg:inline-block sm: hidden">
+                    <p className="sm: mb-16 hidden lg:inline-block">
                         Dispositivo portátil que monitorea la calidad del aire a
                         tu alrededor. Equipado con sensores para detectar ozono,
                         CO2 y otros contaminantes, te proporciona información en
@@ -63,23 +63,23 @@ const Landing = () => {
                         salud y el ambiente que respiras.
                     </p>
 
-                    <div className="flex lg:flex-row sm:flex-col gap-5 lg:items-center sm:items-start">
+                    <div className="flex gap-5 sm:flex-col sm:items-start lg:flex-row lg:items-center">
                         <Link to="/breeze" className="btn-primary">
                             Saber más
                         </Link>
-                        <p className="text-primary font-semibold">
+                        <p className="font-semibold text-primary">
                             ¡Unidades gratis limitadas!
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section className="px-24 flex lg:flex-row sm:flex-col bg-primary h-fit py-20">
-                <div className="lg:w-[60%] sm:w-full lg:pr-36 ">
-                    <h2 className="text-offwhite lg:mx-0 sm:mx-auto">
+            <section className="flex h-fit bg-primary px-24 py-20 sm:flex-col lg:flex-row">
+                <div className="sm:w-full lg:w-[60%] lg:pr-36">
+                    <h2 className="text-offwhite sm:mx-auto lg:mx-0">
                         Mapas de contaminación
                     </h2>
-                    <p className="text-offwhite lg:mb-24 sm:mb-12 lg:text-start sm:text-justify">
+                    <p className="text-offwhite sm:mb-12 sm:text-justify lg:mb-24 lg:text-start">
                         En HowsAir, ofrecemos mapas interactivos que te permiten
                         visualizar en tiempo real la calidad del aire que te
                         rodea. Puedes seleccionar contaminantes como O3, CO y
@@ -88,27 +88,27 @@ const Landing = () => {
                     </p>
                     <Link
                         to="/maps"
-                        className="relative z-10 btn-inverted lg:inline-block sm:hidden"
+                        className="btn-inverted relative z-10 sm:hidden lg:inline-block"
                     >
                         Ver mapas
                     </Link>
                 </div>
                 <img
-                    className="rounded-[50px] w-auto h-auto sm:w-screen lg:max-w-[40%] object-cover"
+                    className="h-auto w-auto rounded-[50px] object-cover sm:w-screen lg:max-w-[40%]"
                     alt="Mapa de ejemplo"
                     src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/uxvxh7ivr6x6hsou4ts7.jpg"
                 ></img>
                 <Link
                     to="/maps"
-                    className="btn-inverted lg:hidden sm:inline-block mx-auto mt-10"
+                    className="btn-inverted mx-auto mt-10 sm:inline-block lg:hidden"
                 >
                     Ver mapas
                 </Link>
             </section>
 
-            <section className="py-20 px-20">
+            <section className="px-20 py-20">
                 <h2 className="mx-auto mb-16">Nuestro valores</h2>
-                <div className="flex lg:flex-row sm:flex-col gap-20 items-stretch lg:justify-center sm:items-center">
+                <div className="flex items-stretch gap-20 sm:flex-col sm:items-center lg:flex-row lg:justify-center">
                     <ValueCard title="Compromiso ambiental">
                         Creemos en la importancia de reducir la contaminación y
                         cuidar el planeta para las generaciones futuras.
@@ -124,10 +124,10 @@ const Landing = () => {
                 </div>
             </section>
 
-            <section className="px-24 flex lg:flex-row sm:flex-col h-fit py-20 sm:items-center">
-                <div className="lg:w-2/3 md:w-4/5 sm:w-full lg:mr-40 sm:mr-0">
-                    <h2 className="lg:mx-0 sm:mx-auto">Nuestra misión</h2>
-                    <p className="lg:text-start sm:text-justify">
+            <section className="flex h-fit px-24 py-20 sm:flex-col sm:items-center lg:flex-row">
+                <div className="sm:mr-0 sm:w-full md:w-4/5 lg:mr-40 lg:w-2/3">
+                    <h2 className="sm:mx-auto lg:mx-0">Nuestra misión</h2>
+                    <p className="sm:text-justify lg:text-start">
                         En HowsAir, nuestra misión es proporcionar a las
                         personas información precisa y sin filtros sobre la
                         calidad del aire que respiran. Buscamos que cualquier
@@ -144,7 +144,7 @@ const Landing = () => {
                 <img
                     alt="Mujer feliz con telefono en mano"
                     src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731011479/media/uvnweh4j8kdua2xz3sa6.jpg"
-                    className="md:inline-block sm:hidden rounded-[50px] lg:w-1/3 md:w-4/5 md:mt-12 object-cover transform scale-x-[-1]"
+                    className="scale-x-[-1] transform rounded-[50px] object-cover sm:hidden md:mt-12 md:inline-block md:w-4/5 lg:w-1/3"
                 ></img>
             </section>
         </>

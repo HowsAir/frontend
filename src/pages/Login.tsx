@@ -76,7 +76,7 @@ const Login: React.FC = () => {
 
                     <Link
                         to="#"
-                        className=" text- text-neutral-400 underline mt-2"
+                        className="text- mt-2 text-neutral-400 underline"
                     >
                         Olvidé mi contraseña
                     </Link>

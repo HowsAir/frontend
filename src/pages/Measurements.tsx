@@ -34,19 +34,19 @@ const Measurements = () => {
 
     return (
         <main className="container mx-auto py-10">
-            <div className="container mx-auto flex-1 mb-8">
-                <h1 className="text-center font-semibold text-4xl">
+            <div className="container mx-auto mb-8 flex-1">
+                <h1 className="text-center text-4xl font-semibold">
                     Controla la calidad del aire a tu alrededor
                 </h1>
             </div>
-            <h2 className="text-xl font-normal mb-4 text-left">
+            <h2 className="mb-4 text-left text-xl font-normal">
                 Últimas mediciones:
             </h2>
 
             {loading ? (
                 <p className="text-center">Cargando mediciones...</p>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {mediciones.length > 0 ? (
                         mediciones.map((medicion) => (
                             <Medicion
@@ -61,7 +61,7 @@ const Measurements = () => {
                             />
                         ))
                     ) : (
-                        <p className="text-center col-span-full">
+                        <p className="col-span-full text-center">
                             No hay mediciones disponibles
                         </p>
                     )}

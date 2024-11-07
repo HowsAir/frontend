@@ -11,7 +11,7 @@ const CustomCheckbox: React.FC = () => {
     const isChecked = !!watch('terms');
 
     return (
-        <div className="flex flex-col mt-4 relative">
+        <div className="relative mt-4 flex flex-col">
             <div className="flex items-center">
                 <input
                     type="checkbox"
@@ -23,17 +23,17 @@ const CustomCheckbox: React.FC = () => {
                 />
                 <label
                     htmlFor="terms"
-                    className="flex items-center cursor-pointer"
+                    className="flex cursor-pointer items-center"
                 >
                     <div
-                        className={`h-5 w-5 border-2 rounded mr-2 flex items-center justify-center ${
+                        className={`mr-2 flex h-5 w-5 items-center justify-center rounded border-2 ${
                             isChecked
                                 ? 'border-primary'
                                 : 'border-gray bg-offwhite'
                         }`}
                     >
                         {isChecked && (
-                            <div className="h-3 w-3 bg-primary rounded" />
+                            <div className="h-3 w-3 rounded bg-primary" />
                         )}
                     </div>
                     Acepto los&nbsp;
@@ -41,14 +41,14 @@ const CustomCheckbox: React.FC = () => {
                         to="/terms-and-privacy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary underline font-semibold"
+                        className="font-semibold text-primary underline"
                     >
                         términos, condiciones y privacidad
                     </Link>
                 </label>
             </div>
             {errors.terms && (
-                <span className="absolute top-[20px] text-red-500 text-sm mt-1">
+                <span className="absolute top-[20px] mt-1 text-sm text-red-500">
                     {typeof errors.terms?.message === 'string' &&
                         errors.terms.message}
                 </span>

@@ -12,13 +12,13 @@ const FormContainer: React.FC<FormContainerProps> = ({
     price,
 }) => {
     return (
-        <div className="w-fit h-fit min-h-[80dvh] flex flex-row mx-auto">
+        <div className="mx-auto flex h-fit min-h-[80dvh] w-fit flex-row">
             {step === 1 ? (
                 <>
-                    <div className="w-[40dvw] bg-form bg-cover sm:hidden lg:flex flex-col justify-between rounded-bl-lg rounded-tl-lg p-8">
+                    <div className="w-[40dvw] flex-col justify-between rounded-bl-lg rounded-tl-lg bg-form bg-cover p-8 sm:hidden lg:flex">
                         <div>
                             <h1>HowsAir</h1>
-                            <h3 className="text-offwhite w-72">
+                            <h3 className="w-72 text-offwhite">
                                 Conoce la calidad del aire que respiras en
                                 segundos
                             </h3>
@@ -33,8 +33,8 @@ const FormContainer: React.FC<FormContainerProps> = ({
             ) : (
                 <>
                     {children}
-                    <div className="w-[40dvw] bg-form bg-cover rounded-br-lg rounded-tr-lg  px-24 py-14 flex flex-col">
-                        <div className="flex gap-4 pb-5 border-b-2 border-offwhite">
+                    <div className="flex w-[40dvw] flex-col rounded-br-lg rounded-tr-lg bg-form bg-cover px-24 py-14">
+                        <div className="flex gap-4 border-b-2 border-offwhite pb-5">
                             <img
                                 src={'../../public/icons/shopping-cart.svg'}
                                 alt="Shopping Cart"
@@ -44,7 +44,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             </p>
                         </div>
 
-                        <div className="flex gap-4 py-8 px-4 border-b-2 border-offwhite">
+                        <div className="flex gap-4 border-b-2 border-offwhite px-4 py-8">
                             <img
                                 src={'../../public/icons/percent.svg'}
                                 alt="Percent"
@@ -55,24 +55,24 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             ></input>
                         </div>
 
-                        <div className="py-8 px-4 border-b-2 border-offwhite space-y-6">
-                            <p className="text-xl text-offwhite font-semibold">
+                        <div className="space-y-6 border-b-2 border-offwhite px-4 py-8">
+                            <p className="text-xl font-semibold text-offwhite">
                                 Resumen del pedido
                             </p>
-                            <p className="flex justify-between text-xl text-offwhite font-extralight">
+                            <p className="flex justify-between text-xl font-extralight text-offwhite">
                                 Subtotal
                                 <span className="mr-4 font-normal">
                                     {price}.00 €
                                 </span>
                             </p>
-                            <p className="flex justify-between text-xl text-offwhite font-extralight">
+                            <p className="flex justify-between text-xl font-extralight text-offwhite">
                                 Envío
                                 <span className="mr-4 font-normal">5.00 €</span>
                             </p>
                         </div>
 
-                        <div className="py-8 px-4">
-                            <p className="flex justify-between text-xl text-offwhite font-semibold">
+                        <div className="px-4 py-8">
+                            <p className="flex justify-between text-xl font-semibold text-offwhite">
                                 Total
                                 <span className="mr-4 font-normal">
                                     104.00 €
@@ -82,7 +82,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
 
                         <button
                             type="submit"
-                            className="mt-auto btn-inverted w-full"
+                            className="btn-inverted mt-auto w-full"
                         >
                             Pagar
                         </button>
