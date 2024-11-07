@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+    /*--- BUTTON CLASSES ---*/
     .btn-primary {
         @apply w-fit h-fit px-12 py-3 rounded-lg text-offwhite bg-primary font-semibold text-[20px];
     }
@@ -19,6 +20,7 @@
         @apply btn-primary font-normal py-2 mt-12 sm:mx-0 lg:mx-auto;
     }
 
+    /*--- FORM CLASSES ---*/
     .form {
         @apply lg:w-[40dvw] sm:w-[60dvw] flex flex-col bg-white border-gray border-[1px] py-12 px-16;
     }
@@ -53,8 +55,8 @@
 }
 
 .loader {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #1074e7; /* Blue */
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1074e7;
     border-radius: 50%;
     width: 64px;
     height: 64px;
