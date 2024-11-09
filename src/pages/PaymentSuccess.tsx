@@ -70,10 +70,10 @@ const PaymentSuccess = () => {
     useEffect(() => {
         if (errorMessage) {
             console.log(
-                'Error encontrado, redirigiendo a /register en 5 segundos'
+                'Error encontrado, redirigiendo a /breeze en 5 segundos'
             );
             const timer = setTimeout(() => {
-                navigate('/register');
+                navigate('/breeze');
             }, 5000);
 
             return () => clearTimeout(timer);
@@ -89,9 +89,8 @@ const PaymentSuccess = () => {
                     </div>
                 ) : (
                     <>
-                        <div className="mb-4 text-2xl">
-                            Estamos procesando tu pago
-                        </div>
+                        <h2>Estamos procesando tu pago...</h2>
+                        <p>Esto puede tardar un poco</p>
                         <div className="loader mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-t-4 border-blue-500"></div>
                     </>
                 )}
