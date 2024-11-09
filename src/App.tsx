@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
 import Landing from './pages/Landing';
@@ -9,11 +9,14 @@ import PaymentCancel from './pages/PaymentCancel';
 import TermsAndPrivacy from './pages/TermsAndPrivacy';
 import Product from './pages/Product';
 import Maps from './pages/Maps';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
+    const location = useLocation();
+
     return (
-        <BrowserRouter>
-            <Routes>
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
                 <Route
                     path="/"
                     element={
@@ -66,7 +69,7 @@ const App = () => {
                 />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-        </BrowserRouter>
+        </AnimatePresence>
     );
 };
 export default App;
