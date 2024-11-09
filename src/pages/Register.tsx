@@ -46,7 +46,7 @@ const Register = () => {
                 <form noValidate onSubmit={onSubmit}>
                     <FormContainer step={step} price={priceAmount}>
                         <div
-                            className={`form ${step === 1 ? 'form-right' : 'form-left'}`}
+                            className={`form ${step === 1 ? 'rounded-br-lg rounded-tr-lg' : 'rounded-bl-lg rounded-tl-lg'}`}
                         >
                             {step === 1 && (
                                 <>

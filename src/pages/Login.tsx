@@ -52,7 +52,10 @@ const Login: React.FC = () => {
     return (
         <FormContainer step={1}>
             <FormProvider {...methods}>
-                <form onSubmit={onSubmit} className="form form-right">
+                <form
+                    onSubmit={onSubmit}
+                    className="form rounded-br-lg rounded-tr-lg"
+                >
                     <h2>Bienvenido</h2>
 
                     <label className="form-label">
