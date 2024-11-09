@@ -6,7 +6,7 @@ export interface RegisterFormData {
     confirmPassword: string;
     phone: string;
     country: string;
-    postalCode: string;
+    zipCode: string;
     city: string;
     address: string;
     terms: boolean;

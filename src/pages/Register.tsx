@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import * as apiClient from '../api/apiClient';
 import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
 import { useState } from 'react';
@@ -14,7 +14,6 @@ import { passwordValidation } from '../utils/passwordValidation';
 import { StepDisplay } from '../components/widgets/StepDisplay';
 
 const Register = () => {
-    const queryClient = useQueryClient();
     const { showToast } = useAppContext();
     const methods = useForm<RegisterFormData>();
 

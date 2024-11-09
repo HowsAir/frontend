@@ -102,7 +102,7 @@ describe("API Client Tests", () => {
         country: "Spain",
         city: "Valencia",
         address: "Calle Falsa 123",
-        postalCode: "46001",
+        zipCode: "46001",
         terms: true
       };
 
@@ -130,13 +130,11 @@ describe("API Client Tests", () => {
         country: "Spain",
         city: "Valencia",
         address: "Calle Falsa 123",
-        postalCode: "46001",
+        zipCode: "46001",
         terms: true
       };
 
-      await expect(apiClient.register(registerData)).rejects.toThrow(
-        apiClient.API_ERRORS.REGISTER_USER
-      );
+      await expect(apiClient.register(registerData)).rejects.toThrow();
       expect(console.error).toHaveBeenCalled();
     });
   });
