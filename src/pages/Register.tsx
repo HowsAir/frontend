@@ -12,6 +12,8 @@ import CustomCheckbox from '../components/common/CustomCheckbox';
 import { ProductCard } from '../components/widgets/ProductCard';
 import { passwordValidation } from '../utils/passwordValidation';
 import { StepDisplay } from '../components/widgets/StepDisplay';
+import { validatePostalCode } from '../utils/PostalCodeValidation';
+import PhoneInput from '../components/common/PhoneInput';
 
 const Register = () => {
     const { showToast } = useAppContext();
@@ -145,11 +147,13 @@ const Register = () => {
                                     >
                                         Edificio, portal, etc.
                                     </Input>
-                                    <div className="flex inline-flex justify-between">
+                                    <div className="inline-flex justify-between">
                                         <Input
                                             name="country"
                                             type="text"
                                             customClass="w-full"
+                                            value="España"
+                                            readOnly
                                         >
                                             País
                                         </Input>
@@ -157,25 +161,26 @@ const Register = () => {
                                             name="city"
                                             type="text"
                                             customClass="w-full"
+                                            value="Valencia"
+                                            readOnly
                                         >
                                             Ciudad
                                         </Input>
                                     </div>
-                                    <div className="flex inline-flex justify-between">
+
+                                    <div className="inline-flex justify-between">
                                         <Input
                                             name="zipCode"
                                             type="number"
                                             customClass="w-full"
+                                            // validate={validatePostalCode}
                                         >
                                             Código postal
                                         </Input>
-                                        <Input
-                                            name="phone"
-                                            type="tel"
-                                            customClass="w-full"
-                                        >
+
+                                        <PhoneInput name="phone">
                                             Teléfono
-                                        </Input>
+                                        </PhoneInput>
                                     </div>
 
                                     <ProductCard price={priceAmount} />
