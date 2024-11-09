@@ -31,7 +31,6 @@ const PaymentSuccess = () => {
             navigate('/');
         },
         onError: (error: Error) => {
-            console.log('Error en mutation:', error.message);
             localStorage.removeItem('userData');
             showToast({
                 message: error.message,
@@ -51,10 +50,6 @@ const PaymentSuccess = () => {
             }
 
             const userData = localStorage.getItem('userData');
-            console.log(
-                'Checking userData:',
-                userData ? 'exists' : 'not found'
-            );
 
             if (!userData) {
                 console.log('No userData found, showing error message');
@@ -69,7 +64,7 @@ const PaymentSuccess = () => {
         };
 
         handleRegistration();
-    }, []); // Empty dependency array
+    }, []);
 
     // Efecto para redirección en caso de error
     useEffect(() => {

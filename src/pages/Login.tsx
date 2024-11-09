@@ -28,18 +28,17 @@ const Login: React.FC = () => {
     const mutation = useMutation(apiClient.login, {
         onSuccess: () => {
             showToast({
-                message: 'Has iniciado la sesión correctamente',
+                message: 'Sesión iniciada',
                 type: ToastMessageType.SUCCESS,
             });
-            queryClient.invalidateQueries('user');
+            queryClient.invalidateQueries('validateToken');
             navigate('/');
         },
         onError: (error: any) => {
-            console.error('Login error:', error); // Log the error for debugging
             const errorMessage =
                 error?.response?.data?.message ||
                 error.message ||
-                'Ocurrió un error. Intenta de nuevo.';
+                'Ocurrió un error. Intentalo de nuevo.';
             showToast({ message: errorMessage, type: ToastMessageType.ERROR });
             setIsLoading(false); // Ensure loading state is reset
         },

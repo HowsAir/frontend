@@ -24,7 +24,6 @@ const Register = () => {
 
     const mutation = useMutation(apiClient.createCheckoutSession, {
         onSuccess: async (sessionId) => {
-            queryClient.invalidateQueries('validateToken');
             localStorage.setItem('userData', JSON.stringify(watch()));
             await redirectToCheckout(sessionId);
         },
