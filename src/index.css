@@ -52,6 +52,13 @@
     p {
         @apply h-fit text-2xl font-normal text-offblack;
     }
+
+    a:hover,
+    Link:hover,
+    button:hover {
+        cursor: url(https://cdn.custom-cursor.com/db/12221/32/material-cloud-pointer.png),
+            pointer;
+    }
 }
 
 .loader {
