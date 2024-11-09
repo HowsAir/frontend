@@ -5,16 +5,20 @@ interface InputProps {
     name: string;
     type: string;
     children: ReactNode;
+    value?: string;
+    readOnly?: boolean;
     confirmPassword?: boolean;
-    customClass?: string;
-    validate?: (value: string) => boolean | string;
+    validate?: (value: string) => Promise<string | boolean> | string | boolean;
     notRequired?: boolean;
+    customClass?: string;
 }
 
 export function Input({
     name,
     type,
     children,
+    value,
+    readOnly = false,
     confirmPassword,
     customClass = '',
     validate,
@@ -28,7 +32,9 @@ export function Input({
 
     const validationRules: {
         required?: string;
-        validate?: (val: string) => string | boolean;
+        validate?: (
+            val: string
+        ) => Promise<string | boolean> | string | boolean;
     } = {};
 
     if (!notRequired) validationRules.required = 'Este campo es obligatorio';
@@ -43,17 +49,16 @@ export function Input({
     }
 
     return (
-        <div className="relative flex flex-col">
-            <label htmlFor={name} className="sr-only">
-                {String(children)}
-            </label>{' '}
-            {/* Hidden label for accessibility */}
+        <div className="relative flex flex-col ">
             <input
-                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary accent-primary ${customClass}`}
+                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${readOnly && 'bg-neutral-300'} ${customClass}`}
                 type={type}
-                id={name} // Use id for the label
-                placeholder={String(children)} // Use children as placeholder
-                {...register(name, validationRules)} // Register with input name and validation rules
+                id={name}
+                placeholder={String(children)}
+                value={value}
+                readOnly={readOnly}
+                disabled={readOnly}
+                {...register(name, validationRules)}
             />
             {errors[name] && (
                 <span className="absolute top-[72px] text-sm text-red-500">

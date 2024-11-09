@@ -16,7 +16,7 @@ const CustomCheckbox: React.FC = () => {
                 <input
                     type="checkbox"
                     id="terms"
-                    className="hidden"
+                    className="sr-only"
                     {...register('terms', {
                         required: 'Debes aceptar los términos',
                     })}

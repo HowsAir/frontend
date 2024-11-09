@@ -50,7 +50,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                                 alt="Percent"
                             />
                             <input
-                                className="form-input mt-0"
+                                className="mt-0 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary"
                                 placeholder="Código de descuento"
                             ></input>
                         </div>
