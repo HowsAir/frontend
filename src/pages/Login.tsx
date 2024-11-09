@@ -17,11 +17,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const methods = useForm<LogInFormData>();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = methods;
+    const { handleSubmit } = methods;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +61,14 @@ const Login: React.FC = () => {
                         <Link to="/breeze">Cómpralo aquí</Link>
                     </label>
 
-                    <Input name="email" type="email">
+                    <Input
+                        name="email"
+                        type="email"
+                        validate={(value) =>
+                            /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
+                            'Introduce un email válido'
+                        }
+                    >
                         Email
                     </Input>
 
@@ -75,7 +78,7 @@ const Login: React.FC = () => {
 
                     <Link
                         to="#"
-                        className="text- mt-2 text-neutral-400 underline"
+                        className="text- mt-4 text-neutral-400 underline"
                     >
                         Olvidé mi contraseña
                     </Link>
