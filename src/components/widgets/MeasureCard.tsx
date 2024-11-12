@@ -1,36 +1,27 @@
-import React from 'react';
-import { MeasurementData } from '../../api/data';
-
-const MeasureCard: React.FC<MeasurementData> = ({
-    timestamp,
-    o3Value,
-    no2Value,
-    coValue,
-    latitude,
-    longitude,
-}) => {
+export const MeasureCard = () => {
     return (
-        <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
-            <p>
-                <strong>Fecha:</strong> {new Date(timestamp).toLocaleString()}
-            </p>
-            <p>
-                <strong>O3 PPM:</strong> {o3Value}
-            </p>
-            <p>
-                <strong>NO2 PPM:</strong> {no2Value}
-            </p>
-            <p>
-                <strong>CO PPM:</strong> {coValue}
-            </p>
-            <p>
-                <strong>Latitud:</strong> {latitude}
-            </p>
-            <p>
-                <strong>Longitud:</strong> {longitude}
-            </p>
+        <div className="w-fit min-w-80 min-h-52 py-4 px-6  rounded-lg border-[1px] border-gray bg-white flex flex-col">
+            <div className="inline-flex gap-2">
+                <div
+                    className="size-4 rounded-md bg-red-500 mt-[6px]"
+                    id="measure-color"
+                ></div>
+                <div className="flex flex-col">
+                    <p className="text-lg font-medium" id="title">
+                        Última medición
+                    </p>
+                    <label
+                        className="leading-none text-lg font-normal text-neutral-500"
+                        id="time"
+                    >
+                        Hace 20 min.
+                    </label>
+                </div>
+            </div>
+            <h1 className="m-auto text-offblack flex w-fit" id="value">
+                800
+                <h3 className="mt-auto mb-3 ml-1" id="type">PPM</h3>
+            </h1>
         </div>
     );
 };
-
-export default MeasureCard;
