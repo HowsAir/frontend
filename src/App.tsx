@@ -10,6 +10,7 @@ import TermsAndPrivacy from './pages/TermsAndPrivacy';
 import Product from './pages/Product';
 import Maps from './pages/Maps';
 import { AnimatePresence } from 'framer-motion';
+import User from './pages/User';
 
 const App = () => {
     const location = useLocation();
@@ -33,6 +34,8 @@ const App = () => {
                         </Layout>
                     }
                 />
+                <Route path="/payment-success" element={<PaymentSuccess />} />
+                <Route path="/payment-cancel" element={<PaymentCancel />} />
                 <Route
                     path="/login"
                     element={
@@ -41,8 +44,13 @@ const App = () => {
                         </Layout>
                     }
                 />
-                <Route path="/payment-success" element={<PaymentSuccess />} />
-                <Route path="/payment-cancel" element={<PaymentCancel />} />
+                <Route
+                path='/user'
+                element={
+                    <Layout>
+                        <User />
+                    </Layout>
+                } />
                 <Route
                     path="/terms-and-privacy"
                     element={
