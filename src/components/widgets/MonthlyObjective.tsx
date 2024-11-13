@@ -6,7 +6,7 @@ interface MonthlyObjectiveProps {
 
 export const MonthlyObjective = ({ objective }: MonthlyObjectiveProps) => {
     return (
-        <div className="w-full">
+        <div className="w-full h-fit">
             <h3 className="font-">
                 <span className="text-2xl">Objetivo mensual: </span>
                 {objective}km
