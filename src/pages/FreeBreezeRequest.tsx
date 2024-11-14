@@ -1,20 +1,10 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { Input } from '../components/common/Input';
 import CustomCheckbox from '../components/common/CustomCheckbox';
-
-interface FreeBreezeFormData {
-    name: string;
-    surnames: string;
-    email: string;
-    address: string;
-    country: string;
-    city: string;
-    zipCode: string;
-    reason: string;
-}
+import { FreeBreezeRequestFormData } from '../types/mainTypes';
 
 const FreeBreezeRequest = () => {
-    const methods = useForm<FreeBreezeFormData>();
+    const methods = useForm<FreeBreezeRequestFormData>();
 
     const onSubmit = methods.handleSubmit(async (data) => {
         // Handle form submission
@@ -133,7 +123,7 @@ const FreeBreezeRequest = () => {
                             Breeze
                         </label>
                         <textarea
-                            {...methods.register('reason', {
+                            {...methods.register('comments', {
                                 required: 'Este campo es obligatorio',
                             })}
                             className="mt-1 h-32 w-full resize-none rounded-lg border border-gray bg-offwhite p-3 focus:outline-primary"

@@ -35,3 +35,15 @@ export type AppContext = {
     showToast: (toastMessage: ToastMessage) => void;
     isLoggedIn: boolean;
 };
+
+export interface FreeBreezeRequestFormData {
+    name: string;
+    surnames: string;
+    email: string;
+    country: string;
+    zipCode: string;
+    city: string;
+    address: string;
+    comments: string;
+    terms: boolean;
+}
