@@ -36,7 +36,7 @@ export type AppContext = {
     isLoggedIn: boolean;
 };
 
-export interface FreeBreezeRequestFormData {
+export interface FreeBreezeApplicationFormData {
     name: string;
     surnames: string;
     email: string;
