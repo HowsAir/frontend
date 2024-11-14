@@ -9,6 +9,7 @@ import PaymentCancel from './pages/PaymentCancel';
 import TermsAndPrivacy from './pages/TermsAndPrivacy';
 import Product from './pages/Product';
 import Maps from './pages/Maps';
+import FreeBreezeRequest from './pages/FreeBreezeRequest';
 import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
@@ -64,6 +65,14 @@ const App = () => {
                     element={
                         <Layout>
                             <Maps />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/free-breeze-request"
+                    element={
+                        <Layout>
+                            <FreeBreezeRequest />
                         </Layout>
                     }
                 />

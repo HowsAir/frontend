@@ -5,7 +5,11 @@
  */
 
 import { MeasurementData } from './data';
-import { LogInFormData, RegisterFormData } from '../types/mainTypes';
+import {
+    LogInFormData,
+    RegisterFormData,
+    FreeBreezeApplicationFormData,
+} from '../types/mainTypes';
 
 const NODE_ENV = import.meta.env.VITE_NODE_ENV || 'development';
 const API_BASE_URL = NODE_ENV === 'development' ? 'http://localhost:3000' : '';
@@ -15,6 +19,7 @@ export const API_ERRORS = {
     REGISTER_USER: 'Error al registrar al usuario',
     CREATE_CHECKOUT_SESSION: 'Error al crear la sesión de pago',
     LOGIN_USER: 'Error al iniciar sesión',
+    FREE_BREEZE_APPLICATION: 'Error al enviar la solicitud de Breeze gratuito',
     // Additional error messages for other functions can be added here
 } as const;
 
@@ -79,7 +84,7 @@ export const register = async (data: RegisterFormData): Promise<void> => {
 
         if (!response.ok) {
             const { message }: { message: string } = await response.json();
-            throw new Error(message || "Error registering user");
+            throw new Error(message || 'Error registering user');
         }
     } catch (error) {
         console.error('Error:', error);
@@ -102,24 +107,24 @@ export const register = async (data: RegisterFormData): Promise<void> => {
  */
 
 export const login = async (data: LogInFormData): Promise<void> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
 
-    if (!response.ok) {
-      const { message }: { message: string } = await response.json();
-      throw new Error(message || "Error logging in");
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error logging in');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.LOGIN_USER);
     }
-  } catch (error) {
-    console.error("Error:", error);
-    throw new Error(API_ERRORS.LOGIN_USER);
-  }
 };
 
 /**
@@ -223,5 +228,46 @@ export const logout = async (): Promise<void> => {
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Error loggin out');
+    }
+};
+
+/**
+ * @brief Submits a free Breeze application
+ * @author Manuel Borregales
+ *
+ * FreeBreezeApplicationData: data -> submitFreeBreezeApplication -> Promise<void>
+ *
+ * This function makes a POST request to submit a free Breeze application.
+ * It sends the user's details and reason for requesting a free Breeze.
+ *
+ * @throws Error - If the submission fails or the response is invalid
+ * @param {FreeBreezeApplicationData} data - The application details
+ * @returns A promise that resolves when the application is successfully submitted
+ */
+export const submitFreeBreezeApplication = async (
+    data: FreeBreezeApplicationFormData
+): Promise<void> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/free-breeze-application`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(
+                message || 'Error submitting free Breeze application'
+            );
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.FREE_BREEZE_APPLICATION);
     }
 };
