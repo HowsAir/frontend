@@ -57,7 +57,7 @@ const FreeBreezeRequest = () => {
                                     /^[A-Za-z\s-]+$/.test(value) ||
                                     'Solo se permiten letras y espacios'
                                 }
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                             >
                                 Nombre
                             </Input>
@@ -69,7 +69,7 @@ const FreeBreezeRequest = () => {
                                     /^[A-Za-z\s-]+$/.test(value) ||
                                     'Solo se permiten letras y espacios'
                                 }
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                             >
                                 Apellidos
                             </Input>
@@ -85,7 +85,7 @@ const FreeBreezeRequest = () => {
                                 /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
                                 'Introduce un email válido'
                             }
-                            customClass="mt-1 w-full"
+                            customClass="!mt-2 w-full"
                         >
                             Email
                         </Input>
@@ -105,7 +105,7 @@ const FreeBreezeRequest = () => {
                             <Input
                                 name="address"
                                 type="text"
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                             >
                                 Dirección
                             </Input>
@@ -117,7 +117,7 @@ const FreeBreezeRequest = () => {
                                 type="text"
                                 value="España"
                                 readOnly
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                             >
                                 España
                             </Input>
@@ -127,7 +127,7 @@ const FreeBreezeRequest = () => {
                                 type="text"
                                 value="Valencia"
                                 readOnly
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                             >
                                 Valencia
                             </Input>
@@ -135,7 +135,7 @@ const FreeBreezeRequest = () => {
                             <Input
                                 name="zipCode"
                                 type="text"
-                                customClass="w-full"
+                                customClass="w-full !mt-2"
                                 validate={(value) =>
                                     /^\d{5}$/.test(value) ||
                                     'El código postal debe tener 5 dígitos'

@@ -86,7 +86,7 @@ const Login: React.FC = () => {
                         Olvidé mi contraseña
                     </Link>
                     <button
-                        className="btn-submit"
+                        className="btn-submit mr-40"
                         type="submit"
                         disabled={isLoading}
                     >

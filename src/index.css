@@ -17,7 +17,7 @@
     }
 
     .btn-submit {
-        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
+        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:ml-auto lg:mr-44;
     }
 
     /*--- FORM CLASSES ---*/
@@ -51,14 +51,6 @@
 
     p {
         @apply h-fit text-2xl font-normal text-offblack;
-    }
-
-    a:hover,
-    Link:hover,
-    button:hover,
-    Input:hover {
-        cursor: url(https://cdn.custom-cursor.com/db/12221/32/material-cloud-pointer.png),
-            pointer;
     }
 }
 

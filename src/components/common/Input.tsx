@@ -49,9 +49,9 @@ export function Input({
     }
 
     return (
-        <div className="relative flex flex-col ">
+        <div className="relative flex w-full flex-col">
             <input
-                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${readOnly && 'bg-neutral-300'} ${customClass}`}
+                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${customClass} ${readOnly && 'bg-zinc-300'} `}
                 type={type}
                 id={name}
                 placeholder={String(children)}

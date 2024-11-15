@@ -147,7 +147,7 @@ const Register = () => {
                                     >
                                         Edificio, portal, etc.
                                     </Input>
-                                    <div className="inline-flex justify-between">
+                                    <div className="inline-flex justify-between gap-4">
                                         <Input
                                             name="country"
                                             type="text"
@@ -168,7 +168,7 @@ const Register = () => {
                                         </Input>
                                     </div>
 
-                                    <div className="inline-flex justify-between">
+                                    <div className="grid grid-flow-row grid-cols-2 grid-rows-1 gap-4">
                                         <Input
                                             name="zipCode"
                                             type="number"

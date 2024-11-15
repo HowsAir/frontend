@@ -38,7 +38,7 @@ const PhoneInput = ({ name, children }: PhoneInputProps) => {
     };
 
     return (
-        <div className="relative inline-flex h-fit items-center">
+        <div className="relative">
             {/* Phone number input */}
             <Input
                 name={name}
