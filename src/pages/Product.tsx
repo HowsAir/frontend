@@ -36,7 +36,10 @@ const Product = () => {
 
                 <div className="relative mb-2 mt-auto">
                     <div className="flex flex-row gap-4">
-                        <Link to="#" className="btn-secondary px-4">
+                        <Link
+                            to="/free-breeze-application"
+                            className="btn-secondary px-4"
+                        >
                             Solícitalo gratis*
                         </Link>
 
