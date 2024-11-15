@@ -9,9 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 function ForgotPassword() {
     const { showToast } = useAppContext();
-    const methods = useForm();
+    const emailMethods = useForm(); // Separate useForm for email form
+    const codeMethods = useForm(); // Separate useForm for verification code form
     const [step, setStep] = useState(1);
     const navigate = useNavigate();
+
+    const email = emailMethods.watch('email');
 
     // Mutación para enviar el correo y recibir el código
     const forgotPasswordEmailMutation = useMutation(
@@ -23,7 +26,6 @@ function ForgotPassword() {
                         'Si el correo está afiliado a un usuario, recibirás un código de verificación',
                     type: ToastMessageType.SUCCESS,
                 });
-                navigate('/login');
             },
             onError: (error) => {
                 showToast({
@@ -61,7 +63,7 @@ function ForgotPassword() {
                 message: 'Contraseña cambiada con éxito',
                 type: ToastMessageType.SUCCESS,
             });
-            // aqui debo poner el navigate to login
+            navigate('/login');
         },
         onError: (error) => {
             showToast({
@@ -72,18 +74,18 @@ function ForgotPassword() {
     });
 
     // Handlers para los formularios
-    const onReceiveCodeSubmit = methods.handleSubmit(async (data) => {
+    const onReceiveCodeSubmit = emailMethods.handleSubmit(async (data) => {
         await forgotPasswordEmailMutation.mutate(data.email);
     });
 
-    const onVerifyCodeSubmit = methods.handleSubmit(async (data) => {
+    const onVerifyCodeSubmit = codeMethods.handleSubmit(async (data) => {
         await forgotPasswordTokenMutation.mutate({
-            email: data.email,
+            email: email,
             code: data.verificationCode,
         });
     });
 
-    const onResetPasswordSubmit = methods.handleSubmit(async (data) => {
+    const onResetPasswordSubmit = codeMethods.handleSubmit(async (data) => {
         await resetPasswordMutation.mutate(data.newPassword);
     });
 
@@ -98,8 +100,8 @@ function ForgotPassword() {
                         poder cambiar tu contraseña
                     </p>
 
-                    <FormProvider {...methods}>
-                        {/* Formulario para enviar email */}
+                    {/* Formulario para enviar email */}
+                    <FormProvider {...emailMethods}>
                         <form noValidate onSubmit={onReceiveCodeSubmit}>
                             <div className="mb-4">
                                 <Input
@@ -130,8 +132,10 @@ function ForgotPassword() {
                                 </button>
                             </div>
                         </form>
+                    </FormProvider>
 
-                        {/* Formulario para verificar código */}
+                    {/* Formulario para verificar código */}
+                    <FormProvider {...codeMethods}>
                         <form noValidate onSubmit={onVerifyCodeSubmit}>
                             <div className="mb-4">
                                 <Input
@@ -170,7 +174,7 @@ function ForgotPassword() {
                 <>
                     <p className="text-lg">Escribe tu nueva contraseña</p>
 
-                    <FormProvider {...methods}>
+                    <FormProvider {...codeMethods}>
                         <form noValidate onSubmit={onResetPasswordSubmit}>
                             <div className="mb-4">
                                 <Input
@@ -199,7 +203,7 @@ function ForgotPassword() {
                                     customClass="mt-0 w-full"
                                     validate={(value) =>
                                         value ===
-                                            methods.watch('newPassword') ||
+                                            codeMethods.watch('newPassword') ||
                                         'Las contraseñas no coinciden'
                                     }
                                 >
