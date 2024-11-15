@@ -10,6 +10,7 @@ import TermsAndPrivacy from './pages/TermsAndPrivacy';
 import Product from './pages/Product';
 import Maps from './pages/Maps';
 import FreeBreezeRequest from './pages/FreeBreezeRequest';
+import ForgotPassword from './pages/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
@@ -73,6 +74,14 @@ const App = () => {
                     element={
                         <Layout>
                             <FreeBreezeRequest />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/forgot-password"
+                    element={
+                        <Layout>
+                            <ForgotPassword />
                         </Layout>
                     }
                 />

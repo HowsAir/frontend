@@ -20,6 +20,11 @@ export const API_ERRORS = {
     CREATE_CHECKOUT_SESSION: 'Error al crear la sesión de pago',
     LOGIN_USER: 'Error al iniciar sesión',
     FREE_BREEZE_APPLICATION: 'Error al enviar la solicitud de Breeze gratuito',
+    FORGOT_PASSWORD_EMAIL:
+        'Si el correo pertenece a una cuenta existente, recibirá un correo electrónico con un enlace para restablecer la contraseña.',
+    FORGOT_PASSWORD_TOKEN:
+        'Error al verificar el código de restablecimiento de contraseña',
+    RESET_PASSWORD: 'Error al restablecer la contraseña',
     // Additional error messages for other functions can be added here
 } as const;
 
@@ -269,5 +274,120 @@ export const submitFreeBreezeApplication = async (
     } catch (error) {
         console.error('Error:', error);
         throw new Error(API_ERRORS.FREE_BREEZE_APPLICATION);
+    }
+};
+
+/**
+ * @brief Sends a password reset email
+ * @author Manuel Borregales
+ *
+ * email: string -> forgotPasswordEmail -> Promise<void>
+ *
+ * This function makes a POST request to the /auth/forgot-password-code endpoint
+ * to send a password reset code to the user's email.
+ *
+ * @throws Error - If the request fails or the response is invalid
+ * @param {string} email - The user's email address
+ * @returns A promise that resolves when the password reset email is sent
+ */
+export const forgotPasswordEmail = async (email: string): Promise<void> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/forgot-password-code`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error sending password reset email');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.FORGOT_PASSWORD_EMAIL);
+    }
+};
+
+/**
+ * @brief Verifies a password reset code
+ * @author Manuel Borregales
+ *
+ * { email: string, code: string } -> forgotPasswordToken -> Promise<void>
+ *
+ * This function makes a GET request to the /auth/forgot-password-token endpoint
+ * to verify the password reset code provided by the user. If the code is valid,
+ * it sets a `password_reset_token` cookie that can be used to reset the password.
+ *
+ * @throws Error - If the request fails or the response is invalid
+ * @param {object} data - An object with the user's email and the reset code
+ * @returns A promise that resolves when the password reset code is verified
+ */
+export const forgotPasswordToken = async (data: {
+    email: string;
+    code: string;
+}): Promise<void> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/forgot-password-token?email=${data.email}&code=${data.code}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error verifying password reset code');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.FORGOT_PASSWORD_TOKEN);
+    }
+};
+
+/**
+ * @brief Resets the user's password
+ * @author Manuel Borregales
+ *
+ * newPassword: string -> resetPassword -> Promise<void>
+ *
+ * This function makes a PUT request to the /users/reset-password endpoint
+ * to reset the user's password. It requires the `password_reset_token` cookie
+ * to be present, which was set by the `forgotPasswordToken` function.
+ *
+ * @throws Error - If the request fails or the response is invalid
+ * @param {string} newPassword - The user's new password
+ * @returns A promise that resolves when the password is successfully reset
+ */
+export const resetPassword = async (newPassword: string): Promise<void> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/reset-password`,
+            {
+                method: 'PUT',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ newPassword }),
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error resetting password');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.RESET_PASSWORD);
     }
 };
