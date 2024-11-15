@@ -2,7 +2,7 @@ const TermsAndPrivacy = () => {
     return (
         <div className="bg-gray-100 min-h-screen p-8">
             <div className="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md">
-                <h2>Términos y Condiciones y Política de Privacidad</h2>
+                <h2>Términos, condiciones y política de privacidad</h2>
                 <p className="text-gray-600 mb-2">
                     Fecha de actualización: Octubre 2024
                 </p>
@@ -19,12 +19,12 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h2 className="text-xl font-bold">
-                        Términos y Condiciones
+                        Términos y condiciones
                     </h2>
 
                     <h3 className="text-lg font-semibold">2. Definiciones</h3>
                     <p>
-                        <strong>Usuario Registrado:</strong> Persona con cuenta
+                        <strong>Usuario registrado:</strong> Persona con cuenta
                         en la Plataforma.
                     </p>
                     <p>
@@ -38,7 +38,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        3. Registro y Cuentas
+                        3. Registro y cuentas
                     </h3>
                     <p>
                         El usuario debe proporcionar información precisa al
@@ -48,7 +48,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        4. Uso de los Servicios
+                        4. Uso de los servicios
                     </h3>
                     <p>Los usuarios pueden:</p>
                     <ul className="list-inside list-disc">
@@ -60,7 +60,7 @@ const TermsAndPrivacy = () => {
                     </ul>
 
                     <h3 className="text-lg font-semibold">
-                        5. Compra de Nodos
+                        5. Compra de nodos (Breeze)
                     </h3>
                     <p>
                         Al realizar compras en la Plataforma, el usuario se
@@ -70,7 +70,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        6. Exactitud de la Información
+                        6. Exactitud de la información
                     </h3>
                     <p>
                         Los datos proporcionados sobre la calidad del aire se
@@ -79,7 +79,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        7. Responsabilidad del Usuario
+                        7. Responsabilidad del usuario
                     </h3>
                     <p>
                         El usuario se compromete a no utilizar HowsAir de manera
@@ -87,7 +87,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        8. Limitación de Responsabilidad
+                        8. Limitación de responsabilidad
                     </h3>
                     <p>HowsAir no será responsable de:</p>
                     <ul className="list-inside list-disc">
@@ -102,7 +102,7 @@ const TermsAndPrivacy = () => {
                     </ul>
 
                     <h3 className="text-lg font-semibold">
-                        9. Propiedad Intelectual
+                        9. Propiedad intelectual
                     </h3>
                     <p>
                         Todos los contenidos de la Plataforma son propiedad de
@@ -126,11 +126,11 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h2 className="text-xl font-bold">
-                        Política de Privacidad
+                        Política de privacidad
                     </h2>
 
                     <h3 className="text-lg font-semibold">
-                        12. Datos Personales Recogidos
+                        12. Datos personales recogidos
                     </h3>
                     <p>
                         HowsAir recoge y almacena los siguientes tipos de datos
@@ -157,7 +157,7 @@ const TermsAndPrivacy = () => {
                     </ul>
 
                     <h3 className="text-lg font-semibold">
-                        13. Uso de la Información Recogida
+                        13. Uso de la información recogida
                     </h3>
                     <p>Utilizamos los datos personales para:</p>
                     <ul className="list-inside list-disc">
@@ -174,7 +174,7 @@ const TermsAndPrivacy = () => {
                     </ul>
 
                     <h3 className="text-lg font-semibold">
-                        14. Compartir Información con Terceros
+                        14. Compartir información con terceros
                     </h3>
                     <p>
                         No compartimos sus datos personales con terceros,
@@ -192,7 +192,7 @@ const TermsAndPrivacy = () => {
                     </ul>
 
                     <h3 className="text-lg font-semibold">
-                        15. Retención de Datos
+                        15. Retención de datos
                     </h3>
                     <p>
                         Sus datos se mantendrán durante el tiempo necesario para
@@ -201,7 +201,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        16. Derechos del Usuario
+                        16. Derechos del usuario
                     </h3>
                     <p>Como usuario de HowsAir, tiene derecho a:</p>
                     <ul className="list-inside list-disc">
@@ -237,7 +237,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        19. Enlaces a Sitios Externos
+                        19. Enlaces a sitios externos
                     </h3>
                     <p>
                         Nuestra Plataforma puede contener enlaces a sitios web
@@ -246,7 +246,7 @@ const TermsAndPrivacy = () => {
                     </p>
 
                     <h3 className="text-lg font-semibold">
-                        20. Cambios en la Política de Privacidad
+                        20. Cambios en la política de privacidad
                     </h3>
                     <p>
                         HowsAir puede modificar esta política de privacidad en

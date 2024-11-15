@@ -8,18 +8,12 @@ const Footer = () => {
             <div className="relative z-10 flex h-fit flex-row justify-between px-40 pt-40">
                 <div className="flex flex-col pt-12">
                     <Link
-                        className="mb-5 text-2xl text-offwhite"
+                        className="mb-5 text-2xl text-offwhite leading-loose"
                         to={'/terms-and-privacy'}
                         target="_blank"
                     >
-                        Términos y condiciones
-                    </Link>
-                    <Link
-                        className="mb-5 text-2xl text-offwhite"
-                        to={'/terms-and-privacy'}
-                        target="_blank"
-                    >
-                        Política de privacidad
+                        Términos, condiciones y <br className='' />
+                        política de privacidad
                     </Link>
                 </div>
                 <div className="flex flex-col items-center">
