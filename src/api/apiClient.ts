@@ -279,7 +279,7 @@ export const submitFreeBreezeApplication = async (
 
 /**
  * @brief Sends a password reset email
- * @author Your Name
+ * @author Manuel Borregales
  *
  * email: string -> forgotPasswordEmail -> Promise<void>
  *
@@ -316,7 +316,7 @@ export const forgotPasswordEmail = async (email: string): Promise<void> => {
 
 /**
  * @brief Verifies a password reset code
- * @author Your Name
+ * @author Manuel Borregales
  *
  * { email: string, code: string } -> forgotPasswordToken -> Promise<void>
  *
@@ -356,7 +356,7 @@ export const forgotPasswordToken = async (data: {
 
 /**
  * @brief Resets the user's password
- * @author Your Name
+ * @author Manuel Borregales
  *
  * newPassword: string -> resetPassword -> Promise<void>
  *
