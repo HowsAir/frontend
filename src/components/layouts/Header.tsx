@@ -7,8 +7,8 @@ const Header = () => {
             <Logo color="primary" />
 
             <div className="flex flex-row items-center gap-10">
-                <Link to="#">Breeze</Link>
-                <Link to="#">Mapas</Link>
+                <Link to="/breeze">Breeze</Link>
+                <Link to="/maps">Mapas</Link>
                 <Link
                     to="/login"
                     className="h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary"
