@@ -7,7 +7,7 @@ import { ToastMessageType } from '../types/mainTypes';
 import { useAppContext } from '../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 
-function ResetPassword() {
+function ForgotPassword() {
     const { showToast } = useAppContext();
     const methods = useForm();
     const [step, setStep] = useState(1);
@@ -172,7 +172,7 @@ function ResetPassword() {
 
                     <FormProvider {...methods}>
                         <form noValidate onSubmit={onResetPasswordSubmit}>
-                            <div className="mb-2">
+                            <div className="mb-4">
                                 <Input
                                     name="newPassword"
                                     type="password"
@@ -226,4 +226,4 @@ function ResetPassword() {
     );
 }
 
-export default ResetPassword;
+export default ForgotPassword;

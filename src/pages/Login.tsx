@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                     </Input>
 
                     <Link
-                        to="#"
+                        to="/forgot-password"
                         className="text- mt-4 text-neutral-400 underline"
                     >
                         Olvidé mi contraseña

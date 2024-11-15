@@ -10,7 +10,7 @@ import TermsAndPrivacy from './pages/TermsAndPrivacy';
 import Product from './pages/Product';
 import Maps from './pages/Maps';
 import FreeBreezeRequest from './pages/FreeBreezeRequest';
-import ResetPassword from './pages/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
@@ -78,10 +78,10 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/reset-password"
+                    path="/forgot-password"
                     element={
                         <Layout>
-                            <ResetPassword />
+                            <ForgotPassword />
                         </Layout>
                     }
                 />
