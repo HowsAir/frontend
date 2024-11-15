@@ -69,7 +69,7 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/free-breeze-request"
+                    path="/free-breeze-application"
                     element={
                         <Layout>
                             <FreeBreezeRequest />
