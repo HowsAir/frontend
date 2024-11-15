@@ -47,3 +47,14 @@ export interface FreeBreezeApplicationFormData {
     comments: string;
     terms: boolean;
 }
+
+export interface UserStatistics {
+    id: number;
+    name: string;
+    surnames: string;
+    phone: string;
+    nodeId: number;
+    averageDailyActiveHours: number;
+    averageDailyDistance: number;
+    nodeLastConnection: string;
+}
