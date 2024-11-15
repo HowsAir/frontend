@@ -205,27 +205,34 @@ export const validateToken = async (): Promise<void> => {
     }
 };
 
+
+
 export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/users/statistics`, {
-            method: 'GET',
-            credentials: 'include', // Cookie-based authentication
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/statistics`,
+            {
+                method: 'GET',
+                credentials: 'include', // Cookie-based authentication
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
-        if(!response.ok) {
+        if (!response.ok) {
             const { message }: { message: string } = await response.json();
             throw new Error(message || 'Error fetching user statistics');
         }
-        
-        return response.json();
+
+        const data = await response.json();
+        return data.usersStatistics; // Only return the usersStatistics array
     } catch (error) {
         console.error('Get user statistics error:', error);
         throw new Error('Error fetching user statistics');
     }
 };
+
 
 /**
  * @brief Logs out the user by invalidating the current session token

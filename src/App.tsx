@@ -12,6 +12,8 @@ import Maps from './pages/Maps';
 import FreeBreezeRequest from './pages/FreeBreezeRequest';
 import ForgotPassword from './pages/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
+// import User from './pages/User';
+import Admin from './pages/Admin';
 
 const App = () => {
     const location = useLocation();
@@ -45,6 +47,21 @@ const App = () => {
                 />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
+                <Route
+                path='/user'
+                element={
+                    <Layout>
+                        <p>hola</p>
+                        {/* <User /> */}
+                    </Layout>
+                } />
+                <Route 
+                path='/admin'
+                element={
+                    <Layout>
+                        <Admin />
+                    </Layout>
+                } />
                 <Route
                     path="/terms-and-privacy"
                     element={
