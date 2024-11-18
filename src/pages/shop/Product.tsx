@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ImagePanel } from '../components/layouts/ImagePanel';
+import { ImagePanel } from '../../components/layouts/ImagePanel';
 
 const Product = () => {
     return (

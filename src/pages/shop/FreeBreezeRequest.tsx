@@ -1,12 +1,12 @@
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../../contexts/AppContext';
 
 import { FormProvider, useForm } from 'react-hook-form';
-import { Input } from '../components/common/Input';
-import CustomCheckbox from '../components/common/CustomCheckbox';
-import { FreeBreezeApplicationFormData } from '../types/mainTypes';
+import { Input } from '../../components/common/Input';
+import CustomCheckbox from '../../components/common/CustomCheckbox';
+import { FreeBreezeApplicationFormData } from '../../types/mainTypes';
 import { useMutation } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { ToastMessageType } from '../types/mainTypes';
+import * as apiClient from '../../api/apiClient';
+import { ToastMessageType } from '../../types/mainTypes';
 
 const FreeBreezeRequest = () => {
     const { showToast } = useAppContext();

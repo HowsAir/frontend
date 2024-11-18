@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Input } from '../components/common/Input';
+import { Input } from '../../components/common/Input';
 import { useMutation } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { ToastMessageType } from '../types/mainTypes';
-import { useAppContext } from '../contexts/AppContext';
+import * as apiClient from '../../api/apiClient';
+import { ToastMessageType } from '../../types/mainTypes';
+import { useAppContext } from '../../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 
 function ForgotPassword() {
@@ -156,7 +156,11 @@ function ForgotPassword() {
                                     type="submit"
                                     className="btn-primary mx-auto mt-2 w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
                                     disabled={
-                                        !/^\d{6}$/.test(codeMethods.watch('verificationCode')) ||
+                                        !/^\d{6}$/.test(
+                                            codeMethods.watch(
+                                                'verificationCode'
+                                            )
+                                        ) ||
                                         forgotPasswordTokenMutation.isLoading
                                     }
                                 >

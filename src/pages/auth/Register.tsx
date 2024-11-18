@@ -1,19 +1,19 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
+import * as apiClient from '../../api/apiClient';
+import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
 import { useState } from 'react';
-import { redirectToCheckout } from '../api/stripe';
-import { useAppContext } from '../contexts/AppContext';
+import { redirectToCheckout } from '../../api/stripe';
+import { useAppContext } from '../../contexts/AppContext';
 import { Link } from 'react-router-dom';
-import FormContainer from '../components/layouts/FormContainer';
-import { Input } from '../components/common/Input';
-import CustomCheckbox from '../components/common/CustomCheckbox';
-import { ProductCard } from '../components/widgets/ProductCard';
-import { passwordValidation } from '../utils/passwordValidation';
-import { StepDisplay } from '../components/widgets/StepDisplay';
-import { validatePostalCode } from '../utils/PostalCodeValidation';
-import PhoneInput from '../components/common/PhoneInput';
+import FormContainer from '../../components/layouts/FormContainer';
+import { Input } from '../../components/common/Input';
+import CustomCheckbox from '../../components/common/CustomCheckbox';
+import { ProductCard } from '../../components/widgets/ProductCard';
+import { passwordValidation } from '../../utils/passwordValidation';
+import { StepDisplay } from '../../components/widgets/StepDisplay';
+import { validatePostalCode } from '../../utils/PostalCodeValidation';
+import PhoneInput from '../../components/common/PhoneInput';
 
 const Register = () => {
     const { showToast } = useAppContext();

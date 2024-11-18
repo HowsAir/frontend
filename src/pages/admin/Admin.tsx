@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
-import { UserStatistics } from '../types/mainTypes';
-import usePagination from '../hooks/tablePagination';
-import { TablePages } from '../components/common/TablePages';
+import * as apiClient from '../../api/apiClient';
+import { UserStatistics } from '../../types/mainTypes';
+import usePagination from '../../hooks/tablePagination';
+import { TablePages } from '../../components/common/TablePages';
 
 const Admin = () => {
     const [statistics, setStatistics] = useState<UserStatistics[]>([]);

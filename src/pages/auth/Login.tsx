@@ -1,15 +1,15 @@
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../../contexts/AppContext';
 
 import { useMutation, useQueryClient } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { LogInFormData, ToastMessageType } from '../types/mainTypes';
+import * as apiClient from '../../api/apiClient';
+import { LogInFormData, ToastMessageType } from '../../types/mainTypes';
 
 import { FormProvider, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Input } from '../components/common/Input';
-import FormContainer from '../components/layouts/FormContainer';
+import { Input } from '../../components/common/Input';
+import FormContainer from '../../components/layouts/FormContainer';
 
 const Login: React.FC = () => {
     const { showToast } = useAppContext();

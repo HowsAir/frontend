@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
-import { useAppContext } from '../contexts/AppContext';
+import * as apiClient from '../../api/apiClient';
+import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
+import { useAppContext } from '../../contexts/AppContext';
 
 const PaymentSuccess = () => {
     const navigate = useNavigate();

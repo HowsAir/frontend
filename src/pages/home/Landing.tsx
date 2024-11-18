@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ValueCard } from '../components/widgets/ValueCard';
-import ArrowDown from '../components/icons/ArrowDown';
+import { ValueCard } from '../../components/widgets/ValueCard';
+import ArrowDown from '../../components/icons/ArrowDown';
 
 const Landing = () => {
     const Icon = ArrowDown;

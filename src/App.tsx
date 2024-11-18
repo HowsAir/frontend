@@ -1,19 +1,19 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
-import Landing from './pages/Landing';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentCancel from './pages/PaymentCancel';
-import TermsAndPrivacy from './pages/TermsAndPrivacy';
-import Product from './pages/Product';
-import Maps from './pages/Maps';
-import FreeBreezeRequest from './pages/FreeBreezeRequest';
-import ForgotPassword from './pages/ForgotPassword';
+import Landing from './pages/home/Landing';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
+import PaymentSuccess from './pages/shop/PaymentSuccess';
+import PaymentCancel from './pages/shop/PaymentCancel';
+import TermsAndPrivacy from './pages/home/TermsAndPrivacy';
+import Product from './pages/shop/Product';
+import Maps from './pages/home/Maps';
+import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 // import User from './pages/User';
-import Admin from './pages/Admin';
+import Admin from './pages/admin/Admin';
 
 const App = () => {
     const location = useLocation();
@@ -48,20 +48,22 @@ const App = () => {
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
                 <Route
-                path='/user'
-                element={
-                    <Layout>
-                        <p>hola</p>
-                        {/* <User /> */}
-                    </Layout>
-                } />
-                <Route 
-                path='/admin'
-                element={
-                    <Layout>
-                        <Admin />
-                    </Layout>
-                } />
+                    path="/user"
+                    element={
+                        <Layout>
+                            <p>hola</p>
+                            {/* <User /> */}
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/admin"
+                    element={
+                        <Layout>
+                            <Admin />
+                        </Layout>
+                    }
+                />
                 <Route
                     path="/terms-and-privacy"
                     element={
