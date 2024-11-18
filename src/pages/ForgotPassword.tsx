@@ -142,13 +142,10 @@ function ForgotPassword() {
                                     name="verificationCode"
                                     type="number"
                                     customClass="mt-0 w-full"
-                                    validate={(value) => {
-                                        const codeRegex = /^\d{6}$/;
-                                        return (
-                                            codeRegex.test(value) ||
-                                            'El código debe ser un número de 6 dígitos'
-                                        );
-                                    }}
+                                    validate={(value) =>
+                                        /^\d{6}$/.test(value) ||
+                                        'El código debe ser un número de 6 dígitos'
+                                    }
                                 >
                                     Código de verificación
                                 </Input>
@@ -157,8 +154,9 @@ function ForgotPassword() {
                             <div className="flex justify-center">
                                 <button
                                     type="submit"
-                                    className="btn-primary mx-auto mt-2 w-full text-base font-normal"
+                                    className="btn-primary mx-auto mt-2 w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
                                     disabled={
+                                        !/^\d{6}$/.test(codeMethods.watch('verificationCode')) ||
                                         forgotPasswordTokenMutation.isLoading
                                     }
                                 >
