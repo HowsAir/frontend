@@ -90,7 +90,7 @@ function ForgotPassword() {
     });
 
     return (
-        <div className="mx-auto max-w-md rounded-xl bg-white p-10 shadow-sm">
+        <div className="mx-auto max-w-md rounded-xl border-[1px] border-gray bg-white p-10 shadow-sm">
             <h3 className="mb-6 text-[32px] font-normal">Cambiar contraseña</h3>
 
             {step === 1 ? (
