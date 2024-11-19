@@ -14,6 +14,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 // import User from './pages/User';
 import Admin from './pages/admin/Admin';
+import EditProfile from './pages/EditProfile';
 
 const App = () => {
     const location = useLocation();
@@ -53,6 +54,14 @@ const App = () => {
                         <Layout>
                             <p>hola</p>
                             {/* <User /> */}
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/edit-profile"
+                    element={
+                        <Layout>
+                            <EditProfile />
                         </Layout>
                     }
                 />
