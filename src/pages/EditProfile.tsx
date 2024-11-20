@@ -154,10 +154,10 @@ const EditProfile = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting || !hasChanges}
-                className="btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack"
+                disabled={isSubmitting}
+                className={`btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${!hasChanges ? 'bg-gray text-offblack' : ''}`}
             >
-                {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
+                {!hasChanges ? 'Cancelar' : isSubmitting ? 'Guardando...' : 'Guardar cambios'}
             </button>
         </form>
     );
