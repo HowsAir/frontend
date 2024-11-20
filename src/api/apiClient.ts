@@ -10,6 +10,7 @@ import {
     RegisterFormData,
     FreeBreezeApplicationFormData,
     UserStatistics,
+    UserProfile,
 } from '../types/mainTypes';
 
 const NODE_ENV = import.meta.env.VITE_NODE_ENV || 'development';
@@ -232,6 +233,34 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
         throw new Error('Error fetching user statistics');
     }
 };
+
+export const getUserProfile = async (): Promise<UserProfile> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/profile`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        
+        if(!response.ok) {
+            const { message } : { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user profile');
+        }
+
+        const data = await response.json();
+        data.photoUrl = data.photoUrl || 'https://example.com/default-photo.jpg';
+        return data.user;
+    }
+    catch (error) {
+        console.error('Get user profile error: ', error);
+        throw new Error('Error fetching user profile')
+    }
+}
 
 
 /**
