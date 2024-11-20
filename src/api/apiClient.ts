@@ -10,6 +10,7 @@ import {
     RegisterFormData,
     FreeBreezeApplicationFormData,
     UserStatistics,
+    UserProfile,
 } from '../types/mainTypes';
 
 const NODE_ENV = import.meta.env.VITE_NODE_ENV || 'development';
@@ -233,6 +234,55 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     }
 };
 
+export const getUserProfile = async (): Promise<UserProfile> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/profile`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        
+        if(!response.ok) {
+            const { message } : { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user profile');
+        }
+
+        const data = await response.json();
+        data.photoUrl = data.photoUrl || 'https://example.com/default-photo.jpg';
+        return data.user;
+    }
+    catch (error) {
+        console.error('Get user profile error: ', error);
+        throw new Error('Error fetching user profile')
+    }
+}
+
+
+export const patchUserProfile = async (formData: FormData): Promise<void> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error updating user profile');
+        }
+    } catch (error) {
+        console.error('Patch user profile error:', error);
+        throw new Error('Error updating user profile');
+    }
+};
 
 /**
  * @brief Logs out the user by invalidating the current session token

@@ -58,3 +58,18 @@ export interface UserStatistics {
     averageDailyDistance: number;
     nodeLastConnection: string;
 }
+
+export interface UserProfile {
+    id: number;
+    email: string;
+    name: string;
+    surnames: string;
+    password: string;
+    photoUrl: string;
+    phone: string;
+    country: string;
+    city: string;
+    zipCode: string;
+    address: string;
+    roleId: number;
+}
