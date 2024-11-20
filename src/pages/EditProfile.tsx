@@ -30,7 +30,7 @@ const EditProfile = () => {
     });
 
     useEffect(() => {
-        const fetchProfileData = async () => {
+        const getProfileData = async () => {
             try {
                 const profile = await apiClient.getUserProfile();
 
@@ -48,7 +48,7 @@ const EditProfile = () => {
             }
         };
 
-        fetchProfileData();
+        getProfileData();
     }, []);
 
     const { showToast } = useAppContext();
@@ -69,7 +69,7 @@ const EditProfile = () => {
                 formData.append('photo', profile.profilePic as File);
             }
 
-            await apiClient.patchUserProfile(formData);
+            await apiClient.updateUserProfile(formData);
             alert('Profile updated successfully');
             setOriginalData({ ...profile});
         } catch (error) {

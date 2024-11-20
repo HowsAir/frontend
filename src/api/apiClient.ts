@@ -257,7 +257,7 @@ export const getUserProfile = async (): Promise<UserProfile> => {
     }
 };
 
-export const patchUserProfile = async (formData: FormData): Promise<void> => {
+export const updateUserProfile = async (formData: FormData): Promise<void> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
             method: 'PATCH',
