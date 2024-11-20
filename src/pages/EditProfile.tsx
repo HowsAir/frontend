@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as apiClient from '../api/apiClient';
-import Toast from '../components/common/Toast';
 import { useAppContext } from '../contexts/AppContext';
 import { ToastMessageType } from '../types/mainTypes';
 
