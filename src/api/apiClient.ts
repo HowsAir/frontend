@@ -263,6 +263,27 @@ export const getUserProfile = async (): Promise<UserProfile> => {
 }
 
 
+export const patchUserProfile = async (formData: FormData): Promise<void> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error updating user profile');
+        }
+    } catch (error) {
+        console.error('Patch user profile error:', error);
+        throw new Error('Error updating user profile');
+    }
+};
+
 /**
  * @brief Logs out the user by invalidating the current session token
  * @author Juan Diaz
