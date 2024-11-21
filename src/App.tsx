@@ -15,6 +15,7 @@ import { AnimatePresence } from 'framer-motion';
 // import User from './pages/User';
 import Admin from './pages/admin/Admin';
 import EditProfile from './pages/EditProfile';
+import ChangePassword from './pages/auth/ChangePassword';
 
 const App = () => {
     const location = useLocation();
@@ -62,6 +63,14 @@ const App = () => {
                     element={
                         <Layout>
                             <EditProfile />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/change-password"
+                    element={
+                        <Layout>
+                            <ChangePassword />
                         </Layout>
                     }
                 />
