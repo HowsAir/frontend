@@ -2,7 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { redirectToCheckout } from '../../api/stripe';
 import { useAppContext } from '../../contexts/AppContext';
 import { Link } from 'react-router-dom';
@@ -18,11 +18,16 @@ import PhoneInput from '../../components/common/PhoneInput';
 
 const Register = () => {
     const { showToast } = useAppContext();
-    const methods = useForm<RegisterFormData>();
+    const methods = useForm<RegisterFormData>({
+        defaultValues: {
+            city: 'Valencia',
+            country: 'España',
+        },
+    });
 
     const [step, setStep] = useState(1);
     const { watch } = methods;
-    const priceAmount = 99;
+    const priceAmount = 104;
 
     const [verifyEmailButtonState, setVerifyEmailButtonState] = useState<
         'initial' | 'sent' | 'sending'
@@ -151,7 +156,7 @@ const Register = () => {
                                         Apellidos
                                     </Input>
 
-                                    <div className="flex gap-x-6">
+                                    <div className="grid grid-cols-2 gap-x-4">
                                         <Input
                                             name="email"
                                             type="email"
@@ -164,18 +169,14 @@ const Register = () => {
                                         >
                                             Email
                                         </Input>
-                                        <div className="relative w-full">
-                                            <button
-                                                type="button"
-                                                className={`btn-primary mt-8 w-8/12 px-2 text-[13px] font-normal disabled:bg-gray-300 disabled:text-offblack`}
-                                                onClick={
-                                                    handleConfirmationEmail
-                                                }
-                                                disabled={buttonDisabled}
-                                            >
-                                                {buttonText}
-                                            </button>
-                                        </div>
+                                        <button
+                                            type="button"
+                                            className={`btn-primary disabled:bg-gray-300 mb-6 mt-2 w-8/12 px-2 py-2.5 text-sm font-normal disabled:text-offblack`}
+                                            onClick={handleConfirmationEmail}
+                                            disabled={buttonDisabled}
+                                        >
+                                            {buttonText}
+                                        </button>
                                     </div>
 
                                     <Input
@@ -215,12 +216,12 @@ const Register = () => {
                             {step === 2 && (
                                 <>
                                     {scrollToTop()}
-                                    <h2>Detalles de envío</h2>
+                                    <h2 className='pb-8'>Detalles de envío</h2>
 
                                     <Input
                                         name="address"
                                         type="text"
-                                        customClass="w-full mt-8"
+                                        customClass="w-full"
                                     >
                                         Dirección
                                     </Input>
@@ -237,9 +238,7 @@ const Register = () => {
                                             name="country"
                                             type="text"
                                             customClass="w-full"
-                                            value="España"
                                             readOnly
-                                            notRequired
                                         >
                                             País
                                         </Input>
@@ -247,9 +246,7 @@ const Register = () => {
                                             name="city"
                                             type="text"
                                             customClass="w-full"
-                                            value="Valencia"
                                             readOnly
-                                            notRequired
                                         >
                                             Ciudad
                                         </Input>

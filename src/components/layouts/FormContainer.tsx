@@ -62,7 +62,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             <p className="flex justify-between text-xl font-extralight text-offwhite">
                                 Subtotal
                                 <span className="mr-4 font-normal">
-                                    {price}.00 €
+                                    99.00 €
                                 </span>
                             </p>
                             <p className="flex justify-between text-xl font-extralight text-offwhite">
@@ -75,7 +75,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             <p className="flex justify-between text-xl font-semibold text-offwhite">
                                 Total
                                 <span className="mr-4 font-normal">
-                                    104.00 €
+                                    {price}.00 €
                                 </span>
                             </p>
                         </div>
