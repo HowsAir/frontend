@@ -69,7 +69,10 @@ const EditProfile = () => {
             }
 
             await apiClient.updateUserProfile(formData);
-            alert('Profile updated successfully');
+            showToast({
+                message: 'Perfil actualizado correctamente',
+                type: ToastMessageType.SUCCESS,
+            });
             setOriginalData({ ...profile });
         } catch (error) {
             console.error('Error updating profile:', error);
