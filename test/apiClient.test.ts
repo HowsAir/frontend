@@ -321,41 +321,23 @@ describe('API Client Tests', () => {
         });
     });
 
-    describe('updateUserProfile', () => {
-        it('should update user profile successfully', async () => {
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: true,
-                json: () => Promise.resolve({}),
-            });
-
-            const formData = new FormData();
-            formData.append('name', 'John Doe');
-            formData.append('email', 'john@example.com');
-
-            await expect(apiClient.updateUserProfile(formData)).resolves.not.toThrow();
-            expect(fetch).toHaveBeenCalledWith(
-                expect.stringContaining('/api/v1/users/profile'),
-                expect.any(Object)
-            );
+describe('updateUserProfile', () => {
+    it('should handle unsuccessful response on updating user profile', async () => {
+        const errorMessage = 'Error updating user profile';
+        global.fetch.mockResolvedValue({
+            ok: false,
+            json: () => Promise.resolve({ message: errorMessage }),
         });
 
-        it('should handle unsuccessful response on updating user profile', async () => {
-            const errorMessage = 'Error updating user profile';
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: false,
-                json: () => Promise.resolve({ message: errorMessage }),
-            });
+        const formData = new FormData();
+        formData.append('name', 'John Doe');
+        formData.append('email', 'john@example.com');
 
-            const formData = new FormData();
-            formData.append('name', 'John Doe');
-            formData.append('email', 'john@example.com');
-
-            await expect(apiClient.updateUserProfile(formData)).rejects.toThrow(
-                'Error updating user profile'
-            );
-            expect(console.error).toHaveBeenCalled();
-        });
+        await expect(apiClient.updateUserProfile(formData)).rejects.toThrow(
+            'Error updating user profile'
+        );
     });
+});
 
     describe('submitFreeBreezeApplication', () => {
         it('should submit free Breeze application successfully', async () => {

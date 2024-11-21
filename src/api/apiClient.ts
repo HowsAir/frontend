@@ -366,8 +366,6 @@ export const getUserProfile = async (): Promise<UserProfile> => {
  */
 export const updateUserProfile = async (formData: FormData): Promise<void> => {
     try {
-        console.log('Updating user profile with:', formData);
-
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
             method: 'PATCH',
             credentials: 'include',
