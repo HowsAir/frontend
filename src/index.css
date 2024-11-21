@@ -17,7 +17,7 @@
     }
 
     .btn-submit {
-        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:ml-auto lg:mr-44;
+        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
     }
 
     /*--- FORM CLASSES ---*/
