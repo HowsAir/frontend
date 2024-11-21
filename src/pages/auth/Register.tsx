@@ -2,7 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { redirectToCheckout } from '../../api/stripe';
 import { useAppContext } from '../../contexts/AppContext';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { passwordValidation } from '../../utils/passwordValidation';
 import { StepDisplay } from '../../components/widgets/StepDisplay';
 import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
+
 
 const Register = () => {
     const { showToast } = useAppContext();
@@ -105,6 +106,10 @@ const Register = () => {
         }
     });
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
         <>
             <StepDisplay total={3} current={step} />
@@ -118,7 +123,7 @@ const Register = () => {
                                 <>
                                     <h2>Detalles personales</h2>
 
-                                    <label className="form-label">
+                                    <label className="form-label mb-6">
                                         ¿Ya has comprado tu Breeze?
                                         <br />
                                         <Link to="/login">Inicia sesión</Link>
@@ -195,7 +200,7 @@ const Register = () => {
                                         Verifica Contraseña
                                     </Input>
 
-                                    <div className="mt-8">
+                                    <div>
                                         <CustomCheckbox />
                                     </div>
 
@@ -209,12 +214,13 @@ const Register = () => {
                             )}
                             {step === 2 && (
                                 <>
+                                    {scrollToTop()}
                                     <h2>Detalles de envío</h2>
 
                                     <Input
                                         name="address"
                                         type="text"
-                                        customClass="w-full"
+                                        customClass="w-full mt-8"
                                     >
                                         Dirección
                                     </Input>
@@ -233,6 +239,7 @@ const Register = () => {
                                             customClass="w-full"
                                             value="España"
                                             readOnly
+                                            notRequired
                                         >
                                             País
                                         </Input>
@@ -242,6 +249,7 @@ const Register = () => {
                                             customClass="w-full"
                                             value="Valencia"
                                             readOnly
+                                            notRequired
                                         >
                                             Ciudad
                                         </Input>

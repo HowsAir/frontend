@@ -17,7 +17,7 @@
     }
 
     .btn-submit {
-        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:ml-auto lg:mr-44;
+        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
     }
 
     /*--- FORM CLASSES ---*/
@@ -51,6 +51,17 @@
 
     p {
         @apply h-fit text-2xl font-normal text-offblack;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type='number'] {
+        appearance: textfield;
+        -moz-appearance: textfield;
     }
 }
 
