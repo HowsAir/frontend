@@ -1,32 +1,34 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
-import { useAppContext } from '../contexts/AppContext';
-import { ToastMessageType } from '../types/mainTypes';
+import * as apiClient from '../../api/apiClient';
+import { useAppContext } from '../../contexts/AppContext';
+import { ToastMessageType } from '../../types/mainTypes';
+import { routes } from '../../routes/routes';
 
 const EditProfile = () => {
+    const navigate = useNavigate();
     const [profile, setProfile] = useState<{
         name: string;
         surnames: string;
         email: string;
-        profilePic: string | File; // Can be a string URL or a File
+        profilePic: string | File;
     }>({
         name: 'Mario',
         surnames: 'Luis',
         email: 'marioluis@mail.fake',
-        profilePic: '', // Initially a string
+        profilePic: '',
     });
 
     const [originalData, setOriginalData] = useState<{
         name: string;
         surnames: string;
         email: string;
-        profilePic: string | File; // Match profile structure
+        profilePic: string | File;
     }>({
         name: 'Mario',
         surnames: 'Luis',
         email: 'marioluis@mail.fake',
-        profilePic: '', // Initially a string
+        profilePic: '',
     });
 
     useEffect(() => {
@@ -40,9 +42,8 @@ const EditProfile = () => {
                     email: profile.email || 'email@falso.es',
                     profilePic: profile.photoUrl,
                 };
-
                 setProfile(profileData);
-                setOriginalData(profileData);   
+                setOriginalData(profileData);
             } catch (error) {
                 console.error('Error fetching profile data:', error);
             }
@@ -70,20 +71,33 @@ const EditProfile = () => {
             }
 
             await apiClient.updateUserProfile(formData);
-            alert('Profile updated successfully');
-            setOriginalData({ ...profile});
+            showToast({
+                message: 'Perfil actualizado correctamente',
+                type: ToastMessageType.SUCCESS,
+            });
+            setOriginalData({ ...profile });
         } catch (error) {
             console.error('Error updating profile:', error);
-            showToast({ message: 'Error guardando cambios', type: ToastMessageType.ERROR });
+            showToast({
+                message: 'Error guardando cambios',
+                type: ToastMessageType.ERROR,
+            });
         } finally {
             setIsSubmitting(false);
         }
     };
 
+    const handleCancel = () => {
+        setProfile({ ...originalData });
+        navigate(-1);
+    }
+
     const hasChanges =
         profile.name !== originalData.name ||
         profile.surnames !== originalData.surnames ||
         profile.profilePic !== originalData.profilePic;
+
+
 
     return (
         <form
@@ -95,13 +109,15 @@ const EditProfile = () => {
                 <img
                     src={
                         typeof profile.profilePic === 'string'
-                            ? profile.profilePic // If it's a string, use it directly
-                            : URL.createObjectURL(profile.profilePic) // If it's a File, create a URL
+                            ? profile.profilePic
+                            : profile.profilePic instanceof File
+                              ? URL.createObjectURL(profile.profilePic)
+                              : profile.profilePic
                     }
                     className="mx-auto size-40 rounded-full text-center"
                     alt="Foto de perfil"
                 />
-                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray p-2">
+                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray hover:bg-neutral-400 transition-all duration-300 ease-in-out p-2">
                     <img
                         className="size-fit"
                         src="../../public/icons/pencil-icon.svg"
@@ -145,7 +161,7 @@ const EditProfile = () => {
             </div>
 
             <Link
-                to="/change-password"
+                to={routes.AUTH.CHANGE_PASSWORD}
                 className="btn-primary mt-8 w-full text-center text-base font-medium"
             >
                 Cambiar contraseña
@@ -153,10 +169,15 @@ const EditProfile = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !hasChanges}
                 className={`btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${!hasChanges ? 'bg-gray text-offblack' : ''}`}
+                onClick={!hasChanges ? handleCancel : undefined}
             >
-                {!hasChanges ? 'Cancelar' : isSubmitting ? 'Guardando...' : 'Guardar cambios'}
+                {!hasChanges
+                    ? 'Cancelar'
+                    : isSubmitting
+                      ? 'Guardando...'
+                      : 'Guardar cambios'}
             </button>
         </form>
     );

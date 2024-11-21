@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
+import { routes } from '../../routes/routes';
 
 const Footer = () => {
     return (
@@ -9,7 +10,7 @@ const Footer = () => {
                 <div className="flex flex-col pt-12">
                     <Link
                         className="mb-5 text-2xl text-offwhite leading-loose"
-                        to={'/terms-and-privacy'}
+                        to={routes.HOME.TERMS_AND_PRIVACY}
                         target="_blank"
                     >
                         Términos, condiciones y <br className='' />
@@ -25,13 +26,13 @@ const Footer = () => {
                 <div className="flex flex-col pt-12">
                     <Link
                         className="mb-5 text-2xl text-offwhite"
-                        to={'/contact'}
+                        to={routes.HOME.CONTACT}
                     >
                         Contáctanos
                     </Link>
                     <Link
                         className="mb-5 text-2xl text-offwhite"
-                        to={'/user-manual'}
+                        to={routes.HOME.MANUAL}
                     >
                         Manual de usuario
                     </Link>

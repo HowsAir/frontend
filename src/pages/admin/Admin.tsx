@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as apiClient from '../../api/apiClient';
-import { UserStatistics } from '../../types/mainTypes';
-import usePagination from '../../hooks/tablePagination';
+import { UserStatistics } from '../../api/data';
 import { TablePages } from '../../components/common/TablePages';
 
 const Admin = () => {

@@ -27,7 +27,8 @@ export const API_ERRORS = {
     FORGOT_PASSWORD_TOKEN:
         'Error al verificar el código de restablecimiento de contraseña',
     RESET_PASSWORD: 'Error al restablecer la contraseña',
-    // Additional error messages for other functions can be added here
+    SEND_CONFIRMATION_EMAIL: 'El Email debe de ser válido y no estar en uso',
+    VALIDATE_EMAIL_CONFIRMATION_TOKEN: 'Tu Email no ha sido confirmado, revisa tu correo',
 } as const;
 
 /**
@@ -65,6 +66,7 @@ export const getMeasurements = async (): Promise<MeasurementData[]> => {
     }
 };
 
+
 /**
  * @brief Registers a new user with the provided registration data
  * @author Juan Diaz
@@ -96,6 +98,72 @@ export const register = async (data: RegisterFormData): Promise<void> => {
     } catch (error) {
         console.error('Error:', error);
         throw new Error(API_ERRORS.REGISTER_USER);
+    }
+};
+
+/**
+ * @brief Sends a confirmation email to the specified address
+ * @param {string} email - The recipient's email address
+ * @returns {Promise<void>} - A promise that resolves when the email is sent successfully
+ *
+ * string: email -> sendConfirmationEmail() -> Promise<void>
+ * 
+ * This function makes a POST request to the API to initiate an email confirmation process.
+ * It expects a valid email address to be included in the request body.
+ *
+ * @throws Error - If sending the email fails or the response is invalid
+ */
+export const sendConfirmationEmail = async (email: string): Promise<void> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/confirmation-email`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error sending confirmation email');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.SEND_CONFIRMATION_EMAIL);
+    }
+};
+
+/**
+ * @brief Validates an email confirmation token using the provided email address
+ * @param {string} email - The email address associated with the confirmation token
+ * @returns {Promise<void>} - A promise that resolves when the token is validated successfully
+ *
+ * string: email -> validateEmailConfirmationToken() -> Promise<void>
+ * 
+ * This function makes a GET request to the API to validate an email confirmation token.
+ * It expects the email address to be sent as a query parameter.
+ *
+ * @throws Error - If the validation fails or the response is invalid
+ */
+export const validateEmailConfirmationToken = async (email: string): Promise<void> => {
+    try {
+        const encodedEmail = encodeURIComponent(email);
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate-email-confirmation-token?email=${encodedEmail}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error validating email confirmation token');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.VALIDATE_EMAIL_CONFIRMATION_TOKEN);
     }
 };
 
@@ -206,6 +274,18 @@ export const validateToken = async (): Promise<void> => {
     }
 };
 
+/**
+ * @brief Fetches the user statistics from the API
+ * @author Mario Luis 
+ * 
+ * getUserStatistics -> Promise<UserStatistics[]>
+ *
+ * This function makes a GET request to the API to retrieve user statistics.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the statistics fails or the response is invalid
+ * @returns {Promise<UserStatistics[]>} - A promise that resolves with the user statistics
+ */
 export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     try {
         const response = await fetch(
@@ -232,6 +312,18 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     }
 };
 
+/**
+ * @brief Fetches the user profile from the API
+ * @author Mario Luis 
+ * 
+ * getUserProfile -> Promise<UserProfile>
+ *
+ * This function makes a GET request to the API to retrieve the user's profile.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the profile fails or the response is invalid
+ * @returns {Promise<UserProfile>} - A promise that resolves with the user's profile
+ */
 export const getUserProfile = async (): Promise<UserProfile> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
@@ -248,8 +340,9 @@ export const getUserProfile = async (): Promise<UserProfile> => {
         }
 
         const data = await response.json();
-        data.photoUrl =
-            data.photoUrl || 'https://example.com/default-photo.jpg';
+        if (!data.user.photoUrl) {
+            data.user.photoUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdueKgrMTpKWfXS0CokGPx71IlOV0FDDxW1A&s';
+        }
         return data.user;
     } catch (error) {
         console.error('Get user profile error: ', error);
@@ -257,21 +350,36 @@ export const getUserProfile = async (): Promise<UserProfile> => {
     }
 };
 
+
+/**
+ * @brief Updates the user's profile with the provided form data
+ * @author Mario Luis 
+ * @param {FormData} formData - The form data to update the user's profile
+ *
+ * FormData: formData -> updateUserProfile() -> Promise<void>
+ * 
+ * This function makes a PATCH request to the API to update the user's profile.
+ * It expects a FormData object to be sent in the request body.
+ *
+ * @throws Error - If updating the profile fails or the response is invalid
+ * @returns {Promise<void>} - A promise that resolves when the profile is successfully updated
+ */
 export const updateUserProfile = async (formData: FormData): Promise<void> => {
     try {
+        console.log('Updating user profile with:', formData);
+
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
             method: 'PATCH',
             credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: formData,
+            body: formData, // Let the browser set the correct Content-Type
         });
 
         if (!response.ok) {
             const { message }: { message: string } = await response.json();
             throw new Error(message || 'Error updating user profile');
         }
+
+        console.log('Profile updated successfully');
     } catch (error) {
         console.error('Patch user profile error:', error);
         throw new Error('Error updating user profile');
@@ -332,7 +440,7 @@ export const logout = async (): Promise<void> => {
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Error loggin out');
+        throw new Error('Error logging out');
     }
 };
 

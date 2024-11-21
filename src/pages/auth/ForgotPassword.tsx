@@ -6,6 +6,7 @@ import * as apiClient from '../../api/apiClient';
 import { ToastMessageType } from '../../types/mainTypes';
 import { useAppContext } from '../../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 import { passwordValidation } from '../../utils/passwordValidation';
 
 function ForgotPassword() {
@@ -64,7 +65,7 @@ function ForgotPassword() {
                 message: 'Contraseña cambiada con éxito',
                 type: ToastMessageType.SUCCESS,
             });
-            navigate('/login');
+            navigate(routes.AUTH.LOGIN);
         },
         onError: (error) => {
             showToast({

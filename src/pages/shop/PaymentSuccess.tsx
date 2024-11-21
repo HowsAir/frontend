@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
 import { useAppContext } from '../../contexts/AppContext';
+import { routes } from '../../routes/routes';
 
 const PaymentSuccess = () => {
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const PaymentSuccess = () => {
                 type: ToastMessageType.SUCCESS,
             });
             localStorage.removeItem('userData');
-            navigate('/');
+            navigate(routes.HOME.INDEX);
         },
         onError: (error: Error) => {
             localStorage.removeItem('userData');
@@ -73,7 +74,7 @@ const PaymentSuccess = () => {
                 'Error encontrado, redirigiendo a /breeze en 5 segundos'
             );
             const timer = setTimeout(() => {
-                navigate('/breeze');
+                navigate(routes.SHOP.PRODUCT);
             }, 5000);
 
             return () => clearTimeout(timer);
