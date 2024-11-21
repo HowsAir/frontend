@@ -64,7 +64,7 @@
         @apply mb-10 w-fit text-5xl font-medium text-offblack;
     }
     h3 {
-        @apply mb-2 w-fit text-2xl font-normal text-offblack;
+        @apply mb-2 w-fit text-3xl font-normal text-offblack;
     }
 
     p {
