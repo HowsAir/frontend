@@ -1,5 +1,5 @@
-import usePagination from "../../hooks/tablePagination";
-import { UserStatistics } from "../../types/mainTypes";
+import usePagination from "../../hooks/TablePagination";
+import { UserStatistics } from "../../api/data";
 
 interface TablePagesProps {
     data: UserStatistics[];
@@ -9,7 +9,6 @@ interface TablePagesProps {
 
 export const TablePages: React.FC<TablePagesProps> = ({ data, pageLength }) => {
     const {
-        currentData,
         currentPage,
         handlePageClick,
         handleInputChange,
@@ -20,7 +19,7 @@ export const TablePages: React.FC<TablePagesProps> = ({ data, pageLength }) => {
     } = usePagination(data, pageLength);
 
     return (
-        <div className="mx-auto my-2 w-fit">
+        <div className={`${totalPages == 1 ? 'hidden' : ''} mx-auto my-2 w-fit`}>
             <button
                 onClick={() => handlePageClick(currentPage - 1)}
                 disabled={currentPage === 1}
