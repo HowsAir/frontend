@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as apiClient from '../api/apiClient';
 import { useAppContext } from '../contexts/AppContext';
 import { ToastMessageType } from '../types/mainTypes';
 
 const EditProfile = () => {
+    const navigate = useNavigate();
     const [profile, setProfile] = useState<{
         name: string;
         surnames: string;
@@ -85,10 +86,17 @@ const EditProfile = () => {
         }
     };
 
+    const handleCancel = () => {
+        setProfile({ ...originalData });
+        navigate(-1);
+    }
+
     const hasChanges =
         profile.name !== originalData.name ||
         profile.surnames !== originalData.surnames ||
         profile.profilePic !== originalData.profilePic;
+
+
 
     return (
         <form
@@ -160,8 +168,9 @@ const EditProfile = () => {
 
             <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !hasChanges}
                 className={`btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${!hasChanges ? 'bg-gray text-offblack' : ''}`}
+                onClick={!hasChanges ? handleCancel : undefined}
             >
                 {!hasChanges
                     ? 'Cancelar'

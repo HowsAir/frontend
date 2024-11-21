@@ -274,6 +274,18 @@ export const validateToken = async (): Promise<void> => {
     }
 };
 
+/**
+ * @brief Fetches the user statistics from the API
+ * @author Mario Luis 
+ * 
+ * getUserStatistics -> Promise<UserStatistics[]>
+ *
+ * This function makes a GET request to the API to retrieve user statistics.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the statistics fails or the response is invalid
+ * @returns {Promise<UserStatistics[]>} - A promise that resolves with the user statistics
+ */
 export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     try {
         const response = await fetch(
@@ -300,6 +312,18 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     }
 };
 
+/**
+ * @brief Fetches the user profile from the API
+ * @author Mario Luis 
+ * 
+ * getUserProfile -> Promise<UserProfile>
+ *
+ * This function makes a GET request to the API to retrieve the user's profile.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the profile fails or the response is invalid
+ * @returns {Promise<UserProfile>} - A promise that resolves with the user's profile
+ */
 export const getUserProfile = async (): Promise<UserProfile> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
@@ -326,6 +350,20 @@ export const getUserProfile = async (): Promise<UserProfile> => {
     }
 };
 
+
+/**
+ * @brief Updates the user's profile with the provided form data
+ * @author Mario Luis 
+ * @param {FormData} formData - The form data to update the user's profile
+ *
+ * FormData: formData -> updateUserProfile() -> Promise<void>
+ * 
+ * This function makes a PATCH request to the API to update the user's profile.
+ * It expects a FormData object to be sent in the request body.
+ *
+ * @throws Error - If updating the profile fails or the response is invalid
+ * @returns {Promise<void>} - A promise that resolves when the profile is successfully updated
+ */
 export const updateUserProfile = async (formData: FormData): Promise<void> => {
     try {
         console.log('Updating user profile with:', formData);

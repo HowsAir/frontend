@@ -139,103 +139,6 @@ describe('API Client Tests', () => {
         });
     });
 
-    describe('sendConfirmationEmail', () => {
-        it('should send confirmation email successfully', async () => {
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: true,
-            });
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.sendConfirmationEmail(email)
-            ).resolves.not.toThrow();
-            expect(fetch).toHaveBeenCalledWith(
-                expect.stringContaining('/api/v1/auth/confirmation-email'),
-                expect.objectContaining({
-                    method: 'POST',
-                    body: JSON.stringify({ email }),
-                })
-            );
-        });
-
-        it('should handle unsuccessful response when sending confirmation email', async () => {
-            const errorMessage = 'Error sending confirmation email';
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: false,
-                json: () => Promise.resolve({ message: errorMessage }),
-            });
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.sendConfirmationEmail(email)
-            ).rejects.toThrow(apiClient.API_ERRORS.SEND_CONFIRMATION_EMAIL);
-            expect(console.error).toHaveBeenCalled();
-        });
-
-        it('should handle fetch error when sending confirmation email', async () => {
-            global.fetch = vi
-                .fn()
-                .mockRejectedValue(new Error('Network Error'));
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.sendConfirmationEmail(email)
-            ).rejects.toThrow(apiClient.API_ERRORS.SEND_CONFIRMATION_EMAIL);
-            expect(console.error).toHaveBeenCalled();
-        });
-    });
-
-    describe('validateEmailConfirmationToken', () => {
-        it('should validate email confirmation token successfully', async () => {
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: true,
-            });
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.validateEmailConfirmationToken(email)
-            ).resolves.not.toThrow();
-            expect(fetch).toHaveBeenCalledWith(
-                expect.stringContaining(
-                    `/api/v1/auth/validate-email-confirmation-token?email=${encodeURIComponent(email)}`
-                ),
-                expect.objectContaining({
-                    method: 'GET',
-                })
-            );
-        });
-
-        it('should handle unsuccessful response when validating email confirmation token', async () => {
-            const errorMessage = 'Error validating token';
-            global.fetch = vi.fn().mockResolvedValue({
-                ok: false,
-                json: () => Promise.resolve({ message: errorMessage }),
-            });
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.validateEmailConfirmationToken(email)
-            ).rejects.toThrow(
-                apiClient.API_ERRORS.VALIDATE_EMAIL_CONFIRMATION_TOKEN
-            );
-            expect(console.error).toHaveBeenCalled();
-        });
-
-        it('should handle fetch error when validating email confirmation token', async () => {
-            global.fetch = vi
-                .fn()
-                .mockRejectedValue(new Error('Network Error'));
-
-            const email = 'user@example.com';
-            await expect(
-                apiClient.validateEmailConfirmationToken(email)
-            ).rejects.toThrow(
-                apiClient.API_ERRORS.VALIDATE_EMAIL_CONFIRMATION_TOKEN
-            );
-            expect(console.error).toHaveBeenCalled();
-        });
-    });
-
     describe('login', () => {
         it('should log in successfully', async () => {
             global.fetch = vi.fn().mockResolvedValue({
@@ -357,6 +260,285 @@ describe('API Client Tests', () => {
 
             await expect(apiClient.logout()).rejects.toThrow(
                 'Error logging out'
+            );
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('getUserStatistics', () => {
+        it('should fetch user statistics successfully', async () => {
+            const statistics = [{ id: 1, value: 100 }];
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({ usersStatistics: statistics }),
+            });
+
+            await expect(apiClient.getUserStatistics()).resolves.toEqual(
+                statistics
+            );
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error fetching user statistics';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(apiClient.getUserStatistics()).rejects.toThrow(
+                'Error fetching user statistics'
+            );
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('getUserProfile', () => {
+        it('should fetch user profile successfully', async () => {
+            const profile = {
+                name: 'John Doe',
+                email: 'john@example.com',
+                photoUrl: '',
+            };
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({ user: profile }),
+            });
+
+            await expect(apiClient.getUserProfile()).resolves.toEqual(profile);
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error fetching user profile';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(apiClient.getUserProfile()).rejects.toThrow(
+                'Error fetching user profile'
+            );
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('updateUserProfile', () => {
+        it('should update user profile successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            const formData = new FormData();
+            formData.append('name', 'John Doe');
+            formData.append('email', 'john@example.com');
+
+            await expect(apiClient.updateUserProfile(formData)).resolves.not.toThrow();
+            expect(fetch).toHaveBeenCalledWith(
+                expect.stringContaining('/api/v1/users/profile'),
+                expect.any(Object)
+            );
+        });
+
+        it('should handle unsuccessful response on updating user profile', async () => {
+            const errorMessage = 'Error updating user profile';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            const formData = new FormData();
+            formData.append('name', 'John Doe');
+            formData.append('email', 'john@example.com');
+
+            await expect(apiClient.updateUserProfile(formData)).rejects.toThrow(
+                'Error updating user profile'
+            );
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('submitFreeBreezeApplication', () => {
+        it('should submit free Breeze application successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            const data = {
+                name: 'Mario',
+                surnames: 'Luis',
+                email: 'mario.luis.mesa2001@gmail.com',
+                country: 'España',
+                zipCode: '46001',
+                city: 'Valencia',
+                address: 'Calle mia',
+                comments:
+                    'Hola que tal esto es un test, un test muy largo esto es un test. Tengo que superar 20 caracteres o asi creo.',
+                terms: true,
+            };
+
+            await expect(
+                apiClient.submitFreeBreezeApplication(data)
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error submitting free Breeze application';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            const data = {
+                name: 'Mario',
+                surnames: 'Luis',
+                email: 'mario.luis.mesa2001@ail.com',
+                country: 'España',
+                zipCode: '46001',
+                city: 'Valencia',
+                address: 'Calle mia',
+                comments: 'Hola',
+                terms: true,
+            };
+
+            await expect(
+                apiClient.submitFreeBreezeApplication(data)
+            ).rejects.toThrow(apiClient.API_ERRORS.FREE_BREEZE_APPLICATION);
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('forgotPasswordEmail', () => {
+        it('should send password reset email successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            await expect(
+                apiClient.forgotPasswordEmail('test@example.com')
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error sending password reset email';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(
+                apiClient.forgotPasswordEmail('test@example.com')
+            ).rejects.toThrow(apiClient.API_ERRORS.FORGOT_PASSWORD_EMAIL);
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('forgotPasswordToken', () => {
+        it('should verify password reset code successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            const data = { email: 'test@example.com', code: '123456' };
+
+            await expect(
+                apiClient.forgotPasswordToken(data)
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error verifying password reset code';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            const data = { email: 'test@example.com', code: '123456' };
+
+            await expect(apiClient.forgotPasswordToken(data)).rejects.toThrow(
+                apiClient.API_ERRORS.FORGOT_PASSWORD_TOKEN
+            );
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('resetPassword', () => {
+        it('should reset password successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            await expect(
+                apiClient.resetPassword('newPassword')
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error resetting password';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(
+                apiClient.resetPassword('newPassword')
+            ).rejects.toThrow(apiClient.API_ERRORS.RESET_PASSWORD);
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('sendConfirmationEmail', () => {
+        it('should send confirmation email successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            await expect(
+                apiClient.sendConfirmationEmail('test@example.com')
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error sending confirmation email';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(
+                apiClient.sendConfirmationEmail('test@example.com')
+            ).rejects.toThrow(apiClient.API_ERRORS.SEND_CONFIRMATION_EMAIL);
+            expect(console.error).toHaveBeenCalled();
+        });
+    });
+
+    describe('validateEmailConfirmationToken', () => {
+        it('should validate email confirmation token successfully', async () => {
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: true,
+                json: () => Promise.resolve({}),
+            });
+
+            await expect(
+                apiClient.validateEmailConfirmationToken('test@example.com')
+            ).resolves.toBeUndefined();
+        });
+
+        it('should handle unsuccessful response', async () => {
+            const errorMessage = 'Error validating email confirmation token';
+            global.fetch = vi.fn().mockResolvedValue({
+                ok: false,
+                json: () => Promise.resolve({ message: errorMessage }),
+            });
+
+            await expect(
+                apiClient.validateEmailConfirmationToken('test@example.com')
+            ).rejects.toThrow(
+                apiClient.API_ERRORS.VALIDATE_EMAIL_CONFIRMATION_TOKEN
             );
             expect(console.error).toHaveBeenCalled();
         });
