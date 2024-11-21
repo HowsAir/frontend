@@ -154,6 +154,7 @@ const Register = () => {
                                             customClass="w-full"
                                             value="España"
                                             readOnly
+                                            notRequired
                                         >
                                             País
                                         </Input>
@@ -163,6 +164,7 @@ const Register = () => {
                                             customClass="w-full"
                                             value="Valencia"
                                             readOnly
+                                            notRequired
                                         >
                                             Ciudad
                                         </Input>
