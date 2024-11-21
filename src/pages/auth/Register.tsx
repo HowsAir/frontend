@@ -2,7 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { redirectToCheckout } from '../../api/stripe';
 import { useAppContext } from '../../contexts/AppContext';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { passwordValidation } from '../../utils/passwordValidation';
 import { StepDisplay } from '../../components/widgets/StepDisplay';
 import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
+
 
 const Register = () => {
     const { showToast } = useAppContext();
@@ -40,6 +41,10 @@ const Register = () => {
             await mutation.mutate(priceAmount);
         }
     });
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <>
@@ -130,6 +135,7 @@ const Register = () => {
                             )}
                             {step === 2 && (
                                 <>
+                                    {scrollToTop()}
                                     <h2>Detalles de envío</h2>
 
                                     <Input
