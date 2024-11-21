@@ -9,7 +9,7 @@
     }
 
     .btn-inverted {
-        @apply h-fit w-fit rounded-lg bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary;
+        @apply h-fit w-fit rounded-lg bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary transition-all duration-500 ease-in-out hover:bg-neutral-200;
     }
 
     .btn-secondary {
@@ -18,6 +18,24 @@
 
     .btn-submit {
         @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-submit {
+        @apply clickable transition-all duration-500 ease-in-out hover:opacity-80;
+    }
+
+    .clickable {
+        @apply transition-transform duration-200 ease-in-out;
+    }
+
+    .clickable:active {
+        @apply scale-75 transform;
+    }
+
+    input {
+        @apply transition-all duration-300 ease-in-out hover:border hover:border-primary hover:border-opacity-80;
     }
 
     /*--- FORM CLASSES ---*/

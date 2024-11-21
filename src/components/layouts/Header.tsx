@@ -11,7 +11,7 @@ const Header = () => {
                 <Link to="/maps">Mapas</Link>
                 <Link
                     to="/login"
-                    className="h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary"
+                    className="clickable h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary transition-all duration-500 ease-in-out hover:border-sky-300 hover:bg-sky-100"
                 >
                     Iniciar sesión
                 </Link>
