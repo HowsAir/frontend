@@ -27,7 +27,8 @@ export const API_ERRORS = {
     FORGOT_PASSWORD_TOKEN:
         'Error al verificar el código de restablecimiento de contraseña',
     RESET_PASSWORD: 'Error al restablecer la contraseña',
-    // Additional error messages for other functions can be added here
+    SEND_CONFIRMATION_EMAIL: 'El Email debe de ser válido y no estar en uso',
+    VALIDATE_EMAIL_CONFIRMATION_TOKEN: 'Tu Email no ha sido confirmado, revisa tu correo',
 } as const;
 
 /**
@@ -65,6 +66,7 @@ export const getMeasurements = async (): Promise<MeasurementData[]> => {
     }
 };
 
+
 /**
  * @brief Registers a new user with the provided registration data
  * @author Juan Diaz
@@ -96,6 +98,72 @@ export const register = async (data: RegisterFormData): Promise<void> => {
     } catch (error) {
         console.error('Error:', error);
         throw new Error(API_ERRORS.REGISTER_USER);
+    }
+};
+
+/**
+ * @brief Sends a confirmation email to the specified address
+ * @param {string} email - The recipient's email address
+ * @returns {Promise<void>} - A promise that resolves when the email is sent successfully
+ *
+ * string: email -> sendConfirmationEmail() -> Promise<void>
+ * 
+ * This function makes a POST request to the API to initiate an email confirmation process.
+ * It expects a valid email address to be included in the request body.
+ *
+ * @throws Error - If sending the email fails or the response is invalid
+ */
+export const sendConfirmationEmail = async (email: string): Promise<void> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/confirmation-email`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error sending confirmation email');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.SEND_CONFIRMATION_EMAIL);
+    }
+};
+
+/**
+ * @brief Validates an email confirmation token using the provided email address
+ * @param {string} email - The email address associated with the confirmation token
+ * @returns {Promise<void>} - A promise that resolves when the token is validated successfully
+ *
+ * string: email -> validateEmailConfirmationToken() -> Promise<void>
+ * 
+ * This function makes a GET request to the API to validate an email confirmation token.
+ * It expects the email address to be sent as a query parameter.
+ *
+ * @throws Error - If the validation fails or the response is invalid
+ */
+export const validateEmailConfirmationToken = async (email: string): Promise<void> => {
+    try {
+        const encodedEmail = encodeURIComponent(email);
+        const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate-email-confirmation-token?email=${encodedEmail}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error validating email confirmation token');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(API_ERRORS.VALIDATE_EMAIL_CONFIRMATION_TOKEN);
     }
 };
 
@@ -312,7 +380,7 @@ export const logout = async (): Promise<void> => {
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Error loggin out');
+        throw new Error('Error logging out');
     }
 };
 

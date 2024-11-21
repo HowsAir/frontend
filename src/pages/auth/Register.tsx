@@ -23,21 +23,85 @@ const Register = () => {
     const { watch } = methods;
     const priceAmount = 99;
 
-    const mutation = useMutation(apiClient.createCheckoutSession, {
-        onSuccess: async (sessionId) => {
-            localStorage.setItem('userData', JSON.stringify(watch()));
-            await redirectToCheckout(sessionId);
+    const [verifyEmailButtonState, setVerifyEmailButtonState] = useState<
+        'initial' | 'sent' | 'sending'
+    >('initial');
+
+    // Button text and disabling logic based on verifyEmailButtonState
+    const buttonText =
+        verifyEmailButtonState === 'sending'
+            ? 'Enviando...'
+            : verifyEmailButtonState === 'sent'
+              ? 'Verificación enviada'
+              : 'Verificar email';
+    const buttonDisabled = verifyEmailButtonState === 'sending' || verifyEmailButtonState === 'sent';
+
+    // Mutation for sending confirmation email
+    const sendConfirmationEmailMutation = useMutation(apiClient.sendConfirmationEmail, {
+        onSuccess: () => {
+            showToast({
+                message: 'Correo de verificación enviado, comprueba tu correo',
+                type: ToastMessageType.SUCCESS,
+            });
+            setVerifyEmailButtonState('sent');
         },
         onError: (error: Error) => {
             showToast({ message: error.message, type: ToastMessageType.ERROR });
+            setVerifyEmailButtonState('initial');
         },
     });
 
+    const handleConfirmationEmail = () => {
+        // Get the email value from the form using watch()
+        const email = watch('email');
+
+        if (email) {
+            setVerifyEmailButtonState('sending');
+            sendConfirmationEmailMutation.mutate(email);
+        } else {
+            showToast({
+                message: 'Por favor, ingresa el Email',
+                type: ToastMessageType.ERROR,
+            });
+        }
+    };
+
+    const validateEmailConfirmationTokenMutation = useMutation(apiClient.validateEmailConfirmationToken, {
+        onSuccess: () => {
+            setStep(2);
+        },
+        onError: (error: Error) => {
+            showToast({
+                message: error.message, type: ToastMessageType.ERROR
+            });
+        }
+    });
+
+
+    const createCheckoutSessionMutation = useMutation(
+        apiClient.createCheckoutSession,
+        {
+            onSuccess: async (sessionId) => {
+                localStorage.setItem('userData', JSON.stringify(watch()));
+                await redirectToCheckout(sessionId);
+            },
+            onError: (error: Error) => {
+                showToast({
+                    message: error.message,
+                    type: ToastMessageType.ERROR,
+                });
+            },
+        }
+    );
+    
     const onSubmit = methods.handleSubmit(async () => {
         if (step === 1) {
-            setStep(2);
+            //Email is ensured to be valid by the previous form validation rules
+            const email = watch('email');
+            
+            validateEmailConfirmationTokenMutation.mutate(email);
         } else {
-            await mutation.mutate(priceAmount);
+            await createCheckoutSessionMutation.mutate(priceAmount);
         }
     });
 
@@ -82,17 +146,32 @@ const Register = () => {
                                         Apellidos
                                     </Input>
 
-                                    <Input
-                                        name="email"
-                                        type="email"
-                                        validate={(value) =>
-                                            /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
-                                                value
-                                            ) || 'Introduce un email válido'
-                                        }
-                                    >
-                                        Email
-                                    </Input>
+                                    <div className="flex gap-x-6">
+                                        <Input
+                                            name="email"
+                                            type="email"
+                                            customClass="w-full"
+                                            validate={(value) =>
+                                                /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+                                                    value
+                                                ) || 'Introduce un email válido'
+                                            }
+                                        >
+                                            Email
+                                        </Input>
+                                        <div className="relative w-full">
+                                            <button
+                                                type="button"
+                                                className={`btn-primary mt-8 w-8/12 px-2 text-[13px] font-normal disabled:bg-gray-300 disabled:text-offblack`}
+                                                onClick={
+                                                    handleConfirmationEmail
+                                                }
+                                                disabled={buttonDisabled}
+                                            >
+                                                {buttonText}
+                                            </button>
+                                        </div>
+                                    </div>
 
                                     <Input
                                         name="password"
