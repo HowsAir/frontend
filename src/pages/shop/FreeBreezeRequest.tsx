@@ -102,7 +102,7 @@ const FreeBreezeRequest = () => {
                         <Input
                             name="address"
                             type="text"
-                            customClass="w-full !my-2"
+                            customClass="w-full !mt-2 !mb-4"
                         >
                             Dirección
                         </Input>

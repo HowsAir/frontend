@@ -81,14 +81,14 @@ const Login: React.FC = () => {
                         <Input
                             name="password"
                             type="password"
-                            customClass="w-full"
+                            customClass="w-full !mb-2"
                         >
                             Contraseña
                         </Input>
 
                         <Link
                             to="/forgot-password"
-                            className="mt-4 text-neutral-400 underline"
+                            className="text-neutral-400 underline"
                         >
                             Olvidé mi contraseña
                         </Link>

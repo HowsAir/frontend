@@ -97,7 +97,7 @@ function ForgotPassword() {
 
             {step === 1 ? (
                 <>
-                    <p className="text-base">
+                    <p className="mb-4 text-base">
                         Escribe tu correo electrónico para recibir un código y
                         poder cambiar tu contraseña
                     </p>
@@ -113,14 +113,14 @@ function ForgotPassword() {
                                         value
                                     ) || 'Introduce un email válido'
                                 }
-                                customClass="mb-4 w-full"
+                                customClass="!mb-2 w-full"
                             >
                                 Correo electrónico
                             </Input>
 
                             <button
                                 type="submit"
-                                className="btn-primary mx-auto my-2 w-full text-base font-normal"
+                                className="btn-primary mx-auto mb-6 w-full text-base font-normal"
                                 disabled={forgotPasswordEmailMutation.isLoading}
                             >
                                 {forgotPasswordEmailMutation.isLoading
@@ -136,7 +136,7 @@ function ForgotPassword() {
                             <Input
                                 name="verificationCode"
                                 type="number"
-                                customClass="mb-4 w-full"
+                                customClass="!mb-2 w-full"
                                 validate={(value) =>
                                     /^\d{6}$/.test(value) ||
                                     'El código debe ser un número de 6 dígitos'
@@ -147,7 +147,7 @@ function ForgotPassword() {
 
                             <button
                                 type="submit"
-                                className="btn-primary mx-auto mt-2 w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
+                                className="btn-primary w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
                                 disabled={
                                     !/^\d{6}$/.test(
                                         codeMethods.watch('verificationCode')
@@ -165,12 +165,17 @@ function ForgotPassword() {
                 <>
                     <p className="text-lg">Escribe tu nueva contraseña</p>
 
+                    <p className="text-[0.9rem] leading-[1.5rem] text-neutral-400 mb-4">
+                        Al menos 8 caracteres, incluidas letras mayúsculas y
+                        minúsculas, números y caracteres especiales.
+                    </p>
+
                     <FormProvider {...codeMethods}>
                         <form noValidate onSubmit={onResetPasswordSubmit}>
                             <Input
                                 name="newPassword"
                                 type="password"
-                                customClass="mb-2 w-full"
+                                customClass="w-full"
                                 validate={(value) => {
                                     const validationResult =
                                         passwordValidation(value);
@@ -181,12 +186,6 @@ function ForgotPassword() {
                             >
                                 Contraseña nueva
                             </Input>
-
-                            <p className="text-[0.9rem] leading-[1.5rem] text-neutral-400">
-                                Al menos 8 caracteres, incluidas letras
-                                mayúsculas y minúsculas, números y caracteres
-                                especiales.
-                            </p>
 
                             <Input
                                 name="verifyNewPassword"
