@@ -65,7 +65,7 @@ const ChangePassword = () => {
                         Contraseña actual
                     </Input>
 
-                    <p className="text-lg mt-8">Escribe tu nueva contraseña</p>
+                    <p className="text-lg">Escribe tu nueva contraseña</p>
 
                     <p className="text-sm leading-tight text-neutral-400">
                         Al menos 8 caracteres, incluidas letras mayúsculas y
