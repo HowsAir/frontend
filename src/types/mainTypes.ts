@@ -17,6 +17,12 @@ export type LogInFormData = {
     password: string;
 };
 
+export type ChangePasswordFormData = {
+    password: string;
+    newPassword: string;
+    verifyPassword: string;
+}
+
 export enum ToastMessageType {
     SUCCESS = 'SUCCESS',
     ERROR = 'ERROR',

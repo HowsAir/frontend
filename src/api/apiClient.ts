@@ -278,6 +278,32 @@ export const updateUserProfile = async (formData: FormData): Promise<void> => {
     }
 };
 
+
+
+export const changePassword = async (data: {
+    currentPassword: string;
+    newPassword: string;
+}): Promise<void> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users/password`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error changing password');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Error changing password');
+    }
+};
+
 /**
  * @brief Logs out the user by invalidating the current session token
  * @author Juan Diaz
