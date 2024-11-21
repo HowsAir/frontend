@@ -341,7 +341,8 @@ export const getUserProfile = async (): Promise<UserProfile> => {
 
         const data = await response.json();
         if (!data.user.photoUrl) {
-            data.user.photoUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdueKgrMTpKWfXS0CokGPx71IlOV0FDDxW1A&s';
+            data.user.photoUrl =
+                'https://res.cloudinary.com/dzh6bz0zi/image/upload/v1732232236/media/glychcgx6gerphrornjb.png ';
         }
         return data.user;
     } catch (error) {
