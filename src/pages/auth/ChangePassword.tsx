@@ -9,21 +9,27 @@ import { useMutation } from 'react-query';
 import { useAppContext } from '../../contexts/AppContext';
 import * as apiClient from '../../api/apiClient';
 import { passwordValidation } from '../../utils/passwordValidation';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes/routes';
+import { delay } from 'framer-motion';
 
 const ChangePassword = () => {
     const methods = useForm<ChangePasswordFormData>();
     const { showToast } = useAppContext(); // Para mostrar mensajes de éxito o error
-    const [step, setStep] = useState(1);
+    const navigate = useNavigate();
 
     // Mutación para cambiar la contraseña
     const changePasswordMutation = useMutation(apiClient.changePassword, {
         onSuccess: () => {
             showToast({
-                message: 'Contraseña cambiada exitosamente',
+                message: 'Contraseña cambiada exitosamente. Cerrando sesión...',
                 type: ToastMessageType.SUCCESS,
             });
             methods.reset();
-            // logout
+            setTimeout(() => {
+                apiClient.logout();
+                navigate(routes.HOME.INDEX);
+            }, 2000);
         },
         onError: (error: any) => {
             const errorMessage =
