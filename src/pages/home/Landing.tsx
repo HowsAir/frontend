@@ -29,6 +29,10 @@ const Landing = () => {
                     <a
                         href="#target"
                         className="mb-12 mt-auto h-14 w-14 rounded-full bg-white bg-opacity-60 p-2 text-4xl text-primary"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.querySelector('#target')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
                     >
                         <Icon></Icon>
                     </a>
