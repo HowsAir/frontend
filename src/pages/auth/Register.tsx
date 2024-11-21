@@ -14,6 +14,7 @@ import { passwordValidation } from '../../utils/passwordValidation';
 import { StepDisplay } from '../../components/widgets/StepDisplay';
 import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
+import { routes } from '../../routes/routes';
 
 
 const Register = () => {
@@ -131,7 +132,7 @@ const Register = () => {
                                     <label className="form-label mb-6">
                                         ¿Ya has comprado tu Breeze?
                                         <br />
-                                        <Link to="/login">Inicia sesión</Link>
+                                        <Link to={routes.AUTH.LOGIN}>Inicia sesión</Link>
                                     </label>
 
                                     <Input

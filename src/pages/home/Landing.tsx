@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ValueCard } from '../../components/widgets/ValueCard';
 import ArrowDown from '../../components/icons/ArrowDown';
+import { routes } from '../../routes/routes';
 
 const Landing = () => {
     const Icon = ArrowDown;
@@ -23,7 +24,7 @@ const Landing = () => {
                         entorno.
                     </p>
 
-                    <Link to="/maps" className="btn-primary mt-24">
+                    <Link to={routes.HOME.MAPS} className="btn-primary mt-24">
                         Ver mapas
                     </Link>
                     <a
@@ -31,7 +32,9 @@ const Landing = () => {
                         className="mb-12 mt-auto h-14 w-14 rounded-full bg-white bg-opacity-60 p-2 text-4xl text-primary"
                         onClick={(e) => {
                             e.preventDefault();
-                            document.querySelector('#target')?.scrollIntoView({ behavior: 'smooth' });
+                            document
+                                .querySelector('#target')
+                                ?.scrollIntoView({ behavior: 'smooth' });
                         }}
                     >
                         <Icon></Icon>
@@ -68,7 +71,7 @@ const Landing = () => {
                     </p>
 
                     <div className="flex gap-5 sm:flex-col sm:items-start lg:flex-row lg:items-center">
-                        <Link to="/breeze" className="btn-primary">
+                        <Link to={routes.SHOP.PRODUCT} className="btn-primary">
                             Saber más
                         </Link>
                         <p className="font-semibold text-primary">
@@ -91,7 +94,7 @@ const Landing = () => {
                         sea.
                     </p>
                     <Link
-                        to="/maps"
+                        to={routes.HOME.MAPS}
                         className="btn-inverted relative z-10 sm:hidden lg:inline-block"
                     >
                         Ver mapas
@@ -103,7 +106,7 @@ const Landing = () => {
                     src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/uxvxh7ivr6x6hsou4ts7.jpg"
                 ></img>
                 <Link
-                    to="/maps"
+                    to={routes.HOME.MAPS}
                     className="btn-inverted mx-auto mt-10 sm:inline-block lg:hidden"
                 >
                     Ver mapas

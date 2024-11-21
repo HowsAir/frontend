@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Input } from '../../components/common/Input';
 import FormContainer from '../../components/layouts/FormContainer';
+import { routes } from '../../routes/routes';
 
 const Login: React.FC = () => {
     const { showToast } = useAppContext();
@@ -28,7 +29,7 @@ const Login: React.FC = () => {
                 type: ToastMessageType.SUCCESS,
             });
             queryClient.invalidateQueries('validateToken');
-            navigate('/');
+            navigate(routes.HOME.INDEX);
         },
         onError: (error: any) => {
             const errorMessage =
@@ -62,7 +63,7 @@ const Login: React.FC = () => {
                         <label className="form-label mb-4">
                             ¿Aún no has comprado tu Breeze?
                             <br />
-                            <Link to="/breeze">Cómpralo aquí</Link>
+                            <Link to={routes.SHOP.PRODUCT}>Cómpralo aquí</Link>
                         </label>
 
                         <Input

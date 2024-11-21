@@ -1,8 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
-import { useAppContext } from '../contexts/AppContext';
-import { ToastMessageType } from '../types/mainTypes';
+import * as apiClient from '../../api/apiClient';
+import { useAppContext } from '../../contexts/AppContext';
+import { ToastMessageType } from '../../types/mainTypes';
+import { routes } from '../../routes/routes';
 
 const EditProfile = () => {
     const navigate = useNavigate();
@@ -160,7 +161,7 @@ const EditProfile = () => {
             </div>
 
             <Link
-                to="/change-password"
+                to={routes.AUTH.CHANGE_PASSWORD}
                 className="btn-primary mt-8 w-full text-center text-base font-medium"
             >
                 Cambiar contraseña

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ImagePanel } from '../../components/layouts/ImagePanel';
+import { routes } from '../../routes/routes';
 
 const Product = () => {
     return (
@@ -37,13 +38,13 @@ const Product = () => {
                 <div className="relative mb-2 mt-auto">
                     <div className="flex flex-row gap-4">
                         <Link
-                            to="/free-breeze-application"
+                            to={routes.SHOP.FREE_BREEZE}
                             className="btn-secondary px-4"
                         >
                             Solícitalo gratis*
                         </Link>
 
-                        <Link to="/register" className="btn-primary">
+                        <Link to={routes.AUTH.REGISTER} className="btn-primary">
                             Comprar
                         </Link>
                     </div>

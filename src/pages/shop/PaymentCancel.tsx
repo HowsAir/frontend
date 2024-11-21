@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 const PaymentCancel = () => {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ const PaymentCancel = () => {
     // Redirigir al usuario a la página de producto después de 5 segundos
     useEffect(() => {
         const timer = setTimeout(() => {
-            navigate('/breeze');
+            navigate(routes.SHOP.PRODUCT);
         }, 5000);
 
         return () => clearTimeout(timer); // Limpiar el temporizador cuando el componente se desmonte
