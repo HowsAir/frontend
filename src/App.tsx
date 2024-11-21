@@ -14,6 +14,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 import User from './pages/User';
 import Admin from './pages/admin/Admin';
+import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
 
 const App = () => {
@@ -62,6 +63,14 @@ const App = () => {
                     element={
                         <Layout>
                             <EditProfile />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/change-password"
+                    element={
+                        <Layout>
+                            <ChangePassword />
                         </Layout>
                     }
                 />
