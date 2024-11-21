@@ -316,8 +316,9 @@ export const getUserProfile = async (): Promise<UserProfile> => {
         }
 
         const data = await response.json();
-        data.photoUrl =
-            data.photoUrl || 'https://example.com/default-photo.jpg';
+        if (!data.user.photoUrl) {
+            data.user.photoUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdueKgrMTpKWfXS0CokGPx71IlOV0FDDxW1A&s';
+        }
         return data.user;
     } catch (error) {
         console.error('Get user profile error: ', error);
@@ -326,12 +327,13 @@ export const getUserProfile = async (): Promise<UserProfile> => {
 };
 
 export const updateUserProfile = async (formData: FormData): Promise<void> => {
+    console.log('formData', formData);
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/users/profile`, {
             method: 'PATCH',
             credentials: 'include',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
             },
             body: formData,
         });
