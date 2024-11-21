@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 const CustomCheckbox: React.FC = () => {
     const {
@@ -38,7 +39,7 @@ const CustomCheckbox: React.FC = () => {
                     </div>
                     Acepto los&nbsp;
                     <Link
-                        to="/terms-and-privacy"
+                        to={routes.HOME.TERMS_AND_PRIVACY}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-semibold text-primary underline"

@@ -14,7 +14,7 @@ import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
 // import User from './pages/User';
 import Admin from './pages/admin/Admin';
-import EditProfile from './pages/EditProfile';
+import EditProfile from './pages/user/EditProfile';
 
 const App = () => {
     const location = useLocation();
