@@ -113,7 +113,7 @@ export const AirQualityGraph = () => {
                     </div>
                 </div>
             </div>
-            <div className="h-[80%]">
+            <div className="h-[75%]">
                 <Bar data={chartData} options={options} />
             </div>
         </div>

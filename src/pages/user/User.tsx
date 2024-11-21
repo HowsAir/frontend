@@ -1,6 +1,6 @@
-import { AirQualityGraph } from '../components/widgets/AirQualityGraph';
-import { MeasureCard } from '../components/widgets/MeasureCard';
-import { MonthlyObjective } from '../components/widgets/MonthlyObjective.tsx';
+import { AirQualityGraph } from '../../components/widgets/AirQualityGraph';
+import { MeasureCard } from '../../components/widgets/MeasureCard';
+import { MonthlyObjective } from '../../components/widgets/MonthlyObjective.tsx';
 
 const User = () => {
     return (

@@ -12,7 +12,7 @@ import Maps from './pages/home/Maps';
 import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
-import User from './pages/User';
+import User from './pages/user/User';
 import Admin from './pages/admin/Admin';
 import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
@@ -53,8 +53,7 @@ const App = () => {
                     path="/user"
                     element={
                         <Layout>
-                            <p>hola</p>
-                            {/* <User /> */}
+                            <User />
                         </Layout>
                     }
                 />
