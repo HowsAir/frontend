@@ -57,10 +57,6 @@ const ChangePassword = () => {
                         name="password"
                         type="password"
                         customClass="w-full"
-                        validate={(value) =>
-                            value.length >= 6 ||
-                            'La contraseña debe tener al menos 6 caracteres'
-                        }
                     >
                         Contraseña actual
                     </Input>

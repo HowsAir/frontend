@@ -6,6 +6,7 @@ import * as apiClient from '../../api/apiClient';
 import { ToastMessageType } from '../../types/mainTypes';
 import { useAppContext } from '../../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { passwordValidation } from '../../utils/passwordValidation';
 
 function ForgotPassword() {
     const { showToast } = useAppContext();
@@ -169,10 +170,13 @@ function ForgotPassword() {
                                 name="newPassword"
                                 type="password"
                                 customClass="mb-2 w-full"
-                                validate={(value) =>
-                                    value.length >= 8 ||
-                                    'La contraseña debe tener al menos 8 caracteres'
-                                }
+                                validate={(value) => {
+                                    const validationResult =
+                                        passwordValidation(value);
+                                    return validationResult === true
+                                        ? true
+                                        : validationResult;
+                                }}
                             >
                                 Contraseña nueva
                             </Input>
