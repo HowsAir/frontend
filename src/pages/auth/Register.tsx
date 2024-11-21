@@ -54,7 +54,7 @@ const Register = () => {
                                 <>
                                     <h2>Detalles personales</h2>
 
-                                    <label className="form-label">
+                                    <label className="form-label mb-6">
                                         ¿Ya has comprado tu Breeze?
                                         <br />
                                         <Link to="/login">Inicia sesión</Link>
@@ -116,7 +116,7 @@ const Register = () => {
                                         Verifica Contraseña
                                     </Input>
 
-                                    <div className="mt-8">
+                                    <div>
                                         <CustomCheckbox />
                                     </div>
 
@@ -135,7 +135,7 @@ const Register = () => {
                                     <Input
                                         name="address"
                                         type="text"
-                                        customClass="w-full"
+                                        customClass="w-full mt-8"
                                     >
                                         Dirección
                                     </Input>
