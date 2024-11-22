@@ -1,14 +1,14 @@
 const TermsAndPrivacy = () => {
     return (
-        <div className="bg-gray-100 min-h-screen p-8">
-            <div className="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md">
+        <div className="bg-gray-100 min-h-screen">
+            <div className="mx-auto max-w-6xl rounded-lg bg-white p-12 shadow-md">
                 <h2>Términos, condiciones y política de privacidad</h2>
                 <p className="text-gray-600 mb-2">
                     Fecha de actualización: Octubre 2024
                 </p>
 
                 <div className="text-gray-700 space-y-4">
-                    <h2 className="text-xl font-bold">1. Introducción</h2>
+                    <h3 className="text-xl font-bold">1. Introducción</h3>
                     <p>
                         Bienvenido a HowsAir, una plataforma dedicada al
                         monitoreo de la calidad del aire en tiempo real. Al
