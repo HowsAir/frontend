@@ -3,6 +3,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Logo } from './Logo';
 import { routes } from '../../routes/routes';
 import * as apiClient from '../../api/apiClient'; // Adjust the import path as necessary
+import LogoutIcon from '../icons/LogoutIcon';
+import ProfileHeader from './ProfileHeader';
 
 const Header = () => {
     const { isAuthenticated, roleId, validateAuth } = useAuth();
@@ -21,10 +23,6 @@ const Header = () => {
             <Logo color="primary" />
 
             <div className="flex flex-row items-center gap-10">
-                {/* Common links for all users */}
-                <Link to={routes.SHOP.PRODUCT}>Breeze</Link>
-                <Link to={routes.HOME.MAPS}>Mapas</Link>
-
                 {/* Conditional rendering based on auth status */}
                 {isAuthenticated ? (
                     <>
@@ -34,37 +32,56 @@ const Header = () => {
                                 to={routes.ADMIN.INDEX}
                                 className="hover:text-primary-dark text-primary"
                             >
-                                Dashboard
+                                Administración
                             </Link>
                         )}
 
+                        {/* User-only links */}
                         {roleId === 1 && (
-                            <Link
-                                to={routes.USER.INDEX}
-                                className="hover:text-primary transition-colors duration-300 ease-in-out"
-                            >
-                                Mi nodo
-                            </Link>
+                            <>
+                                <Link to={routes.HOME.MAPS}>Mapas</Link>
+                                <Link
+                                    to={routes.USER.INDEX}
+                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                >
+                                    Mi nodo
+                                </Link>
+                                <Link to="/">Inicio</Link>
+                            </>
                         )}
 
                         {/* Profile and Logout buttons */}
                         <div className="flex items-center gap-4">
-                            <Link
-                                to={routes.USER.EDIT_PROFILE}
-                                className="flex items-center gap-2 rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary transition-all duration-500 ease-in-out hover:border-sky-300 hover:bg-sky-100"
+                            <ProfileHeader />
+                            <button className="relative size-10 rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-sky-100">
+                                <img
+                                    src="../../public/icons/alert-icon.svg"
+                                    alt="alertas"
+                                    className="absolute left-1 top-1 size-8"
+                                ></img>
+                            </button>
+                            <button
+                                className="size-10 rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-sky-100"
+                                onClick={async () => await handleLogout()}
                             >
-                                <span>Perfil</span>
-                            </Link>
-                            <button onClick={async () => await handleLogout()}>Cerrar sesión</button>
+                                <LogoutIcon
+                                    color1={'#4074E7'}
+                                    color2={'#112233'}
+                                ></LogoutIcon>
+                            </button>
                         </div>
                     </>
                 ) : (
-                    <Link
-                        to={routes.AUTH.LOGIN}
-                        className="clickable h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary transition-all duration-500 ease-in-out hover:border-sky-300 hover:bg-sky-100"
-                    >
-                        Iniciar sesión
-                    </Link>
+                    <>
+                        <Link to={routes.SHOP.PRODUCT}>Breeze</Link>
+                        <Link to={routes.HOME.MAPS}>Mapas</Link>
+                        <Link
+                            to={routes.AUTH.LOGIN}
+                            className="clickable h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary transition-all duration-500 ease-in-out hover:border-sky-300 hover:bg-sky-100"
+                        >
+                            Iniciar sesión
+                        </Link>
+                    </>
                 )}
             </div>
         </header>
