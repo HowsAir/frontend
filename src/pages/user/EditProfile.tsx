@@ -20,7 +20,7 @@ const EditProfile = () => {
         name: 'Mario',
         surnames: 'Luis',
         email: 'marioluis@mail.fake',
-        profilePic: '',
+        profilePic: 'https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif',
     });
 
     const [originalData, setOriginalData] = useState<{
