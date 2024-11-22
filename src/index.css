@@ -9,7 +9,7 @@
     }
 
     .btn-inverted {
-        @apply h-fit w-fit rounded-lg bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary;
+        @apply h-fit w-fit rounded-lg bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary transition-all duration-500 ease-in-out hover:bg-neutral-200;
     }
 
     .btn-secondary {
@@ -17,7 +17,25 @@
     }
 
     .btn-submit {
-        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:ml-auto lg:mr-44;
+        @apply btn-primary mt-12 py-2 font-normal sm:mx-0 lg:mx-auto;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-submit {
+        @apply clickable transition-all duration-500 ease-in-out hover:opacity-80;
+    }
+
+    .clickable {
+        @apply transition-transform duration-200 ease-in-out;
+    }
+
+    .clickable:active {
+        @apply scale-75 transform;
+    }
+
+    input {
+        @apply transition-all duration-300 ease-in-out hover:border hover:border-primary hover:border-opacity-80;
     }
 
     /*--- FORM CLASSES ---*/
@@ -46,11 +64,22 @@
         @apply mb-10 w-fit text-5xl font-medium text-offblack;
     }
     h3 {
-        @apply mb-2 w-fit text-2xl font-normal text-offblack;
+        @apply mb-2 w-fit text-3xl font-normal text-offblack;
     }
 
     p {
         @apply h-fit text-2xl font-normal text-offblack;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type='number'] {
+        appearance: textfield;
+        -moz-appearance: textfield;
     }
 }
 

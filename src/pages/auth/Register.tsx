@@ -14,32 +14,107 @@ import { passwordValidation } from '../../utils/passwordValidation';
 import { StepDisplay } from '../../components/widgets/StepDisplay';
 import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
+import { routes } from '../../routes/routes';
+
 
 const Register = () => {
     const { showToast } = useAppContext();
-    const methods = useForm<RegisterFormData>();
+    const methods = useForm<RegisterFormData>({
+        defaultValues: {
+            city: 'Valencia',
+            country: 'España',
+        },
+    });
 
     const [step, setStep] = useState(1);
     const { watch } = methods;
-    const priceAmount = 99;
+    const priceAmount = 104;
 
-    const mutation = useMutation(apiClient.createCheckoutSession, {
-        onSuccess: async (sessionId) => {
-            localStorage.setItem('userData', JSON.stringify(watch()));
-            await redirectToCheckout(sessionId);
+    const [verifyEmailButtonState, setVerifyEmailButtonState] = useState<
+        'initial' | 'sent' | 'sending'
+    >('initial');
+
+    // Button text and disabling logic based on verifyEmailButtonState
+    const buttonText =
+        verifyEmailButtonState === 'sending'
+            ? 'Enviando...'
+            : verifyEmailButtonState === 'sent'
+              ? 'Verificación enviada'
+              : 'Verificar email';
+    const buttonDisabled = verifyEmailButtonState === 'sending' || verifyEmailButtonState === 'sent';
+
+    // Mutation for sending confirmation email
+    const sendConfirmationEmailMutation = useMutation(apiClient.sendConfirmationEmail, {
+        onSuccess: () => {
+            showToast({
+                message: 'Correo de verificación enviado, comprueba tu correo',
+                type: ToastMessageType.SUCCESS,
+            });
+            setVerifyEmailButtonState('sent');
         },
         onError: (error: Error) => {
             showToast({ message: error.message, type: ToastMessageType.ERROR });
+            setVerifyEmailButtonState('initial');
         },
     });
 
-    const onSubmit = methods.handleSubmit(async () => {
-        if (step === 1) {
-            setStep(2);
+    const handleConfirmationEmail = () => {
+        // Get the email value from the form using watch()
+        const email = watch('email');
+
+        if (email) {
+            setVerifyEmailButtonState('sending');
+            sendConfirmationEmailMutation.mutate(email);
         } else {
-            await mutation.mutate(priceAmount);
+            showToast({
+                message: 'Por favor, ingresa el Email',
+                type: ToastMessageType.ERROR,
+            });
+        }
+    };
+
+    const validateEmailConfirmationTokenMutation = useMutation(apiClient.validateEmailConfirmationToken, {
+        onSuccess: () => {
+            setStep(2);
+        },
+        onError: (error: Error) => {
+            showToast({
+                message: error.message, type: ToastMessageType.ERROR
+            });
         }
     });
+
+
+    const createCheckoutSessionMutation = useMutation(
+        apiClient.createCheckoutSession,
+        {
+            onSuccess: async (sessionId) => {
+                localStorage.setItem('userData', JSON.stringify(watch()));
+                await redirectToCheckout(sessionId);
+            },
+            onError: (error: Error) => {
+                showToast({
+                    message: error.message,
+                    type: ToastMessageType.ERROR,
+                });
+            },
+        }
+    );
+    
+    const onSubmit = methods.handleSubmit(async () => {
+        if (step === 1) {
+            //Email is ensured to be valid by the previous form validation rules
+            const email = watch('email');
+            
+            validateEmailConfirmationTokenMutation.mutate(email);
+        } else {
+            await createCheckoutSessionMutation.mutate(priceAmount);
+        }
+    });
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <>
@@ -54,10 +129,10 @@ const Register = () => {
                                 <>
                                     <h2>Detalles personales</h2>
 
-                                    <label className="form-label">
+                                    <label className="form-label mb-6">
                                         ¿Ya has comprado tu Breeze?
                                         <br />
-                                        <Link to="/login">Inicia sesión</Link>
+                                        <Link to={routes.AUTH.LOGIN}>Inicia sesión</Link>
                                     </label>
 
                                     <Input
@@ -82,17 +157,28 @@ const Register = () => {
                                         Apellidos
                                     </Input>
 
-                                    <Input
-                                        name="email"
-                                        type="email"
-                                        validate={(value) =>
-                                            /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
-                                                value
-                                            ) || 'Introduce un email válido'
-                                        }
-                                    >
-                                        Email
-                                    </Input>
+                                    <div className="grid grid-cols-2 gap-x-4">
+                                        <Input
+                                            name="email"
+                                            type="email"
+                                            customClass="w-full"
+                                            validate={(value) =>
+                                                /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+                                                    value
+                                                ) || 'Introduce un email válido'
+                                            }
+                                        >
+                                            Email
+                                        </Input>
+                                        <button
+                                            type="button"
+                                            className={`btn-primary disabled:bg-gray-300 mb-6 mt-2 w-8/12 px-2 py-2.5 text-sm font-normal disabled:text-offblack`}
+                                            onClick={handleConfirmationEmail}
+                                            disabled={buttonDisabled}
+                                        >
+                                            {buttonText}
+                                        </button>
+                                    </div>
 
                                     <Input
                                         name="password"
@@ -116,7 +202,7 @@ const Register = () => {
                                         Verifica Contraseña
                                     </Input>
 
-                                    <div className="mt-8">
+                                    <div>
                                         <CustomCheckbox />
                                     </div>
 
@@ -130,7 +216,8 @@ const Register = () => {
                             )}
                             {step === 2 && (
                                 <>
-                                    <h2>Detalles de envío</h2>
+                                    {scrollToTop()}
+                                    <h2 className='pb-8'>Detalles de envío</h2>
 
                                     <Input
                                         name="address"
@@ -152,7 +239,6 @@ const Register = () => {
                                             name="country"
                                             type="text"
                                             customClass="w-full"
-                                            value="España"
                                             readOnly
                                         >
                                             País
@@ -161,7 +247,6 @@ const Register = () => {
                                             name="city"
                                             type="text"
                                             customClass="w-full"
-                                            value="Valencia"
                                             readOnly
                                         >
                                             Ciudad

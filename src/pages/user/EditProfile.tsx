@@ -1,37 +1,42 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
-import Toast from '../components/common/Toast';
-import { useAppContext } from '../contexts/AppContext';
-import { ToastMessageType } from '../types/mainTypes';
+import { useMutation, useQueryClient } from 'react-query';
+import * as apiClient from '../../api/apiClient';
+import { useAppContext } from '../../contexts/AppContext';
+import { ToastMessageType } from '../../types/mainTypes';
+import { routes } from '../../routes/routes';
 
 const EditProfile = () => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const { showToast } = useAppContext();
+
     const [profile, setProfile] = useState<{
         name: string;
         surnames: string;
         email: string;
-        profilePic: string | File; // Can be a string URL or a File
+        profilePic: string | File;
     }>({
         name: 'Mario',
         surnames: 'Luis',
         email: 'marioluis@mail.fake',
-        profilePic: '', // Initially a string
+        profilePic: '',
     });
 
     const [originalData, setOriginalData] = useState<{
         name: string;
         surnames: string;
         email: string;
-        profilePic: string | File; // Match profile structure
+        profilePic: string | File;
     }>({
         name: 'Mario',
         surnames: 'Luis',
         email: 'marioluis@mail.fake',
-        profilePic: '', // Initially a string
+        profilePic: '',
     });
 
     useEffect(() => {
-        const fetchProfileData = async () => {
+        const getProfileData = async () => {
             try {
                 const profile = await apiClient.getUserProfile();
 
@@ -41,44 +46,53 @@ const EditProfile = () => {
                     email: profile.email || 'email@falso.es',
                     profilePic: profile.photoUrl,
                 };
-
                 setProfile(profileData);
-                setOriginalData(profileData);   
+                setOriginalData(profileData);
             } catch (error) {
                 console.error('Error fetching profile data:', error);
             }
         };
 
-        fetchProfileData();
+        getProfileData();
     }, []);
 
-    const { showToast } = useAppContext();
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    // React Query mutation for updating the user profile
+    const mutation = useMutation(apiClient.updateUserProfile, {
+        onSuccess: () => {
+            showToast({
+                message: 'Perfil actualizado correctamente',
+                type: ToastMessageType.SUCCESS,
+            });
+            setOriginalData({ ...profile });
+            queryClient.invalidateQueries(['userProfile']); // Optional: refetch profile data
+        },
+        onError: () => {
+            showToast({
+                message: 'Error guardando cambios',
+                type: ToastMessageType.ERROR,
+            });
+        },
+    });
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); // Prevent page reload
-        setIsSubmitting(true);
 
-        try {
-            const formData = new FormData();
-            if (profile.name) formData.append('name', profile.name);
-            if (profile.surnames) formData.append('surnames', profile.surnames);
-            if (
-                profile.profilePic &&
-                profile.profilePic !== originalData.profilePic
-            ) {
-                formData.append('photo', profile.profilePic as File);
-            }
-
-            await apiClient.patchUserProfile(formData);
-            alert('Profile updated successfully');
-            setOriginalData({ ...profile});
-        } catch (error) {
-            console.error('Error updating profile:', error);
-            showToast({ message: 'Error guardando cambios', type: ToastMessageType.ERROR });
-        } finally {
-            setIsSubmitting(false);
+        const formData = new FormData();
+        if (profile.name) formData.append('name', profile.name);
+        if (profile.surnames) formData.append('surnames', profile.surnames);
+        if (
+            profile.profilePic &&
+            profile.profilePic !== originalData.profilePic
+        ) {
+            formData.append('photo', profile.profilePic as File);
         }
+
+        mutation.mutate(formData);
+    };
+
+    const handleCancel = () => {
+        setProfile({ ...originalData });
+        navigate('/user');
     };
 
     const hasChanges =
@@ -96,13 +110,15 @@ const EditProfile = () => {
                 <img
                     src={
                         typeof profile.profilePic === 'string'
-                            ? profile.profilePic // If it's a string, use it directly
-                            : URL.createObjectURL(profile.profilePic) // If it's a File, create a URL
+                            ? profile.profilePic
+                            : profile.profilePic instanceof File
+                              ? URL.createObjectURL(profile.profilePic)
+                              : profile.profilePic
                     }
                     className="mx-auto size-40 rounded-full text-center"
                     alt="Foto de perfil"
                 />
-                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray p-2">
+                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray p-2 transition-all duration-300 ease-in-out hover:bg-neutral-400">
                     <img
                         className="size-fit"
                         src="../../public/icons/pencil-icon.svg"
@@ -146,19 +162,36 @@ const EditProfile = () => {
             </div>
 
             <Link
-                to="/change-password"
+                to={routes.AUTH.CHANGE_PASSWORD}
                 className="btn-primary mt-8 w-full text-center text-base font-medium"
             >
                 Cambiar contraseña
             </Link>
 
-            <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${!hasChanges ? 'bg-gray text-offblack' : ''}`}
-            >
-                {!hasChanges ? 'Cancelar' : isSubmitting ? 'Guardando...' : 'Guardar cambios'}
-            </button>
+            <div className={`relative mt-8 inline-flex w-full gap-4`}>
+                {/* Cancel Button */}
+                <button
+                    onClick={handleCancel}
+                    className={`btn-primary bg-gray text-base font-medium text-offblack transition-all duration-300 ${
+                        hasChanges
+                            ? 'relative w-1/2'
+                            : 'absolute left-0 w-full'
+                    }`}
+                >
+                    Cancelar
+                </button>
+
+                {/* Save Button */}
+                <button
+                    type="submit"
+                    disabled={mutation.isLoading}
+                    className={`btn-primary relative text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${
+                        hasChanges ? 'w-1/2' : 'ml-auto absolute w-0 px-0 opacity-0'
+                    }`}
+                >
+                    {mutation.isLoading ? 'Guardando...' : 'Guardar'}
+                </button>
+            </div>
         </form>
     );
 };

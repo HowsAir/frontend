@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Input } from '../../components/common/Input';
 import FormContainer from '../../components/layouts/FormContainer';
+import { routes } from '../../routes/routes';
 
 const Login: React.FC = () => {
     const { showToast } = useAppContext();
@@ -28,7 +29,7 @@ const Login: React.FC = () => {
                 type: ToastMessageType.SUCCESS,
             });
             queryClient.invalidateQueries('validateToken');
-            navigate('/');
+            navigate(routes.USER.INDEX);
         },
         onError: (error: any) => {
             const errorMessage =
@@ -56,42 +57,51 @@ const Login: React.FC = () => {
                     onSubmit={onSubmit}
                     className="form rounded-br-lg rounded-tr-lg"
                 >
-                    <h2>Bienvenido</h2>
+                    <div className="w-10/12 flex flex-col">
+                        <h2>Bienvenido</h2>
 
-                    <label className="form-label">
-                        ¿Aún no has comprado tu Breeze?
-                        <br />
-                        <Link to="/breeze">Cómpralo aquí</Link>
-                    </label>
+                        <label className="form-label mb-4">
+                            ¿Aún no has comprado tu Breeze?
+                            <br />
+                            <Link to={routes.SHOP.PRODUCT}>Cómpralo aquí</Link>
+                        </label>
 
-                    <Input
-                        name="email"
-                        type="email"
-                        validate={(value) =>
-                            /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
-                            'Introduce un email válido'
-                        }
-                    >
-                        Email
-                    </Input>
+                        <Input
+                            name="email"
+                            type="email"
+                            customClass="w-full"
+                            validate={(value) =>
+                                /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
+                                'Introduce un email válido'
+                            }
+                        >
+                            Email
+                        </Input>
 
-                    <Input name="password" type="password">
-                        Contraseña
-                    </Input>
+                        <Input
+                            name="password"
+                            type="password"
+                            customClass="w-full !mb-2"
+                        >
+                            Contraseña
+                        </Input>
 
-                    <Link
-                        to="/forgot-password"
-                        className="text- mt-4 text-neutral-400 underline"
-                    >
-                        Olvidé mi contraseña
-                    </Link>
-                    <button
-                        className="btn-submit mr-40"
-                        type="submit"
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-                    </button>
+                        <Link
+                            to={routes.AUTH.FORGOT_PASSWORD}
+                            className="text-neutral-400 underline"
+                        >
+                            Olvidé mi contraseña
+                        </Link>
+                        <button
+                            className="btn-submit"
+                            type="submit"
+                            disabled={isLoading}
+                        >
+                            {isLoading
+                                ? 'Iniciando sesión...'
+                                : 'Iniciar sesión'}
+                        </button>
+                    </div>
                 </form>
             </FormProvider>
         </FormContainer>

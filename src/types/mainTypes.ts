@@ -17,6 +17,12 @@ export type LogInFormData = {
     password: string;
 };
 
+export type ChangePasswordFormData = {
+    password: string;
+    newPassword: string;
+    verifyPassword: string;
+}
+
 export enum ToastMessageType {
     SUCCESS = 'SUCCESS',
     ERROR = 'ERROR',
@@ -48,28 +54,3 @@ export interface FreeBreezeApplicationFormData {
     terms: boolean;
 }
 
-export interface UserStatistics {
-    id: number;
-    name: string;
-    surnames: string;
-    phone: string;
-    nodeId: number;
-    averageDailyActiveHours: number;
-    averageDailyDistance: number;
-    nodeLastConnection: string;
-}
-
-export interface UserProfile {
-    id: number;
-    email: string;
-    name: string;
-    surnames: string;
-    password: string;
-    photoUrl: string;
-    phone: string;
-    country: string;
-    city: string;
-    zipCode: string;
-    address: string;
-    roleId: number;
-}

@@ -49,7 +49,7 @@ const FreeBreezeRequest = () => {
                 <form noValidate onSubmit={onSubmit} className="">
                     <div className="flex flex-col">
                         <label>Nombre y apellidos</label>
-                        <div className="mb-6 inline-flex w-full justify-between gap-4">
+                        <div className="inline-flex w-full justify-between gap-4">
                             <Input
                                 name="name"
                                 type="text"
@@ -76,74 +76,70 @@ const FreeBreezeRequest = () => {
                         </div>
                     </div>
 
-                    <div className="mb-6">
-                        <label>Correo electrónico</label>
+                    <label>Correo electrónico</label>
+                    <Input
+                        name="email"
+                        type="email"
+                        validate={(value) =>
+                            /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
+                            'Introduce un email válido'
+                        }
+                        customClass="!mt-2 w-full"
+                    >
+                        Email
+                    </Input>
+
+                    <div>
+                        <div className="flex items-center gap-1">
+                            <label>Localización</label>
+                            <a
+                                href="#"
+                                className="text-base text-neutral-500 hover:underline"
+                            >
+                                ¿Por qué me piden esto?
+                            </a>
+                        </div>
                         <Input
-                            name="email"
-                            type="email"
-                            validate={(value) =>
-                                /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
-                                'Introduce un email válido'
-                            }
-                            customClass="!mt-2 w-full"
+                            name="address"
+                            type="text"
+                            customClass="w-full !mt-2 !mb-4"
                         >
-                            Email
+                            Dirección
                         </Input>
                     </div>
 
-                    <div className="mb-6">
-                        <div>
-                            <div className="flex items-center gap-1">
-                                <label>Localización</label>
-                                <a
-                                    href="#"
-                                    className="text-base text-neutral-500 hover:underline"
-                                >
-                                    ¿Por qué me piden esto?
-                                </a>
-                            </div>
-                            <Input
-                                name="address"
-                                type="text"
-                                customClass="w-full !mt-2"
-                            >
-                                Dirección
-                            </Input>
-                        </div>
+                    <div className="inline-flex w-full justify-between gap-4">
+                        <Input
+                            name="country"
+                            type="text"
+                            value="España"
+                            readOnly
+                            customClass="w-full !mt-2"
+                        >
+                            Pais
+                        </Input>
 
-                        <div className="inline-flex w-full justify-between gap-4">
-                            <Input
-                                name="country"
-                                type="text"
-                                value="España"
-                                readOnly
-                                customClass="w-full !mt-2"
-                            >
-                                España
-                            </Input>
+                        <Input
+                            name="city"
+                            type="text"
+                            value="Valencia"
+                            readOnly
+                            customClass="w-full !mt-2"
+                        >
+                            Ciudad
+                        </Input>
 
-                            <Input
-                                name="city"
-                                type="text"
-                                value="Valencia"
-                                readOnly
-                                customClass="w-full !mt-2"
-                            >
-                                Valencia
-                            </Input>
-
-                            <Input
-                                name="zipCode"
-                                type="text"
-                                customClass="w-full !mt-2"
-                                validate={(value) =>
-                                    /^\d{5}$/.test(value) ||
-                                    'El código postal debe tener 5 dígitos'
-                                }
-                            >
-                                Código Postal
-                            </Input>
-                        </div>
+                        <Input
+                            name="zipCode"
+                            type="text"
+                            customClass="w-full !mt-2"
+                            validate={(value) =>
+                                /^\d{5}$/.test(value) ||
+                                'El código postal debe tener 5 dígitos'
+                            }
+                        >
+                            Código Postal
+                        </Input>
                     </div>
 
                     <div>

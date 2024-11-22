@@ -6,6 +6,8 @@ import * as apiClient from '../../api/apiClient';
 import { ToastMessageType } from '../../types/mainTypes';
 import { useAppContext } from '../../contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../routes/routes';
+import { passwordValidation } from '../../utils/passwordValidation';
 
 function ForgotPassword() {
     const { showToast } = useAppContext();
@@ -63,7 +65,7 @@ function ForgotPassword() {
                 message: 'Contraseña cambiada con éxito',
                 type: ToastMessageType.SUCCESS,
             });
-            navigate('/login');
+            navigate(routes.AUTH.LOGIN);
         },
         onError: (error) => {
             showToast({
@@ -95,7 +97,7 @@ function ForgotPassword() {
 
             {step === 1 ? (
                 <>
-                    <p className="text-base">
+                    <p className="mb-4 text-base">
                         Escribe tu correo electrónico para recibir un código y
                         poder cambiar tu contraseña
                     </p>
@@ -103,72 +105,59 @@ function ForgotPassword() {
                     {/* Formulario para enviar email */}
                     <FormProvider {...emailMethods}>
                         <form noValidate onSubmit={onReceiveCodeSubmit}>
-                            <div className="mb-4">
-                                <Input
-                                    name="email"
-                                    type="email"
-                                    validate={(value) =>
-                                        /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
-                                            value
-                                        ) || 'Introduce un email válido'
-                                    }
-                                    customClass="mt-0 w-full"
-                                >
-                                    Correo electrónico
-                                </Input>
-                            </div>
+                            <Input
+                                name="email"
+                                type="email"
+                                validate={(value) =>
+                                    /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+                                        value
+                                    ) || 'Introduce un email válido'
+                                }
+                                customClass="!mb-2 w-full"
+                            >
+                                Correo electrónico
+                            </Input>
 
-                            <div className="flex justify-center">
-                                <button
-                                    type="submit"
-                                    className="btn-primary mx-auto my-2 w-full text-base font-normal"
-                                    disabled={
-                                        forgotPasswordEmailMutation.isLoading
-                                    }
-                                >
-                                    {forgotPasswordEmailMutation.isLoading
-                                        ? 'Enviando...'
-                                        : 'Recibir código'}
-                                </button>
-                            </div>
+                            <button
+                                type="submit"
+                                className="btn-primary mx-auto mb-6 w-full text-base font-normal"
+                                disabled={forgotPasswordEmailMutation.isLoading}
+                            >
+                                {forgotPasswordEmailMutation.isLoading
+                                    ? 'Enviando...'
+                                    : 'Recibir código'}
+                            </button>
                         </form>
                     </FormProvider>
 
                     {/* Formulario para verificar código */}
                     <FormProvider {...codeMethods}>
                         <form noValidate onSubmit={onVerifyCodeSubmit}>
-                            <div className="mb-4">
-                                <Input
-                                    name="verificationCode"
-                                    type="number"
-                                    customClass="mt-0 w-full"
-                                    validate={(value) =>
-                                        /^\d{6}$/.test(value) ||
-                                        'El código debe ser un número de 6 dígitos'
-                                    }
-                                >
-                                    Código de verificación
-                                </Input>
-                            </div>
+                            <Input
+                                name="verificationCode"
+                                type="number"
+                                customClass="!mb-2 w-full"
+                                validate={(value) =>
+                                    /^\d{6}$/.test(value) ||
+                                    'El código debe ser un número de 6 dígitos'
+                                }
+                            >
+                                Código de verificación
+                            </Input>
 
-                            <div className="flex justify-center">
-                                <button
-                                    type="submit"
-                                    className="btn-primary mx-auto mt-2 w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
-                                    disabled={
-                                        !/^\d{6}$/.test(
-                                            codeMethods.watch(
-                                                'verificationCode'
-                                            )
-                                        ) ||
-                                        forgotPasswordTokenMutation.isLoading
-                                    }
-                                >
-                                    {forgotPasswordTokenMutation.isLoading
-                                        ? 'Verificando...'
-                                        : 'Verificar código'}
-                                </button>
-                            </div>
+                            <button
+                                type="submit"
+                                className="btn-primary w-full text-base font-normal disabled:bg-gray disabled:text-offblack"
+                                disabled={
+                                    !/^\d{6}$/.test(
+                                        codeMethods.watch('verificationCode')
+                                    ) || forgotPasswordTokenMutation.isLoading
+                                }
+                            >
+                                {forgotPasswordTokenMutation.isLoading
+                                    ? 'Verificando...'
+                                    : 'Verificar código'}
+                            </button>
                         </form>
                     </FormProvider>
                 </>
@@ -176,54 +165,50 @@ function ForgotPassword() {
                 <>
                     <p className="text-lg">Escribe tu nueva contraseña</p>
 
+                    <p className="text-[0.9rem] leading-[1.5rem] text-neutral-400 mb-4">
+                        Al menos 8 caracteres, incluidas letras mayúsculas y
+                        minúsculas, números y caracteres especiales.
+                    </p>
+
                     <FormProvider {...codeMethods}>
                         <form noValidate onSubmit={onResetPasswordSubmit}>
-                            <div className="mb-4">
-                                <Input
-                                    name="newPassword"
-                                    type="password"
-                                    customClass="mt-0 w-full"
-                                    validate={(value) =>
-                                        value.length >= 8 ||
-                                        'La contraseña debe tener al menos 8 caracteres'
-                                    }
-                                >
-                                    Contraseña nueva
-                                </Input>
-                            </div>
+                            <Input
+                                name="newPassword"
+                                type="password"
+                                customClass="w-full"
+                                validate={(value) => {
+                                    const validationResult =
+                                        passwordValidation(value);
+                                    return validationResult === true
+                                        ? true
+                                        : validationResult;
+                                }}
+                            >
+                                Contraseña nueva
+                            </Input>
 
-                            <p className="text-[0.9rem] leading-[1.5rem] text-neutral-400">
-                                Al menos 8 caracteres, incluidas letras
-                                mayúsculas y minúsculas, números y caracteres
-                                especiales.
-                            </p>
+                            <Input
+                                name="verifyNewPassword"
+                                type="password"
+                                customClass="w-full mb-8"
+                                validate={(value) =>
+                                    value ===
+                                        codeMethods.watch('newPassword') ||
+                                    'Las contraseñas no coinciden'
+                                }
+                            >
+                                Verifica la nueva contraseña
+                            </Input>
 
-                            <div className="mb-6">
-                                <Input
-                                    name="verifyNewPassword"
-                                    type="password"
-                                    customClass="mt-0 w-full"
-                                    validate={(value) =>
-                                        value ===
-                                            codeMethods.watch('newPassword') ||
-                                        'Las contraseñas no coinciden'
-                                    }
-                                >
-                                    Verifica la nueva contraseña
-                                </Input>
-                            </div>
-
-                            <div className="flex justify-center">
-                                <button
-                                    type="submit"
-                                    className="btn-primary mx-auto mt-2 w-full text-base font-normal"
-                                    disabled={resetPasswordMutation.isLoading}
-                                >
-                                    {resetPasswordMutation.isLoading
-                                        ? 'Confirmando...'
-                                        : 'Confirmar cambio de contraseña'}
-                                </button>
-                            </div>
+                            <button
+                                type="submit"
+                                className="btn-primary mx-auto mt-2 w-full text-base font-normal"
+                                disabled={resetPasswordMutation.isLoading}
+                            >
+                                {resetPasswordMutation.isLoading
+                                    ? 'Confirmando...'
+                                    : 'Confirmar cambio de contraseña'}
+                            </button>
                         </form>
                     </FormProvider>
                 </>
