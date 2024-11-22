@@ -1,32 +1,25 @@
-import React, { useState } from 'react';
-import type { ToastMessage, AppContext } from '../types/mainTypes';
+import React, { createContext, useState } from 'react';
+import type {
+    ToastMessage,
+    AppContext as AppContextType,
+} from '../types/mainTypes';
 import Toast from '../components/common/Toast';
-import { useQuery } from 'react-query';
-import * as apiClient from '../api/apiClient.ts';
 
-//When app loads for first time, context is undefined
-const AppContext = React.createContext<AppContext | undefined>(undefined);
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
-//Gives context to all children of app
 export const AppContextProvider = ({
     children,
 }: {
     children: React.ReactNode;
 }) => {
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
-    const { isError } = useQuery('validateToken', apiClient.validateToken, {
-        retry: false,
-    });
+
+    const showToast = (toastMessage: ToastMessage) => {
+        setToast(toastMessage);
+    };
 
     return (
-        <AppContext.Provider
-            value={{
-                showToast: (toastMessage: ToastMessage) => {
-                    setToast(toastMessage);
-                },
-                isLoggedIn: !isError,
-            }}
-        >
+        <AppContext.Provider value={{ showToast }}>
             {toast && (
                 <Toast
                     message={toast.message}
@@ -39,8 +32,12 @@ export const AppContextProvider = ({
     );
 };
 
-//Hook that components can use to access context
-export const useAppContext = (): AppContext => {
+export const useAppContext = (): AppContextType => {
     const context = React.useContext(AppContext);
-    return context as AppContext;
+    if (!context) {
+        throw new Error(
+            'useAppContext must be used within an AppContextProvider'
+        );
+    }
+    return context;
 };

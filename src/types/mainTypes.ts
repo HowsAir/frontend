@@ -37,10 +37,17 @@ export type ToastProps = ToastMessage & {
     onClose: () => void;
 };
 
-export type AppContext = {
+export interface AppContext {
     showToast: (toastMessage: ToastMessage) => void;
-    isLoggedIn: boolean;
-};
+}
+
+export interface AuthContextType {
+    roleId: number | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    error: string | null;
+    validateAuth: () => Promise<void>;
+}
 
 export interface FreeBreezeApplicationFormData {
     name: string;

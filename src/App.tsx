@@ -16,6 +16,7 @@ import User from './pages/user/User';
 import Admin from './pages/admin/Admin';
 import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
+import { ProtectedRoute } from './components/ProtectedRoutes';
 
 const App = () => {
     const location = useLocation();
@@ -53,7 +54,9 @@ const App = () => {
                     path="/user"
                     element={
                         <Layout>
-                            <User />
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <User />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -61,7 +64,9 @@ const App = () => {
                     path="/edit-profile"
                     element={
                         <Layout>
-                            <EditProfile />
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <EditProfile />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -69,7 +74,9 @@ const App = () => {
                     path="/change-password"
                     element={
                         <Layout>
-                            <ChangePassword />
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <ChangePassword />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -77,7 +84,9 @@ const App = () => {
                     path="/admin"
                     element={
                         <Layout>
-                            <Admin />
+                            <ProtectedRoute allowedRoles={[2]}>
+                                <Admin />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -117,7 +126,7 @@ const App = () => {
                     path="/forgot-password"
                     element={
                         <Layout>
-                            <ForgotPassword />
+                                <ForgotPassword />
                         </Layout>
                     }
                 />
