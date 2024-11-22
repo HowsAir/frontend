@@ -169,27 +169,27 @@ const EditProfile = () => {
             </Link>
 
             <div className={`relative mt-8 inline-flex w-full gap-4`}>
-                {/* Save Button */}
-                <button
-                    type="submit"
-                    disabled={mutation.isLoading}
-                    className={`btn-primary relative text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${
-                        hasChanges ? 'w-1/2' : 'absolute w-0 px-0 opacity-0'
-                    }`}
-                >
-                    {mutation.isLoading ? 'Guardando...' : 'Guardar'}
-                </button>
-
                 {/* Cancel Button */}
                 <button
                     onClick={handleCancel}
                     className={`btn-primary bg-gray text-base font-medium text-offblack transition-all duration-300 ${
                         hasChanges
                             ? 'relative w-1/2'
-                            : 'absolute right-0 w-full'
+                            : 'absolute left-0 w-full'
                     }`}
                 >
                     Cancelar
+                </button>
+
+                {/* Save Button */}
+                <button
+                    type="submit"
+                    disabled={mutation.isLoading}
+                    className={`btn-primary relative text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${
+                        hasChanges ? 'w-1/2' : 'ml-auto absolute w-0 px-0 opacity-0'
+                    }`}
+                >
+                    {mutation.isLoading ? 'Guardando...' : 'Guardar'}
                 </button>
             </div>
         </form>
