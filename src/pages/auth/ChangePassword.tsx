@@ -49,15 +49,17 @@ const ChangePassword = () => {
 
     return (
         <div className="mx-auto max-w-md rounded-xl border-[1px] border-gray bg-white p-10 shadow-sm">
-            <h3 className="mb-12 text-[32px] font-normal">
-                Cambiar contraseña
-            </h3>
+            <h3 className="mb-6 text-[32px] font-normal">Cambiar contraseña</h3>
             <FormProvider {...methods}>
                 <form onSubmit={onSubmit}>
                     <p className="text-lg">
                         Escribe tu contraseña actual para cambiarla
                     </p>
-                    <Input name="password" type="password" customClass="w-full !mb-2">
+                    <Input
+                        name="password"
+                        type="password"
+                        customClass="w-full !mb-4"
+                    >
                         Contraseña actual
                     </Input>
                     <Link
@@ -67,9 +69,9 @@ const ChangePassword = () => {
                         Olvidé mi contraseña
                     </Link>
 
-                    <p className="text-lg mt-4">Escribe tu nueva contraseña</p>
+                    <p className="mt-4 text-lg">Escribe tu nueva contraseña</p>
 
-                    <p className="text-sm leading-tight mb-2 text-neutral-400">
+                    <p className="my-2 text-sm leading-tight text-neutral-400">
                         Al menos 8 caracteres, incluidas letras mayúsculas y
                         minúsculas, números y caracteres especiales.
                     </p>
@@ -77,7 +79,7 @@ const ChangePassword = () => {
                     <Input
                         name="newPassword"
                         type="password"
-                        customClass="!mb-2 w-full"
+                        customClass="!mb-4 w-full"
                         validate={(value) => {
                             const validationResult = passwordValidation(value);
                             return validationResult === true
@@ -102,7 +104,7 @@ const ChangePassword = () => {
 
                     <button
                         type="submit"
-                        className="btn-primary w-full py-2 text-lg"
+                        className="btn-primary w-full py-2 text-lg font-normal"
                         disabled={changePasswordMutation.isLoading}
                     >
                         {changePasswordMutation.isLoading
