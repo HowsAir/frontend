@@ -16,7 +16,6 @@ import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
 import { routes } from '../../routes/routes';
 import { Payment, Shipping, Details } from '../../components/icons/index';
-import { color } from 'chart.js/helpers';
 
 const Register = () => {
     const { showToast } = useAppContext();
@@ -87,6 +86,7 @@ const Register = () => {
         apiClient.validateEmailConfirmationToken,
         {
             onSuccess: () => {
+                scrollToTop();
                 setStep(2);
             },
             onError: (error: Error) => {
@@ -213,9 +213,15 @@ const Register = () => {
                                                 ? true
                                                 : validationResult;
                                         }}
+                                        customClass="!mb-0"
                                     >
                                         Contraseña
                                     </Input>
+                                    <p className="my-2 w-10/12 text-sm leading-tight text-neutral-400">
+                                        Al menos 8 caracteres, incluidas letras
+                                        mayúsculas y minúsculas, números y
+                                        caracteres especiales.
+                                    </p>
 
                                     <Input
                                         name="confirmPassword"
@@ -239,7 +245,6 @@ const Register = () => {
                             )}
                             {step === 2 && (
                                 <>
-                                    {scrollToTop()}
                                     <h2 className="pb-8">Detalles de envío</h2>
 
                                     <Input
