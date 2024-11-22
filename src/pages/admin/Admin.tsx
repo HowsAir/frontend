@@ -143,8 +143,8 @@ const Admin = () => {
                                     Usuario_ID
                                     {sortConfig.key === 'id' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -153,8 +153,8 @@ const Admin = () => {
                                     Nombre
                                     {sortConfig.key === 'name' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -163,8 +163,8 @@ const Admin = () => {
                                     Teléfono
                                     {sortConfig.key === 'phone' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="min-w-[120px] cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -173,8 +173,8 @@ const Admin = () => {
                                     Nodo_ID
                                     {sortConfig.key === 'nodeId' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="min-w-[230px] cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -186,8 +186,8 @@ const Admin = () => {
                                     {sortConfig.key ===
                                         'averageDailyActiveHours' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="min-w-[210px] cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -199,8 +199,8 @@ const Admin = () => {
                                     {sortConfig.key ===
                                         'averageDailyDistance' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                                 <th
                                     className="cursor-pointer px-5 py-1 font-normal text-neutral-600"
@@ -211,8 +211,8 @@ const Admin = () => {
                                     Última conexión
                                     {sortConfig.key === 'nodeLastConnection' &&
                                         (sortConfig.direction === 'asc'
-                                            ? ' ↑'
-                                            : ' ↓')}
+                                            ? ' ▲'
+                                            : ' ▼')}
                                 </th>
                             </tr>
                         </thead>
