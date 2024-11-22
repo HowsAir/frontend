@@ -3,7 +3,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Logo } from './Logo';
 import { routes } from '../../routes/routes';
 import * as apiClient from '../../api/apiClient'; // Adjust the import path as necessary
-import LogoutIcon from '../icons/LogoutIcon';
 import ProfileHeader from './ProfileHeader';
 
 const Header = () => {

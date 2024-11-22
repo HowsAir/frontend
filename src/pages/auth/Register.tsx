@@ -16,7 +16,6 @@ import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
 import { routes } from '../../routes/routes';
 
-
 const Register = () => {
     const { showToast } = useAppContext();
     const methods = useForm<RegisterFormData>({
@@ -41,22 +40,31 @@ const Register = () => {
             : verifyEmailButtonState === 'sent'
               ? 'Verificación enviada'
               : 'Verificar email';
-    const buttonDisabled = verifyEmailButtonState === 'sending' || verifyEmailButtonState === 'sent';
+    const buttonDisabled =
+        verifyEmailButtonState === 'sending' ||
+        verifyEmailButtonState === 'sent';
 
     // Mutation for sending confirmation email
-    const sendConfirmationEmailMutation = useMutation(apiClient.sendConfirmationEmail, {
-        onSuccess: () => {
-            showToast({
-                message: 'Correo de verificación enviado, comprueba tu correo',
-                type: ToastMessageType.SUCCESS,
-            });
-            setVerifyEmailButtonState('sent');
-        },
-        onError: (error: Error) => {
-            showToast({ message: error.message, type: ToastMessageType.ERROR });
-            setVerifyEmailButtonState('initial');
-        },
-    });
+    const sendConfirmationEmailMutation = useMutation(
+        apiClient.sendConfirmationEmail,
+        {
+            onSuccess: () => {
+                showToast({
+                    message:
+                        'Correo de verificación enviado, comprueba tu correo',
+                    type: ToastMessageType.SUCCESS,
+                });
+                setVerifyEmailButtonState('sent');
+            },
+            onError: (error: Error) => {
+                showToast({
+                    message: error.message,
+                    type: ToastMessageType.ERROR,
+                });
+                setVerifyEmailButtonState('initial');
+            },
+        }
+    );
 
     const handleConfirmationEmail = () => {
         // Get the email value from the form using watch()
@@ -73,17 +81,20 @@ const Register = () => {
         }
     };
 
-    const validateEmailConfirmationTokenMutation = useMutation(apiClient.validateEmailConfirmationToken, {
-        onSuccess: () => {
-            setStep(2);
-        },
-        onError: (error: Error) => {
-            showToast({
-                message: error.message, type: ToastMessageType.ERROR
-            });
+    const validateEmailConfirmationTokenMutation = useMutation(
+        apiClient.validateEmailConfirmationToken,
+        {
+            onSuccess: () => {
+                setStep(2);
+            },
+            onError: (error: Error) => {
+                showToast({
+                    message: error.message,
+                    type: ToastMessageType.ERROR,
+                });
+            },
         }
-    });
-
+    );
 
     const createCheckoutSessionMutation = useMutation(
         apiClient.createCheckoutSession,
@@ -100,12 +111,12 @@ const Register = () => {
             },
         }
     );
-    
+
     const onSubmit = methods.handleSubmit(async () => {
         if (step === 1) {
             //Email is ensured to be valid by the previous form validation rules
             const email = watch('email');
-            
+
             validateEmailConfirmationTokenMutation.mutate(email);
         } else {
             await createCheckoutSessionMutation.mutate(priceAmount);
@@ -132,7 +143,9 @@ const Register = () => {
                                     <label className="form-label mb-6">
                                         ¿Ya has comprado tu Breeze?
                                         <br />
-                                        <Link to={routes.AUTH.LOGIN}>Inicia sesión</Link>
+                                        <Link to={routes.AUTH.LOGIN}>
+                                            Inicia sesión
+                                        </Link>
                                     </label>
 
                                     <Input
@@ -217,7 +230,7 @@ const Register = () => {
                             {step === 2 && (
                                 <>
                                     {scrollToTop()}
-                                    <h2 className='pb-8'>Detalles de envío</h2>
+                                    <h2 className="pb-8">Detalles de envío</h2>
 
                                     <Input
                                         name="address"
@@ -258,7 +271,7 @@ const Register = () => {
                                             name="zipCode"
                                             type="number"
                                             customClass="w-full"
-                                            // validate={validatePostalCode}
+                                            validate={validatePostalCode}
                                         >
                                             Código postal
                                         </Input>
