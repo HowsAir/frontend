@@ -1,30 +1,18 @@
-import { useMutation } from 'react-query';
+import { useQuery } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { TablePages } from '../../components/common/TablePages';
-import { useEffect } from 'react';
 
 const Admin = () => {
     const {
-        mutate: fetchStatistics,
         data: statistics = [],
         isLoading: loading,
         isError,
-    } = useMutation(apiClient.getUserStatistics, {
+    } = useQuery('userStatistics', apiClient.getUserStatistics, {
+        refetchInterval: 10000,
         onError: (error) => {
             console.error('Error fetching statistics:', error);
         },
     });
-
-    
-    useEffect(() => {
-        fetchStatistics(); // Fetch inicial
-        const interval = setInterval(() => {
-            fetchStatistics();
-        }, 10000); // Fetch cada 10 segundos
-
-        // Limpiar el intervalo al desmontar
-        return () => clearInterval(interval);
-    }, [fetchStatistics]);
 
     return (
         <div className="mx-auto w-fit overflow-hidden rounded-lg border-[1px] border-gray bg-white">
