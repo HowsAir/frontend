@@ -217,7 +217,7 @@ const TermsAndPrivacy = () => {
                     </ul>
                     <p>
                         Para ejercer estos derechos, puede contactarnos en
-                        contacto@howsair.com.
+                        howsair@gmail.com.
                     </p>
 
                     <h3 className="text-lg font-semibold">17. Cookies</h3>
@@ -258,7 +258,7 @@ const TermsAndPrivacy = () => {
                     <p>
                         Para consultas relacionadas con estos términos y la
                         política de privacidad, contáctenos en
-                        contacto@howsair.com.
+                        howsair@gmail.com.
                     </p>
 
                     <p className="text-gray-600 mt-4">
