@@ -262,7 +262,7 @@ export const createCheckoutSession = async (
  * @throws Error - If the token is invalid or the request fails
  * @returns A promise that resolves when the token is successfully validated
  */
-export const validateToken = async (): Promise<void> => {
+export const validateToken = async (): Promise<{ roleId: number }> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate`, {
             method: 'GET',
@@ -277,7 +277,7 @@ export const validateToken = async (): Promise<void> => {
             throw new Error(message || 'Token invalid');
         }
 
-        return response.json();
+        return response.json(); // Expecting { message: "Token is valid", roleId: 1 }
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Error validating token');
