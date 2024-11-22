@@ -24,7 +24,7 @@ const Header = () => {
 
             <div className="flex flex-row items-center gap-10">
                 {/* Conditional rendering based on auth status */}
-                {!isAuthenticated ? (
+                {isAuthenticated ? (
                     <>
                         {/* Admin-only links */}
                         {roleId === 2 && (
