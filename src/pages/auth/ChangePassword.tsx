@@ -69,7 +69,7 @@ const ChangePassword = () => {
 
                     <p className="text-lg mt-4">Escribe tu nueva contraseña</p>
 
-                    <p className="text-sm leading-tight text-neutral-400">
+                    <p className="text-sm leading-tight mb-2 text-neutral-400">
                         Al menos 8 caracteres, incluidas letras mayúsculas y
                         minúsculas, números y caracteres especiales.
                     </p>
@@ -77,7 +77,7 @@ const ChangePassword = () => {
                     <Input
                         name="newPassword"
                         type="password"
-                        customClass="mb-2 w-full"
+                        customClass="!mb-2 w-full"
                         validate={(value) => {
                             const validationResult = passwordValidation(value);
                             return validationResult === true
