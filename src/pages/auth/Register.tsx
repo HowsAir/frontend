@@ -158,8 +158,10 @@ const Register = () => {
                                         name="name"
                                         type="text"
                                         validate={(value) =>
-                                            /^[A-Za-z\s-]+$/.test(value) ||
-                                            'Solo se permiten letras y espacios'
+                                            /^[A-Za-z\sáéíóúÁÉÍÓÚñÑ-]+$/.test(
+                                                value
+                                            ) ||
+                                            'Solo se permiten letras, espacios y tildes'
                                         }
                                     >
                                         Nombre
@@ -169,7 +171,9 @@ const Register = () => {
                                         name="surnames"
                                         type="text"
                                         validate={(value) =>
-                                            /^[A-Za-z\s-]+$/.test(value) ||
+                                            /^[A-Za-z\sáéíóúÁÉÍÓÚñÑ-]+$/.test(
+                                                value
+                                            ) ||
                                             'Solo se permiten letras y espacios'
                                         }
                                     >
@@ -191,7 +195,7 @@ const Register = () => {
                                         </Input>
                                         <button
                                             type="button"
-                                            className={`btn-primary disabled:bg-gray-300 mb-6 mt-2 w-8/12 px-2 py-2.5 text-sm font-normal disabled:text-offblack`}
+                                            className={`btn-primary mb-6 mt-2 w-8/12 px-2 py-2.5 text-sm font-normal disabled:bg-gray disabled:text-offblack`}
                                             onClick={handleConfirmationEmail}
                                             disabled={buttonDisabled}
                                         >
