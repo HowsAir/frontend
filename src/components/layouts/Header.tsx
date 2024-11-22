@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Logo } from './Logo';
 import { routes } from '../../routes/routes';
@@ -17,6 +17,11 @@ const Header = () => {
         }
     };
 
+    const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+        isActive
+            ? 'text-primary font-semibold'
+            : 'transition-colors duration-300 ease-in-out hover:text-primary';
+
     return (
         <header className="fixed top-0 z-50 flex h-20 w-screen flex-row items-center justify-between bg-white px-20 drop-shadow-header">
             <Logo color="primary" />
@@ -27,35 +32,35 @@ const Header = () => {
                     <>
                         {/* Admin-only links */}
                         {roleId === 2 && (
-                            <Link
+                            <NavLink
                                 to={routes.ADMIN.INDEX}
-                                className="hover:text-primary-dark text-primary"
+                                className={getLinkClass}
                             >
                                 Administración
-                            </Link>
+                            </NavLink>
                         )}
 
                         {/* User-only links */}
                         {roleId === 1 && (
                             <>
-                                <Link
+                                <NavLink
                                     to={routes.HOME.MAPS}
-                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                    className={getLinkClass}
                                 >
                                     Mapas
-                                </Link>
-                                <Link
+                                </NavLink>
+                                <NavLink
                                     to={routes.USER.INDEX}
-                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                    className={getLinkClass}
                                 >
                                     Mi nodo
-                                </Link>
-                                <Link
+                                </NavLink>
+                                <NavLink
                                     to={routes.USER.START}
-                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                    className={getLinkClass}
                                 >
                                     Inicio
-                                </Link>
+                                </NavLink>
                             </>
                         )}
 
@@ -74,7 +79,7 @@ const Header = () => {
                                 onClick={async () => await handleLogout()}
                             >
                                 <img
-                                    className="absolute left-1 top-1 size-8"
+                                    className="absolute left-0 top-1 size-8"
                                     src="../../public/icons/logout-icon.svg"
                                     alt="Cerrar sesión"
                                 ></img>
@@ -83,14 +88,24 @@ const Header = () => {
                     </>
                 ) : (
                     <>
-                        <Link to={routes.SHOP.PRODUCT}>Breeze</Link>
-                        <Link to={routes.HOME.MAPS}>Mapas</Link>
-                        <Link
+                        <NavLink
+                            to={routes.SHOP.PRODUCT}
+                            className={getLinkClass}
+                        >
+                            Breeze
+                        </NavLink>
+                        <NavLink
+                            to={routes.HOME.MAPS}
+                            className={getLinkClass}
+                        >
+                            Mapas
+                        </NavLink>
+                        <NavLink
                             to={routes.AUTH.LOGIN}
                             className="clickable h-fit rounded-lg border-2 border-gray bg-transparent px-4 py-3 font-medium text-primary transition-all duration-500 ease-in-out hover:border-sky-300 hover:bg-sky-100"
                         >
                             Iniciar sesión
-                        </Link>
+                        </NavLink>
                     </>
                 )}
             </div>

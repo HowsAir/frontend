@@ -16,7 +16,7 @@ const ProfileHeader: React.FC = () => {
     return (
         <Link
             to={routes.USER.EDIT_PROFILE}
-            className="inline-flex gap-2 rounded-full border-2 border-gray py-1 pl-1 pr-4 no-underline"
+            className="hover:bg-sky-100 transition-all duration-300 ease-in-out inline-flex gap-2 rounded-full border-2 border-gray py-1 pl-1 pr-4 no-underline"
         >
             <div className="pointer-events-none inline-flex gap-2">
                 <img

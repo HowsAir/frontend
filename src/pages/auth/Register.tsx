@@ -15,6 +15,8 @@ import { StepDisplay } from '../../components/widgets/StepDisplay';
 import { validatePostalCode } from '../../utils/PostalCodeValidation';
 import PhoneInput from '../../components/common/PhoneInput';
 import { routes } from '../../routes/routes';
+import { Payment, Shipping, Details } from '../../components/icons/index';
+import { color } from 'chart.js/helpers';
 
 const Register = () => {
     const { showToast } = useAppContext();
@@ -129,7 +131,11 @@ const Register = () => {
 
     return (
         <>
-            <StepDisplay total={3} current={step} />
+            <StepDisplay
+                total={3}
+                current={step}
+                steps={[Details, Shipping, Payment]}
+            />
             <FormProvider {...methods}>
                 <form noValidate onSubmit={onSubmit}>
                     <FormContainer step={step} price={priceAmount}>
