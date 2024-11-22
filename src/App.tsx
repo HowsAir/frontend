@@ -74,7 +74,9 @@ const App = () => {
                     path="/change-password"
                     element={
                         <Layout>
-                            <ChangePassword />
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <ChangePassword />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -124,9 +126,7 @@ const App = () => {
                     path="/forgot-password"
                     element={
                         <Layout>
-                            <ProtectedRoute allowedRoles={[1,2]}>
                                 <ForgotPassword />
-                            </ProtectedRoute>
                         </Layout>
                     }
                 />
