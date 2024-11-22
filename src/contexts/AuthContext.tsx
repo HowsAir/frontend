@@ -1,59 +1,54 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import * as apiClient from '../api/apiClient';
+// AuthContext.tsx
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { validateToken } from '../api/apiClient';
+import { AuthContextType } from '../types/mainTypes';
 
-interface AuthContextProps {
-    isAuthenticated: boolean;
-    roleId: number | null;
-    login: (token: string) => void;
-    logout: () => void;
-    validateToken: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [roleId, setRoleId] = useState<number | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const validateToken = async () => {
+    const validateAuth = async () => {
         try {
-            const response = await apiClient.validateToken();
+            setIsLoading(true);
+            setError(null);
+            const { roleId } = await validateToken();
+            setRoleId(roleId);
             setIsAuthenticated(true);
-            setRoleId(response.roleId); // Set role based on response
-        } catch (error) {
-            console.error('Token validation failed:', error);
+        } catch (err) {
             setIsAuthenticated(false);
-            setRoleId(null); // Reset role if token is invalid
+            setRoleId(null);
+            setError(
+                err instanceof Error ? err.message : 'Authentication failed'
+            );
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    const login = (token: string) => {
-        localStorage.setItem('token', token);
-        validateToken(); // Validate token after login
-    };
-
-    const logout = () => {
-        localStorage.removeItem('token');
-        setIsAuthenticated(false);
-        setRoleId(null);
-    };
-
     useEffect(() => {
-        validateToken(); // Validate token on initial load
+        validateAuth();
     }, []);
 
+    const value = {
+        roleId,
+        isAuthenticated,
+        isLoading,
+        error,
+        validateAuth,
+    };
+
     return (
-        <AuthContext.Provider
-            value={{ isAuthenticated, roleId, login, logout, validateToken }}
-        >
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );
 };
 
-export const useAuth = (): AuthContextProps => {
+export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
         throw new Error('useAuth must be used within an AuthProvider');

@@ -54,7 +54,7 @@ const App = () => {
                     path="/user"
                     element={
                         <Layout>
-                            <ProtectedRoute requiredRole="user">
+                            <ProtectedRoute allowedRoles={[1]}>
                                 <User />
                             </ProtectedRoute>
                         </Layout>
@@ -64,7 +64,7 @@ const App = () => {
                     path="/edit-profile"
                     element={
                         <Layout>
-                            <ProtectedRoute requiredRole="user">
+                            <ProtectedRoute allowedRoles={[1]}>
                                 <EditProfile />
                             </ProtectedRoute>
                         </Layout>
@@ -82,7 +82,7 @@ const App = () => {
                     path="/admin"
                     element={
                         <Layout>
-                            <ProtectedRoute requiredRole="admin">
+                            <ProtectedRoute allowedRoles={[2]}>
                                 <Admin />
                             </ProtectedRoute>
                         </Layout>
@@ -124,7 +124,7 @@ const App = () => {
                     path="/forgot-password"
                     element={
                         <Layout>
-                            <ProtectedRoute>
+                            <ProtectedRoute allowedRoles={[1,2]}>
                                 <ForgotPassword />
                             </ProtectedRoute>
                         </Layout>

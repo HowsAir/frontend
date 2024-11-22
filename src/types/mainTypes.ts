@@ -41,6 +41,14 @@ export interface AppContext {
     showToast: (toastMessage: ToastMessage) => void;
 }
 
+export interface AuthContextType {
+    roleId: number | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    error: string | null;
+    validateAuth: () => Promise<void>;
+}
+
 export interface FreeBreezeApplicationFormData {
     name: string;
     surnames: string;
