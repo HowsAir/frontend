@@ -29,7 +29,7 @@ const Login: React.FC = () => {
                 type: ToastMessageType.SUCCESS,
             });
             queryClient.invalidateQueries('validateToken');
-            navigate(routes.HOME.INDEX);
+            navigate(routes.USER.INDEX);
         },
         onError: (error: any) => {
             const errorMessage =
