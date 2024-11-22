@@ -16,6 +16,7 @@ import User from './pages/user/User';
 import Admin from './pages/admin/Admin';
 import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
+import { ProtectedRoute } from './components/ProtectedRoutes';
 
 const App = () => {
     const location = useLocation();
@@ -53,7 +54,9 @@ const App = () => {
                     path="/user"
                     element={
                         <Layout>
-                            <User />
+                            <ProtectedRoute requiredRole="user">
+                                <User />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -61,7 +64,9 @@ const App = () => {
                     path="/edit-profile"
                     element={
                         <Layout>
-                            <EditProfile />
+                            <ProtectedRoute requiredRole="user">
+                                <EditProfile />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -77,7 +82,9 @@ const App = () => {
                     path="/admin"
                     element={
                         <Layout>
-                            <Admin />
+                            <ProtectedRoute requiredRole="admin">
+                                <Admin />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
@@ -117,7 +124,9 @@ const App = () => {
                     path="/forgot-password"
                     element={
                         <Layout>
-                            <ForgotPassword />
+                            <ProtectedRoute>
+                                <ForgotPassword />
+                            </ProtectedRoute>
                         </Layout>
                     }
                 />
