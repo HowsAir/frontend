@@ -10,11 +10,22 @@ import * as apiClient from '../../api/apiClient';
 import { passwordValidation } from '../../utils/passwordValidation';
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../routes/routes';
+import { useAuth } from '../../contexts/AuthContext';
 
 const ChangePassword = () => {
     const methods = useForm<ChangePasswordFormData>();
     const { showToast } = useAppContext();
     const navigate = useNavigate();
+    const { validateAuth } = useAuth();
+
+    const handleLogout = async () => {
+        try {
+            await apiClient.logout();
+            await validateAuth();
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
 
     const changePasswordMutation = useMutation(apiClient.changePassword, {
         onSuccess: () => {
@@ -24,7 +35,7 @@ const ChangePassword = () => {
             });
             methods.reset();
             setTimeout(() => {
-                apiClient.logout();
+                handleLogout();
                 navigate(routes.AUTH.LOGIN);
             }, 2000);
         },
