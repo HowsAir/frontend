@@ -11,7 +11,7 @@ export const StepDisplay = ({
 }: {
     total: number;
     current: number;
-    steps: React.FC<{ color: string }>[]; 
+    steps: React.FC<{ color: string }>[];
 }) => {
     return (
         <div className="fixed left-1/2 top-20 z-[1000] mb-6 flex w-fit -translate-x-1/2 items-center justify-center rounded-b-3xl bg-white px-3 py-2 drop-shadow-header">
@@ -37,7 +37,9 @@ export const StepDisplay = ({
                         {index < total - 1 && (
                             <div
                                 className={`mx-2 h-[1px] w-20 rounded-full border-2 ${
-                                    isActive ? 'border-primary' : 'border-gray'
+                                    index + 1 < current
+                                        ? 'border-primary'
+                                        : 'border-gray'
                                 }`}
                                 key={`divider-${index}`}
                             />
