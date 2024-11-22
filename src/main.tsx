@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppContextProvider } from './contexts/AppContext.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.tsx';
+import { UserProvider } from './contexts/UserContext.tsx';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -19,9 +20,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
                 <AppContextProvider>
-                    <BrowserRouter>
-                        <App />
-                    </BrowserRouter>
+                    <UserProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </UserProvider>
                 </AppContextProvider>
             </AuthProvider>
         </QueryClientProvider>
