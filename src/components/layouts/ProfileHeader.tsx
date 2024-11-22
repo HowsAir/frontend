@@ -34,14 +34,22 @@ const ProfileHeader: React.FC = () => {
     
 
     return (
-        <Link to={routes.USER.INDEX} className="inline-flex gap-2 rounded-full border-2 border-gray pl-1 pr-4 py-1 no-underline">
+        <Link
+            to={routes.USER.EDIT_PROFILE}
+            className="inline-flex gap-2 rounded-full border-2 border-gray py-1 pl-1 pr-4 no-underline"
+        >
             <div className="pointer-events-none inline-flex gap-2">
-            <img
-                src={photoUrl || ''}
-                alt={`Foto de ${name || 'User'}`}
-                className="size-8 rounded-full border-[1px] border-primary pointer-events-none"
-            />
-            <label className='self-center select-none'>{name || 'User'}</label>
+                <img
+                    src={
+                        photoUrl ||
+                        'https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif'
+                    }
+                    alt={`Foto de ${name || 'User'}`}
+                    className="pointer-events-none size-8 rounded-full border-[1px] border-primary"
+                />
+                <label className="select-none self-center">
+                    {name || 'User'}
+                </label>
             </div>
         </Link>
     );

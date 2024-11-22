@@ -24,7 +24,7 @@ const Header = () => {
 
             <div className="flex flex-row items-center gap-10">
                 {/* Conditional rendering based on auth status */}
-                {isAuthenticated ? (
+                {!isAuthenticated ? (
                     <>
                         {/* Admin-only links */}
                         {roleId === 2 && (
@@ -61,13 +61,14 @@ const Header = () => {
                                 ></img>
                             </button>
                             <button
-                                className="size-10 rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-sky-100"
+                                className="relative size-10 rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-sky-100"
                                 onClick={async () => await handleLogout()}
                             >
-                                <LogoutIcon
-                                    color1={'#4074E7'}
-                                    color2={'#112233'}
-                                ></LogoutIcon>
+                                <img
+                                    className="absolute size-8 top-1 left-1"
+                                    src="../../public/icons/logout-icon.svg"
+                                    alt="Cerrar sesión"
+                                ></img>
                             </button>
                         </div>
                     </>
