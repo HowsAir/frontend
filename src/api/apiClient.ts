@@ -434,6 +434,8 @@ export const updateUserProfile = async (formData: FormData): Promise<void> => {
 
 /**
  * @brief Updates the user's password in the system using the API
+ * @author Mario Luis
+ *
  * @param {object} data - Object containing the current and new passwords
  * @param {string} data.currentPassword - The user's current password
  * @param {string} data.newPassword - The user's new password
