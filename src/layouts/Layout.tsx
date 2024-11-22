@@ -21,7 +21,7 @@ const Layout = ({ children, noPadding }: Props) => {
         <div className="flex flex-col bg-offwhite">
             <Header />
             <motion.div
-                className={`mx-0 min-h-screen flex-1 ${noPadding ? '' : 'py-44'}`}
+                className={`mx-0 min-h-screen flex-1 ${noPadding ? '' : 'py-36'}`}
                 variants={contentVariants}
                 initial="initial"
                 animate="animate"
