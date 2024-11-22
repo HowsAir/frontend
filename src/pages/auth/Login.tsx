@@ -87,7 +87,7 @@ const Login: React.FC = () => {
                         </Input>
 
                         <Link
-                            to="/forgot-password"
+                            to={routes.AUTH.FORGOT_PASSWORD}
                             className="text-neutral-400 underline"
                         >
                             Olvidé mi contraseña

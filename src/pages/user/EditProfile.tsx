@@ -92,7 +92,7 @@ const EditProfile = () => {
 
     const handleCancel = () => {
         setProfile({ ...originalData });
-        navigate(-1);
+        navigate('/user');
     };
 
     const hasChanges =

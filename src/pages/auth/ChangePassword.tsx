@@ -4,21 +4,18 @@ import {
     ChangePasswordFormData,
     ToastMessageType,
 } from '../../types/mainTypes';
-import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useAppContext } from '../../contexts/AppContext';
 import * as apiClient from '../../api/apiClient';
 import { passwordValidation } from '../../utils/passwordValidation';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from '../../routes/routes';
-import { delay } from 'framer-motion';
 
 const ChangePassword = () => {
     const methods = useForm<ChangePasswordFormData>();
-    const { showToast } = useAppContext(); // Para mostrar mensajes de éxito o error
+    const { showToast } = useAppContext();
     const navigate = useNavigate();
 
-    // Mutación para cambiar la contraseña
     const changePasswordMutation = useMutation(apiClient.changePassword, {
         onSuccess: () => {
             showToast({
@@ -28,7 +25,7 @@ const ChangePassword = () => {
             methods.reset();
             setTimeout(() => {
                 apiClient.logout();
-                navigate(routes.HOME.INDEX);
+                navigate(routes.AUTH.LOGIN);
             }, 2000);
         },
         onError: (error: any) => {
@@ -43,10 +40,11 @@ const ChangePassword = () => {
     });
 
     const onSubmit = methods.handleSubmit((data) => {
-        changePasswordMutation.mutate({
+        const requestData = {
             currentPassword: data.password,
             newPassword: data.newPassword,
-        });
+        };
+        changePasswordMutation.mutate(requestData);
     });
 
     return (
@@ -59,15 +57,17 @@ const ChangePassword = () => {
                     <p className="text-lg">
                         Escribe tu contraseña actual para cambiarla
                     </p>
-                    <Input
-                        name="password"
-                        type="password"
-                        customClass="w-full"
-                    >
+                    <Input name="password" type="password" customClass="w-full !mb-2">
                         Contraseña actual
                     </Input>
+                    <Link
+                        to={routes.AUTH.FORGOT_PASSWORD}
+                        className="text-neutral-400 underline"
+                    >
+                        Olvidé mi contraseña
+                    </Link>
 
-                    <p className="text-lg">Escribe tu nueva contraseña</p>
+                    <p className="text-lg mt-4">Escribe tu nueva contraseña</p>
 
                     <p className="text-sm leading-tight text-neutral-400">
                         Al menos 8 caracteres, incluidas letras mayúsculas y
@@ -102,7 +102,7 @@ const ChangePassword = () => {
 
                     <button
                         type="submit"
-                        className="btn-primary text-lg w-full py-2"
+                        className="btn-primary w-full py-2 text-lg"
                         disabled={changePasswordMutation.isLoading}
                     >
                         {changePasswordMutation.isLoading
