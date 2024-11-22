@@ -64,7 +64,7 @@ const App = () => {
                     path="/edit-profile"
                     element={
                         <Layout>
-                            <ProtectedRoute allowedRoles={[1]}>
+                            <ProtectedRoute allowedRoles={[1,2]}>
                                 <EditProfile />
                             </ProtectedRoute>
                         </Layout>
