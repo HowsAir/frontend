@@ -30,7 +30,7 @@ const User = () => {
             <h3 className="mx-auto mb-10 lg:mx-0">Tu nodo hoy</h3>
 
             <div className="flex flex-col gap-12 lg:max-h-[60dvh] lg:flex-row">
-                <div className="space-y-12 lg:space-y-6">
+                <div className="h-[481px] space-y-12 lg:space-y-6">
                     <div className="space-y-12 md:inline-flex md:gap-12 md:space-y-0">
                         <MeasureCard value={80} type="PPM" />
                         {dailyDistance !== null && (
