@@ -90,14 +90,12 @@ const EditProfile = () => {
     const handleCancel = () => {
         setProfile({ ...originalData });
         navigate(-1);
-    }
+    };
 
     const hasChanges =
         profile.name !== originalData.name ||
         profile.surnames !== originalData.surnames ||
         profile.profilePic !== originalData.profilePic;
-
-
 
     return (
         <form
@@ -117,7 +115,7 @@ const EditProfile = () => {
                     className="mx-auto size-40 rounded-full text-center"
                     alt="Foto de perfil"
                 />
-                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray hover:bg-neutral-400 transition-all duration-300 ease-in-out p-2">
+                <label className="absolute right-32 top-28 w-fit cursor-pointer rounded-full border-4 border-white bg-gray p-2 transition-all duration-300 ease-in-out hover:bg-neutral-400">
                     <img
                         className="size-fit"
                         src="../../public/icons/pencil-icon.svg"
@@ -167,18 +165,30 @@ const EditProfile = () => {
                 Cambiar contraseña
             </Link>
 
-            <button
-                type="submit"
-                disabled={isSubmitting || !hasChanges}
-                className={`btn-primary mt-8 w-full text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${!hasChanges ? 'bg-gray text-offblack' : ''}`}
-                onClick={!hasChanges ? handleCancel : undefined}
-            >
-                {!hasChanges
-                    ? 'Cancelar'
-                    : isSubmitting
-                      ? 'Guardando...'
-                      : 'Guardar cambios'}
-            </button>
+            <div className={`relative mt-8 inline-flex w-full gap-4`}>
+                {/* Save Button */}
+                <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`btn-primary relative text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${
+                        hasChanges ? 'w-1/2' : 'absolute w-0 px-0 opacity-0'
+                    }`}
+                >
+                    {isSubmitting ? 'Guardando...' : 'Guardar'}
+                </button>
+
+                {/* Cancel Button */}
+                <button
+                    onClick={handleCancel}
+                    className={`btn-primary bg-gray text-base font-medium text-offblack transition-all duration-300 ${
+                        hasChanges
+                            ? 'relative w-1/2'
+                            : 'absolute right-0 w-full'
+                    }`}
+                >
+                    Cancelar
+                </button>
+            </div>
         </form>
     );
 };
