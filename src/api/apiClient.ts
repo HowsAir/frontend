@@ -312,6 +312,33 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     }
 };
 
+
+export const getUsersDailyDistance = async (): Promise<number> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/today-total-distance`,
+            {
+                method: 'GET',
+                credentials: 'include', // Cookie-based authentication
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching users daily distance');
+        }
+
+        const data = await response.json();
+        return data.totalDistance; // Only return the usersStatistics array
+    } catch (error) {
+        console.error('Get user daily distance error:', error);
+        throw new Error('Error fetching users daily distance');
+    }
+}
+
 /**
  * @brief Fetches the user profile from the API
  * @author Mario Luis 

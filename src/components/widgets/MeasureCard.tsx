@@ -13,7 +13,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({ value, type }) => {
                 ></div>
                 <div className="flex flex-col">
                     <p className="text-lg font-medium" id="title">
-                        Última medición
+                        {type === 'PPM' ? 'Ultima medición' : 'Recorrido'}
                     </p>
                     <label
                         className="leading-none text-lg font-normal text-neutral-500"
