@@ -7,7 +7,7 @@ const Landing = () => {
     const Icon = ArrowDown;
 
     return (
-        <>
+        <div className='overflow-x-hidden'>
             <section className="relative h-screen w-full overflow-hidden bg-hero bg-cover">
                 <div
                     className="absolute inset-0 bg-[rgba(143,143,143,0.28)]"
@@ -42,13 +42,23 @@ const Landing = () => {
                 </div>
             </section>
             <div id="target" className="relative -top-20"></div>
-            <section className="mx-auto flex max-w-[600px] flex-col items-center py-20">
+            <section className=" relative mx-auto flex w-full flex-col items-center py-20">
                 <h2>¿Qué hacemos en HowsAir?</h2>
-                <p className="text-center">
+                <p className="max-w-[600px] text-center">
                     Desarrollamos mapas de calidad del aire para los ciudadanos
                     gracias a la participación de nuestros fieles portadores de
                     Breeze.
                 </p>
+
+                <img
+                    src="/nube-lateral.svg"
+                    className="absolute -right-10 top-52 w-28 scale-y-125 object-cover"
+                ></img>
+
+                <img
+                    src="/nube-lateral.svg"
+                    className="absolute -left-12 top-14 w-40 -scale-y-125 scale-x-[-1] transform object-cover"
+                ></img>
             </section>
 
             <section className="flex w-fit flex-row justify-center py-20 sm:gap-0 lg:gap-16">
@@ -154,7 +164,7 @@ const Landing = () => {
                     className="scale-x-[-1] transform rounded-[50px] object-cover sm:hidden md:mt-12 md:inline-block md:w-4/5 lg:w-1/3"
                 ></img>
             </section>
-        </>
+        </div>
     );
 };
 
