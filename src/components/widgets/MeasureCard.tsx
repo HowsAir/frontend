@@ -5,10 +5,10 @@ interface MeasureCardProps {
 
 export const MeasureCard: React.FC<MeasureCardProps> = ({ value, type }) => {
     return (
-        <div className="w-fit min-w-80 min-h-52 py-4 px-6  rounded-lg border-[1px] border-gray bg-white flex flex-col">
+        <div className="flex min-h-52 w-fit min-w-80 flex-col rounded-lg border-[1px] border-gray bg-white px-6 py-4">
             <div className="inline-flex gap-2">
                 <div
-                    className="size-4 rounded-md bg-red-500 mt-[6px]"
+                    className="color-blue mt-[6px] size-4 rounded-md bg-primary"
                     id="measure-color"
                 ></div>
                 <div className="flex flex-col">
@@ -16,16 +16,16 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({ value, type }) => {
                         {type === 'PPM' ? 'Ultima medición' : 'Recorrido'}
                     </p>
                     <label
-                        className="leading-none text-lg font-normal text-neutral-500"
+                        className="text-lg font-normal leading-none text-neutral-500"
                         id="time"
                     >
-                        Hace 20 min.
+                        Ahora
                     </label>
                 </div>
             </div>
-            <h1 className="m-auto text-offblack flex w-fit">
+            <h1 className="m-auto flex w-fit text-offblack">
                 {value}
-                <h3 className="mt-auto mb-3 ml-1">{type}</h3>
+                <h3 className="mb-3 ml-1 mt-auto">{type}</h3>
             </h1>
         </div>
     );
