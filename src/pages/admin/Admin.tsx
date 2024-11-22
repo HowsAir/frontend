@@ -1,40 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import * as apiClient from '../../api/apiClient';
-import { UserStatistics } from '../../api/data';
 import { TablePages } from '../../components/common/TablePages';
+import { useEffect } from 'react';
 
 const Admin = () => {
-    const [statistics, setStatistics] = useState<UserStatistics[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let isMounted = true;
-
-        const fetchStatistics = async () => {
-            try {
-                const data = await apiClient.getUserStatistics();
-                if (isMounted) {
-                    console.log('Statistics:', data);
-                    setStatistics(data);
-                }
-            } catch (error) {
-                console.error('Error fetching statistics:', error);
-                if (isMounted) setStatistics([]);
-            } finally {
-                if (isMounted) setLoading(false);
-            }
-        };
-
-        fetchStatistics();
-        const interval = setInterval(fetchStatistics, 10000);
-
-        return () => {
-            isMounted = false;
-            clearInterval(interval);
-        };
-    }, []);
+    const {
+        mutate: fetchStatistics,
+        data: statistics = [],
+        isLoading: loading,
+        isError,
+    } = useMutation(apiClient.getUserStatistics, {
+        onError: (error) => {
+            console.error('Error fetching statistics:', error);
+        },
+    });
 
     
+    useEffect(() => {
+        fetchStatistics(); // Fetch inicial
+        const interval = setInterval(() => {
+            fetchStatistics();
+        }, 10000); // Fetch cada 10 segundos
+
+        // Limpiar el intervalo al desmontar
+        return () => clearInterval(interval);
+    }, [fetchStatistics]);
 
     return (
         <div className="mx-auto w-fit overflow-hidden rounded-lg border-[1px] border-gray bg-white">
@@ -46,9 +36,11 @@ const Admin = () => {
             </p>
             {loading ? (
                 <p>Cargando Usuarios...</p>
+            ) : isError ? (
+                <p>Error al cargar usuarios. Inténtelo de nuevo más tarde.</p>
             ) : (
                 <>
-                    <table className="">
+                    <table className="table-auto">
                         <thead>
                             <tr className="border-b-[1px] border-gray bg-[#F9FAFB]">
                                 <th className="px-5 py-1 font-normal text-neutral-600">
@@ -58,7 +50,7 @@ const Admin = () => {
                                     Nombre
                                 </th>
                                 <th className="px-5 py-1 font-normal text-neutral-600">
-                                    Telefono
+                                    Teléfono
                                 </th>
                                 <th className="px-5 py-1 font-normal text-neutral-600">
                                     Nodo_ID
@@ -77,42 +69,41 @@ const Admin = () => {
                         <tbody>
                             {statistics.length > 0 ? (
                                 statistics.map((statistic) => (
-                                    <>
-                                        <tr
-                                            key={statistic.id}
-                                            className="border-b-[1px] border-gray"
-                                        >
-                                            <td className="px-5 py-4">
-                                                {statistic.id}
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {statistic.name +
-                                                    ' ' +
-                                                    statistic.surnames}
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {statistic.phone}
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {statistic.nodeId}
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {
-                                                    statistic.averageDailyActiveHours
-                                                }
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {statistic.averageDailyDistance}
-                                            </td>
-                                            <td className="px-5 py-4">
-                                                {statistic.nodeLastConnection}
-                                            </td>
-                                        </tr>
-                                    </>
+                                    <tr
+                                        key={statistic.id}
+                                        className="border-b-[1px] border-gray"
+                                    >
+                                        <td className="px-5 py-4">
+                                            {statistic.id}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.name +
+                                                ' ' +
+                                                statistic.surnames}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.phone}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.nodeId}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.averageDailyActiveHours}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.averageDailyDistance}
+                                        </td>
+                                        <td className="px-5 py-4">
+                                            {statistic.nodeLastConnection}
+                                        </td>
+                                    </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={7} className='text-center py-6'>
+                                    <td
+                                        colSpan={7}
+                                        className="py-6 text-center"
+                                    >
                                         No hay datos disponibles.
                                     </td>
                                 </tr>
