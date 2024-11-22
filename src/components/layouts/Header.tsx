@@ -39,14 +39,24 @@ const Header = () => {
                         {/* User-only links */}
                         {roleId === 1 && (
                             <>
-                                <Link to={routes.HOME.MAPS}>Mapas</Link>
+                                <Link
+                                    to={routes.HOME.MAPS}
+                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                >
+                                    Mapas
+                                </Link>
                                 <Link
                                     to={routes.USER.INDEX}
                                     className="transition-colors duration-300 ease-in-out hover:text-primary"
                                 >
                                     Mi nodo
                                 </Link>
-                                <Link to="/">Inicio</Link>
+                                <Link
+                                    to={routes.USER.START}
+                                    className="transition-colors duration-300 ease-in-out hover:text-primary"
+                                >
+                                    Inicio
+                                </Link>
                             </>
                         )}
 
@@ -65,7 +75,7 @@ const Header = () => {
                                 onClick={async () => await handleLogout()}
                             >
                                 <img
-                                    className="absolute size-8 top-1 left-1"
+                                    className="absolute left-1 top-1 size-8"
                                     src="../../public/icons/logout-icon.svg"
                                     alt="Cerrar sesión"
                                 ></img>

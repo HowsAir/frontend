@@ -17,6 +17,7 @@ import Admin from './pages/admin/Admin';
 import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
 import { ProtectedRoute } from './components/ProtectedRoutes';
+import Start from './pages/user/Start';
 
 const App = () => {
     const location = useLocation();
@@ -64,7 +65,7 @@ const App = () => {
                     path="/edit-profile"
                     element={
                         <Layout>
-                            <ProtectedRoute allowedRoles={[1,2]}>
+                            <ProtectedRoute allowedRoles={[1, 2]}>
                                 <EditProfile />
                             </ProtectedRoute>
                         </Layout>
@@ -115,6 +116,14 @@ const App = () => {
                     }
                 />
                 <Route
+                    path="/start"
+                    element={
+                        <Layout>
+                            <Start />
+                        </Layout>
+                    }
+                />
+                <Route
                     path="/free-breeze-application"
                     element={
                         <Layout>
@@ -126,7 +135,7 @@ const App = () => {
                     path="/forgot-password"
                     element={
                         <Layout>
-                                <ForgotPassword />
+                            <ForgotPassword />
                         </Layout>
                     }
                 />

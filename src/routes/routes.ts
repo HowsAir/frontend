@@ -21,6 +21,7 @@ export const routes = {
     USER: {
         INDEX: '/user',
         EDIT_PROFILE: '/edit-profile',
+        START: '/start',
     },
     ADMIN: {
         INDEX: '/admin',
