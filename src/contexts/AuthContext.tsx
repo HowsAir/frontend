@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as apiClient from '../api/apiClient';
 
 interface AuthContextProps {
     isAuthenticated: boolean;
-    role: string | null; // Ejemplo: 'admin' | 'user' | null
+    roleId: number | null;
     login: (token: string) => void;
     logout: () => void;
+    validateToken: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -13,47 +15,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [role, setRole] = useState<string | null>(null);
+    const [roleId, setRoleId] = useState<number | null>(null);
 
-    useEffect(() => {
-        // Verifica si hay un token almacenado
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decoded = decodeToken(token);
+    const validateToken = async () => {
+        try {
+            const response = await apiClient.validateToken();
             setIsAuthenticated(true);
-            setRole(decoded.role);
+            setRoleId(response.roleId); // Set role based on response
+        } catch (error) {
+            console.error('Token validation failed:', error);
+            setIsAuthenticated(false);
+            setRoleId(null); // Reset role if token is invalid
         }
-    }, []);
+    };
 
     const login = (token: string) => {
         localStorage.setItem('token', token);
-        const decoded = decodeToken(token);
-        setIsAuthenticated(true);
-        setRole(decoded.role);
+        validateToken(); // Validate token after login
     };
 
     const logout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);
-        setRole(null);
+        setRoleId(null);
     };
 
+    useEffect(() => {
+        validateToken(); // Validate token on initial load
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, role, login, logout }}>
+        <AuthContext.Provider
+            value={{ isAuthenticated, roleId, login, logout, validateToken }}
+        >
             {children}
         </AuthContext.Provider>
     );
 };
 
-export const useAuth = () => {
+export const useAuth = (): AuthContextProps => {
     const context = useContext(AuthContext);
-    if (!context)
+    if (!context) {
         throw new Error('useAuth must be used within an AuthProvider');
+    }
     return context;
-};
-
-// Helper para decodificar tokens (ejemplo usando JWT)
-const decodeToken = (token: string): { role: string } => {
-    const payload = token.split('.')[1];
-    return JSON.parse(atob(payload)); 
 };
