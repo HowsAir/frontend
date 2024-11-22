@@ -11,6 +11,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Input } from '../../components/common/Input';
 import FormContainer from '../../components/layouts/FormContainer';
 import { routes } from '../../routes/routes';
+import { useUser } from '../../contexts/UserContext';
 
 const Login: React.FC = () => {
     const { showToast } = useAppContext();
@@ -27,10 +28,13 @@ const Login: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const { refreshUser } = useUser(); // Import this from UserContext
+
     const mutation = useMutation(apiClient.login, {
         onSuccess: async () => {
             try {
-                // After successful login, validate auth which will update the context
+                // After successful login, fetch and set user profile
+                await refreshUser();
                 await validateAuth();
 
                 showToast({
@@ -38,7 +42,7 @@ const Login: React.FC = () => {
                     type: ToastMessageType.SUCCESS,
                 });
 
-                // Navigate based on role - the role will be available in the auth context
+                // Navigate based on role
                 const { roleId } = await apiClient.validateToken();
                 switch (roleId) {
                     case 2: // Admin
@@ -48,13 +52,11 @@ const Login: React.FC = () => {
                         navigate(routes.USER.INDEX);
                         break;
                     default:
-                        // If we have a 'from' location, go there, otherwise go home
-                        navigate(from);
+                        navigate(from); // Default to "from" path or home
                         break;
                 }
 
-                // Invalidate any relevant queries
-                queryClient.invalidateQueries('user');
+                queryClient.invalidateQueries('user'); // Optional: Revalidate other user-related queries
             } catch (error) {
                 showToast({
                     message: 'Error al validar la sesión',

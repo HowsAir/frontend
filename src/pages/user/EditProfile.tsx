@@ -33,41 +33,22 @@ const EditProfile = () => {
     ); // For image preview
 
     useEffect(() => {
-        const getProfileData = async () => {
-            try {
-                const profile = await apiClient.getUserProfile();
-                const profileData = {
-                    name: profile.name || 'Nombre',
-                    surnames: profile.surnames || 'Apellidos',
-                    email: profile.email || 'email@falso.es',
-                    profilePic: profile.photoUrl,
-                };
-                setProfile(profileData);
-                setOriginalData(profileData);
-                setPreviewUrl(profileData.profilePic); // Update preview
-                updateUser(profileData);
-            } catch (error) {
-                console.error('Error fetching profile data:', error);
-                showToast({
-                    message: 'Error al cargar el perfil.',
-                    type: ToastMessageType.ERROR,
-                });
-            }
-        };
-
-        if (!user) {
-            // Prevent calling if user is already loaded
-            getProfileData();
+        if (user) {
+            const profileData = {
+                name: user.name,
+                surnames: user.surnames,
+                email: user.email,
+                profilePic: user.photoUrl,
+            };
+            setProfile(profileData);
+            setOriginalData(profileData);
+            setPreviewUrl(profileData.profilePic); // Update preview
         }
+    }, [user]);
 
-        return () => {
-            // Cleanup previous object URLs to avoid memory leaks
-            if (previewUrl && previewUrl.startsWith('blob:')) {
-                URL.revokeObjectURL(previewUrl);
-            }
-        };
-    }, [user, updateUser, showToast]);
-
+    if (!user) {
+        return <div>Loading profile...</div>;
+    }
 
     const mutation = useMutation(apiClient.updateUserProfile, {
         onSuccess: async () => {
