@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { useAppContext } from '../../contexts/AppContext';
 import { ToastMessageType } from '../../types/mainTypes';
@@ -7,6 +8,9 @@ import { routes } from '../../routes/routes';
 
 const EditProfile = () => {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const { showToast } = useAppContext();
+
     const [profile, setProfile] = useState<{
         name: string;
         surnames: string;
@@ -52,39 +56,38 @@ const EditProfile = () => {
         getProfileData();
     }, []);
 
-    const { showToast } = useAppContext();
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent page reload
-        setIsSubmitting(true);
-
-        try {
-            const formData = new FormData();
-            if (profile.name) formData.append('name', profile.name);
-            if (profile.surnames) formData.append('surnames', profile.surnames);
-            if (
-                profile.profilePic &&
-                profile.profilePic !== originalData.profilePic
-            ) {
-                formData.append('photo', profile.profilePic as File);
-            }
-
-            await apiClient.updateUserProfile(formData);
+    // React Query mutation for updating the user profile
+    const mutation = useMutation(apiClient.updateUserProfile, {
+        onSuccess: () => {
             showToast({
                 message: 'Perfil actualizado correctamente',
                 type: ToastMessageType.SUCCESS,
             });
             setOriginalData({ ...profile });
-        } catch (error) {
-            console.error('Error updating profile:', error);
+            queryClient.invalidateQueries(['userProfile']); // Optional: refetch profile data
+        },
+        onError: () => {
             showToast({
                 message: 'Error guardando cambios',
                 type: ToastMessageType.ERROR,
             });
-        } finally {
-            setIsSubmitting(false);
+        },
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent page reload
+
+        const formData = new FormData();
+        if (profile.name) formData.append('name', profile.name);
+        if (profile.surnames) formData.append('surnames', profile.surnames);
+        if (
+            profile.profilePic &&
+            profile.profilePic !== originalData.profilePic
+        ) {
+            formData.append('photo', profile.profilePic as File);
         }
+
+        mutation.mutate(formData);
     };
 
     const handleCancel = () => {
@@ -169,12 +172,12 @@ const EditProfile = () => {
                 {/* Save Button */}
                 <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={mutation.isLoading}
                     className={`btn-primary relative text-base font-medium transition-all duration-300 disabled:bg-gray disabled:text-offblack ${
                         hasChanges ? 'w-1/2' : 'absolute w-0 px-0 opacity-0'
                     }`}
                 >
-                    {isSubmitting ? 'Guardando...' : 'Guardar'}
+                    {mutation.isLoading ? 'Guardando...' : 'Guardar'}
                 </button>
 
                 {/* Cancel Button */}
