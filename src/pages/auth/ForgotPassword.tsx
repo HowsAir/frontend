@@ -113,7 +113,7 @@ function ForgotPassword() {
                                         value
                                     ) || 'Introduce un email válido'
                                 }
-                                customClass="!mb-2 w-full"
+                                customClass="!mb-6 w-full"
                             >
                                 Correo electrónico
                             </Input>
@@ -136,7 +136,7 @@ function ForgotPassword() {
                             <Input
                                 name="verificationCode"
                                 type="number"
-                                customClass="!mb-2 w-full"
+                                customClass="!mb-6 w-full"
                                 validate={(value) =>
                                     /^\d{6}$/.test(value) ||
                                     'El código debe ser un número de 6 dígitos'
@@ -165,7 +165,7 @@ function ForgotPassword() {
                 <>
                     <p className="text-lg">Escribe tu nueva contraseña</p>
 
-                    <p className="text-[0.9rem] leading-[1.5rem] text-neutral-400 mb-4">
+                    <p className="mb-4 text-[0.9rem] leading-[1.5rem] text-neutral-400">
                         Al menos 8 caracteres, incluidas letras mayúsculas y
                         minúsculas, números y caracteres especiales.
                     </p>
