@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { getUserProfile } from '../../api/apiClient'; // Adjust the import path as needed
-import { routes } from '../../routes/routes';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-interface UserProfile {
-    name: string;
-    photoUrl: string;
-    // Include any other fields returned by the API if necessary
-}
+import { useUser } from '../../contexts/UserContext'; // Import the UserContext hook
+import { routes } from '../../routes/routes';
 
 const ProfileHeader: React.FC = () => {
-    const [name, setName] = useState<string | null>(null);
-    const [photoUrl, setPhotoUrl] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    // Use UserContext to access the user data
+    const { user } = useUser(); // Access the user data from the context
 
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const userProfile: UserProfile = await getUserProfile();
-                setName(userProfile.name);
-                setPhotoUrl(userProfile.photoUrl);
-            } catch (error: any) {
-                setError(error.message || 'Failed to fetch user profile');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserProfile();
-    }, []);
-
-    
+    // Destructure user data
+    const name = user?.name || 'User';
+    const photoUrl =
+        user?.photoUrl ||
+        'https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif';
 
     return (
         <Link
@@ -40,16 +20,11 @@ const ProfileHeader: React.FC = () => {
         >
             <div className="pointer-events-none inline-flex gap-2">
                 <img
-                    src={
-                        photoUrl ||
-                        'https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif'
-                    }
-                    alt={`Foto de ${name || 'User'}`}
+                    src={photoUrl}
+                    alt={`Foto de ${name}`}
                     className="pointer-events-none size-8 rounded-full border-[1px] border-primary"
                 />
-                <label className="select-none self-center">
-                    {name || 'User'}
-                </label>
+                <label className="select-none self-center">{name}</label>
             </div>
         </Link>
     );
