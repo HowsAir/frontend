@@ -112,7 +112,7 @@ const Login: React.FC = () => {
                         <Input
                             name="password"
                             type="password"
-                            customClass="w-full !mb-2"
+                            customClass="w-full !mb-4"
                         >
                             Contraseña
                         </Input>
