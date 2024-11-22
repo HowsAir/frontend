@@ -28,7 +28,8 @@ export const API_ERRORS = {
         'Error al verificar el código de restablecimiento de contraseña',
     RESET_PASSWORD: 'Error al restablecer la contraseña',
     SEND_CONFIRMATION_EMAIL: 'El Email debe de ser válido y no estar en uso',
-    VALIDATE_EMAIL_CONFIRMATION_TOKEN: 'Tu Email no ha sido confirmado, revisa tu correo',
+    VALIDATE_EMAIL_CONFIRMATION_TOKEN:
+        'Tu Email no ha sido confirmado, revisa tu correo',
 } as const;
 
 /**
@@ -65,7 +66,6 @@ export const getMeasurements = async (): Promise<MeasurementData[]> => {
         throw new Error(API_ERRORS.GET_MEASUREMENTS);
     }
 };
-
 
 /**
  * @brief Registers a new user with the provided registration data
@@ -107,7 +107,7 @@ export const register = async (data: RegisterFormData): Promise<void> => {
  * @returns {Promise<void>} - A promise that resolves when the email is sent successfully
  *
  * string: email -> sendConfirmationEmail() -> Promise<void>
- * 
+ *
  * This function makes a POST request to the API to initiate an email confirmation process.
  * It expects a valid email address to be included in the request body.
  *
@@ -115,14 +115,17 @@ export const register = async (data: RegisterFormData): Promise<void> => {
  */
 export const sendConfirmationEmail = async (email: string): Promise<void> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/auth/confirmation-email`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email }),
-        });
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/confirmation-email`,
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            }
+        );
 
         if (!response.ok) {
             const { message }: { message: string } = await response.json();
@@ -140,26 +143,33 @@ export const sendConfirmationEmail = async (email: string): Promise<void> => {
  * @returns {Promise<void>} - A promise that resolves when the token is validated successfully
  *
  * string: email -> validateEmailConfirmationToken() -> Promise<void>
- * 
+ *
  * This function makes a GET request to the API to validate an email confirmation token.
  * It expects the email address to be sent as a query parameter.
  *
  * @throws Error - If the validation fails or the response is invalid
  */
-export const validateEmailConfirmationToken = async (email: string): Promise<void> => {
+export const validateEmailConfirmationToken = async (
+    email: string
+): Promise<void> => {
     try {
         const encodedEmail = encodeURIComponent(email);
-        const response = await fetch(`${API_BASE_URL}/api/v1/auth/validate-email-confirmation-token?email=${encodedEmail}`, {
-            method: 'GET',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/validate-email-confirmation-token?email=${encodedEmail}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
 
         if (!response.ok) {
             const { message }: { message: string } = await response.json();
-            throw new Error(message || 'Error validating email confirmation token');
+            throw new Error(
+                message || 'Error validating email confirmation token'
+            );
         }
     } catch (error) {
         console.error('Error:', error);
@@ -276,8 +286,8 @@ export const validateToken = async (): Promise<void> => {
 
 /**
  * @brief Fetches the user statistics from the API
- * @author Mario Luis 
- * 
+ * @author Mario Luis
+ *
  * getUserStatistics -> Promise<UserStatistics[]>
  *
  * This function makes a GET request to the API to retrieve user statistics.
@@ -312,7 +322,18 @@ export const getUserStatistics = async (): Promise<UserStatistics[]> => {
     }
 };
 
-
+/**
+ * @brief Fetches today's total distance covered by users from the API
+ * @author Mario Luis
+ *
+ * getUsersDailyDistance -> Promise<number>
+ *
+ * This function makes a GET request to the API to retrieve the total distance covered by users today.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the distance fails or the response is invalid
+ * @returns {Promise<number>} - A promise that resolves with the total distance for the day
+ */
 export const getUsersDailyDistance = async (): Promise<number> => {
     try {
         const response = await fetch(
@@ -337,12 +358,12 @@ export const getUsersDailyDistance = async (): Promise<number> => {
         console.error('Get user daily distance error:', error);
         throw new Error('Error fetching users daily distance');
     }
-}
+};
 
 /**
  * @brief Fetches the user profile from the API
- * @author Mario Luis 
- * 
+ * @author Mario Luis
+ *
  * getUserProfile -> Promise<UserProfile>
  *
  * This function makes a GET request to the API to retrieve the user's profile.
@@ -378,14 +399,13 @@ export const getUserProfile = async (): Promise<UserProfile> => {
     }
 };
 
-
 /**
  * @brief Updates the user's profile with the provided form data
- * @author Mario Luis 
+ * @author Mario Luis
  * @param {FormData} formData - The form data to update the user's profile
  *
  * FormData: formData -> updateUserProfile() -> Promise<void>
- * 
+ *
  * This function makes a PATCH request to the API to update the user's profile.
  * It expects a FormData object to be sent in the request body.
  *
@@ -412,8 +432,20 @@ export const updateUserProfile = async (formData: FormData): Promise<void> => {
     }
 };
 
-
-
+/**
+ * @brief Updates the user's password in the system using the API
+ * @param {object} data - Object containing the current and new passwords
+ * @param {string} data.currentPassword - The user's current password
+ * @param {string} data.newPassword - The user's new password
+ *
+ * changePassword -> Promise<void>
+ *
+ * This function makes a PUT request to the API to change the user's password.
+ * It requires the user to be authenticated and provide the necessary credentials.
+ *
+ * @throws Error - If the password update fails or the response is invalid
+ * @returns {Promise<void>} - Resolves when the password has been successfully changed
+ */
 export const changePassword = async (data: {
     currentPassword: string;
     newPassword: string;
