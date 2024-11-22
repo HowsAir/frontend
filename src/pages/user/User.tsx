@@ -44,7 +44,7 @@ const User = () => {
                     <AirQualityGraph />
                 </div>
 
-                <MonthlyObjective objective={20} />
+                <MonthlyObjective objective={20} current={dailyDistance ?? 0} />
             </div>
         </div>
     );
