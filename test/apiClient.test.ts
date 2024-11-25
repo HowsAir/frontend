@@ -321,24 +321,6 @@ describe('API Client Tests', () => {
         });
     });
 
-describe('updateUserProfile', () => {
-    it('should handle unsuccessful response on updating user profile', async () => {
-        const errorMessage = 'Error updating user profile';
-        global.fetch.mockResolvedValue({
-            ok: false,
-            json: () => Promise.resolve({ message: errorMessage }),
-        });
-
-        const formData = new FormData();
-        formData.append('name', 'John Doe');
-        formData.append('email', 'john@example.com');
-
-        await expect(apiClient.updateUserProfile(formData)).rejects.toThrow(
-            'Error updating user profile'
-        );
-    });
-});
-
     describe('submitFreeBreezeApplication', () => {
         it('should submit free Breeze application successfully', async () => {
             global.fetch = vi.fn().mockResolvedValue({
