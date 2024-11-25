@@ -13,7 +13,7 @@
     }
 
     .btn-secondary {
-        @apply h-fit w-fit rounded-lg border-2 border-primary bg-offwhite px-12 py-3 text-[20px] font-semibold text-primary;
+        @apply h-fit w-fit rounded-lg border-2 border-primary bg-offwhite px-12 py-2.5 text-[20px] font-semibold text-primary;
     }
 
     .btn-submit {
