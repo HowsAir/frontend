@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import Eye from '../icons/Eye';
 
 interface InputProps {
     name: string;
@@ -48,11 +49,17 @@ export function Input({
         validationRules.validate = validate;
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className="relative flex w-full flex-col">
             <input
                 className={`mb-6 mt-2 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${customClass} ${readOnly && 'bg-zinc-300'} `}
-                type={type}
+                type={showPassword && type === 'password' ? 'text' : type}
                 id={name}
                 placeholder={String(children)}
                 value={value}
@@ -60,6 +67,15 @@ export function Input({
                 disabled={readOnly}
                 {...register(name, validationRules)}
             />
+            {type === 'password' && (
+                <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-2 top-[18px] text-primary"
+                >
+                    <Eye>{showPassword ? 'show' : 'hide'}</Eye>
+                </button>
+            )}
             {errors[name] && (
                 <span className="absolute top-12 text-sm text-red-500">
                     {typeof errors[name]?.message === 'string'
