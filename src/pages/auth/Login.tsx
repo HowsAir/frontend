@@ -90,7 +90,7 @@ const Login: React.FC = () => {
                     onSubmit={onSubmit}
                     className="form rounded-br-lg rounded-tr-lg"
                 >
-                    <div className="flex w-10/12 flex-col">
+                    <div className="flex w-10/12 flex-col w-full">
                         <h2>Bienvenido</h2>
 
                         <label className="form-label mb-4">
@@ -102,7 +102,6 @@ const Login: React.FC = () => {
                         <Input
                             name="email"
                             type="email"
-                            customClass="w-full"
                             validate={(value) =>
                                 /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value) ||
                                 'Introduce un email válido'
@@ -114,7 +113,7 @@ const Login: React.FC = () => {
                         <Input
                             name="password"
                             type="password"
-                            customClass="w-full !mb-4"
+                            customClass="!mb-4"
                         >
                             Contraseña
                         </Input>
@@ -126,7 +125,7 @@ const Login: React.FC = () => {
                             Olvidé mi contraseña
                         </Link>
                         <button
-                            className="btn-submit"
+                            className="btn-submit mr-36"
                             type="submit"
                             disabled={isLoading}
                         >

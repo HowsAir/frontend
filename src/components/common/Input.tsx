@@ -71,7 +71,7 @@ export function Input({
                 <button
                     type="button"
                     onClick={togglePasswordVisibility}
-                    className="absolute right-2 top-[18px] text-primary"
+                    className="absolute right-[5.5rem] top-[18px] text-primary"
                 >
                     <Eye>{showPassword ? 'show' : 'hide'}</Eye>
                 </button>
