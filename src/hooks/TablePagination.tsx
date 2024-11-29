@@ -1,52 +1,46 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-// Custom hook to handle pagination
-const usePagination = (data: any[], pageSize: number) => {
-    const totalPages = Math.ceil(data.length / pageSize);
-    const [currentPage, setCurrentPage] = useState(1);
+export const usePagination = (
+    data: any[],
+    pageLength: number,
+    currentPage: number,
+    onPageChange: (page: number) => void
+) => {
     const [inputPage, setInputPage] = useState('');
 
-    const currentData = data.slice(
-        (currentPage - 1) * pageSize,
-        currentPage * pageSize
+    const totalPages = useMemo(
+        () => Math.ceil(data.length / pageLength),
+        [data.length, pageLength]
     );
 
     const handlePageClick = (page: number) => {
         if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
-            setInputPage(''); // Reset input when changing page via buttons
+            onPageChange(page); // Notify parent of page change
         }
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputPage(e.target.value);
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputPage(event.target.value);
     };
 
-    const handleInputPageSubmit = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter' && inputPage) {
+    const handleInputPageSubmit = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
             const page = parseInt(inputPage, 10);
-            handlePageClick(page);
+            if (!isNaN(page) && page >= 1 && page <= totalPages) {
+                onPageChange(page); // Notify parent of page change
+            }
         }
     };
 
     const generatePageNumbers = () => {
-        const pageNumbers = [];
+        const pages = [];
         for (let i = 1; i <= totalPages; i++) {
-            if (
-                i <= 3 ||
-                i >= totalPages - 2 ||
-                (i >= currentPage - 1 && i <= currentPage + 1)
-            ) {
-                pageNumbers.push(i);
-            }
+            pages.push(i);
         }
-
-        return pageNumbers;
+        return pages;
     };
 
     return {
-        currentData,
-        currentPage,
         handlePageClick,
         handleInputChange,
         handleInputPageSubmit,
@@ -55,5 +49,3 @@ const usePagination = (data: any[], pageSize: number) => {
         totalPages,
     };
 };
-
-export default usePagination;

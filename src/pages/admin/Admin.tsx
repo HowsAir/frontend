@@ -30,7 +30,7 @@ const Admin = () => {
 
     // State for current page in pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const pageLength = 10;
+    const pageLength = 8;
 
     // Fetch statistics using react-query
     const {
@@ -71,14 +71,19 @@ const Admin = () => {
     // Memoized sorted statistics
     const sortedStatistics = useMemo(() => {
         const sortedData = [...filteredStatistics];
+
         if (sortConfig.key) {
             sortedData.sort((a, b) => {
-                if (sortConfig.key && (a[sortConfig.key] == null || b[sortConfig.key] == null)) return 0; // Handle null values
+                const key = sortConfig.key;
 
-                if (sortConfig.key && a[sortConfig.key] < b[sortConfig.key]) {
+                // Extract the values with type safety
+                const aValue = (a[key as keyof Statistic] ?? -Infinity) as number;
+                const bValue = (b[key as keyof Statistic] ?? -Infinity) as number;
+
+                if (aValue < bValue) {
                     return sortConfig.direction === 'asc' ? -1 : 1;
                 }
-                if (sortConfig.key && a[sortConfig.key] > b[sortConfig.key]) {
+                if (aValue > bValue) {
                     return sortConfig.direction === 'asc' ? 1 : -1;
                 }
                 return 0;
@@ -86,6 +91,7 @@ const Admin = () => {
         }
         return sortedData;
     }, [filteredStatistics, sortConfig]);
+
 
     // Handle sorting
     const handleSort = (key: keyof Statistic) => {
@@ -111,8 +117,14 @@ const Admin = () => {
         setSearchTerm(e.target.value);
     };
 
+    console.log(paginatedStatistics.length)
+    console.log(6 + paginatedStatistics.length * 3.525)
+
     return (
-        <div className="mx-auto w-fit overflow-hidden rounded-lg border-[1px] border-gray bg-white">
+        <div
+            className="mx-auto w-fit overflow-hidden rounded-lg border-[1px] border-gray bg-white transition-all duration-200 ease-in-out"
+            style={{ height: `${10 + paginatedStatistics.length  * 3.525}rem` }}
+        >
             <p className="m-4 inline-flex items-center gap-2">
                 Usuarios{' '}
                 <div className="rounded-full bg-sky-100 px-2 text-base text-primary">
@@ -120,7 +132,7 @@ const Admin = () => {
                 </div>
             </p>
             {loading ? (
-                <p>Cargando Usuarios...</p>
+                <p className="mx-64 my-8">Cargando Usuarios...</p>
             ) : isError ? (
                 <p className="text-red-500">
                     Error al cargar usuarios. Inténtelo de nuevo más tarde.
@@ -265,8 +277,8 @@ const Admin = () => {
                     <TablePages
                         data={sortedStatistics}
                         pageLength={pageLength}
-                        // currentPage={currentPage}
-                        // onPageChange={setCurrentPage}
+                        currentPage={currentPage}
+                        onPageChange={setCurrentPage}
                     />
                 </>
             )}
