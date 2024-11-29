@@ -18,6 +18,7 @@ import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
 import { ProtectedRoute } from './components/ProtectedRoutes';
 import Start from './pages/user/Start';
+import { AuthRedirect } from './components/AuthRedirect';
 
 const App = () => {
     const location = useLocation();
@@ -37,7 +38,9 @@ const App = () => {
                     path="/register"
                     element={
                         <Layout>
-                            <Register />
+                            <AuthRedirect>
+                                <Register />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
@@ -47,7 +50,9 @@ const App = () => {
                     path="/login"
                     element={
                         <Layout>
-                            <Login />
+                            <AuthRedirect>
+                                <Login />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
@@ -127,7 +132,9 @@ const App = () => {
                     path="/free-breeze-application"
                     element={
                         <Layout>
-                            <FreeBreezeRequest />
+                            <AuthRedirect>
+                                <FreeBreezeRequest />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
