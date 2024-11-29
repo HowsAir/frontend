@@ -23,7 +23,7 @@ const Header = () => {
             : 'transition-colors duration-300 ease-in-out hover:text-primary';
 
     return (
-        <header className="fixed top-0 z-50 flex h-20 w-screen flex-row items-center justify-between bg-white px-20 drop-shadow-header">
+        <header className="fixed top-0 z-50 flex h-20 w-screen flex-row items-center justify-between bg-white px-20 drop-shadow-header hover:drop-shadow-headerHover transition-all duration-500 ease-in-out">
             <Logo color="primary" />
 
             <div className="flex flex-row items-center gap-10">
