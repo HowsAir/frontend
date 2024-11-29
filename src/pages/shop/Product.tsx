@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom';
 import { ImagePanel } from '../../components/layouts/ImagePanel';
 import { routes } from '../../routes/routes';
+import { BuyPopUp } from '../../components/widgets/BuyPopUp';
+import { useState } from 'react';
 
 const Product = () => {
+    const [popup, setPopup] = useState<boolean>(false);
+
+    const togglePopup = () => {
+        setPopup(!popup);
+    };
+
     return (
         <div className="grid grid-flow-row grid-cols-3 grid-rows-1 gap-20 px-28">
             <ImagePanel />
@@ -44,9 +52,9 @@ const Product = () => {
                             Solícitalo gratis*
                         </Link>
 
-                        <Link to={routes.AUTH.REGISTER} className="btn-primary">
+                        <button onClick={togglePopup} className="btn-primary">
                             Comprar
-                        </Link>
+                        </button>
                     </div>
                     <label className="absolute mt-4 w-3/4 leading-none text-neutral-500">
                         * La solicitud no garantiza la obtención del producto.
@@ -56,6 +64,9 @@ const Product = () => {
                     </label>
                 </div>
             </div>
+
+            {/* PopUp */}
+            {popup && <BuyPopUp togglePopup={togglePopup} />}
         </div>
     );
 };

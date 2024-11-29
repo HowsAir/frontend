@@ -1,9 +1,5 @@
 import React from 'react';
 
-interface Step {
-    icon: React.FC<{ color: string }>; // Icon with a color prop
-}
-
 export const StepDisplay = ({
     total,
     current,
