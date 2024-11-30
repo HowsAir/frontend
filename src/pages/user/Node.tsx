@@ -3,8 +3,10 @@ import { AirQualityGraph } from '../../components/widgets/AirQualityGraph';
 import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
 import { getUsersDailyDistance } from '../../api/apiClient';
+import { getFormattedDate } from '../../utils/DateFormatter';
 
 const Node = () => {
+    const formattedDate = getFormattedDate();
     const [dailyDistance, setDailyDistance] = useState<number | null>(null);
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const Node = () => {
 
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
-            <h3 className="mx-auto mb-10 lg:mx-0">Tu nodo hoy</h3>
+            <h3 className="mx-auto mb-10 lg:mx-0">Tu nodo a dia { formattedDate } </h3>
 
             <div className="flex flex-col gap-12 lg:max-h-[60dvh] lg:flex-row">
                 <div className="h-[481px] space-y-12 lg:space-y-6">
