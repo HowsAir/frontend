@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
-import * as apiClient from '../api/apiClient';
-import { RegisterFormData, ToastMessageType } from '../types/mainTypes';
-import { useAppContext } from '../contexts/AppContext';
+import * as apiClient from '../../api/apiClient';
+import { RegisterFormData, ToastMessageType } from '../../types/mainTypes';
+import { useAppContext } from '../../contexts/AppContext';
+import { routes } from '../../routes/routes';
 
 const PaymentSuccess = () => {
     const navigate = useNavigate();
@@ -28,10 +29,9 @@ const PaymentSuccess = () => {
                 type: ToastMessageType.SUCCESS,
             });
             localStorage.removeItem('userData');
-            navigate('/');
+            navigate(routes.HOME.INDEX);
         },
         onError: (error: Error) => {
-            console.log('Error en mutation:', error.message);
             localStorage.removeItem('userData');
             showToast({
                 message: error.message,
@@ -51,10 +51,6 @@ const PaymentSuccess = () => {
             }
 
             const userData = localStorage.getItem('userData');
-            console.log(
-                'Checking userData:',
-                userData ? 'exists' : 'not found'
-            );
 
             if (!userData) {
                 console.log('No userData found, showing error message');
@@ -69,16 +65,16 @@ const PaymentSuccess = () => {
         };
 
         handleRegistration();
-    }, []); // Empty dependency array
+    }, []);
 
     // Efecto para redirección en caso de error
     useEffect(() => {
         if (errorMessage) {
             console.log(
-                'Error encontrado, redirigiendo a /register en 5 segundos'
+                'Error encontrado, redirigiendo a /breeze en 5 segundos'
             );
             const timer = setTimeout(() => {
-                navigate('/register');
+                navigate(routes.SHOP.PRODUCT);
             }, 5000);
 
             return () => clearTimeout(timer);
@@ -86,18 +82,17 @@ const PaymentSuccess = () => {
     }, [errorMessage, navigate]);
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen bg-gray-100">
+        <div className="bg-gray-100 flex h-screen w-screen items-center justify-center">
             <div className="text-center">
                 {errorMessage ? (
-                    <div className="text-red-600 text-lg mb-4">
+                    <div className="mb-4 text-lg text-red-600">
                         {errorMessage}
                     </div>
                 ) : (
                     <>
-                        <div className="text-2xl mb-4">
-                            Estamos procesando tu pago
-                        </div>
-                        <div className="loader border-t-4 border-blue-500 rounded-full w-16 h-16 mb-4 animate-spin mx-auto"></div>
+                        <h2>Estamos procesando tu pago...</h2>
+                        <p>Esto puede tardar un poco</p>
+                        <div className="loader mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-t-4 border-blue-500"></div>
                     </>
                 )}
             </div>

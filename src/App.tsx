@@ -1,21 +1,35 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
-import Landing from './pages/Landing';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentCancel from './pages/PaymentCancel';
-import TermsAndPrivacy from './pages/TermsAndPrivacy';
+import Landing from './pages/home/Landing';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
+import PaymentSuccess from './pages/shop/PaymentSuccess';
+import PaymentCancel from './pages/shop/PaymentCancel';
+import TermsAndPrivacy from './pages/home/TermsAndPrivacy';
+import Product from './pages/shop/Product';
+import Maps from './pages/home/Maps';
+import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import { AnimatePresence } from 'framer-motion';
+import User from './pages/user/User';
+import Admin from './pages/admin/Admin';
+import ChangePassword from './pages/auth/ChangePassword';
+import EditProfile from './pages/user/EditProfile';
+import { ProtectedRoute } from './components/ProtectedRoutes';
+import Start from './pages/user/Start';
+import { AuthRedirect } from './components/AuthRedirect';
 
 const App = () => {
+    const location = useLocation();
+
     return (
-        <BrowserRouter>
-            <Routes>
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
                 <Route
                     path="/"
                     element={
-                        <Layout>
+                        <Layout noPadding>
                             <Landing />
                         </Layout>
                     }
@@ -24,31 +38,117 @@ const App = () => {
                     path="/register"
                     element={
                         <Layout>
-                            <Register />
-                        </Layout>
-                    }
-                />
-                <Route 
-                    path="/login"
-                    element={
-                        <Layout>
-                            <Login />
+                            <AuthRedirect>
+                                <Register />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-cancel" element={<PaymentCancel />} />
-                <Route 
-                    path="/terms-and-privacy" 
+                <Route
+                    path="/login"
+                    element={
+                        <Layout>
+                            <AuthRedirect>
+                                <Login />
+                            </AuthRedirect>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/user"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <User />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/edit-profile"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <EditProfile />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/change-password"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <ChangePassword />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/admin"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[2]}>
+                                <Admin />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/terms-and-privacy"
                     element={
                         <Layout>
                             <TermsAndPrivacy />
                         </Layout>
-                    } 
+                    }
                 />
-                <Route path="*" element={<Navigate to="/" />} />                
+                <Route
+                    path="/breeze"
+                    element={
+                        <Layout>
+                            <Product />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/maps"
+                    element={
+                        <Layout>
+                            <Maps />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/start"
+                    element={
+                        <Layout>
+                            <Start />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/free-breeze-application"
+                    element={
+                        <Layout>
+                            <AuthRedirect>
+                                <FreeBreezeRequest />
+                            </AuthRedirect>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/forgot-password"
+                    element={
+                        <Layout>
+                            <ForgotPassword />
+                        </Layout>
+                    }
+                />
+                <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-        </BrowserRouter>
+        </AnimatePresence>
     );
 };
 export default App;
