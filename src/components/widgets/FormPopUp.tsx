@@ -29,7 +29,7 @@ export const FormPopUp = ({ togglePopup }: FormPopUpProps) => {
                         Cancelar
                     </button>
                     <Link
-                        to={routes.AUTH.REGISTER}
+                        to={routes.SHOP.FREE_BREEZE}
                         className="btn-primary w-full rounded-lg bg-primary px-10 py-2 text-center text-xl font-medium text-offwhite"
                     >
                         Continuar
