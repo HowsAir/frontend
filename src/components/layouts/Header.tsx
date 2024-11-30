@@ -50,13 +50,13 @@ const Header = () => {
                                     Mapas
                                 </NavLink>
                                 <NavLink
-                                    to={routes.USER.INDEX}
+                                    to={routes.USER.NODE}
                                     className={getLinkClass}
                                 >
                                     Mi nodo
                                 </NavLink>
                                 <NavLink
-                                    to={routes.USER.START}
+                                    to={routes.USER.INDEX}
                                     className={getLinkClass}
                                 >
                                     Inicio
