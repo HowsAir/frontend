@@ -44,12 +44,15 @@ const Login: React.FC = () => {
 
                 // Navigate based on role
                 const { roleId } = await apiClient.validateToken();
+                console.log(roleId);
                 switch (roleId) {
-                    case 2: // Admin
-                        navigate(routes.ADMIN.INDEX);
-                        break;
                     case 1: // User
+                        console.log('redirecting to user index');
                         navigate(routes.USER.INDEX);
+                        break;
+                    case 2: // Admin
+                        console.log('redirecting to admin index');
+                        navigate(routes.ADMIN.INDEX);
                         break;
                     default:
                         navigate(from); // Default to "from" path or home
@@ -90,7 +93,7 @@ const Login: React.FC = () => {
                     onSubmit={onSubmit}
                     className="form rounded-br-lg rounded-tr-lg"
                 >
-                    <div className="flex w-10/12 flex-col w-full">
+                    <div className="flex w-10/12 w-full flex-col">
                         <h2>Bienvenido</h2>
 
                         <label className="form-label mb-4">
@@ -120,7 +123,7 @@ const Login: React.FC = () => {
 
                         <Link
                             to={routes.AUTH.FORGOT_PASSWORD}
-                            className="text-neutral-400 underline w-fit"
+                            className="w-fit text-neutral-400 underline"
                         >
                             Olvidé mi contraseña
                         </Link>

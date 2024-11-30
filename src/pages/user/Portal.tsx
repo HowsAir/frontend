@@ -11,7 +11,7 @@ const Portal = () => {
                 src="https://media0.giphy.com/media/H1dxi6xdh4NGQCZSvz/200w.gif?cid=6c09b9520oljohov3k5p47xyfvxcsv4qr30gyahx5ky7gwp7&ep=v1_gifs_search&rid=200w.gif&ct=g"
                 alt="Gato trabajando"
             ></img>
-            <Link to="/user/node" className="btn-primary mt-8">
+            <Link to={routes.USER.NODE} className="btn-primary mt-8">
                 Nodo</Link>
                 <Link to={routes.HOME.MAPS} className="btn-primary mt-8">Mapas</Link>
         </div>
