@@ -7,7 +7,7 @@ import { getFormattedDate } from '../../utils/DateFormatter';
 
 const Node = () => {
     const formattedDate = getFormattedDate();
-    const [dailyDistance, setDailyDistance] = useState<number | null>(null);
+    const [dailyDistance, setDailyDistance] = useState<number | null>(0);
 
     useEffect(() => {
         const fetchDailyDistance = async () => {

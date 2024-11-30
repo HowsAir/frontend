@@ -7,10 +7,6 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({ value, type }) => {
     return (
         <div className="flex min-h-52 w-fit min-w-80 flex-col rounded-lg border-[1px] border-gray bg-white px-6 py-4">
             <div className="inline-flex gap-2">
-                <div
-                    className="color-blue mt-[6px] size-4 rounded-md bg-primary"
-                    id="measure-color"
-                ></div>
                 <div className="flex flex-col">
                     <p className="text-lg font-medium" id="title">
                         {type === 'PPM' ? 'Ultima medición' : 'Recorrido'}
