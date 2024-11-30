@@ -4,7 +4,7 @@ import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
 import { getUsersDailyDistance } from '../../api/apiClient';
 
-const User = () => {
+const Node = () => {
     const [dailyDistance, setDailyDistance] = useState<number | null>(null);
 
     useEffect(() => {
@@ -50,4 +50,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default Node;

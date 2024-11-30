@@ -19,9 +19,9 @@ export const routes = {
         PRODUCT: '/breeze',
     },
     USER: {
-        INDEX: '/user',
+        INDEX: '/portal',
+        NODE: '/node',
         EDIT_PROFILE: '/edit-profile',
-        START: '/start',
     },
     ADMIN: {
         INDEX: '/admin',
