@@ -31,6 +31,7 @@ const Node = () => {
                 }
                 setDailyDistance(todayDistance || { d: 0, t: 'm' });
                 setLastMeasurement(response.lastAirQualityReading);
+                console.log(response.airQualityReadings);
                 setAirQualityReadings(response.airQualityReadings);
             } catch (error) {
                 console.error('Error fetching node data:', error);
@@ -78,7 +79,7 @@ const Node = () => {
                         )}
                     </div>
 
-                    <AirQualityGraph />
+                    <AirQualityGraph measurements={airQualityReadings} />
                 </div>
 
                 <MonthlyObjective objective={20} current={monthlyDistance} />
