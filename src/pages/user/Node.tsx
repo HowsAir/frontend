@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { AirQualityGraph } from '../../components/widgets/AirQualityGraph';
 import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
-import { getUsersDailyDistance } from '../../api/apiClient';
+import { getMonthlyDistance, getUsersDashboardData } from '../../api/apiClient';
 import { getFormattedDate } from '../../utils/DateFormatter';
 
 const Node = () => {
     const formattedDate = getFormattedDate();
     const [dailyDistance, setDailyDistance] = useState<number | null>(0);
+    const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
 
     useEffect(() => {
         const fetchDailyDistance = async () => {
@@ -25,6 +26,17 @@ const Node = () => {
         };
 
         fetchDailyDistance();
+    useEffect(() => {
+        const getMonthDistance = async () => {
+            try {
+                let response = await getMonthlyDistance();
+                setMonthlyDistance(response);
+            } catch (error) {
+                console.error('Error fetching monthly distance:', error);
+            }
+            }
+
+        getMonthDistance();
     }, []);
 
     return (
@@ -46,7 +58,7 @@ const Node = () => {
                     <AirQualityGraph />
                 </div>
 
-                <MonthlyObjective objective={20} current={dailyDistance ?? 0} />
+                <MonthlyObjective objective={20} current={monthlyDistance} />
             </div>
         </div>
     );
