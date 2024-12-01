@@ -61,3 +61,9 @@ export interface FreeBreezeApplicationFormData {
     terms: boolean;
 }
 
+export interface Measurement {
+    timestamp: string;
+    airQuality: string;
+    proportionalValue: number;
+    worstGas: string;
+}

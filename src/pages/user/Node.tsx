@@ -2,51 +2,87 @@ import { useEffect, useState } from 'react';
 import { AirQualityGraph } from '../../components/widgets/AirQualityGraph';
 import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
-import { getUsersDailyDistance } from '../../api/apiClient';
+import { getMonthlyDistance, getUsersDashboardData } from '../../api/apiClient';
 import { getFormattedDate } from '../../utils/DateFormatter';
+import { Measurement } from '../../types/mainTypes';
 
 const Node = () => {
-    const formattedDate = getFormattedDate();
-    const [dailyDistance, setDailyDistance] = useState<number | null>(0);
+    const todayDate = getFormattedDate();
+    const [dailyDistance, setDailyDistance] = useState<{d: number, t: string}>({d: 0, t: 'm'});
+    const [lastMeasurement, setLastMeasurement] = useState<Measurement>({
+        timestamp: new Date().toISOString(),
+        airQuality: '',
+        proportionalValue: 0,
+        worstGas: '',
+    });
+    const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
+    const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>([]);
+
+    let measurementDate = lastMeasurement.timestamp ? getFormattedDate(lastMeasurement.timestamp, new Date().toISOString(), 'compact') : 'No existe medicion';
+    
 
     useEffect(() => {
-        const fetchDailyDistance = async () => {
+        const getNodeData = async () => {
             try {
-                let distance = await getUsersDailyDistance();
-                distance = Math.floor(distance); // Redondear hacia abajo para eliminar decimales
-                if (distance > 999) {
-                    distance = Math.floor(distance / 1000); // Dividir por 1000 si es mayor que 999
+                let response = await getUsersDashboardData();
+                let todayDistance = { d: response.todayDistance, t: 'm' };
+                if (todayDistance && todayDistance.d >= 1000) {
+                    todayDistance = { d: parseFloat((todayDistance.d / 1000).toFixed(1)), t: 'km' };
                 }
-                setDailyDistance(distance);
+                setDailyDistance(todayDistance || { d: 0, t: 'm' });
+                setLastMeasurement(response.lastAirQualityReading);
+                console.log(response.airQualityReadings);
+                setAirQualityReadings(response.airQualityReadings);
             } catch (error) {
-                console.error('Error fetching daily distance:', error);
-                setDailyDistance(0); // Manejar el caso de error
+                console.error('Error fetching node data:', error);
             }
         };
 
-        fetchDailyDistance();
+        getNodeData();
+    }, []);
+
+    useEffect(() => {
+        const getMonthDistance = async () => {
+            try {
+                let response = await getMonthlyDistance();
+                setMonthlyDistance(response);
+            } catch (error) {
+                console.error('Error fetching monthly distance:', error);
+            }
+        }
+
+        getMonthDistance();
     }, []);
 
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
-            <h3 className="mx-auto mb-10 lg:mx-0">Tu nodo a dia { formattedDate } </h3>
+            <h3 className="mx-auto mb-10 lg:mx-0">
+                Tu nodo a dia {todayDate}{' '}
+            </h3>
 
             <div className="flex flex-col gap-12 lg:max-h-[60dvh] lg:flex-row">
                 <div className="h-[481px] space-y-12 lg:space-y-6">
                     <div className="space-y-12 md:inline-flex md:gap-12 md:space-y-0">
-                        <MeasureCard value={80} type="PPM" />
+                        <MeasureCard
+                            title="Última medición"
+                            date={measurementDate}
+                            value={lastMeasurement.proportionalValue}
+                            slider
+                        />
                         {dailyDistance !== null && (
                             <MeasureCard
-                                value={dailyDistance}
-                                type={dailyDistance < 1000 ? 'm' : 'km'}
+                                title="Recorrido"
+                                date="Hoy"
+                                value={dailyDistance.d}
+                                type={dailyDistance.t}
                             />
                         )}
                     </div>
 
-                    <AirQualityGraph />
+                    <AirQualityGraph measurements={airQualityReadings} />
                 </div>
 
-                <MonthlyObjective objective={20} current={dailyDistance ?? 0} />
+                <MonthlyObjective objective={20} current={monthlyDistance} />
             </div>
         </div>
     );
