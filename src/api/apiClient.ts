@@ -367,10 +367,10 @@ export const getUsersDashboardData = async (): Promise<DashboardData> => {
             credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-            }
+            },
         });
 
-        if(!response.ok) {
+        if (!response.ok) {
             const { message }: { message: string } = await response.json();
             throw new Error(message || 'Error fetching user dashboard data');
         }
@@ -380,6 +380,32 @@ export const getUsersDashboardData = async (): Promise<DashboardData> => {
     } catch (error) {
         console.error('Get user dashboard data error:', error);
         throw new Error('Error fetching user dashboard data');
+    }
+};
+
+export const getMonthlyDistance = async (): Promise<number> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/current-month-distance`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user monthly distance');
+        }
+
+        const data = await response.json();
+        return data.currentMonthDistance;
+    } catch (error) {
+        console.error('Get user monthly distance error:', error);
+        throw new Error('Error fetching user monthly distance');
     }
 };
 
