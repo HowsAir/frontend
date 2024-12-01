@@ -4,7 +4,7 @@
  * @author Juan Diaz
  */
 
-import { MeasurementData } from './data';
+import { DashboardData, MeasurementData } from './data';
 import {
     LogInFormData,
     RegisterFormData,
@@ -357,6 +357,29 @@ export const getUsersDailyDistance = async (): Promise<number> => {
     } catch (error) {
         console.error('Get user daily distance error:', error);
         throw new Error('Error fetching users daily distance');
+    }
+};
+
+export const getUsersDashboardData = async (): Promise<DashboardData> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users/dashboard`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if(!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user dashboard data');
+        }
+
+        const data = await response.json();
+        return data.dashboardData;
+    } catch (error) {
+        console.error('Get user dashboard data error:', error);
+        throw new Error('Error fetching user dashboard data');
     }
 };
 

@@ -33,3 +33,19 @@ export interface UserProfile {
     address: string;
     roleId: number;
 }
+
+export interface DashboardData {
+    lastAirQualityReading: {
+        timestamp: string;
+        airQuality: string;
+        proportionalValue: number;
+        worstGas: string;
+    };
+    todayDistance: number;
+    airQualityReadings: {
+        timestamp: string;
+        airQuality: string;
+        proportionalValue: number;
+        worstGas: string;
+    }[];
+}
