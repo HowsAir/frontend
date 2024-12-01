@@ -13,7 +13,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
     date,
     type,
     slider,
-    title
+    title,
 }) => {
     const [color, setColor] = useState('green');
     const gradientRef = useRef<HTMLDivElement | null>(null);
@@ -52,9 +52,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
         <div className="flex min-h-52 w-fit min-w-80 flex-col rounded-lg border-[1px] border-gray bg-white px-6 py-4">
             <div className="inline-flex gap-2">
                 <div className="flex flex-col">
-                    <p className="text-lg font-medium">
-                        {title}
-                    </p>
+                    <p className="text-lg font-medium">{title}</p>
                     <label className="text-lg font-normal leading-none text-neutral-500">
                         {date}
                     </label>
@@ -64,14 +62,14 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 {value}
                 <h3 className="mb-2.5 ml-1 mt-auto">{type}</h3>
             </h1>
-            <div className={`inline-flex gap-2 ${slider ? ' ': 'hidden'}`}>
+            <div className={`inline-flex gap-2 ${slider ? '' : 'opacity-0'}`}>
                 0
                 <div
                     ref={gradientRef}
-                    className='relative mx-auto my-2 h-1.5 w-full rounded-full bg-gradient-to-r from-green-600 via-yellow-400 to-red-600'
+                    className="relative mx-auto my-2 h-1.5 w-full rounded-full bg-gradient-to-r from-green-600 via-yellow-400 to-red-600"
                 >
                     <div
-                        className="absolute -top-[9px] size-6 -translate-x-2 rounded-full border-2 border-white"
+                        className="absolute -top-[9px] size-6 -translate-x-2 rounded-full border-2 border-white transition-all duration-500"
                         style={{
                             left: `${value}%`,
                             backgroundColor: color,
