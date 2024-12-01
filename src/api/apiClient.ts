@@ -376,7 +376,7 @@ export const getUsersDashboardData = async (): Promise<DashboardData> => {
         }
 
         const data = await response.json();
-        return data.dashboardData;
+        return data.data;
     } catch (error) {
         console.error('Get user dashboard data error:', error);
         throw new Error('Error fetching user dashboard data');
