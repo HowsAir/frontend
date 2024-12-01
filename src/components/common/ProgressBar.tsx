@@ -6,7 +6,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ progress, objective }) => {
-    const percentage = (progress / objective) * 100;
+    const percentage = Math.round((progress / objective) * 100);
     const padding = 100 - percentage;
     return (
         <div className="w-full">

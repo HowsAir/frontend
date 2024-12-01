@@ -14,6 +14,7 @@ export default {
             },
             dropShadow: {
                 header: '0 4px 4px rgba(16, 116, 231, 0.1)',
+                headerHover: '0 4px 8px rgba(16, 116, 231, 0.2)',
             },
             backgroundImage: {
                 hero: "url('https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/iy48f6xc9urpf0kdp3lm.jpg')",

@@ -1,16 +1,25 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from './layouts/Layout';
-import Landing from './pages/Landing';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import PaymentSuccess from './pages/PaymentSuccess';
-import PaymentCancel from './pages/PaymentCancel';
-import TermsAndPrivacy from './pages/TermsAndPrivacy';
-import Product from './pages/Product';
-import Maps from './pages/Maps';
+import Landing from './pages/home/Landing';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
+import PaymentSuccess from './pages/shop/PaymentSuccess';
+import PaymentCancel from './pages/shop/PaymentCancel';
+import TermsAndPrivacy from './pages/home/TermsAndPrivacy';
+import Product from './pages/shop/Product';
+import Maps from './pages/home/Maps';
+import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
-import User from './pages/User';
+import Portal from './pages/user/Portal';
+import Node from './pages/user/Node';
+import Admin from './pages/admin/Admin';
+import ChangePassword from './pages/auth/ChangePassword';
+import EditProfile from './pages/user/EditProfile';
+import { ProtectedRoute } from './components/ProtectedRoutes';
+import Start from './pages/user/Portal';
+import { AuthRedirect } from './components/AuthRedirect';
 
 const App = () => {
     const location = useLocation();
@@ -30,7 +39,9 @@ const App = () => {
                     path="/register"
                     element={
                         <Layout>
-                            <Register />
+                            <AuthRedirect>
+                                <Register />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
@@ -40,22 +51,68 @@ const App = () => {
                     path="/login"
                     element={
                         <Layout>
-                            <Login />
+                            <AuthRedirect>
+                                <Login />
+                            </AuthRedirect>
                         </Layout>
                     }
                 />
                 <Route
-                path='/user'
-                element={
-                    <Layout>
-                        <User />
-                    </Layout>
-                } />
-                <Route
-                    path="/terms-and-privacy"
+                    path="/portal"
                     element={
                         <Layout>
-                            <TermsAndPrivacy />
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <Portal />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/node"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <Node />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/edit-profile"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <EditProfile />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/change-password"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1, 2]}>
+                                <ChangePassword />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/admin"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[2]}>
+                                <Admin />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/start"
+                    element={
+                        <Layout>
+                            <Start />
                         </Layout>
                     }
                 />
@@ -72,6 +129,32 @@ const App = () => {
                     element={
                         <Layout>
                             <Maps />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/free-breeze-application"
+                    element={
+                        <Layout>
+                            <AuthRedirect>
+                                <FreeBreezeRequest />
+                            </AuthRedirect>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/forgot-password"
+                    element={
+                        <Layout>
+                            <ForgotPassword />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/terms-and-privacy"
+                    element={
+                        <Layout>
+                            <TermsAndPrivacy />
                         </Layout>
                     }
                 />

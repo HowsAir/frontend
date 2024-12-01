@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import Eye from '../icons/Eye';
 
 interface InputProps {
     name: string;
@@ -48,11 +49,17 @@ export function Input({
         validationRules.validate = validate;
     }
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
-        <div className="relative flex flex-col ">
+        <div className="relative flex w-full flex-col">
             <input
-                className={`mt-8 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${readOnly && 'bg-neutral-300'} ${customClass}`}
-                type={type}
+                className={`mb-6 mt-2 h-10 w-10/12 rounded-lg border-[1px] border-gray bg-offwhite p-2 placeholder-neutral-300 caret-primary focus:outline-primary ${customClass} ${readOnly && 'bg-zinc-300'} `}
+                type={showPassword && type === 'password' ? 'text' : type}
                 id={name}
                 placeholder={String(children)}
                 value={value}
@@ -60,8 +67,17 @@ export function Input({
                 disabled={readOnly}
                 {...register(name, validationRules)}
             />
+            {type === 'password' && (
+                <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-[5.5rem] top-[18px] text-primary"
+                >
+                    <Eye>{showPassword ? 'show' : 'hide'}</Eye>
+                </button>
+            )}
             {errors[name] && (
-                <span className="absolute top-[72px] text-sm text-red-500">
+                <span className="absolute top-12 text-sm text-red-500">
                     {typeof errors[name]?.message === 'string'
                         ? errors[name]?.message
                         : 'Este campo es obligatorio'}

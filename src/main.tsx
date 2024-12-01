@@ -5,6 +5,8 @@ import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AppContextProvider } from './contexts/AppContext.tsx';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext.tsx';
+import { UserProvider } from './contexts/UserContext.tsx';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -16,11 +18,15 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
-            <AppContextProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </AppContextProvider>
+            <AuthProvider>
+                <AppContextProvider>
+                    <UserProvider>
+                        <BrowserRouter>
+                            <App />
+                        </BrowserRouter>
+                    </UserProvider>
+                </AppContextProvider>
+            </AuthProvider>
         </QueryClientProvider>
     </React.StrictMode>
 );

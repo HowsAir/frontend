@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -100,20 +99,29 @@ export const AirQualityGraph = () => {
                 <h2 className="mb-0 text-lg">Calidad del aire</h2>
                 <div className="flex gap-2 align-top">
                     <div className="flex items-center">
-                        <span className="mr-1 inline-block h-3 w-3" style={{ backgroundColor: colors.green }}></span>
+                        <span
+                            className="mr-1 inline-block h-3 w-3"
+                            style={{ backgroundColor: colors.green }}
+                        ></span>
                         <span className="text-sm">Good</span>
                     </div>
                     <div className="flex items-center">
-                        <span className="mr-1 inline-block h-3 w-3" style={{ backgroundColor: colors.yellow }}></span>
+                        <span
+                            className="mr-1 inline-block h-3 w-3"
+                            style={{ backgroundColor: colors.yellow }}
+                        ></span>
                         <span className="text-sm">Medium</span>
                     </div>
                     <div className="flex items-center">
-                        <span className="mr-1 inline-block h-3 w-3" style={{ backgroundColor: colors.red }}></span>
+                        <span
+                            className="mr-1 inline-block h-3 w-3"
+                            style={{ backgroundColor: colors.red }}
+                        ></span>
                         <span className="text-sm">Bad</span>
                     </div>
                 </div>
             </div>
-            <div className="h-[80%]">
+            <div className="h-[75%]">
                 <Bar data={chartData} options={options} />
             </div>
         </div>

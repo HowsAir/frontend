@@ -38,7 +38,7 @@ const PhoneInput = ({ name, children }: PhoneInputProps) => {
     };
 
     return (
-        <div className="relative inline-flex h-fit items-center">
+        <div className="relative">
             {/* Phone number input */}
             <Input
                 name={name}
@@ -51,7 +51,7 @@ const PhoneInput = ({ name, children }: PhoneInputProps) => {
 
             {/* Country flag and code selector */}
             <div
-                className="absolute right-0 top-8 flex h-10 cursor-pointer items-center rounded-r-lg bg-transparent px-2"
+                className="absolute right-0 top-2 flex h-10 cursor-pointer items-center rounded-r-lg bg-transparent px-2"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
                 <Flag
@@ -74,7 +74,7 @@ const PhoneInput = ({ name, children }: PhoneInputProps) => {
 
             {/* Country selector dropdown */}
             {isDropdownOpen && (
-                <div className="absolute right-0 top-16 z-10 h-52 w-fit overflow-auto rounded-md border bg-white shadow-lg">
+                <div className="absolute right-0 top-12 z-10 h-52 w-fit overflow-auto rounded-md border bg-white shadow-lg">
                     {countries.map((countryCode) => (
                         <div
                             key={countryCode}

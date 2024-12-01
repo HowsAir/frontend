@@ -29,7 +29,7 @@ const Toast = ({ message, type, onClose }: ToastProps) => {
         <AnimatePresence>
             {isVisible && (
                 <motion.div
-                    className={`fixed right-9 top-32 z-50 rounded-md px-6 py-4 ${styles}`}
+                    className={`fixed right-9 max-w-72 top-32 z-50 rounded-md px-6 py-4 ${styles}`}
                     initial={{ x: '100%' }}
                     animate={{ x: 0 }}
                     exit={{ x: '150%' }}

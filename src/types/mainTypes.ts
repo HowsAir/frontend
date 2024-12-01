@@ -17,6 +17,12 @@ export type LogInFormData = {
     password: string;
 };
 
+export type ChangePasswordFormData = {
+    password: string;
+    newPassword: string;
+    verifyPassword: string;
+}
+
 export enum ToastMessageType {
     SUCCESS = 'SUCCESS',
     ERROR = 'ERROR',
@@ -31,7 +37,27 @@ export type ToastProps = ToastMessage & {
     onClose: () => void;
 };
 
-export type AppContext = {
+export interface AppContext {
     showToast: (toastMessage: ToastMessage) => void;
-    isLoggedIn: boolean;
-};
+}
+
+export interface AuthContextType {
+    roleId: number | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    error: string | null;
+    validateAuth: () => Promise<void>;
+}
+
+export interface FreeBreezeApplicationFormData {
+    name: string;
+    surnames: string;
+    email: string;
+    country: string;
+    zipCode: string;
+    city: string;
+    address: string;
+    comments: string;
+    terms: boolean;
+}
+

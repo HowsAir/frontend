@@ -1,38 +1,17 @@
+// ProductCard.tsx
 import React from 'react';
+import { getFormattedDate } from '../../utils/DateFormatter';
 
 interface ProductCardProps {
     price: number;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ price }) => {
-    const today = new Date();
-    const futureDate = new Date(today);
-    futureDate.setDate(today.getDate() + 3);
-
-    const monthNames = [
-        'enero',
-        'febrero',
-        'marzo',
-        'abril',
-        'mayo',
-        'junio',
-        'julio',
-        'agosto',
-        'septiembre',
-        'octubre',
-        'noviembre',
-        'diciembre',
-    ];
-
-    const day = futureDate.getDate();
-    const month = monthNames[futureDate.getMonth()];
-    const year = futureDate.getFullYear();
+    const formattedDate = getFormattedDate(3);
 
     return (
         <div className="mt-8 h-fit rounded-lg border border-gray px-6 py-4">
-            <p className="text-lg font-semibold">
-                Llega el {day} de {month} de {year}
-            </p>
+            <p className="text-lg font-semibold">Llega el {formattedDate}</p>
             <div className="mt-4 flex">
                 <img
                     alt="Breeze"

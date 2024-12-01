@@ -2,23 +2,35 @@ import ProgressBar from '../common/ProgressBar';
 
 interface MonthlyObjectiveProps {
     objective: number;
+    current: number | 0;
 }
 
-export const MonthlyObjective = ({ objective }: MonthlyObjectiveProps) => {
+export const MonthlyObjective = ({
+    objective,
+    current,
+}: MonthlyObjectiveProps) => {
     return (
-        <div className="w-full h-fit">
+        <div className="h-fit w-full">
             <h3 className="font-">
                 <span className="text-2xl">Objetivo mensual: </span>
                 {objective}km
             </h3>
-            <ProgressBar progress={2} objective={objective} />
+            <ProgressBar
+                progress={parseFloat((current / 1000).toFixed(1))}
+                objective={objective}
+            />
 
             <p className="mt-8 text-2xl">
                 Completa el objetivo para escoger un premio
             </p>
 
             <div className="mt-4 w-full overflow-auto rounded-lg border-[1px] border-gray">
-                <p className='border-b-[1px] border-gray bg-white p-4 text-xl'>Premios <span className='px-2 py-[2px] rounded-full bg-sky-200 text-primary text-sm'>3 disponibles</span></p>
+                <p className="border-b-[1px] border-gray bg-white p-4 text-xl">
+                    Premios{' '}
+                    <span className="rounded-full bg-sky-200 px-2 py-[2px] text-sm text-primary">
+                        3 disponibles
+                    </span>
+                </p>
                 <table className="w-full text-left text-sm">
                     <thead>
                         <tr className="border-b-[1px] border-gray bg-neutral-50 text-neutral-500">

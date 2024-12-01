@@ -12,7 +12,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
     price,
 }) => {
     return (
-        <div className="mx-auto flex h-fit min-h-[80dvh] w-fit flex-row">
+        <div className="mx-auto flex h-fit min-h-[70dvh] w-fit flex-row">
             {step === 1 ? (
                 <>
                     <div className="w-[40dvw] flex-col justify-between rounded-bl-lg rounded-tl-lg bg-form bg-cover p-8 sm:hidden lg:flex">
@@ -62,7 +62,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             <p className="flex justify-between text-xl font-extralight text-offwhite">
                                 Subtotal
                                 <span className="mr-4 font-normal">
-                                    {price}.00 €
+                                    99.00 €
                                 </span>
                             </p>
                             <p className="flex justify-between text-xl font-extralight text-offwhite">
@@ -75,7 +75,7 @@ const FormContainer: React.FC<FormContainerProps> = ({
                             <p className="flex justify-between text-xl font-semibold text-offwhite">
                                 Total
                                 <span className="mr-4 font-normal">
-                                    104.00 €
+                                    {price}.00 €
                                 </span>
                             </p>
                         </div>
