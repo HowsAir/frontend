@@ -4,28 +4,34 @@ import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
 import { getMonthlyDistance, getUsersDashboardData } from '../../api/apiClient';
 import { getFormattedDate } from '../../utils/DateFormatter';
-import { LastMeasurement } from '../../types/mainTypes';
+import { Measurement } from '../../types/mainTypes';
 
 const Node = () => {
     const todayDate = getFormattedDate();
-    const [dailyDistance, setDailyDistance] = useState<number | null>(0);
-    const [lastMeasurement, setLastMeasurement] = useState<LastMeasurement>({
-        timestamp: '2024-12-01T00:00:00Z',
+    const [dailyDistance, setDailyDistance] = useState<{d: number, t: string}>({d: 0, t: 'm'});
+    const [lastMeasurement, setLastMeasurement] = useState<Measurement>({
+        timestamp: new Date().toISOString(),
         airQuality: '',
         proportionalValue: 0,
         worstGas: '',
     });
     const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
+    const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>([]);
 
-    let measurementDate = lastMeasurement.timestamp ? getFormattedDate(lastMeasurement.timestamp, new Date().toISOString(), 'relative') : 'No existe medicion';
+    let measurementDate = lastMeasurement.timestamp ? getFormattedDate(lastMeasurement.timestamp, new Date().toISOString(), 'compact') : 'No existe medicion';
     
 
     useEffect(() => {
         const getNodeData = async () => {
             try {
                 let response = await getUsersDashboardData();
-                setDailyDistance(response.todayDistance);
+                let todayDistance = { d: response.todayDistance, t: 'm' };
+                if (todayDistance && todayDistance.d >= 1000) {
+                    todayDistance = { d: parseFloat((todayDistance.d / 1000).toFixed(1)), t: 'km' };
+                }
+                setDailyDistance(todayDistance || { d: 0, t: 'm' });
                 setLastMeasurement(response.lastAirQualityReading);
+                setAirQualityReadings(response.airQualityReadings);
             } catch (error) {
                 console.error('Error fetching node data:', error);
             }
@@ -66,8 +72,8 @@ const Node = () => {
                             <MeasureCard
                                 title="Recorrido"
                                 date="Hoy"
-                                value={dailyDistance}
-                                type='m'
+                                value={dailyDistance.d}
+                                type={dailyDistance.t}
                             />
                         )}
                     </div>

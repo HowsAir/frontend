@@ -60,7 +60,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             </div>
             <h1 className="m-auto flex w-fit text-offblack">
                 {value}
-                <h3 className="mb-2.5 ml-1 mt-auto">{type}</h3>
+                <p className="text-3xl mb-2.5 ml-1 mt-auto">{type}</p>
             </h1>
             <div className={`inline-flex gap-2 ${slider ? '' : 'opacity-0'}`}>
                 0

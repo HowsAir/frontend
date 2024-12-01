@@ -61,7 +61,7 @@ export interface FreeBreezeApplicationFormData {
     terms: boolean;
 }
 
-export interface LastMeasurement {
+export interface Measurement {
     timestamp: string;
     airQuality: string;
     proportionalValue: number;

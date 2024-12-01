@@ -38,7 +38,9 @@ export const getFormattedDate = (
         const hours = String(baseDate.getHours()).padStart(2, '0');
         const minutes = String(baseDate.getMinutes()).padStart(2, '0');
 
-        return `${day}/${month}/${year} - ${hours}:${minutes}`;
+        const currentYear = new Date().getFullYear();
+        const formattedYear = baseDate.getFullYear() === currentYear ? '' : `/${year}`;
+        return `${hours}:${minutes} - ${day}/${month}${formattedYear}`;
     }
 
     const monthNames = [
