@@ -21,9 +21,9 @@ ChartJS.register(
 );
 
 const colors = {
-    good: 'rgb(22, 163, 74)', // Green for Good
-    regular: 'rgb(234, 179, 8)', // Yellow for Regular
-    dangerous: 'rgb(220, 38, 38)', // Red for Dangerous
+    good: '#49B500', // Green for Good
+    regular: '#EAB308', // Yellow for Regular
+    dangerous: '#E10000', // Red for Dangerous
 };
 
 // Define thresholds
@@ -49,7 +49,7 @@ export const AirQualityGraph = ({ measurements }: AirQualityGraphProps) => {
     const chartData = {
         labels: measurements.map((entry) => {
             const date = new Date(entry.timestamp);
-            return `${date.getHours()}:${date.getMinutes()}`;
+            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
         }),
         datasets: [
             {
@@ -95,13 +95,9 @@ export const AirQualityGraph = ({ measurements }: AirQualityGraphProps) => {
                     },
                 },
                 grid: {
-                    drawBorder: false, // Remove the border
-                    color: 'rgba(0, 0, 0, 0.1)', // Light color for grid lines
-                    borderDash: [5, 5], // Dashed grid lines
-                },
-                title: {
-                    display: true,
-                    text: 'Air Quality Index',
+                    drawBorder: false,
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    borderDash: [5, 5], 
                 },
             },
             x: {
@@ -114,92 +110,38 @@ export const AirQualityGraph = ({ measurements }: AirQualityGraphProps) => {
                 },
             },
         },
-        annotation: {
-            annotations: [
-                {
-                    type: 'line',
-                    yMin: thresholds.good.max,
-                    yMax: thresholds.good.max,
-                    borderColor: colors.good,
-                    borderWidth: 2,
-                    label: {
-                        content: 'Buena',
-                        enabled: true,
-                        position: 'start',
-                        backgroundColor: colors.good,
-                        font: {
-                            size: 10,
-                            weight: 'bold',
-                        },
-                    },
-                },
-                {
-                    type: 'line',
-                    yMin: thresholds.regular.max,
-                    yMax: thresholds.regular.max,
-                    borderColor: colors.regular,
-                    borderWidth: 2,
-                    label: {
-                        content: 'Regular',
-                        enabled: true,
-                        position: 'start',
-                        backgroundColor: colors.regular,
-                        font: {
-                            size: 10,
-                            weight: 'bold',
-                        },
-                    },
-                },
-                {
-                    type: 'line',
-                    yMin: thresholds.dangerous.max,
-                    yMax: thresholds.dangerous.max,
-                    borderColor: colors.dangerous,
-                    borderWidth: 2,
-                    label: {
-                        content: 'Peligrosa',
-                        enabled: true,
-                        position: 'start',
-                        backgroundColor: colors.dangerous,
-                        font: {
-                            size: 10,
-                            weight: 'bold',
-                        },
-                    },
-                },
-            ],
-        },
     };
 
 
     return (
         <div className="h-auto w-full rounded-lg border-[1px] border-gray bg-white px-8 pb-0 pt-4 lg:h-[51%]">
-            <div className="mb-2 flex justify-between">
-                <h2 className="mb-0 text-lg">Calidad del aire</h2>
+            <div className="mb- flex justify-between">
+                <h2 className="mb-0 text-lg">Calidad del aire</h2>                
                 <div className="flex gap-2 align-top">
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
                             style={{ backgroundColor: colors.good }}
                         ></span>
                         <span className="text-sm">Buena</span>
                     </div>
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
                             style={{ backgroundColor: colors.regular }}
                         ></span>
                         <span className="text-sm">Regular</span>
                     </div>
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
                             style={{ backgroundColor: colors.dangerous }}
                         ></span>
                         <span className="text-sm">Peligrosa</span>
                     </div>
                 </div>
             </div>
+            <p className='text-sm text-neutral-600 mb-2'></p>
             <div className="h-[75%]">
                 <Bar data={chartData} options={options} />
             </div>

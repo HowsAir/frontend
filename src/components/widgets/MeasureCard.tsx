@@ -71,7 +71,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 case 'Buena':
                     return '#49B500';
                 case 'Regular':
-                    return '#e6c90a';
+                    return '#EAB308';
                 case 'Peligrosa':
                     return '#E10000';
                 default:

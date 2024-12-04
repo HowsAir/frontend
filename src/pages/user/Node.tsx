@@ -22,7 +22,9 @@ const Node = () => {
     const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>(
         []
     );
-    const [overallAirQuality, setOverallAirQuality] = useState<string | null>(null);
+    const [overallAirQuality, setOverallAirQuality] = useState<string | null>(
+        null
+    );
 
     let measurementDate = lastMeasurement.timestamp
         ? getFormattedDate(
@@ -48,10 +50,8 @@ const Node = () => {
                 setAirQualityReadings(
                     response.airQualityReadingsInfo.airQualityReadings
                 );
-                console.log("response: ", response.airQualityReadingsInfo)
-                let airQuality = 
+                let airQuality =
                     response.airQualityReadingsInfo.overallAirQuality;
-                console.log("airQuality: ", airQuality)
                 switch (airQuality) {
                     case 'Good':
                         setOverallAirQuality(OverallAirQuality.Good);
@@ -66,7 +66,6 @@ const Node = () => {
                         setOverallAirQuality(null);
                         break;
                 }
-                console.log("overallAirQuality: ",  overallAirQuality)
             } catch (error) {
                 console.error('Error fetching node data:', error);
             }
@@ -91,7 +90,13 @@ const Node = () => {
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
             <h3 className="mx-auto mb-10 lg:mx-0">
-                Tu nodo a dia {todayDate}{' '} <button><img alt='Elegir fecha' src='../../../public/icons/calendar.svg' /></button>
+                Tu nodo a dia {todayDate}{' '}
+                <button>
+                    <img
+                        alt="Elegir fecha"
+                        src="../../../public/icons/calendar.svg"
+                    />
+                </button>
             </h3>
 
             <div className="flex flex-col gap-12 lg:max-h-[60dvh] lg:flex-row">
@@ -114,7 +119,7 @@ const Node = () => {
                         )}
                     </div>
 
-                    {/* <AirQualityGraph measurements={airQualityReadings} /> */}
+                    <AirQualityGraph measurements={airQualityReadings} />
                 </div>
 
                 <MonthlyObjective objective={20} current={monthlyDistance} />
