@@ -94,6 +94,7 @@ const Node = () => {
                 Tu nodo a dia {todayDate}{' '}
                 <button>
                     <img
+                    className='p-1 relative top-1 bg-primary rounded-lg'
                         alt="Elegir fecha"
                         src="../../../public/icons/calendar.svg"
                     />
