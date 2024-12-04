@@ -2,9 +2,64 @@ import { Link } from 'react-router-dom';
 import { routes } from '../../routes/routes';
 import { useUser } from '../../contexts/UserContext';
 import { MeasureCard } from '../../components/widgets/MeasureCard';
+import { useEffect, useState } from 'react';
+import { getUsersDashboardData } from '../../api/apiClient';
+import { Measurement, OverallAirQuality } from '../../types/mainTypes';
 
 const Portal = () => {
     const { user } = useUser();
+
+    const [dailyDistance, setDailyDistance] = useState<{
+        d: number;
+        t: string;
+    }>({ d: 0, t: 'm' });
+    const [lastMeasurement, setLastMeasurement] = useState<Measurement>({
+        timestamp: new Date().toISOString(),
+        airQuality: '',
+        proportionalValue: 0,
+        worstGas: '',
+    });
+    const [overallAirQuality, setOverallAirQuality] = useState<string | null>(
+        null
+    );
+
+    useEffect(() => {
+        const getNodeData = async () => {
+            try {
+                let response = await getUsersDashboardData();
+                let todayDistance = { d: response.todayDistance, t: 'm' };
+                if (todayDistance && todayDistance.d >= 1000) {
+                    todayDistance = {
+                        d: parseFloat((todayDistance.d / 1000).toFixed(1)),
+                        t: 'km',
+                    };
+                }
+                setDailyDistance(todayDistance || { d: 0, t: 'm' });
+                setLastMeasurement(response.lastAirQualityReading);
+                let airQuality =
+                    response.airQualityReadingsInfo.overallAirQuality;
+                switch (airQuality) {
+                    case 'Good':
+                        setOverallAirQuality(OverallAirQuality.Good);
+                        break;
+                    case 'Regular':
+                        setOverallAirQuality(OverallAirQuality.Regular);
+                        break;
+                    case 'Bad':
+                        setOverallAirQuality(OverallAirQuality.Bad);
+                        break;
+                    default:
+                        setOverallAirQuality(null);
+                        break;
+                }
+            } catch (error) {
+                console.error('Error fetching node data:', error);
+            }
+        };
+        
+        getNodeData();
+    }, []);
+
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
             <h3 className="w-full">
@@ -36,15 +91,15 @@ const Portal = () => {
                     </div>
                     <div className="flex flex-col gap-6">
                         <MeasureCard
-                            value={2}
+                            value={lastMeasurement.proportionalValue}
                             type="ppm"
                             date="Ayer"
                             title="Ultima medición"
                             slider
-                            average={"Buena"}
+                            average={overallAirQuality}
                         />
                         <MeasureCard
-                            value={100}
+                            value={dailyDistance.d}
                             type="m"
                             date="Hola"
                             title="Recorrido"
