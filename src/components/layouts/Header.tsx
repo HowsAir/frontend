@@ -23,7 +23,7 @@ const Header = () => {
             : 'transition-colors duration-300 ease-in-out hover:text-primary';
 
     return (
-        <header className="fixed top-0 z-50 flex h-20 w-screen flex-row items-center justify-between bg-white px-20 drop-shadow-header hover:drop-shadow-headerHover transition-all duration-500 ease-in-out">
+        <header className="fixed top-0 z-50 flex h-20 w-screen flex-row items-center justify-between bg-white px-20 drop-shadow-header transition-all duration-500 ease-in-out hover:drop-shadow-headerHover">
             <Logo color="primary" />
 
             <div className="flex flex-row items-center gap-10">
@@ -44,10 +44,10 @@ const Header = () => {
                         {roleId === 1 && (
                             <>
                                 <NavLink
-                                    to={routes.HOME.MAPS}
+                                    to={routes.USER.INDEX}
                                     className={getLinkClass}
                                 >
-                                    Mapas
+                                    Portal
                                 </NavLink>
                                 <NavLink
                                     to={routes.USER.NODE}
@@ -56,10 +56,10 @@ const Header = () => {
                                     Mi nodo
                                 </NavLink>
                                 <NavLink
-                                    to={routes.USER.INDEX}
+                                    to={routes.HOME.MAPS}
                                     className={getLinkClass}
                                 >
-                                    Inicio
+                                    Mapas
                                 </NavLink>
                             </>
                         )}
@@ -94,10 +94,7 @@ const Header = () => {
                         >
                             Breeze
                         </NavLink>
-                        <NavLink
-                            to={routes.HOME.MAPS}
-                            className={getLinkClass}
-                        >
+                        <NavLink to={routes.HOME.MAPS} className={getLinkClass}>
                             Mapas
                         </NavLink>
                         <NavLink
