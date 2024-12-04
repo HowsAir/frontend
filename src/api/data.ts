@@ -42,10 +42,13 @@ export interface DashboardData {
         worstGas: string;
     };
     todayDistance: number;
-    airQualityReadings: {
-        timestamp: string;
-        airQuality: string;
-        proportionalValue: number;
-        worstGas: string;
-    }[];
+    airQualityReadingsInfo: {
+        airQualityReadings: {
+            timestamp: string;
+            airQuality: string;
+            proportionalValue: number;
+            worstGas: string;
+        }[],
+        overallAirQuality: string;
+    };
 }
