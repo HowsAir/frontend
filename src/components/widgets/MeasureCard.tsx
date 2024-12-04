@@ -95,7 +95,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 <div className={`flex flex-col items-center ${average == null ? 'hidden' : ''}`}>
                     <p className="text-base text-neutral-500 font-light">Media hoy</p>
                     <img
-                        className="size-6 bg-green-50"
+                        className="size-6"
                         alt="Img media"
                         src={overallQuality.icon}
                     ></img>
