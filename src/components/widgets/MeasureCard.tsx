@@ -85,8 +85,8 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             <div className="inline-flex justify-between">
                 <div className="flex flex-col">
                     <p className="text-lg font-medium">
-                        {title}{'  '}
-                        <button className="size-6 rounded-md bg-gray">i</button>
+                        {title}
+                        <button className={`${slider ? 'relative top-[2px] pl-1' : 'hidden'} `}><img alt='info' src='../../../public/icons/info.svg' /></button>
                     </p>
                     <label className="text-lg font-normal leading-none">
                         {date}
