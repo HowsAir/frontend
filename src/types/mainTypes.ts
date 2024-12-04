@@ -66,6 +66,7 @@ export interface Measurement {
     airQuality: string;
     proportionalValue: number;
     worstGas: string;
+    ppmValue: number;
 }
 
 export enum OverallAirQuality {

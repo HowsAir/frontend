@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 interface GradientSliderProps {
-    value: number;
+    value: null | number;
 }
 
 export const GradientSlider: React.FC<GradientSliderProps> = ({ value }) => {
@@ -17,29 +17,31 @@ export const GradientSlider: React.FC<GradientSliderProps> = ({ value }) => {
         ];
 
         // Interpolate the color based on the value
-        for (let i = 0; i < gradientColors.length - 1; i++) {
-            const start = gradientColors[i];
-            const end = gradientColors[i + 1];
-            if (value >= start.stop && value <= end.stop) {
-                const ratio = (value - start.stop) / (end.stop - start.stop);
-                const interpolateColor = (
-                    startValue: number,
-                    endValue: number
-                ) => Math.round(startValue + ratio * (endValue - startValue));
+        if (value !== null) {
+            for (let i = 0; i < gradientColors.length - 1; i++) {
+                const start = gradientColors[i];
+                const end = gradientColors[i + 1];
+                if (value >= start.stop && value <= end.stop) {
+                    const ratio = (value - start.stop) / (end.stop - start.stop);
+                    const interpolateColor = (
+                        startValue: number,
+                        endValue: number
+                    ) => Math.round(startValue + ratio * (endValue - startValue));
 
-                const [r1, g1, b1] = start.color.match(/\d+/g)!.map(Number);
-                const [r2, g2, b2] = end.color.match(/\d+/g)!.map(Number);
+                    const [r1, g1, b1] = start.color.match(/\d+/g)!.map(Number);
+                    const [r2, g2, b2] = end.color.match(/\d+/g)!.map(Number);
 
-                setColor(
-                    `rgb(${interpolateColor(r1, r2)}, ${interpolateColor(g1, g2)}, ${interpolateColor(b1, b2)})`
-                );
-                break;
+                    setColor(
+                        `rgb(${interpolateColor(r1, r2)}, ${interpolateColor(g1, g2)}, ${interpolateColor(b1, b2)})`
+                    );
+                    break;
+                }
             }
         }
     }, [value]);
 
     return (
-        <div className="inline-flex gap-2">
+        <div className={`inline-flex gap-2 ${value != null ? '' : 'opacity-0'}`}>
             0
             <div
                 ref={gradientRef}

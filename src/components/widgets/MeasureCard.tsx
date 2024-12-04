@@ -9,7 +9,7 @@ interface MeasureCardProps {
     date: string;
     title: string;
     type?: string;
-    slider?: boolean;
+    slider?: null | number;
     average?: string | null;
 }
 
@@ -86,11 +86,11 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                     </p>
                 </div>
             </div>
-            <h1 className="m-auto flex w-fit text-offblack">
+            <h1 className="m-auto flex w-fit text-offblack mb-2">
                 {value}
                 <p className="mb-2.5 ml-1 mt-auto text-3xl">{type}</p>
             </h1>
-            {slider && <GradientSlider value={value} />}
+            <GradientSlider value={slider ?? null} />
         </div>
     );
 };

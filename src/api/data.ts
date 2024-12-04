@@ -40,6 +40,7 @@ export interface DashboardData {
         airQuality: string;
         proportionalValue: number;
         worstGas: string;
+        ppmValue: number;
     };
     todayDistance: number;
     airQualityReadingsInfo: {
@@ -48,7 +49,8 @@ export interface DashboardData {
             airQuality: string;
             proportionalValue: number;
             worstGas: string;
-        }[],
+            ppmValue: number;
+        }[];
         overallAirQuality: string;
     };
 }
