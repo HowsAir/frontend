@@ -9,7 +9,7 @@ interface MeasureCardProps {
     title: string;
     type?: string;
     slider?: boolean;
-    average?: string;
+    average?: string | null;
 }
 
 export const MeasureCard: React.FC<MeasureCardProps> = ({
