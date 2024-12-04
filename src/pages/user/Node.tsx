@@ -4,11 +4,14 @@ import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { MonthlyObjective } from '../../components/widgets/MonthlyObjective';
 import { getMonthlyDistance, getUsersDashboardData } from '../../api/apiClient';
 import { getFormattedDate } from '../../utils/DateFormatter';
-import { Measurement } from '../../types/mainTypes';
+import { Measurement, OverallAirQuality } from '../../types/mainTypes';
 
 const Node = () => {
     const todayDate = getFormattedDate();
-    const [dailyDistance, setDailyDistance] = useState<{d: number, t: string}>({d: 0, t: 'm'});
+    const [dailyDistance, setDailyDistance] = useState<{
+        d: number;
+        t: string;
+    }>({ d: 0, t: 'm' });
     const [lastMeasurement, setLastMeasurement] = useState<Measurement>({
         timestamp: new Date().toISOString(),
         airQuality: '',
@@ -16,10 +19,18 @@ const Node = () => {
         worstGas: '',
     });
     const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
-    const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>([]);
+    const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>(
+        []
+    );
+    const [overallAirQuality, setOverallAirQuality] = useState<string | null>(null);
 
-    let measurementDate = lastMeasurement.timestamp ? getFormattedDate(lastMeasurement.timestamp, new Date().toISOString(), 'compact') : 'No existe medicion';
-    
+    let measurementDate = lastMeasurement.timestamp
+        ? getFormattedDate(
+              lastMeasurement.timestamp,
+              new Date().toISOString(),
+              'compact'
+          )
+        : 'No existe medicion';
 
     useEffect(() => {
         const getNodeData = async () => {
@@ -27,12 +38,35 @@ const Node = () => {
                 let response = await getUsersDashboardData();
                 let todayDistance = { d: response.todayDistance, t: 'm' };
                 if (todayDistance && todayDistance.d >= 1000) {
-                    todayDistance = { d: parseFloat((todayDistance.d / 1000).toFixed(1)), t: 'km' };
+                    todayDistance = {
+                        d: parseFloat((todayDistance.d / 1000).toFixed(1)),
+                        t: 'km',
+                    };
                 }
                 setDailyDistance(todayDistance || { d: 0, t: 'm' });
                 setLastMeasurement(response.lastAirQualityReading);
-                console.log(response.airQualityReadings);
-                setAirQualityReadings(response.airQualityReadings);
+                setAirQualityReadings(
+                    response.airQualityReadingsInfo.airQualityReadings
+                );
+                console.log("response: ", response.airQualityReadingsInfo)
+                let airQuality = 
+                    response.airQualityReadingsInfo.overallAirQuality;
+                console.log("airQuality: ", airQuality)
+                switch (airQuality) {
+                    case 'Good':
+                        setOverallAirQuality(OverallAirQuality.Good);
+                        break;
+                    case 'Regular':
+                        setOverallAirQuality(OverallAirQuality.Regular);
+                        break;
+                    case 'Bad':
+                        setOverallAirQuality(OverallAirQuality.Bad);
+                        break;
+                    default:
+                        setOverallAirQuality(null);
+                        break;
+                }
+                console.log("overallAirQuality: ",  overallAirQuality)
             } catch (error) {
                 console.error('Error fetching node data:', error);
             }
@@ -49,7 +83,7 @@ const Node = () => {
             } catch (error) {
                 console.error('Error fetching monthly distance:', error);
             }
-        }
+        };
 
         getMonthDistance();
     }, []);
@@ -68,6 +102,7 @@ const Node = () => {
                             date={measurementDate}
                             value={lastMeasurement.proportionalValue}
                             slider
+                            average={overallAirQuality}
                         />
                         {dailyDistance !== null && (
                             <MeasureCard
@@ -79,7 +114,7 @@ const Node = () => {
                         )}
                     </div>
 
-                    <AirQualityGraph measurements={airQualityReadings} />
+                    {/* <AirQualityGraph measurements={airQualityReadings} /> */}
                 </div>
 
                 <MonthlyObjective objective={20} current={monthlyDistance} />
