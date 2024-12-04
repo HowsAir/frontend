@@ -17,6 +17,7 @@ const Node = () => {
         airQuality: '',
         proportionalValue: 0,
         worstGas: '',
+        ppmValue: 0,
     });
     const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
     const [airQualityReadings, setAirQualityReadings] = useState<Measurement[]>(
@@ -105,8 +106,9 @@ const Node = () => {
                         <MeasureCard
                             title="Última medición"
                             date={measurementDate}
-                            value={lastMeasurement.proportionalValue}
-                            slider
+                            type={lastMeasurement.worstGas}
+                            value={lastMeasurement.ppmValue}
+                            slider={lastMeasurement.proportionalValue}
                             average={overallAirQuality}
                         />
                         {dailyDistance !== null && (

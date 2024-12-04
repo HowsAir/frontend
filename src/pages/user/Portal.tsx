@@ -5,6 +5,7 @@ import { MeasureCard } from '../../components/widgets/MeasureCard';
 import { useEffect, useState } from 'react';
 import { getUsersDashboardData } from '../../api/apiClient';
 import { Measurement, OverallAirQuality } from '../../types/mainTypes';
+import { getFormattedDate } from '../../utils/DateFormatter';
 
 const Portal = () => {
     const { user } = useUser();
@@ -18,6 +19,7 @@ const Portal = () => {
         airQuality: '',
         proportionalValue: 0,
         worstGas: '',
+        ppmValue: 0,
     });
     const [overallAirQuality, setOverallAirQuality] = useState<string | null>(
         null
@@ -60,6 +62,14 @@ const Portal = () => {
         getNodeData();
     }, []);
 
+    let measurementDate = lastMeasurement.timestamp
+        ? getFormattedDate(
+              lastMeasurement.timestamp,
+              new Date().toISOString(),
+              'compact'
+          )
+        : 'No existe medicion';
+
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
             <h3 className="w-full">
@@ -91,11 +101,11 @@ const Portal = () => {
                     </div>
                     <div className="flex flex-col gap-6">
                         <MeasureCard
-                            value={lastMeasurement.proportionalValue}
-                            type="ppm"
-                            date="Ayer"
                             title="Ultima medición"
-                            slider
+                            value={lastMeasurement.ppmValue}
+                            type={lastMeasurement.worstGas}
+                            date={measurementDate}
+                            slider={lastMeasurement.proportionalValue}
                             average={overallAirQuality}
                         />
                         <MeasureCard
