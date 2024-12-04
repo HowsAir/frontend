@@ -67,3 +67,9 @@ export interface Measurement {
     proportionalValue: number;
     worstGas: string;
 }
+
+export enum OverallAirQuality {
+    "Good" = "Buena",
+    "Regular" = "Regular",
+    "Bad" = "Peligrosa"
+}
