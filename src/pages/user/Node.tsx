@@ -91,7 +91,7 @@ const Node = () => {
     return (
         <div className="mx-auto w-fit lg:w-full lg:px-24">
             <h3 className="mx-auto mb-10 lg:mx-0">
-                Tu nodo a dia {todayDate}{' '}
+                Tu nodo a dia {todayDate}{' '} <button><img alt='Elegir fecha' src='../../../public/icons/calendar.svg' /></button>
             </h3>
 
             <div className="flex flex-col gap-12 lg:max-h-[60dvh] lg:flex-row">
