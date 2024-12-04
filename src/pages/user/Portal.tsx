@@ -83,7 +83,7 @@ const Portal = () => {
                         <Link
                             className="mb-1 text-2xl font-normal text-primary underline"
                             to={routes.HOME.MAPS}
-                        >{`Más información >`}</Link>
+                        >{`Más mapas >`}</Link>
                     </div>
                     <div className="h-[85%] rounded-lg border-[1px] border-gray bg-white p-8 text-center">
                         <div className="h-full rounded-lg bg-green-200">
@@ -97,7 +97,7 @@ const Portal = () => {
                         <Link
                             className="mb-1 text-2xl font-normal text-primary underline"
                             to={routes.USER.NODE}
-                        >{`Más mapas >`}</Link>
+                        >{`Más datos >`}</Link>
                     </div>
                     <div className="flex flex-col gap-6">
                         <MeasureCard
