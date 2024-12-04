@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface GradientSliderProps {
     value: number;
+    visible?: boolean;
 }
 
-export const GradientSlider: React.FC<GradientSliderProps> = ({ value }) => {
+export const GradientSlider: React.FC<GradientSliderProps> = ({ value, visible }) => {
     const [color, setColor] = useState('green');
     const gradientRef = useRef<HTMLDivElement | null>(null);
     
@@ -39,7 +40,7 @@ export const GradientSlider: React.FC<GradientSliderProps> = ({ value }) => {
     }, [value]);
 
     return (
-        <div className="inline-flex gap-2">
+        <div className={`inline-flex gap-2 ${visible ? '' : 'opacity-0'}`}>
             0
             <div
                 ref={gradientRef}
