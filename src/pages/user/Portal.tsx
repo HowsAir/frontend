@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { getUsersDashboardData } from '../../api/apiClient';
 import { Measurement, OverallAirQuality } from '../../types/mainTypes';
 import { getFormattedDate } from '../../utils/DateFormatter';
+import { LatestMap } from '../../components/LatestMap';
 
 const Portal = () => {
     const { user } = useUser();
@@ -85,11 +86,7 @@ const Portal = () => {
                             to={routes.HOME.MAPS}
                         >{`Más mapas >`}</Link>
                     </div>
-                    <div className="h-[85%] rounded-lg border-[1px] border-gray bg-white p-8 text-center">
-                        <div className="h-full rounded-lg bg-green-200">
-                            <p className="m-auto">Mapa</p>
-                        </div>
-                    </div>
+                    <LatestMap portal />
                 </div>
                 <div className="col-span-2">
                     <div className="mb-6 flex items-center gap-4">
