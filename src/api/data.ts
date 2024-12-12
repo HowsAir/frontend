@@ -8,6 +8,11 @@ export interface MeasurementData {
     longitude: number;
 }
 
+export interface AirQualityMap {
+    url: string;
+    timestamp: string;
+}
+
 export interface UserStatistics {
     id: number;
     name: string;

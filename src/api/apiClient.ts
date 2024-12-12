@@ -4,7 +4,7 @@
  * @author Juan Diaz
  */
 
-import { DashboardData, MeasurementData } from './data';
+import { AirQualityMap, DashboardData, MeasurementData } from './data';
 import {
     LogInFormData,
     RegisterFormData,
@@ -283,6 +283,34 @@ export const validateToken = async (): Promise<{ roleId: number }> => {
         throw new Error('Error validating token');
     }
 };
+
+export const getCurrentAirQualityMap = async (): Promise<AirQualityMap> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/air-quality-maps/current`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(
+                message || 'Error fetching current air quality map'
+            );
+        } 
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Get current air quality map error:', error);
+        throw new Error('Error fetching current air quality map');
+    }
+}
 
 /**
  * @brief Fetches the user statistics from the API
