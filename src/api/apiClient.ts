@@ -284,6 +284,17 @@ export const validateToken = async (): Promise<{ roleId: number }> => {
     }
 };
 
+/**
+ * @brief Fetches the current air quality map from the API
+ * @author Mario Luis
+ *
+ * getCurrentAirQualityMap -> Promise<AirQualityMap>
+ *
+ * This function makes a GET request to the API to retrieve the latest map.
+ *
+ * @throws Error - If fetching the map fails or the response is invalid
+ * @returns {Promise<AirQualityMap>} - A promise that resolves with the air quality map
+ */
 export const getCurrentAirQualityMap = async (): Promise<AirQualityMap> => {
     try {
         const response = await fetch(
@@ -302,15 +313,15 @@ export const getCurrentAirQualityMap = async (): Promise<AirQualityMap> => {
             throw new Error(
                 message || 'Error fetching current air quality map'
             );
-        } 
-        
+        }
+
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Get current air quality map error:', error);
         throw new Error('Error fetching current air quality map');
     }
-}
+};
 
 /**
  * @brief Fetches the user statistics from the API

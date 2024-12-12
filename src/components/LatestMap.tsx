@@ -61,24 +61,6 @@ export const LatestMap = (portal: LatestMapProps) => {
                     title="Dynamic HTML"
                     className={`mb-0 h-full w-full border-0`}
                 />
-                <div className="absolute bottom-4 left-4 flex flex-col gap-1 rounded-md border-[1px] border-gray bg-white px-4 py-2">
-                    <p className="text-base">Calidad</p>
-
-                    <div className="inline-flex items-center gap-2">
-                        <div className="size-3 rounded-sm bg-green-500" />{' '}
-                        <p className="text-sm">Buena</p>
-                    </div>
-
-                    <div className="inline-flex items-center gap-2">
-                        <div className="size-3 rounded-sm bg-orange-500" />{' '}
-                        <p className="text-sm">Regular</p>
-                    </div>
-
-                    <div className="inline-flex items-center gap-2">
-                        <div className="size-3 rounded-sm bg-red-500" />{' '}
-                        <p className="text-sm">Peligrosa</p>
-                    </div>
-                </div>
 
                 <button className="absolute bottom-20 right-4 rounded-md bg-white p-2 transition-all duration-200 ease-in-out hover:bg-neutral-200">
                     <img src="../../../public/icons/location.svg" />
