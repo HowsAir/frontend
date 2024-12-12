@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { GasInfoPopUp } from './widgets/GasInfoPopUp';
+import { getCurrentAirQualityMap } from '../api/apiClient';
 
 interface LatestMapProps {
     portal?: boolean;
@@ -7,21 +8,21 @@ interface LatestMapProps {
 
 export const LatestMap = (portal: LatestMapProps) => {
     const [gasInfoPopUp, setGasInfoPopUp] = useState<boolean>(false);
+    const [htmlContent, setHtmlContent] = useState('');
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     const toggleGasInfoPopUp = () => {
         setGasInfoPopUp(!gasInfoPopUp);
     };
 
-    const mapUrl =
-        'https://res.cloudinary.com/dzh6bz0zi/raw/upload/v1733940950/air_quality_maps/latest.html';
-
-    const [htmlContent, setHtmlContent] = useState('');
-    const iframeRef = useRef<HTMLIFrameElement>(null);
-
     useEffect(() => {
-        const fetchHtml = async () => {
+        const fetchAirQualityMap = async () => {
             try {
-                const response = await fetch(mapUrl);
+                // Fetch the map URL using the API method
+                const airQualityMap = await getCurrentAirQualityMap();
+
+                // Fetch the HTML content of the map URL
+                const response = await fetch(airQualityMap.url);
                 if (!response.ok) {
                     throw new Error(
                         `Error fetching HTML: ${response.statusText}`
@@ -30,12 +31,12 @@ export const LatestMap = (portal: LatestMapProps) => {
                 const html = await response.text();
                 setHtmlContent(html);
             } catch (error) {
-                console.error('Failed to fetch HTML:', error);
+                console.error('Failed to fetch air quality map:', error);
             }
         };
 
-        fetchHtml();
-    }, [mapUrl]);
+        fetchAirQualityMap();
+    }, []); // No dependencies, runs once on mount
 
     useEffect(() => {
         if (iframeRef.current && htmlContent) {
@@ -52,11 +53,13 @@ export const LatestMap = (portal: LatestMapProps) => {
 
     return (
         <>
-            <div className="relative w-full rounded-lg border-[1px] border-gray bg-white after:absolute after:bottom-0 after:h-2.5 after:w-full after:rounded-bl-lg after:rounded-br-lg after:bg-white">
+            <div
+                className={`${portal ? 'h-[55dvh]' : ''} relative h-[75dvh] w-full rounded-lg border-[1px] border-gray bg-white`}
+            >
                 <iframe
                     ref={iframeRef}
                     title="Dynamic HTML"
-                    className={`mb-0 ${portal ? 'h-[55dvh]' : 'h-[75dvh]'} w-full border-0`}
+                    className={`mb-0 h-full w-full border-0`}
                 />
                 <div className="absolute bottom-4 left-4 flex flex-col gap-1 rounded-md border-[1px] border-gray bg-white px-4 py-2">
                     <p className="text-base">Calidad</p>
