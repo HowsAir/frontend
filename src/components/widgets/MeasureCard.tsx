@@ -86,9 +86,21 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                     </p>
                 </div>
             </div>
-            <h1 className="m-auto flex w-fit text-offblack mb-2">
+            <h1 className="m-auto mb-2 flex w-fit text-offblack">
                 {value}
-                <p className="mb-2.5 ml-1 mt-auto text-3xl">{type}</p>
+                <p className="mb-2.5 ml-1 mt-auto text-right text-3xl leading-none">
+                    {type === 'm' || type === 'km' ? (
+                        type
+                    ) : (
+                        <>
+                            <span className="text-base text-neutral-600 leading-none">
+                                {type}
+                            </span>
+                            <br />
+                            ppm{' '}
+                        </>
+                    )}
+                </p>
             </h1>
             <GradientSlider value={slider ?? null} />
         </div>

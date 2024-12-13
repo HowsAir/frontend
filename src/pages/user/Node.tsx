@@ -16,7 +16,7 @@ const Node = () => {
         timestamp: new Date().toISOString(),
         airQuality: '',
         proportionalValue: 0,
-        worstGas: '',
+        gas: '',
         ppmValue: 0,
     });
     const [monthlyDistance, setMonthlyDistance] = useState<number>(0);
@@ -107,7 +107,7 @@ const Node = () => {
                         <MeasureCard
                             title="Última medición"
                             date={measurementDate}
-                            type={lastMeasurement.worstGas}
+                            type={lastMeasurement.gas}
                             value={lastMeasurement.ppmValue}
                             slider={lastMeasurement.proportionalValue}
                             average={overallAirQuality}
