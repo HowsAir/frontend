@@ -54,12 +54,12 @@ export const LatestMap = (portal: LatestMapProps) => {
     return (
         <>
             <div
-                className={`${portal ? 'h-[55dvh]' : ''} relative h-[75dvh] w-full rounded-lg border-[1px] border-gray bg-white`}
+                className={`${portal ? 'h-[55dvh]' : ''} relative h-[75dvh] w-full rounded-lg border-[1px] border-gray bg-white p-2`}
             >
                 <iframe
                     ref={iframeRef}
                     title="Dynamic HTML"
-                    className={`mb-0 h-full w-full border-0`}
+                    className={`mb-0 h-full w-full border-0 rounded-md`}
                 />
 
                 <button className="absolute bottom-20 right-4 rounded-md bg-white p-2 transition-all duration-200 ease-in-out hover:bg-neutral-200">
