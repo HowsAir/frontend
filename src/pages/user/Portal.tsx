@@ -84,7 +84,7 @@ const Portal = () => {
                         <Link
                             className="mb-1 text-2xl font-normal text-primary underline"
                             to={routes.HOME.MAPS}
-                        >{`Más mapas >`}</Link>
+                        >{` >`}</Link>
                     </div>
                     <LatestMap portal />
                 </div>
@@ -107,8 +107,8 @@ const Portal = () => {
                         />
                         <MeasureCard
                             value={dailyDistance.d}
-                            type="m"
-                            date="Hola"
+                            type={dailyDistance.t}
+                            date="00:00 - Ahora"
                             title="Recorrido"
                         />
                     </div>
