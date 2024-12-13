@@ -1,15 +1,19 @@
-import { Link } from 'react-router-dom';
-import { ImagePanel } from '../../components/layouts/ImagePanel';
-import { routes } from '../../routes/routes';
-import { BuyPopUp } from '../../components/widgets/BuyPopUp';
 import { useState } from 'react';
+import { ImagePanel } from '../../components/layouts/ImagePanel';
+import { BuyPopUp } from '../../components/widgets/BuyPopUp';
+import { FormPopUp } from '../../components/widgets/FormPopUp';
 
 const Product = () => {
-    const [popup, setPopup] = useState<boolean>(false);
+    const [buypopup, setBuyPopup] = useState<boolean>(false);
+    const [formpopup, setFormPopup] = useState<boolean>(false);
 
-    const togglePopup = () => {
-        setPopup(!popup);
+    const toggleBuyPopup = () => {
+        setBuyPopup(!buypopup);
     };
+
+    const toggleFormPopup = () => {
+        setFormPopup(!formpopup);
+    }
 
     return (
         <div className="grid grid-flow-row grid-cols-3 grid-rows-1 gap-20 px-28">
@@ -45,14 +49,17 @@ const Product = () => {
 
                 <div className="relative mb-2 mt-auto">
                     <div className="flex flex-row gap-4">
-                        <Link
-                            to={routes.SHOP.FREE_BREEZE}
+                        <button
+                            onClick={toggleFormPopup}
                             className="btn-secondary px-4"
                         >
                             Solícitalo gratis*
-                        </Link>
+                        </button>
 
-                        <button onClick={togglePopup} className="btn-primary">
+                        <button
+                            onClick={toggleBuyPopup}
+                            className="btn-primary"
+                        >
                             Comprar
                         </button>
                     </div>
@@ -65,8 +72,9 @@ const Product = () => {
                 </div>
             </div>
 
-            {/* PopUp */}
-            {popup && <BuyPopUp togglePopup={togglePopup} />}
+            {/* PopUps */}
+            {buypopup && <BuyPopUp togglePopup={toggleBuyPopup} />}
+            {formpopup && <FormPopUp togglePopup={toggleFormPopup} />}
         </div>
     );
 };

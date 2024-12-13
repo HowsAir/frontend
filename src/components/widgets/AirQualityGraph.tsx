@@ -9,69 +9,65 @@ import {
     Legend,
 } from 'chart.js';
 
+import { Measurement } from '../../types/mainTypes'; // Import the Measurement interface
+
 ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
 );
 
 const colors = {
-    red: '#E37070',
-    yellow: '#EBE34E',
-    green: '#A2D481',
+    good: '#49B500', // Green for Good
+    regular: '#EAB308', // Yellow for Regular
+    dangerous: '#E10000', // Red for Dangerous
 };
 
-export const AirQualityGraph = () => {
-    // const [data, setData] = useState([]);
-    const data = [
-        { hour: '1:00', value: 15 },
-        { hour: '2:00', value: 45 },
-        { hour: '3:00', value: 68 },
-        { hour: '4:00', value: 72 },
-        { hour: '5:00', value: 88 },
-        { hour: '6:00', value: 55 },
-        { hour: '7:00', value: 43 },
-        { hour: '8:00', value: 22 },
-        { hour: '9:00', value: 76 },
-        { hour: '10:00', value: 54 },
-        { hour: '11:00', value: 35 },
-        { hour: '12:00', value: 90 },
-    ];
+// Define thresholds
+const thresholds = {
+    good: { min: 0, max: 20 },
+    regular: { min: 21, max: 60 },
+    dangerous: { min: 61, max: 100 },
+};
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const response = await fetch('/api/get-hourly-averages');
-    //         const result = await response.json();
-    //         setData(result);
-    //     }
-    //     fetchData();
-    // }, []);
+interface AirQualityGraphProps {
+    measurements: Measurement[]; // Use the imported Measurement interface
+}
 
+export const AirQualityGraph = ({ measurements }: AirQualityGraphProps) => {
+    // Function to get the color based on the value
     const getColor = (value: number) => {
-        if (value > 80) return colors.red; // Bad (red)
-        if (value > 50) return colors.yellow; // Medium (yellow)
-        return colors.green; // Good (green)
+        if (value <= thresholds.good.max) return colors.good; // Good (Green)
+        if (value <= thresholds.regular.max) return colors.regular; // Regular (Yellow)
+        return colors.dangerous; // Dangerous (Red)
     };
 
+    // Chart Data Preparation
     const chartData = {
-        labels: Array(12)
-            .fill('')
-            .map((_, i) => `Hora ${i + 1}`),
+        labels: measurements.map((entry) => {
+            const date = new Date(entry.timestamp);
+            return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+        }),
         datasets: [
             {
-                label: 'Media',
-                data: data.map((entry) => entry.value),
-                backgroundColor: data.map((entry) => getColor(entry.value)),
-                borderColor: data.map((entry) => getColor(entry.value)),
+                label: 'Air Quality',
+                data: measurements.map((entry) => entry.proportionalValue),
+                backgroundColor: measurements.map((entry) =>
+                    getColor(entry.proportionalValue)
+                ),
+                borderColor: measurements.map((entry) =>
+                    getColor(entry.proportionalValue)
+                ),
                 borderWidth: 1,
                 borderRadius: { topLeft: 8, topRight: 8 },
             },
         ],
     };
 
+    // Chart Options
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -80,7 +76,30 @@ export const AirQualityGraph = () => {
             tooltip: { enabled: true },
         },
         scales: {
-            y: { display: false },
+            y: {
+                min: 0, // Set the minimum value of Y-axis to 0
+                max: 100, // Set the maximum value of Y-axis to 100
+                ticks: {
+                    stepSize: 20,
+                    callback: function (value: string | number) {
+                        if (value === thresholds.good.max) {
+                            return 'Buena';
+                        }
+                        if (value === thresholds.regular.max) {
+                            return 'Regular';
+                        }
+                        if (value === thresholds.dangerous.max) {
+                            return 'Peligrosa';
+                        }
+                        return null;
+                    },
+                },
+                grid: {
+                    drawBorder: false,
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    borderDash: [5, 5], 
+                },
+            },
             x: {
                 grid: {
                     display: false,
@@ -93,34 +112,36 @@ export const AirQualityGraph = () => {
         },
     };
 
+
     return (
         <div className="h-auto w-full rounded-lg border-[1px] border-gray bg-white px-8 pb-0 pt-4 lg:h-[51%]">
-            <div className="mb-2 flex justify-between">
-                <h2 className="mb-0 text-lg">Calidad del aire</h2>
+            <div className="mb- flex justify-between">
+                <h2 className="mb-0 text-lg">Calidad del aire</h2>                
                 <div className="flex gap-2 align-top">
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
-                            style={{ backgroundColor: colors.green }}
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
+                            style={{ backgroundColor: colors.good }}
                         ></span>
-                        <span className="text-sm">Good</span>
+                        <span className="text-sm">Buena</span>
                     </div>
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
-                            style={{ backgroundColor: colors.yellow }}
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
+                            style={{ backgroundColor: colors.regular }}
                         ></span>
-                        <span className="text-sm">Medium</span>
+                        <span className="text-sm">Regular</span>
                     </div>
                     <div className="flex items-center">
                         <span
-                            className="mr-1 inline-block h-3 w-3"
-                            style={{ backgroundColor: colors.red }}
+                            className="mr-1 inline-block h-3 w-3 rounded-[5px]"
+                            style={{ backgroundColor: colors.dangerous }}
                         ></span>
-                        <span className="text-sm">Bad</span>
+                        <span className="text-sm">Peligrosa</span>
                     </div>
                 </div>
             </div>
+            <p className='text-sm text-neutral-600 mb-2'></p>
             <div className="h-[75%]">
                 <Bar data={chartData} options={options} />
             </div>

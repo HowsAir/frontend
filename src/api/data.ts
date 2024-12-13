@@ -8,6 +8,11 @@ export interface MeasurementData {
     longitude: number;
 }
 
+export interface AirQualityMap {
+    url: string;
+    timestamp: string;
+}
+
 export interface UserStatistics {
     id: number;
     name: string;
@@ -32,4 +37,25 @@ export interface UserProfile {
     zipCode: string;
     address: string;
     roleId: number;
+}
+
+export interface DashboardData {
+    lastAirQualityReading: {
+        timestamp: string;
+        airQuality: string;
+        proportionalValue: number;
+        gas: string;
+        ppmValue: number;
+    };
+    todayDistance: number;
+    airQualityReadingsInfo: {
+        airQualityReadings: {
+            timestamp: string;
+            airQuality: string;
+            proportionalValue: number;
+            gas: string;
+            ppmValue: number;
+        }[];
+        overallAirQuality: string;
+    };
 }

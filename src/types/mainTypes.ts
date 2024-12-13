@@ -61,3 +61,16 @@ export interface FreeBreezeApplicationFormData {
     terms: boolean;
 }
 
+export interface Measurement {
+    timestamp: string;
+    airQuality: string;
+    proportionalValue: number;
+    gas: string;
+    ppmValue: number;
+}
+
+export enum OverallAirQuality {
+    "Good" = "Buena",
+    "Regular" = "Regular",
+    "Bad" = "Peligrosa"
+}

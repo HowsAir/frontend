@@ -4,7 +4,7 @@
  * @author Juan Diaz
  */
 
-import { MeasurementData } from './data';
+import { AirQualityMap, DashboardData, MeasurementData } from './data';
 import {
     LogInFormData,
     RegisterFormData,
@@ -285,6 +285,45 @@ export const validateToken = async (): Promise<{ roleId: number }> => {
 };
 
 /**
+ * @brief Fetches the current air quality map from the API
+ * @author Mario Luis
+ *
+ * getCurrentAirQualityMap -> Promise<AirQualityMap>
+ *
+ * This function makes a GET request to the API to retrieve the latest map.
+ *
+ * @throws Error - If fetching the map fails or the response is invalid
+ * @returns {Promise<AirQualityMap>} - A promise that resolves with the air quality map
+ */
+export const getCurrentAirQualityMap = async (): Promise<AirQualityMap> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/air-quality-maps/current`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(
+                message || 'Error fetching current air quality map'
+            );
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Get current air quality map error:', error);
+        throw new Error('Error fetching current air quality map');
+    }
+};
+
+/**
  * @brief Fetches the user statistics from the API
  * @author Mario Luis
  *
@@ -357,6 +396,55 @@ export const getUsersDailyDistance = async (): Promise<number> => {
     } catch (error) {
         console.error('Get user daily distance error:', error);
         throw new Error('Error fetching users daily distance');
+    }
+};
+
+export const getUsersDashboardData = async (): Promise<DashboardData> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/users/dashboard`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user dashboard data');
+        }
+
+        const data = await response.json();
+        return data.data;
+    } catch (error) {
+        console.error('Get user dashboard data error:', error);
+        throw new Error('Error fetching user dashboard data');
+    }
+};
+
+export const getMonthlyDistance = async (): Promise<number> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/users/current-month-distance`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching user monthly distance');
+        }
+
+        const data = await response.json();
+        return data.currentMonthDistance;
+    } catch (error) {
+        console.error('Get user monthly distance error:', error);
+        throw new Error('Error fetching user monthly distance');
     }
 };
 

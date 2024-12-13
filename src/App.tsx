@@ -12,12 +12,13 @@ import Maps from './pages/home/Maps';
 import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
-import User from './pages/user/User';
+import Portal from './pages/user/Portal';
+import Node from './pages/user/Node';
 import Admin from './pages/admin/Admin';
 import ChangePassword from './pages/auth/ChangePassword';
 import EditProfile from './pages/user/EditProfile';
 import { ProtectedRoute } from './components/ProtectedRoutes';
-import Start from './pages/user/Start';
+import Start from './pages/user/Portal';
 import { AuthRedirect } from './components/AuthRedirect';
 
 const App = () => {
@@ -57,11 +58,21 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/user"
+                    path="/portal"
                     element={
                         <Layout>
                             <ProtectedRoute allowedRoles={[1]}>
-                                <User />
+                                <Portal />
+                            </ProtectedRoute>
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/node"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[1]}>
+                                <Node />
                             </ProtectedRoute>
                         </Layout>
                     }
@@ -96,11 +107,12 @@ const App = () => {
                         </Layout>
                     }
                 />
+
                 <Route
-                    path="/terms-and-privacy"
+                    path="/start"
                     element={
                         <Layout>
-                            <TermsAndPrivacy />
+                            <Start />
                         </Layout>
                     }
                 />
@@ -121,14 +133,6 @@ const App = () => {
                     }
                 />
                 <Route
-                    path="/start"
-                    element={
-                        <Layout>
-                            <Start />
-                        </Layout>
-                    }
-                />
-                <Route
                     path="/free-breeze-application"
                     element={
                         <Layout>
@@ -143,6 +147,14 @@ const App = () => {
                     element={
                         <Layout>
                             <ForgotPassword />
+                        </Layout>
+                    }
+                />
+                <Route
+                    path="/terms-and-privacy"
+                    element={
+                        <Layout>
+                            <TermsAndPrivacy />
                         </Layout>
                     }
                 />
