@@ -47,9 +47,9 @@ export const GasInfoPopUp = ({ togglePopup }: GasInfoPopUpProps) => {
                         </thead>
                         <tr className="text-center text-base font-normal text-[#1652A0]">
                             <td className="pb-2"></td>
-                            <td className="pb-2">Límite/hora: 200 µg/m³</td>
-                            <td className="pb-2">Límite/hora: 180 μg/m³</td>
-                            <td className="pb-2">Límite/hora: 30 mg/m³</td>
+                            <td className="pb-2">Límite/hora: 0.2 ppm</td>
+                            <td className="pb-2">Límite/hora: 0.2 ppm</td>
+                            <td className="pb-2">Límite/hora: 20 ppm</td>
                         </tr>
                         <tbody className="mt-4">
                             <tr className="text-left font-light">
