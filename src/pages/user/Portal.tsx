@@ -84,7 +84,7 @@ const Portal = () => {
                         <Link
                             className="mb-1 text-2xl font-normal text-primary underline"
                             to={routes.HOME.MAPS}
-                        >{` >`}</Link>
+                        >{`Ver grande >`}</Link>
                     </div>
                     <LatestMap portal />
                 </div>
