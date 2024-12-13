@@ -1,18 +1,37 @@
+import { useState, useEffect } from 'react';
+
 interface GasInfoPopUpProps {
     togglePopup: () => void;
 }
 
 export const GasInfoPopUp = ({ togglePopup }: GasInfoPopUpProps) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), 10); // Start transition after mount
+        return () => clearTimeout(timer);
+    }, []);
+
+    const closePopup = () => {
+        setIsVisible(false);
+        setTimeout(togglePopup, 300); // Match this timeout to your CSS transition duration
+    };
+
     return (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative mx-24 mt-20 h-fit w-[70%] rounded-lg bg-offwhite px-12 py-8">
+        <div
+            className={`fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
+                isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+        >
+            <div
+                className={`relative mx-24 mt-20 h-fit w-[70%] transform rounded-lg bg-offwhite px-12 py-8 transition-all duration-300 ${
+                    isVisible ? 'scale-100' : 'scale-90'
+                }`}
+            >
                 <h2 className="mb-4 w-full text-center text-3xl">
                     Contaminantes y consejos
                 </h2>
-                <button
-                    onClick={togglePopup}
-                    className="absolute right-8 top-8"
-                >
+                <button onClick={closePopup} className="absolute right-8 top-8">
                     <img
                         className="text-4xl"
                         src="../../../public/icons/close.svg"

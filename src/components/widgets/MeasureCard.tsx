@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { GradientSlider } from './GradientSlider';
+import { GasInfoPopUp } from './GasInfoPopUp';
 const goodQualityIcon = '../../../public/icons/good-quality.svg';
 const regularQualityIcon = '../../../public/icons/regular-quality.svg';
 const toxicQualityIcon = '../../../public/icons/toxic-quality.svg';
@@ -47,22 +48,18 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             }
         })(),
     };
+    
+
+    const [gasInfoPopUp, setGasInfoPopUp] = useState<boolean>(false);
+    const toggleGasInfoPopUp = () => {
+        setGasInfoPopUp(!gasInfoPopUp);
+    };
 
     return (
         <div className="flex min-h-52 w-fit min-w-80 flex-col rounded-lg border-[1px] border-gray bg-white px-6 py-4">
             <div className="inline-flex justify-between">
                 <div className="flex flex-col">
-                    <p className="text-lg font-medium">
-                        {title}
-                        <button
-                            className={`${slider ? 'relative top-[2px] pl-1' : 'hidden'} `}
-                        >
-                            <img
-                                alt="info"
-                                src="../../../public/icons/info.svg"
-                            />
-                        </button>
-                    </p>
+                    <p className="text-lg font-medium">{title}</p>
                     <label className="text-lg font-normal leading-none">
                         {date}
                     </label>
@@ -93,8 +90,17 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                         type
                     ) : (
                         <>
-                            <span className="text-base text-neutral-600 leading-none">
+                            <span className="text-base leading-none text-neutral-600">
                                 {type}
+                                <button
+                                    className="relative top-[2px] size-5 pl-1"
+                                    onClick={toggleGasInfoPopUp}
+                                >
+                                    <img
+                                        alt="info"
+                                        src="../../../public/icons/help.svg"
+                                    />
+                                </button>
                             </span>
                             <br />
                             ppm{' '}
@@ -103,6 +109,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 </p>
             </h1>
             <GradientSlider value={slider ?? null} />
+            {gasInfoPopUp && <GasInfoPopUp togglePopup={toggleGasInfoPopUp} />}
         </div>
     );
 };

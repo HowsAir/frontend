@@ -19,7 +19,7 @@ const Portal = () => {
         timestamp: new Date().toISOString(),
         airQuality: '',
         proportionalValue: 0,
-        worstGas: '',
+        gas: '',
         ppmValue: 0,
     });
     const [overallAirQuality, setOverallAirQuality] = useState<string | null>(
@@ -59,7 +59,7 @@ const Portal = () => {
                 console.error('Error fetching node data:', error);
             }
         };
-        
+
         getNodeData();
     }, []);
 
@@ -100,7 +100,7 @@ const Portal = () => {
                         <MeasureCard
                             title="Ultima medición"
                             value={lastMeasurement.ppmValue}
-                            type={lastMeasurement.worstGas}
+                            type={lastMeasurement.gas}
                             date={measurementDate}
                             slider={lastMeasurement.proportionalValue}
                             average={overallAirQuality}
