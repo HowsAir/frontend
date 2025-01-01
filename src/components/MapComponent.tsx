@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { GasInfoPopUp } from './widgets/GasInfoPopUp';
 import { getCurrentAirQualityMap } from '../api/apiClient';
 
-interface LatestMapProps {
+interface MapProps {
+    date?: Date | null;
     portal?: boolean;
 }
 
-export const LatestMap = ({ portal }: LatestMapProps) => {
+export const MapComponent = ({ portal, date }: MapProps) => {
     const [gasInfoPopUp, setGasInfoPopUp] = useState<boolean>(false);
     const [htmlContent, setHtmlContent] = useState('');
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -16,27 +17,29 @@ export const LatestMap = ({ portal }: LatestMapProps) => {
     };
 
     useEffect(() => {
-        const fetchAirQualityMap = async () => {
-            try {
-                // Fetch the map URL using the API method
-                const airQualityMap = await getCurrentAirQualityMap();
+        if (date === null) {
+            const fetchAirQualityMap = async () => {
+                try {
+                    // Fetch the map URL using the API method
+                    const airQualityMap = await getCurrentAirQualityMap();
 
-                // Fetch the HTML content of the map URL
-                const response = await fetch(airQualityMap.url);
-                if (!response.ok) {
-                    throw new Error(
-                        `Error fetching HTML: ${response.statusText}`
-                    );
+                    // Fetch the HTML content of the map URL
+                    const response = await fetch(airQualityMap.url);
+                    if (!response.ok) {
+                        throw new Error(
+                            `Error fetching HTML: ${response.statusText}`
+                        );
+                    }
+                    const html = await response.text();
+                    setHtmlContent(html);
+                } catch (error) {
+                    console.error('Failed to fetch air quality map:', error);
                 }
-                const html = await response.text();
-                setHtmlContent(html);
-            } catch (error) {
-                console.error('Failed to fetch air quality map:', error);
-            }
-        };
+            };
 
-        fetchAirQualityMap();
-    }, []); // No dependencies, runs once on mount
+            fetchAirQualityMap();
+        } else {}
+    }, [date]); // Dependency on date
 
     useEffect(() => {
         if (iframeRef.current && htmlContent) {
