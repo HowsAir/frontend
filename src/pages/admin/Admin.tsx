@@ -129,15 +129,23 @@ const Admin = () => {
                 Usuarios{' '}
                 <div className="rounded-full bg-sky-100 px-2 text-base text-primary">
                     {filteredStatistics.length} usuarios
-                </div>
-            </p>
-            {loading ? (
-                <p className="mx-64 my-8">Cargando Usuarios...</p>
-            ) : isError ? (
-                <p className="text-red-500">
-                    Error al cargar usuarios. Inténtelo de nuevo más tarde.
+                    </div>
                 </p>
-            ) : (
+                {loading ? (
+                    <div>
+                        <div className="mx-64 my-8 inline-flex gap-2">
+                            <img
+                                src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
+                                className="size-8"
+                            />
+                            <p>Cargando Usuarios...</p>
+                        </div>
+                    </div>
+                ) : isError ? (
+                    <p className="mx-24 my-8 text-red-500">
+                        Error al cargar usuarios. Inténtelo de nuevo más tarde.
+                    </p>
+                ) : (
                 <>
                     <table className="relative table-auto">
                         <input
