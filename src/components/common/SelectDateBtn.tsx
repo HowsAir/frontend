@@ -8,7 +8,7 @@ const SelectDateBtn: React.FC<SelectDateBtnProps> = ({ onClick }) => {
             className="absolute left-2 top-14 z-10 inline-block"
             style={{
                 ['--expand-width' as string]: '200px',
-                ['--initial-width' as string]: '40px',
+                ['--initial-width' as string]: '38px',
                 ['--transition-time' as string]: '0.3s',
             }}
         >
