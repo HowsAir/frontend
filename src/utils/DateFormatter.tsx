@@ -1,7 +1,8 @@
 export const getFormattedDate = (
-    inputDate?: string,
-    compareToDate?: string, // New parameter to specify the date to compare against
-    format: 'fancy' | 'compact' | 'relative' = 'fancy' // Add "relative" as a format
+    inputDate?: string, // ISO timestamp
+    format: 'fancy' | 'compact' | 'relative' = 'fancy', // Format of the output
+    noTime?: boolean, // if true, time will not be included in the output
+    compareToDate?: string, // specify the date to compare against
 ): string => {
     const baseDate = inputDate ? new Date(inputDate) : new Date(); // Parse input date or use today's date
     if (isNaN(baseDate.getTime())) {
@@ -40,7 +41,7 @@ export const getFormattedDate = (
 
         const currentYear = new Date().getFullYear();
         const formattedYear = baseDate.getFullYear() === currentYear ? '' : `/${year}`;
-        return `${hours}:${minutes} - ${day}/${month}${formattedYear}`;
+        return `${noTime ? '' : `${hours}:${minutes} - `} ${day}/${month}${formattedYear}`;
     }
 
     const monthNames = [
