@@ -1,6 +1,6 @@
 // ProtectedRoute.tsx
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -16,8 +16,11 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
     if (isLoading) {
         return (
-            <div className="m-auto w-14 mt-20">
-                <img alt='cargando...' src='https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif'></img>
+            <div className="m-auto mt-20 w-14">
+                <img
+                    alt="cargando..."
+                    src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
+                ></img>
             </div>
         );
     }

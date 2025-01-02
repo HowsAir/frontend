@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { GasInfoPopUp } from './widgets/GasInfoPopUp';
-import { getCurrentAirQualityMap } from '../api/apiClient';
+import { GasInfoPopUp } from '../widgets/GasInfoPopUp';
+import { getCurrentAirQualityMap } from '../../api/apiClient';
 
 interface MapProps {
     date?: Date | null;

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { getUsersDashboardData } from '../../api/apiClient';
 import { Measurement, OverallAirQuality } from '../../types/mainTypes';
 import { getFormattedDate } from '../../utils/DateFormatter';
-import { MapComponent } from '../../components/MapComponent';
+import { MapComponent } from '../../components/layouts/MapComponent';
 
 const Portal = () => {
     const { user } = useUser();
@@ -66,8 +66,9 @@ const Portal = () => {
     let measurementDate = lastMeasurement.timestamp
         ? getFormattedDate(
               lastMeasurement.timestamp,
+              'compact',
+              false,
               new Date().toISOString(),
-              'compact'
           )
         : 'No existe medicion';
 

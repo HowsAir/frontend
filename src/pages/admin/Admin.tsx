@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import * as apiClient from '../../api/apiClient';
 import { TablePages } from '../../components/common/TablePages';
 import { useState, useMemo, ChangeEvent } from 'react';
-import { AdminMaps } from '../../components/AdminMaps';
+import { AdminMaps } from '../../components/layouts/AdminMaps';
 
 // Define types for the statistics data
 interface Statistic {
