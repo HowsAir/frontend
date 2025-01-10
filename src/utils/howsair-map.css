@@ -1,0 +1,202 @@
+/**
+ * @file howsair-map.css
+ * @brief CSS file for the "HowsAir" map example.
+ * @description This file is uploaded to a CDN, it's placed here only for reference 
+ * @author Manuel Borregales
+ */
+
+body,
+html,
+.leaflet-control-layers,
+body {
+  margin: 0;
+}
+
+#map {
+  height: 100vh;
+  width: 100%;
+}
+
+.leaflet-touch .leaflet-control-layers {
+  border: 0px;
+}
+
+/*-------------------------------------*/
+/* Custom marker style */
+/*-------------------------------------*/
+
+.custom-marker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 30px;
+  background-color: var(--marker-bg-color);
+  color: white;
+  border-radius: 20px;
+  padding: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-family: "Outfit", sans-serif;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.custom-marker:hover {
+  transform: scale(1.1); /* Slightly scale up the marker */
+}
+
+/* Ensure :active doesn't override hover */
+.custom-marker:active {
+  transform: scale(1); /* No scaling when clicked */
+}
+
+.marker-svg-icon {
+  width: 20px; /* Adjust the icon size */
+  height: 20px;
+  margin-right: 5px;
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(180deg); /* Example for white color */
+}
+
+.marker-text {
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+/*-------------------------------------*/
+/* Layers controller style */
+/*-------------------------------------*/
+
+.layer-label {
+  font-family: "Outfit", sans-serif;
+}
+
+.ha-layers-control-title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "Outfit", sans-serif;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.ha-layers-control-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  font-size: 14px;
+  font-family: "Outfit", sans-serif;
+  z-index: 1000;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.leaflet-control-layers .disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* General checkbox styles */
+.ha-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-radius: 50%; /* Default circular checkboxes */
+  cursor: pointer;
+  outline: none;
+  background-color: white;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Specific styles for the "official stations" checkbox */
+.ha-checkbox.official-stations-checkbox {
+  border-radius: 5px; /* Less border radius for "Estaciones oficiales" checkbox */
+}
+
+/* Checked state for the checkbox */
+.ha-checkbox:checked {
+  background-color: #1074e7; /* Blue background */
+  border-color: #1074e7;
+  position: relative;
+}
+
+/* Create a white checkmark */
+.ha-checkbox:checked::after {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 7px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+  left: 4px;
+}
+
+/* Style for the separator between layers */
+.ha-layers-separator {
+  height: 1px; /* Height of the separator */
+  background-color: #f0f0f0; /* Light gray color */
+  width: 200px; /* Width of the separator */
+  margin: 5px auto; /* Vertical margin of 5px */
+  border-radius: 5px; /* Border radius for smooth corners */
+}
+
+/*-------------------------------------*/
+/* Legend style */
+/*-------------------------------------*/
+
+.legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 105px;
+  height: 105px;
+  background-color: rgba(255, 255, 255);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  color: #333;
+  z-index: 1000;
+  font-family: "Outfit", sans-serif;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.legend-color.green {
+  background-color: #35b765;
+}
+.legend-color.yellow {
+  background-color: #e5b41c;
+}
+.legend-color.red {
+  background-color: #e24c4c;
+}
