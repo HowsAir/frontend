@@ -274,3 +274,38 @@ body {
 .legend-color.red {
     background-color: #e24c4c;
 }
+
+/*-------------------------------------*/
+/* labelWithIcon.css */
+
+.label-with-icon {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.label-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.icon-wrapper .marker-svg-icon {
+    margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    filter: none; /* Remove the existing filter */
+    opacity: 0.7; /* Make the icon slightly subtle */
+}
+
+/* Adjust the existing layer-option class */
+.layer-option {
+    margin-bottom: 8px;
+    width: 100%;
+}
