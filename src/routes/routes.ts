@@ -24,6 +24,7 @@ export const routes = {
         EDIT_PROFILE: '/edit-profile',
     },
     ADMIN: {
-        INDEX: '/admin',
+        USERS: '/admin/users',
+        MAPS: '/admin/maps',
     },
 };

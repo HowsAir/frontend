@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { MapComponent } from './MapComponent';
-import SelectDateBtn from '../common/SelectDateBtn';
-import DatePicker from '../widgets/DatePicker';
+import { MapComponent } from '../../components/layouts/MapComponent';
+import SelectDateBtn from '../../components/common/SelectDateBtn';
+import DatePicker from '../../components/widgets/DatePicker';
 import { getHistoricalAirQualityMap } from '../../api/apiClient';
 import type { AirQualityMap } from '../../api/data';
 
-export const AdminMaps = () => {
+const AdminMaps = () => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -32,19 +32,17 @@ export const AdminMaps = () => {
         }
     };
 
-
     return (
-        <div className="relative">
-            <h3>{`Mapas:`}</h3>
-
-            <SelectDateBtn onClick={toggleDatePicker} />
-
-            {isLoading && <div>Cargando...</div>}
-            {error && <div className="text-red-500">{error}</div>}
-            {}
+        <div className="px-24 relative -top-10">
+            <div className='inline-flex'>
+                <h3>{`Mapas:`}</h3>
+                {isLoading && <div>Cargando...</div>}
+                {error && <div className="text-red-500">{error}</div>}
+                {}
+            </div>
 
             <MapComponent data={mapData} />
-
+            <SelectDateBtn onClick={toggleDatePicker} />
             {showDatePicker && (
                 <DatePicker
                     onClose={() => setShowDatePicker(false)}
@@ -54,3 +52,5 @@ export const AdminMaps = () => {
         </div>
     );
 };
+
+export default AdminMaps;
