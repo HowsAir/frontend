@@ -4,7 +4,7 @@ export const routes = {
         TERMS_AND_PRIVACY: '/terms-and-privacy',
         MAPS: '/maps',
         CONTACT: '/contact',
-        MANUAL: '/manual',
+        MANUAL: 'https://drive.google.com/file/d/1XHQoHOPJjp0XVF-QQ7CfXX8Ym2xKbQx2/view',
     },
     AUTH: {
         REGISTER: '/register',
