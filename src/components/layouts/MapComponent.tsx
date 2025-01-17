@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { GasInfoPopUp } from '../widgets/GasInfoPopUp';
 import { getCurrentAirQualityMap } from '../../api/apiClient';
 import { AirQualityMap } from '../../api/data';
+import { getFormattedDate } from '../../utils/DateFormatter';
 
 interface MapProps {
     data?: AirQualityMap | null;
@@ -32,7 +33,6 @@ export const MapComponent = ({ portal, data }: MapProps) => {
                         );
                     }
                     const html = await response.text();
-                    console.log(html);
                     setHtmlContent(html);
                 } catch (error) {
                     console.error('Failed to fetch air quality map:', error);
@@ -80,6 +80,11 @@ export const MapComponent = ({ portal, data }: MapProps) => {
             <div
                 className={`${portal ? 'h-[445px]' : 'h-[75dvh]'} relative w-full rounded-lg border-[1px] border-gray bg-white p-2`}
             >
+                {data && (
+                    <div className="absolute left-1/2 -translate-x-1/2 transform rounded-b-lg bg-white px-4 pb-1">
+                        {getFormattedDate(data.timestamp, 'compactDayFirst')}
+                    </div>
+                )}
                 <iframe
                     ref={iframeRef}
                     title="Dynamic HTML"
