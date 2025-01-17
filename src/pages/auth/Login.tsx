@@ -52,7 +52,7 @@ const Login: React.FC = () => {
                         break;
                     case 2: // Admin
                         console.log('redirecting to admin index');
-                        navigate(routes.ADMIN.INDEX);
+                        navigate(routes.ADMIN.USERS);
                         break;
                     default:
                         navigate(from); // Default to "from" path or home

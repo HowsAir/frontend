@@ -33,10 +33,19 @@ const AdminMaps = () => {
     };
 
     return (
-        <div className="px-24 relative -top-10">
-            <div className='inline-flex'>
+        <div className="relative -top-10 px-24">
+            <div className="inline-flex items-center gap-x-4">
                 <h3>{`Mapas:`}</h3>
-                {isLoading && <div>Cargando...</div>}
+                {isLoading &&
+                    <div className='inline-flex gap-1 items-center'>
+                        <img
+                            alt="Cargando..."
+                            src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
+                            className="size-5"
+                        />
+                        Cargando...
+                    </div>
+                }
                 {error && <div className="text-red-500">{error}</div>}
                 {}
             </div>

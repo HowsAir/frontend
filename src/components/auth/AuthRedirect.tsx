@@ -30,7 +30,7 @@ export const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
             return <Navigate to={routes.USER.INDEX} replace />;
         } else if (roleId === 2) {
             // Redirect admins to their dashboard
-            return <Navigate to={routes.ADMIN.INDEX} replace />;
+            return <Navigate to={routes.ADMIN.USERS} replace />;
         }
     }
 
