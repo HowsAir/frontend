@@ -205,8 +205,12 @@ const DatePicker: React.FC<DatePickerProps> = ({ onClose, onSelect }) => {
     if (isLoading) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="w-[300px] rounded-lg bg-white p-4 text-center">
-                    Cargando...
+                <div className="h-[400px] w-[300px] rounded-lg bg-white py-32 p-20 text-center">
+                    <img
+                        alt="Cargando..."
+                        src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
+                        className='size-20 m-auto'
+                    />
                 </div>
             </div>
         );
