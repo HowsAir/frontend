@@ -7,7 +7,7 @@ const Landing = () => {
     const Icon = ArrowDown;
 
     return (
-        <div className='overflow-x-hidden'>
+        <div className="overflow-x-hidden">
             <section className="relative h-screen w-full overflow-hidden bg-hero bg-cover">
                 <div
                     className="absolute inset-0 bg-[rgba(143,143,143,0.28)]"
@@ -42,7 +42,7 @@ const Landing = () => {
                 </div>
             </section>
             <div id="target" className="relative -top-20"></div>
-            <section className=" relative mx-auto flex w-full flex-col items-center py-20">
+            <section className="relative mx-auto flex w-full flex-col items-center py-20">
                 <h2>¿Qué hacemos en HowsAir?</h2>
                 <p className="max-w-[600px] text-center">
                     Desarrollamos mapas de calidad del aire para los ciudadanos
@@ -113,7 +113,7 @@ const Landing = () => {
                 <img
                     className="h-auto w-auto rounded-[50px] object-cover sm:w-screen lg:max-w-[40%]"
                     alt="Mapa de ejemplo"
-                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/uxvxh7ivr6x6hsou4ts7.jpg"
+                    src="https://res.cloudinary.com/dzh6bz0zi/image/upload/v1737118575/media/Screenshot_2025-01-17_134856_eagxea.png "
                 ></img>
                 <Link
                     to={routes.HOME.MAPS}

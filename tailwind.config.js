@@ -17,7 +17,7 @@ export default {
                 headerHover: '0 4px 8px rgba(16, 116, 231, 0.2)',
             },
             backgroundImage: {
-                hero: "url('https://res.cloudinary.com/dzh6bz0zi/image/upload/v1730570970/media/iy48f6xc9urpf0kdp3lm.jpg')",
+                hero: "url('https://res.cloudinary.com/dzh6bz0zi/image/upload/v1737117698/media/aerial-view-city-fog_1_h9llyg.jpg ')",
                 form: 'url(https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731011446/media/ezs0b2ip4g7fpae9mgcr.jpg)',
                 footer: 'url(https://res.cloudinary.com/dzh6bz0zi/image/upload/v1731011446/media/k2utc6qnpazlppx4f9gi.jpg)',
             },
