@@ -170,7 +170,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onClose, onSelect }) => {
         }
 
         for (let day = 1; day <= daysInMonth; day++) {
-            const isAvailable = isDateAvailable(day);
+            const isAvailable = isDateAvailable(day+1);
             const isSelected =
                 selectedDate?.getDate() === day &&
                 selectedDate?.getMonth() === currentDate.getMonth() &&
