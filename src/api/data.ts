@@ -59,3 +59,13 @@ export interface DashboardData {
         overallAirQuality: string;
     };
 }
+
+export interface CalendarMetadataOutput {
+    firstAvailableYear: number;
+    year: number;
+    month: number;
+    availableDates: {
+        date: string;
+        times: string[][];
+    }[];
+}

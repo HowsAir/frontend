@@ -4,7 +4,7 @@
  * @author Juan Diaz
  */
 
-import { AirQualityMap, DashboardData, MeasurementData } from './data';
+import { AirQualityMap, CalendarMetadataOutput, DashboardData, MeasurementData } from './data';
 import {
     LogInFormData,
     RegisterFormData,
@@ -399,6 +399,18 @@ export const getUsersDailyDistance = async (): Promise<number> => {
     }
 };
 
+/**
+ * @brief Fetches the user's dashboard from the API
+ * @author Mario Luis
+ *
+ * getUsersDailyDistance -> Promise<number>
+ *
+ * This function makes a GET request to the API to retrieve all the data displayed in the portal
+ * like the node's measures 
+ *
+ * @throws Error - If fetching the distance fails or the response is invalid
+ * @returns {Promise<DashboardData>} - A promise that resolves with the data
+ */
 export const getUsersDashboardData = async (): Promise<DashboardData> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/v1/users/dashboard`, {
@@ -422,6 +434,18 @@ export const getUsersDashboardData = async (): Promise<DashboardData> => {
     }
 };
 
+/**
+ * @author Mario Luis Mesa
+ * @brief Fetches the user's monthly distance from the API
+ * 
+ * getMonthlyDistance -> Promise<number>
+ * 
+ * This function makes a GET request to the API to retrieve the user's monthly distance.
+ * It expects the user to be authenticated and the request to include the necessary credentials.
+ * 
+ * @throws Error - If fetching the distance fails or the response is invalid
+ * @returns {Promise<number>} - A promise that resolves with the user's monthly distance
+ */
 export const getMonthlyDistance = async (): Promise<number> => {
     try {
         const response = await fetch(
@@ -745,5 +769,87 @@ export const resetPassword = async (newPassword: string): Promise<void> => {
     } catch (error) {
         console.error('Error:', error);
         throw new Error(API_ERRORS.RESET_PASSWORD);
+    }
+};
+
+/**
+ * @brief Fetches the calendar metadata for air quality maps for a specific month and year
+ * @author Mario Luis
+ *
+ * @param {number} year - The year for which the calendar metadata is requested
+ * @param {number} month - The month for which the calendar metadata is requested (1-12)
+ * @returns {Promise<CalendarMetadataOutput>} - A promise that resolves with the calendar metadata
+ *
+ * This function makes a GET request to the API to retrieve the calendar metadata for air quality maps.
+ * It expects the user to be authenticated as an administrator and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the calendar metadata fails or the response is invalid
+ */
+export const getCalendarMetadata = async (
+    year: number,
+    month: number
+): Promise<CalendarMetadataOutput> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/air-quality-maps/calendar-metadata?year=${year}&month=${month}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching calendar metadata');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Get calendar metadata error:', error);
+        throw new Error('Error fetching calendar metadata');
+    }
+};
+
+/**
+ * @brief Fetches a historical air quality map for a specific timestamp
+ * @author Mario Luis
+ *
+ * @param {string} timestamp - The ISO 8601 timestamp for the desired air quality map
+ * @returns {Promise<AirQualityMap>} - A promise that resolves with the historical air quality map
+ *
+ * This function makes a GET request to the API to retrieve a historical air quality map.
+ * It expects the user to be authenticated as an administrator and the request to include the necessary credentials.
+ *
+ * @throws Error - If fetching the air quality map fails or the response is invalid
+ */
+export const getHistoricalAirQualityMap = async (
+    timestamp: string
+): Promise<AirQualityMap> => {
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/api/v1/air-quality-maps/${encodeURIComponent(timestamp)}`,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+
+        if (!response.ok) {
+            const { message }: { message: string } = await response.json();
+            throw new Error(message || 'Error fetching historical air quality map');
+        }
+
+        const data = await response.json();
+        return data.airQualityMap;
+    } catch (error) {
+        console.error('Get historical air quality map error:', error);
+        throw new Error('Error fetching historical air quality map');
     }
 };
