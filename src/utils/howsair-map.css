@@ -168,6 +168,19 @@ body {
     .ha-burger-button.ha-active .ha-burger-line:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -7px);
     }
+
+    #aqiInfoContainer {
+        width: 250px !important;
+    }
+
+    #aqiInfoInnerContainer {
+        flex-direction: column;
+        gap: 20px;
+    }    
+
+    .responsiveAqiData {
+        width: 100% !important;    
+    }
 }
 
 /*-------------------------------------*/
