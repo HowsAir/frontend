@@ -831,7 +831,7 @@ export const getHistoricalAirQualityMap = async (
 ): Promise<AirQualityMap> => {
     try {
         const response = await fetch(
-            `${API_BASE_URL}/api/v1/air-quality-maps/${encodeURIComponent(timestamp)}`,
+            `${API_BASE_URL}/api/v1/air-quality-maps/${timestamp}`,
             {
                 method: 'GET',
                 credentials: 'include',
@@ -847,7 +847,7 @@ export const getHistoricalAirQualityMap = async (
         }
 
         const data = await response.json();
-        return data.airQualityMap;
+        return data;
     } catch (error) {
         console.error('Get historical air quality map error:', error);
         throw new Error('Error fetching historical air quality map');
