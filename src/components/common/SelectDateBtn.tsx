@@ -5,9 +5,9 @@ interface SelectDateBtnProps {
 const SelectDateBtn: React.FC<SelectDateBtnProps> = ({ onClick }) => {
     return (
         <div
-            className="absolute left-2 top-14 z-10 inline-block"
+            className="absolute left-16 top-16 z-10 inline-block"
             style={{
-                ['--expand-width' as string]: '200px',
+                ['--expand-width' as string]: '180px',
                 ['--initial-width' as string]: '38px',
                 ['--transition-time' as string]: '0.3s',
             }}
