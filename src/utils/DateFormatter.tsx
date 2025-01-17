@@ -1,6 +1,6 @@
 export const getFormattedDate = (
     inputDate?: string, // ISO timestamp
-    format: 'fancy' | 'compact' | 'relative' = 'fancy', // Format of the output
+    format: 'fancy' | 'compact' | 'compactDayFirst' | 'relative' = 'fancy', // Format of the output
     noTime?: boolean, // if true, time will not be included in the output
     compareToDate?: string, // specify the date to compare against
 ): string => {
@@ -42,6 +42,16 @@ export const getFormattedDate = (
         const currentYear = new Date().getFullYear();
         const formattedYear = baseDate.getFullYear() === currentYear ? '' : `/${year}`;
         return `${noTime ? '' : `${hours}:${minutes} - `} ${day}/${month}${formattedYear}`;
+    }
+
+    if (format === 'compactDayFirst') {
+        const day = String(baseDate.getDate()).padStart(2, '0');
+        const month = String(baseDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+        const year = String(baseDate.getFullYear()).slice(-2); // Get last two digits of the year
+        const hours = String(baseDate.getHours()).padStart(2, '0');
+        const minutes = String(baseDate.getMinutes()).padStart(2, '0');
+
+        return `${noTime ? '' : `${day}/${month}/${year} - `} ${hours}:${minutes}`;
     }
 
     const monthNames = [
