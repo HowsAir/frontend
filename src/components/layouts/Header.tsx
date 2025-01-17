@@ -32,12 +32,21 @@ const Header = () => {
                     <>
                         {/* Admin-only links */}
                         {roleId === 2 && (
-                            <NavLink
-                                to={routes.ADMIN.INDEX}
-                                className={getLinkClass}
-                            >
-                                Administración
-                            </NavLink>
+                            <>
+                                <NavLink
+                                    to={routes.ADMIN.USERS}
+                                    className={getLinkClass}
+                                >
+                                    Usuarios
+                                </NavLink>
+
+                                <NavLink
+                                    to={routes.ADMIN.MAPS}
+                                    className={getLinkClass}
+                                >
+                                    Mapas
+                                </NavLink>
+                            </>
                         )}
 
                         {/* User-only links */}

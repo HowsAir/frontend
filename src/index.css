@@ -38,6 +38,43 @@
         @apply transition-all duration-300 ease-in-out hover:border hover:border-primary hover:border-opacity-80;
     }
 
+    .calendar-day-btn {
+        @apply clickable size-8 rounded-md text-xl transition-colors duration-300 ease-in-out selection:bg-sky-200 hover:bg-gray;
+    }
+
+    .expand-button {
+          display: flex;
+          align-items: center;
+          background-color: #3b82f6;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          padding: 8px;
+          cursor: pointer;
+          transition: all var(--transition-time) ease;
+          width: var(--initial-width);
+          overflow: hidden;
+        }
+
+        .expand-button:hover {
+          width: var(--expand-width);
+          background-color: #2563eb;
+        }
+
+        .button-text {
+          white-space: nowrap;
+          opacity: 0;
+          width: 0;
+          transition: all var(--transition-time) ease;
+          margin-left: 0;
+        }
+
+        .expand-button:hover .button-text {
+          opacity: 1;
+          width: auto;
+          margin-left: 8px;
+        }
+
     /*--- FORM CLASSES ---*/
     .form {
         @apply flex flex-col border-[1px] border-gray bg-white px-16 py-12 sm:w-[60dvw] lg:w-[40dvw];

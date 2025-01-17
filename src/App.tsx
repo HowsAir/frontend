@@ -1,25 +1,26 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-
-import Layout from './layouts/Layout';
-import Landing from './pages/home/Landing';
-import Register from './pages/auth/Register';
-import Login from './pages/auth/Login';
-import PaymentSuccess from './pages/shop/PaymentSuccess';
-import PaymentCancel from './pages/shop/PaymentCancel';
-import TermsAndPrivacy from './pages/home/TermsAndPrivacy';
-import Product from './pages/shop/Product';
-import Maps from './pages/home/Maps';
-import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
-import ForgotPassword from './pages/auth/ForgotPassword';
 import { AnimatePresence } from 'framer-motion';
-import Portal from './pages/user/Portal';
-import Node from './pages/user/Node';
-import Admin from './pages/admin/Admin';
+
+import { AuthRedirect } from './components/auth/AuthRedirect';
+import { ProtectedRoute } from './components/auth/ProtectedRoutes';
+import Layout from './layouts/Layout';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminMaps from './pages/admin/AdminMaps';
 import ChangePassword from './pages/auth/ChangePassword';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import FreeBreezeRequest from './pages/shop/FreeBreezeRequest';
+import PaymentCancel from './pages/shop/PaymentCancel';
+import PaymentSuccess from './pages/shop/PaymentSuccess';
+import Product from './pages/shop/Product';
 import EditProfile from './pages/user/EditProfile';
-import { ProtectedRoute } from './components/ProtectedRoutes';
+import Node from './pages/user/Node';
+import Portal from './pages/user/Portal';
 import Start from './pages/user/Portal';
-import { AuthRedirect } from './components/AuthRedirect';
+import Landing from './pages/home/Landing';
+import Maps from './pages/home/Maps';
+import TermsAndPrivacy from './pages/home/TermsAndPrivacy';
 
 const App = () => {
     const location = useLocation();
@@ -91,18 +92,29 @@ const App = () => {
                     path="/change-password"
                     element={
                         <Layout>
-                            <ProtectedRoute allowedRoles={[1, 2]}>
-                                <ChangePassword />
+                            {/* <ProtectedRoute allowedRoles={[1, 2]}> */}
+                            <ChangePassword />
+                            {/* </ProtectedRoute> */}
+                        </Layout>
+                    }
+                />
+
+                <Route
+                    path="/admin/users"
+                    element={
+                        <Layout>
+                            <ProtectedRoute allowedRoles={[2]}>
+                                <AdminUsers />
                             </ProtectedRoute>
                         </Layout>
                     }
                 />
                 <Route
-                    path="/admin"
+                    path="/admin/maps"
                     element={
                         <Layout>
                             <ProtectedRoute allowedRoles={[2]}>
-                                <Admin />
+                                <AdminMaps />
                             </ProtectedRoute>
                         </Layout>
                     }

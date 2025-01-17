@@ -1,8 +1,8 @@
 // AuthRedirect.tsx
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { routes } from '../routes/routes';
+import { useAuth } from '../../contexts/AuthContext';
+import { routes } from '../../routes/routes';
 
 interface AuthRedirectProps {
     children: React.ReactNode;
@@ -30,7 +30,7 @@ export const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
             return <Navigate to={routes.USER.INDEX} replace />;
         } else if (roleId === 2) {
             // Redirect admins to their dashboard
-            return <Navigate to={routes.ADMIN.INDEX} replace />;
+            return <Navigate to={routes.ADMIN.USERS} replace />;
         }
     }
 

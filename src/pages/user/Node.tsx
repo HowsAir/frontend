@@ -30,8 +30,9 @@ const Node = () => {
     let measurementDate = lastMeasurement.timestamp
         ? getFormattedDate(
               lastMeasurement.timestamp,
+              'compact',
+              false,
               new Date().toISOString(),
-              'compact'
           )
         : 'No existe medicion';
 

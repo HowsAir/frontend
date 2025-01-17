@@ -15,7 +15,7 @@ interface Statistic {
     nodeLastConnection: string;
 }
 
-const Admin = () => {
+const AdminUsers = () => {
     // State for sorting configuration
     const [sortConfig, setSortConfig] = useState<{
         key: keyof Statistic | '';
@@ -77,8 +77,10 @@ const Admin = () => {
                 const key = sortConfig.key;
 
                 // Extract the values with type safety
-                const aValue = (a[key as keyof Statistic] ?? -Infinity) as number;
-                const bValue = (b[key as keyof Statistic] ?? -Infinity) as number;
+                const aValue = (a[key as keyof Statistic] ??
+                    -Infinity) as number;
+                const bValue = (b[key as keyof Statistic] ??
+                    -Infinity) as number;
 
                 if (aValue < bValue) {
                     return sortConfig.direction === 'asc' ? -1 : 1;
@@ -91,7 +93,6 @@ const Admin = () => {
         }
         return sortedData;
     }, [filteredStatistics, sortConfig]);
-
 
     // Handle sorting
     const handleSort = (key: keyof Statistic) => {
@@ -117,13 +118,12 @@ const Admin = () => {
         setSearchTerm(e.target.value);
     };
 
-    console.log(paginatedStatistics.length)
-    console.log(6 + paginatedStatistics.length * 3.525)
-
     return (
         <div
             className="mx-auto w-fit overflow-hidden rounded-lg border-[1px] border-gray bg-white transition-all duration-200 ease-in-out"
-            style={{ height: `${10 + paginatedStatistics.length  * 3.525}rem` }}
+            style={{
+                height: `${10 + paginatedStatistics.length * 3.525}rem`,
+            }}
         >
             <p className="m-4 inline-flex items-center gap-2">
                 Usuarios{' '}
@@ -132,9 +132,17 @@ const Admin = () => {
                 </div>
             </p>
             {loading ? (
-                <p className="mx-64 my-8">Cargando Usuarios...</p>
+                <div>
+                    <div className="mx-64 my-8 inline-flex gap-2">
+                        <img
+                            src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
+                            className="size-8"
+                        />
+                        <p>Cargando Usuarios...</p>
+                    </div>
+                </div>
             ) : isError ? (
-                <p className="text-red-500">
+                <p className="mx-24 my-8 text-red-500">
                     Error al cargar usuarios. Inténtelo de nuevo más tarde.
                 </p>
             ) : (
@@ -286,4 +294,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default AdminUsers;
