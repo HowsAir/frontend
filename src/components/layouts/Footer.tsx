@@ -9,11 +9,11 @@ const Footer = () => {
             <div className="relative z-10 flex h-fit flex-row justify-between px-40 pt-40">
                 <div className="flex flex-col pt-12">
                     <Link
-                        className="mb-5 text-2xl text-offwhite leading-loose"
+                        className="mb-5 text-2xl leading-loose text-offwhite"
                         to={routes.HOME.TERMS_AND_PRIVACY}
                         target="_blank"
                     >
-                        Términos, condiciones y <br className='' />
+                        Términos, condiciones y <br className="" />
                         política de privacidad
                     </Link>
                 </div>
@@ -33,6 +33,7 @@ const Footer = () => {
                     <Link
                         className="mb-5 text-2xl text-offwhite"
                         to={routes.HOME.MANUAL}
+                        target="_blank"
                     >
                         Manual de usuario
                     </Link>
