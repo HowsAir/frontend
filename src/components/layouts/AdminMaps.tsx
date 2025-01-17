@@ -16,19 +16,22 @@ export const AdminMaps = () => {
     };
 
     const handleDateSelect = async (timestamp: string) => {
-        console.log(timestamp);
         setIsLoading(true);
         setError(null);
         try {
             const data = await getHistoricalAirQualityMap(timestamp);
+            if (!data) {
+                throw new Error('No data received');
+            }
             setMapData(data);
         } catch (err) {
             setError('Error fetching map data');
-            console.error(err);
+            console.error('Error:', err);
         } finally {
             setIsLoading(false);
         }
     };
+
 
     return (
         <div className="relative">
@@ -37,11 +40,10 @@ export const AdminMaps = () => {
             <SelectDateBtn onClick={toggleDatePicker} />
 
             {isLoading && <div>Cargando...</div>}
-            {!isLoading && mapData && <p>Fecha seleccionada: {new Date(mapData.timestamp).toLocaleDateString()}</p>}
             {error && <div className="text-red-500">{error}</div>}
             {}
 
-            <MapComponent  />
+            <MapComponent data={mapData} />
 
             {showDatePicker && (
                 <DatePicker
