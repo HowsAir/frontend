@@ -48,11 +48,15 @@ export const getFormattedDate = (
         const day = String(baseDate.getDate()).padStart(2, '0');
         const month = String(baseDate.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
         const year = String(baseDate.getFullYear()).slice(-2); // Get last two digits of the year
-        const hours = String(baseDate.getHours()).padStart(2, '0');
-        const minutes = String(baseDate.getMinutes()).padStart(2, '0');
+        const hours = String(baseDate.getUTCHours()).padStart(2, '0'); // Use getUTCHours() for UTC
+        const minutes = String(baseDate.getUTCMinutes()).padStart(2, '0'); // Use getUTCMinutes() for UTC
 
+        console.log(
+            `${noTime ? '' : `${day}/${month}/${year} - `} ${hours}:${minutes}`
+        );
         return `${noTime ? '' : `${day}/${month}/${year} - `} ${hours}:${minutes}`;
     }
+
 
     const monthNames = [
         'enero',

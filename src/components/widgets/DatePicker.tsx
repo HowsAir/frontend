@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
-import {
-    getCalendarMetadata,
-    getHistoricalAirQualityMap,
-} from '../../api/apiClient';
+import { getCalendarMetadata } from '../../api/apiClient';
 import type { CalendarMetadataOutput } from '../../api/data';
 import { getFormattedDate } from '../../utils/DateFormatter';
 
@@ -145,7 +142,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onClose, onSelect }) => {
                 `${selectedDate.toISOString().split('T')[0]}T${selectedTime}`
             ).toISOString();
             console.log(selectedDateTime);
-
+            
             onSelect(selectedDateTime); // Send the properly formatted timestamp
             onClose();
         }
@@ -205,11 +202,11 @@ const DatePicker: React.FC<DatePickerProps> = ({ onClose, onSelect }) => {
     if (isLoading) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                <div className="h-[400px] w-[300px] rounded-lg bg-white py-32 p-20 text-center">
+                <div className="h-[400px] w-[300px] rounded-lg bg-white p-20 py-32 text-center">
                     <img
                         alt="Cargando..."
                         src="https://media.tenor.com/G7LfW0O5qb8AAAAj/loading-gif.gif"
-                        className='size-20 m-auto'
+                        className="m-auto size-20"
                     />
                 </div>
             </div>
@@ -240,7 +237,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ onClose, onSelect }) => {
                             }
                             className="flex w-full items-center justify-between rounded-lg border-[1px] border-gray bg-white px-2 py-0.5 text-left text-neutral-600 transition-colors duration-300 hover:bg-gray"
                         >
-                            <span>{selectedTime.slice(0, 5) || 'Seleccionar hora'}</span>
+                            <span>
+                                {selectedTime.slice(0, 5) || 'Seleccionar hora'}
+                            </span>
                             <ChevronDown className="h-5 w-5" />
                         </button>
 
